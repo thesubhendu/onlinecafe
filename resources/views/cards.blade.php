@@ -46,7 +46,7 @@
       <!-- Image and text -->
     <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">
-      <img src="./img/loyaltyGreen.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      <img src="storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
       my coffee
     </a>
     <ul class="navbar-nav ml-auto">
@@ -101,7 +101,7 @@
 <main role="main" class="container py-4 mb-5">
   <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
     <div class="">
-        <img src="./img/loyaltyGreen.jpg" width="30" height="30" alt="">
+        <img src="storage/img/nostamp.png" width="50" height="50" alt="">
     </div>
     <div>
         <h1>Your Cards</h1>
@@ -116,7 +116,7 @@
     <div>
       <div class="card mt-4" style="max-width: 540px;">
         <div class="card-logo card-header">
-          <img src="./img/logo.jpg" style="max-width: 10%; height: auto;">
+          <img src="storage/img/nostamp.png" style="max-width: 10%; height: auto;">
           Cafe One
           <div>
             <small class="card-text text-muted">Buy 9 coffees get 1 free</small>
@@ -125,23 +125,23 @@
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between flex-wrap">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
           </div>
           <div class="d-flex justify-content-between flex-wrap">
-            <img src="./img/nostamp.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp.png" width="60" height="60" alt="nostamp">
           </div>
         </div>
       </div>
       <div class="card mt-4" style="max-width: 540px;">
         <div class="card-logo card-header">
-          <img src="./img/logo.jpg" style="max-width: 10%; height: auto;">
+          <img src="storage/img/nostamp.png" style="max-width: 10%; height: auto;">
           Cafe Two
           <div>
             <small class="card-text text-muted">Buy 9 Coffee get 1 free</small>
@@ -150,17 +150,17 @@
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between flex-wrap">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
-            <img src="./img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
+            <img src="storage/img/stamp48x48.png" width="60" height="60" alt="stamp">
           </div>
           <div class="d-flex justify-content-between flex-wrap">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
-            <img src="./img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
+            <img src="storage/img/nostamp48x48.png" width="60" height="60" alt="nostamp">
           </div>
         </div>
       </div>

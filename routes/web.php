@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::view('/', 'landing-page');
 route::get('/', 'App\http\Controllers\LandingPageController@index')->name('landing-page');
+route::get('/vendor/{vendor}', 'App\http\Controllers\VendorController@show')->name('vendor.show');
 
 Route::view('/menu', 'menu');
 Route::view('/cart', 'cart');
@@ -28,4 +29,5 @@ Route::view('/comment', 'comment');
 Route::view('/favourites', 'favourites');
 Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou');
+Route::view('/cards', 'cards');
 

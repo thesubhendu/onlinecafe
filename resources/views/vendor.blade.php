@@ -42,7 +42,7 @@
       <!-- Image and text -->
     <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">
-      <img src="./img/loyaltyGreen.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      <img src="/storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
       my coffee
     </a>
     <ul class="navbar-nav ml-auto">
@@ -56,65 +56,36 @@
           </li>
     </ul>
   </nav>
-    <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark mt-4">
-      <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
+  <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark mt-4">
+      <a class="nav-link" href="{{route('landing-page')}}"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
       <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
       <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
       <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
-
-  <!-- <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
-      </li> -->
-      <!-- <li class="nav-item nav-right dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Admin</a>
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">logout</a>
-        </div>
-      </li> -->
-    <!-- </ul>
-
-  </div> -->
 </nav>
 <main role="main" class="container py-4 mb-5">
 
     <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
         <div class="">
-            <img src="./img/loyaltyGreen.jpg" width="30" height="30" alt="">
+            <img src="/storage/img/nostamp.png" width="50" height="50" alt="">
         </div>
         <div>
             <h1>Vendor View</h1>
         </div>
         <div>
-            <a href="index.html" class="btn btn-success">go back</a>
+        <a href="{{route('landing-page')}}" class="btn btn-success">go back</a>
         </div>
     </div>
     <hr>
     <div class="container">
-        <div class="card mb-3" style="max-width: 540px;">
-            <img src="./img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
+        <div class="card mb-3">
+            <img src="/storage/img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Cafe One</h5>
+              <h5 class="card-title">{{$vendor->vendor_name}}</h5>
               <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto reprehenderit sint dignissimos cumque cupiditate eos voluptas laudantium harum ullam quibusdam.</p>
-              <p class="card-text">123 main street</p>
-              <p class="card-text">Suburb 4000</p>
-              <p class="card-text">state</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <p class="card-text">{{$vendor->address}}</p>
+              <p class="card-text">{{$vendor->suburb}} {{$vendor->pc}}</p>
+              <p class="card-text">{{$vendor->state}}</p>
+              <p class="card-text"><small class="text-muted">Last updated {{$vendor->updated_at->format('d/m/Y')}}</small></p>
               <a id="addFavIcon" href="favourites.html" class="btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-heart checked"></span></i></a>
               <a href="menu.html" class="btn btn-success">Order</a>
             </div>

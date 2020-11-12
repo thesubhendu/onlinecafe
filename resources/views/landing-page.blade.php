@@ -42,7 +42,7 @@
       <!-- Image and text -->
     <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">
-      <img src="./img/loyaltyGreen.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      <img src="storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
       my coffee
     </a>
     <ul class="navbar-nav ml-auto">
@@ -57,40 +57,11 @@
     </ul>
   </nav>
 
-    <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark">
       <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
       <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
       <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
       <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
-
-  <!-- <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
-      </li> -->
-      <!-- <li class="nav-item nav-right dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Admin</a>
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">logout</a>
-        </div>
-      </li> -->
-    <!-- </ul>
-
-  </div> -->
 </nav>
 
 
@@ -99,7 +70,7 @@
   <div class="vendor-index mt-4">
     <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
       <div class="">
-          <img src="./img/loyaltyGreen.jpg" width="30" height="30" alt="">
+          <img src="storage/img/nostamp.png" width="50" height="50" alt="">
       </div>
       <div>
           <h1>My Coffee</h1>
@@ -108,21 +79,21 @@
           <!-- <a href="index.html" class="btn btn-success">go back</a> -->
       </div>
   </div>
-  @foreach ($vendors as $vendor)
-    <div class="card mb-3">
-        <img src="/img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{$vendor->vendor_name}}</h5>
-          <p class="card-text">{{$vendor->suburb}}</p>
-        <a id="orderbtn" href="#" class="homeScreenOrder btn btn-success btn-sm">Menu</a>
-            <a id="viewProductsbtn" href="#" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
-            <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
-            <a id="addRatingBtn" href="#" class="homeScreenRating btn btn-secondary btn-sm"><i class="fas fa-star" ></i></a>
-            <a id="addFavIcon" href="#" class="btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-heart checked"></span></i></a>
-          <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->format('d/m/Y')}}</small></p>
-        </div>
-      </div>
-  @endforeach
+      @foreach ($vendors as $vendor)
+        <div class="card mb-3">
+            <img src="storage/img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{$vendor->vendor_name}}</h5>
+              <p class="card-text">{{$vendor->suburb}}</p>
+              <a id="menubtn" href="#" class="btn btn-success btn-sm">Menu</a>
+              <a id="vendorbtn" href="{{route('vendor.show', $vendor->id)}}" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
+                <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
+                <a id="addRatingBtn" href="#" class="homeScreenRating btn btn-secondary btn-sm"><i class="fas fa-star" ></i></a>
+                <a id="addFavIcon" href="#" class="btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-heart checked"></span></i></a>
+              <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->format('d/m/Y')}}</small></p>
+            </div>
+          </div>
+      @endforeach
   </div>
 
 </main><!-- /.container -->

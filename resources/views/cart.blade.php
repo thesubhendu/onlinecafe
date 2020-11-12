@@ -46,7 +46,7 @@
       <!-- Image and text -->
     <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">
-      <img src="./img/loyaltyGreen.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      <img src="storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
       my coffee
     </a>
     <ul class="navbar-nav ml-auto">
@@ -66,34 +66,6 @@
       <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
       <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
       <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> -->
-
-        <!-- <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i id="favicon" class="fas fa-heart"></i></a>
-            </li> -->
-            <!-- <li class="nav-item nav-right dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Admin</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">logout</a>
-                </div>
-            </li> -->
-            <!-- </ul> -->
-        <!-- </div> -->
     </nav>
 <main role="main" class="container py-4 mb-5">
   <div class="vendor-index mt-4">
@@ -104,7 +76,7 @@
             <input type="text" id="email" name="email" placeholder="john@example.com">
             <label for="email"><i class="fas fa-mobile-alt"></i> Mobile</label>
             <input type="text" id="Mobile" name="mobile" placeholder="0412345678">
-            <div class="row">
+            <div class="cart-row">
                 <div class="col-75">
                     <div class="container">
                         <h4>Cart
