@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap');
 :root {
     --success-color: #2eec71;
     --error-color:#e74c3c;
@@ -8,6 +10,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Roboto;
   }
 
   span .checked {
@@ -15,20 +18,44 @@
   }
 
   .checked {
-    color: #2eec71;
+    color: #28a745;
   }
 
   a.nav-link {
     color: #fff;
   }
 
+  button .fav_like {
+    color: #28a745;
+    background-color:white;
+    border-color: white;
+  }
+
+  .fav_like:hover {
+    color: white !important;
+    background-color:#28a745;
+    border-color: #28a745;
+  }
+
+  .fav_unlike {
+    color: white;
+    background-color:#28a745;
+    border-color: #28a745;
+  }
+
+  .fav_unlike:hover {
+    color: #28a745;
+    background-color:white;
+    border-color: white;
+  }
+
   a.nav-link:hover {
     color: #2eec71;
   }
 
-  .card {
+  /* .card {
     max-width: 540px !important;
-  }
+  } */
 
   .card-img-top {
     max-width: 100%;

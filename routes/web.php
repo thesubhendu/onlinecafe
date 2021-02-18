@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +22,17 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Route::view('/', 'landing-page');
-route::get('/', 'App\http\Controllers\LandingPageController@index')->name('landing-page');
+// route::get('/', 'App\http\Controllers\LandingPageController@index')->name('landing-page');
+route::get('/', [LandingPageController::class, 'index'])->name('home');
 route::get('/vendor/{vendor}', 'App\http\Controllers\VendorController@show')->name('vendor.show');
+
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
 
 Route::view('/menu', 'menu');
 Route::view('/cart', 'cart');

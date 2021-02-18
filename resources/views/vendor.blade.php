@@ -57,14 +57,14 @@
     </ul>
   </nav>
   <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark mt-4">
-      <a class="nav-link" href="{{route('landing-page')}}"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
+      <a class="nav-link" href="{{route('home')}}"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
       <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
       <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
-      <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
+      <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-coffee"></i></a>
 </nav>
-<main role="main" class="container py-4 mb-5">
+<main role="main" class="container mb-5">
 
-    <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
+    <div class="vendor-view d-flex flex-row justify-content-between card-header mb-3 mt-4">
         <div class="">
             <img src="/storage/img/nostamp.png" width="50" height="50" alt="">
         </div>
@@ -72,11 +72,9 @@
             <h1>Vendor View</h1>
         </div>
         <div>
-        <a href="{{route('landing-page')}}" class="btn btn-success">go back</a>
+        <a href="{{route('home')}}" class="btn btn-success"><i class="fas fa-chevron-left"></i> go back</a>
         </div>
     </div>
-    <hr>
-    <div class="container">
         <div class="card mb-3">
             <img src="/storage/img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
@@ -86,38 +84,113 @@
               <p class="card-text">{{$vendor->suburb}} {{$vendor->pc}}</p>
               <p class="card-text">{{$vendor->state}}</p>
               <p class="card-text"><small class="text-muted">Last updated {{$vendor->updated_at->format('d/m/Y')}}</small></p>
-              <a id="addFavIcon" href="favourites.html" class="btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-heart checked"></span></i></a>
+              <a id="addFavIcon" href="favourites.html" class="fav_like btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-coffee"></span></i></a>
               <a href="menu.html" class="btn btn-success">Order</a>
             </div>
           </div>
-    </div>
-    <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                Rating <span class="badge badge-pill badge-dark"> 3.0</span>
+                Reviews
+                <span class="card-text fa fa-star checked"></span>
+                <span class="card-text fa fa-star checked"></span>
+                <span class="card-text fa fa-star checked"></span>
+                <span class="card-text fa fa-star"></span>
+                <span class="card-text fa fa-star"></span><span class="badge badge-pill badge-dark"> 3.0</span>
             </div>
-            <div class="card-body">
-            <span class="card-text fa fa-star checked"></span>
-            <span class="card-text fa fa-star checked"></span>
-            <span class="card-text fa fa-star checked"></span>
-            <span class="card-text fa fa-star"></span>
-            <span class="card-text fa fa-star"></span>
+            <div class="row">
+              <div class="col-sm-7">
+                <hr/>
+                <div class="review-block">
+                  <div class="row">
+                    <div class="col-sm-3 ml-4">
+                      <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                      <div class="review-block-name"><a href="#">nktailor</a></div>
+                      <div class="review-block-date">June 16, 2016<br/>1 day ago</div>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="review-block-rate">
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                      <div class="review-block-title ml-4">this was nice in buy</div>
+                      <div class="review-block-description ml-4">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-sm-3 ml-4">
+                      <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                      <div class="review-block-name"><a href="#">nktailor</a></div>
+                      <div class="review-block-date">March 6, 2016<br/>1 day ago</div>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="review-block-rate">
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                      <div class="review-block-title ml-4">this was nice in buy</div>
+                      <div class="review-block-description ml-4">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-sm-3 ml-4">
+                      <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                      <div class="review-block-name"><a href="#">nktailor</a></div>
+                      <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="review-block-rate">
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-xs" aria-label="Left Align">
+                          <span class="fas fa-star" aria-hidden="true"></span>
+                        </button> 
+                      </div>
+                      <div class="review-block-title ml-4">Lorem ipsum dolor sit amet.</div>
+                      <div class="review-block-description ml-4">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-    </div>
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                comments <span class="badge badge-pill badge-dark"> 5.0</span>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-          </div>
-    </div>
+          </div> 
   
   </main><!-- /.container -->
   
