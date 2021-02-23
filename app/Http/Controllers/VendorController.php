@@ -46,9 +46,10 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        
+    
         $vendor = Vendor::where('id', $id)->firstOrFail();
         return view('vendor')->with('vendor',$vendor);
+    
     }
 
     /**

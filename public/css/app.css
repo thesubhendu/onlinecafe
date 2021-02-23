@@ -24,28 +24,37 @@
     color: #fff;
   }
 
-  button .fav_like {
-    color: #28a745;
-    background-color:white;
-    border-color: white;
+  button.fav_like {
+    color: white;
+    border: none;
+    background-color:#28a745;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
   }
 
   .fav_like:hover {
-    color: white !important;
-    background-color:#28a745;
-    border-color: #28a745;
+    color: #28a745 !important;
+    background-color:white;
+    border-color: white;
   }
 
-  .fav_unlike {
-    color: white;
-    background-color:#28a745;
-    border-color: #28a745;
+  button.fav_unlike {
+    color: #28a745;
+    border: none;
+    background-color:white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    
+    
   }
 
   .fav_unlike:hover {
-    color: #28a745;
-    background-color:white;
-    border-color: white;
+    color: white;
+    background-color:#28a745;
+    border-color: #28a745;
   }
 
   a.nav-link:hover {

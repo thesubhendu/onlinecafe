@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -33,6 +34,9 @@ Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
+Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy'])->name('vendor.likes');
 
 Route::view('/menu', 'menu');
 Route::view('/cart', 'cart');

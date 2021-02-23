@@ -115,14 +115,21 @@
               <a id="vendorbtn" href="{{route('vendor.show', $vendor->id)}}" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
                 <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
                 <a id="addRatingBtn" href="#" class="homeScreenRating btn btn-secondary btn-sm"><i class="fas fa-star" ></i></a>
-                <form action="" method=''>
-                  @csrf
-                <button id="addFavIcon" type="submit" class="fav_like btn btn-success btn-sm float-right"><span class="card-text fas fa-coffee"></span> Like</i></button>
-                </form>
-                <form action="" method=''>
-                  @csrf
-                <button id="addFavIcon" type="submit" class="fav_unlike btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-coffee"></span></i> Unlike</button>
-                </form>
+                <div class="flex">
+                  @if (!$vendor->likedBy(auth()->user()))
+                    <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
+                      @csrf 
+                    <button id="addFavIcon" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee"></span> Like</button>
+                    </form>
+                  @else
+                    <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
+                      @csrf
+                      @method('DELETE')
+                    <button id="addFavIcon" type="submit" class="fav_like float-right"><span class="fas fa-mug-hot "></span>Unlike</button>
+                    </form>
+                  @endif
+                  <span>{{ $vendor->likes->count() }} {{ Str::plural('like', $vendor->likes->count())}}</span>
+              </div>
                 <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->format('d/m/Y')}}</small></p>
             </div>
           </div>
