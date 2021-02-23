@@ -25,9 +25,9 @@
   }
 
   button.fav_like {
-    color: white;
+    color: #D3D3D3;
     border: none;
-    background-color:#28a745;
+    background-color:white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -35,8 +35,11 @@
 
   .fav_like:hover {
     color: #28a745 !important;
+    border: none;
     background-color:white;
-    border-color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
   }
 
   button.fav_unlike {
@@ -52,9 +55,12 @@
   }
 
   .fav_unlike:hover {
-    color: white;
-    background-color:#28a745;
-    border-color: #28a745;
+    color: #D3D3D3;;
+    border: none;
+    background-color:white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
   }
 
   a.nav-link:hover {

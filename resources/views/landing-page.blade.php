@@ -119,13 +119,13 @@
                   @if (!$vendor->likedBy(auth()->user()))
                     <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
                       @csrf 
-                    <button id="addFavIcon" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee"></span> Like</button>
+                    <button id="addFavIcon" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span> Like</button>
                     </form>
                   @else
                     <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
                       @csrf
                       @method('DELETE')
-                    <button id="addFavIcon" type="submit" class="fav_like float-right"><span class="fas fa-mug-hot "></span>Unlike</button>
+                    <button id="addFavIcon" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span>Unlike</button>
                     </form>
                   @endif
                   <span>{{ $vendor->likes->count() }} {{ Str::plural('like', $vendor->likes->count())}}</span>
