@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
@@ -37,6 +38,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
 Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy'])->name('vendor.likes');
+
+Route::get('/user/favourites', [FavouritesController::class, 'index'])->name('user.favourites');
 
 Route::view('/menu', 'menu');
 Route::view('/cart', 'cart');

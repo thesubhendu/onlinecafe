@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -40,28 +40,53 @@
   </head>
   <body>
       <!-- Image and text -->
-    <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">
-      <img src="/storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-      my coffee
-    </a>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item nav-right dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
-              <a class="dropdown-item" href="#"><i class="fas fa-cog"> Settings</i></a>
-              <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt">logout</i></a>
-            </div>
-          </li>
-    </ul>
-  </nav>
-  <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark mt-4">
-      <a class="nav-link" href="{{route('home')}}"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
-      <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
-      <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
-      <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-coffee"></i></a>
-</nav>
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+          <img src="storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+          my coffee
+        </a>
+        <ul class="navbar-nav ml-auto flex">
+          <div>
+          <li class="nav-item nav-right">
+                <a class="nav-link" href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
+            </li>
+            @auth
+            <li class="nav-item nav-right">
+              {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
+              {{-- <li class="nav-item nav-right dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"> </i> {{ auth()->user()->name }}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01"> --}}
+                  <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
+                  {{-- <a class="dropdown-item" href="#"><i class="fas fa-cog"> Settings</i></a>
+                  <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i></button>
+                  </form>
+                </div>
+            </li>
+            </li>
+            @endauth
+            @guest
+            <li class="nav-item nav-right">
+              <a class="nav-link" href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+            </li>
+            <li class="nav-item nav-right"> --}}
+              {{-- <a class="nav-link" href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a> --}}
+              {{-- <a class="nav-link" href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+            </li>
+            @endguest
+          </div>
+        </ul>
+      </nav> --}}
+    {{-- bottom Nav --}}
+      {{-- <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark justify-content-between mt-4"> --}}
+          <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
+          {{-- <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
+          <a class="nav-link" href="cards.html"><i class="fas fa-id-card fa-lg"></i></a>
+          <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
+    </nav> --}}
+    @extends('layout.app')
+@section('content')
 <main role="main" class="container mb-5">
 
     <div class="vendor-view d-flex flex-row justify-content-between card-header mb-3 mt-4">
@@ -83,8 +108,22 @@
               <p class="card-text">{{$vendor->address}}</p>
               <p class="card-text">{{$vendor->suburb}} {{$vendor->pc}}</p>
               <p class="card-text">{{$vendor->state}}</p>
-              <p class="card-text"><small class="text-muted">Last updated {{$vendor->updated_at->format('d/m/Y')}}</small></p>
-              <a id="addFavIcon" href="favourites.html" class="fav_like btn btn-outline-success btn-sm float-right"><span class="card-text fas fa-coffee"></span></i></a>
+              <p class="card-text"><small class="text-muted">Last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
+              <div class="flex">
+                @if (!$vendor->likedBy(auth()->user()))
+                  <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
+                    @csrf 
+                  <button id="addFavIcon" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
+                  </form>
+                @else
+                  <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
+                    @csrf
+                    @method('DELETE')
+                  <button id="addFavIcon" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
+                  </form>
+                @endif
+                <span>{{ $vendor->likes->count() }} {{ Str::plural('like', $vendor->likes->count())}}</span>
+            </div>
               <a href="menu.html" class="btn btn-success">Order</a>
             </div>
           </div>
@@ -193,9 +232,9 @@
           </div> 
   
   </main><!-- /.container -->
-  
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  @endsection
+  {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script></body>
 </body>
-  </html>
+  </html> --}}
