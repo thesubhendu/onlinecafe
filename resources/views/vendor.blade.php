@@ -110,6 +110,7 @@
               <p class="card-text">{{$vendor->state}}</p>
               <p class="card-text"><small class="text-muted">Last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
               <div class="flex">
+                @auth
                 @if (!$vendor->likedBy(auth()->user()))
                   <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
                     @csrf 
@@ -123,6 +124,7 @@
                   </form>
                 @endif
                 <span>{{ $vendor->likes->count() }} {{ Str::plural('like', $vendor->likes->count())}}</span>
+                @endauth
             </div>
               <a href="menu.html" class="btn btn-success">Order</a>
             </div>

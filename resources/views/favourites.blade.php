@@ -14,13 +14,8 @@
       </div>
   </div>
   <hr>
-  {{-- @if ($favourites->count())
-    @foreach ($favourites as $favourite) --}
-  
-      {{-- @endforeach
-      @else
-      <p>you havent liked anything</p>
-      @endif --}}
+  {{-- @if ($vendors->likedBy(auth()->user())) @endif --}}
+  {{-- @foreach ($user_likes as $vendor) --}}
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
@@ -28,12 +23,15 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <h5 class="card-title">Vendor Name</h5>
+            <p class="card-text"><small class="text-muted">2 days ago</small></p>
           </div>
           <a href="" class="btn btn-success">Order</a>
           <button id="fav_unlike" type="submit" class="fav_unlike float-right mr-2"><span class="fas fa-coffee fa-lg"></span></button>
+          {{-- @else
+            <p>you havent liked anything</p> --}}
+  
+         
         {{-- @if (!$favourite->likedBy(auth()->user()))
                 <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
                   @csrf 
@@ -50,6 +48,8 @@
         {{-- <div>  <p>you havent liked anything</p>  </div> --}}
       </div>
     </div>
+    {{-- @endforeach --}}
+
 </main><!-- /.container -->
 @endsection
 

@@ -83,7 +83,7 @@
     <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
     <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
     <a class="nav-link" href="cards.html"><i class="fas fa-id-card fa-lg"></i></a>
-    <a class="nav-link" href="{{ route('user.favourites') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
+    <a class="nav-link" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
 </nav>
     @yield('content')
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -37,4 +37,5 @@ class VendorLikeController extends Controller
         
         return back();
     }
+
 }
