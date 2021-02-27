@@ -39,7 +39,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
 Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy'])->name('vendor.likes');
 
-Route::get('/user/likes', [FavouritesController::class, 'index'])->name('user.likes');
+Route::get('/user/likes', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
 Route::view('/menu', 'menu');
 Route::view('/cart', 'cart');

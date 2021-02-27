@@ -15,7 +15,7 @@
   </div>
   <hr>
   {{-- @if ($vendors->likedBy(auth()->user())) @endif --}}
-  {{-- @foreach ($user_likes as $vendor) --}}
+  @foreach ($userlikes as $vendor)
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">Vendor Name</h5>
+            <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
             <p class="card-text"><small class="text-muted">2 days ago</small></p>
           </div>
           <a href="" class="btn btn-success">Order</a>
@@ -48,7 +48,7 @@
         {{-- <div>  <p>you havent liked anything</p>  </div> --}}
       </div>
     </div>
-    {{-- @endforeach --}}
+    @endforeach
 
 </main><!-- /.container -->
 @endsection

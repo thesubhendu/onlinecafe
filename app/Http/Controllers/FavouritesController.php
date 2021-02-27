@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavouritesController extends Controller
 {
@@ -25,6 +26,20 @@ class FavouritesController extends Controller
         
        ]);
             
+
+    }
+
+    public function userlikes()
+    {
+        $userlikes = Like::where('user_id', Auth::id())
+        ->with('vendor')
+        ->get();
+
+        // dd($userlikes);
+        return view('favourites', [
+            'userlikes' => $userlikes,
+            
+           ]);
 
     }
 
