@@ -47,9 +47,12 @@
   </a>
   <ul class="navbar-nav ml-auto ">
     <div class="d-flex flex-row">
-    <li class="nav-item nav-right">
+      <li class="nav-item nav-right">
           <a class="nav-link p-3" href="/" class="text-sm text-gray-700 underline">Home</a>
       </li>
+      <li class="nav-item nav-right">
+        <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline"><i class="fas fa-shopping-cart"></i> <span class="badge bg-light text-dark">2</span>Cart</a>
+    </li>
       @auth
       <li class="nav-item nav-right">
         {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}

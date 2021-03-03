@@ -111,14 +111,14 @@
                 <span class="card-text fa fa-star"></span>
                 <span class="card-text fa fa-star"></span><span class="badge badge-pill badge-success"> 3.0</span>
               <p class="card-text">{{$vendor->suburb}}</p>
-              <a id="menubtn" href="#" class="btn btn-success btn-sm">Menu</a>
-              <a id="vendorbtn" href="{{route('vendor.show', $vendor->id)}}" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
+              <a id="menubtn" href="{{route( 'vendor.products', $vendor )}}" class="btn btn-success btn-sm">Menu</a>
+              <a id="vendorbtn" href="{{route('vendor.show', $vendor)}}" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
                 <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
                 <a id="addRatingBtn" href="#" class="homeScreenRating btn btn-secondary btn-sm"><i class="fas fa-star" ></i></a>
                 <div class="flex">
                   @auth
                   @if (!$vendor->likedBy(auth()->user()))
-                    <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
+                    <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
                       @csrf 
                     <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
                     </form>

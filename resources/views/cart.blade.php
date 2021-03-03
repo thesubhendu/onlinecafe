@@ -1,102 +1,175 @@
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>my coffee</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/1e6705f353.js" crossorigin="anonymous"></script>
-
-        <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        /* a.nav-link {
-        color: #fff;
-    } */
-
-        
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-            }
-        }
-
-        </style>
-    <!-- Custom styles for this template -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
-  </head>
-  <body>
-      <!-- Image and text -->
-    <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">
-      <img src="storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-      my coffee
-    </a>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item nav-right dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
-              <a class="dropdown-item" href="#"><i class="fas fa-cog"> Settings</i></a>
-              <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"> logout</i></a>
-            </div>
-          </li>
-    </ul>
-  </nav>
-
-    <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark">
-        <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a>
-      <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign"></i></a>
-      <a class="nav-link" href="cards.html"><i class="fas fa-id-card"></i></a>
-      <a class="nav-link" href="favourites.html"><i id="favicon" class="fas fa-heart"></i></a>
-    </nav>
+@extends('layout.app')
+@section('content')
 <main role="main" class="container py-4 mb-5">
   <div class="vendor-index mt-4">
-        <h1>Order Details</h1>
-            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-            <label for="email"><i class="fa fa-envelope"></i> Email</label>
-            <input type="text" id="email" name="email" placeholder="john@example.com">
-            <label for="email"><i class="fas fa-mobile-alt"></i> Mobile</label>
-            <input type="text" id="Mobile" name="mobile" placeholder="0412345678">
-            <div class="cart-row">
-                <div class="col-75">
-                    <div class="container">
-                        <h4>Cart
-                            <span class="price" style="color:black">
-                            <i class="fa fa-shopping-cart"></i>
-                            <b>1</b>
-                            </span>
-                        </h4>
-                        <p><a href="menu.html">Latte Small</a> <span class="price">$3.50</span></p>
-                        <hr>
-                        <p>Total <span class="price" style="color:black"><b>$3.50</b></span></p>
-                        <div>
-                            <a href="order_suibmitted.html"class="btn btn-success mt-4">Submit</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="modal-header">
+            <img src="{{asset('storage/img/nostamp.png')}}" width="30" height="30" class="d-inline-block align-top float-left" alt="logo">
+            <h5 class="modal-title" id="titleLabel">new order</h5>
+            <div>
+                <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
             </div>
+        </div>
     </div>
-</main><!-- /.container -->
+        <div class="mt-2">
+            @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+            @endif
+        </div>
+        @if(count($errors) > 0)
+        <div id="cart_error" class="d-none alert alert-danger" role="alert">
+            <ul>
+                @foreach ($error->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
+        @if (Cart::count() > 0) 
+            <div class="modal-body">
+                <form id="newOrderForm" method="POST" action="" class="needs-validation" novalidate>
+                    <h3>{{ Cart::count() }} items in shopping Cart<h3>
+                    <!-- <div class="form-group">
+                    <input type="text" class="form-control" id="orderUser_id" name="orderUser_id" value="" placeholder="User ID..." required>
+                    </div> -->
+                    <div class="form-group">
+                        @foreach(Cart::content() as $item)
+                        {{-- <div class="row"> --}}
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                <div class="col-md-2">
+                                    <img src="{{asset('storage/img/nostamp.png')}}" alt="...">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" id="orderProduct_id" name="orderProduct_id" value="{{ $item->name }}" placeholder="product ID..." required>
+                                    <div class="invalid-feedback">
+                                        You need to let us know what you would like
+                                    </div>
+                                    <h5 class="card-title">{{ $item->name }}</h5>
+                                    <p class="card-text"> ${{ $item->price }}</p>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <select class="form-control" id="orderQuanitity" name="orderQuanitity" required>
+                                            <option selected>how many...</option>
+                                            <option value="1"{{ old('orderQuanitity') == "1" ? 'selected' : ''}}>1</option>
+                                            <option value="2"{{ old('orderQuanitity') == "2" ? 'selected' : ''}}>2</option>
+                                            <option value="3"{{ old('orderQuanitity') == "3" ? 'selected' : ''}}>3</option>
+                                            <option value="4"{{ old('orderQuanitity') == "4" ? 'selected' : ''}}>4</option>
+                                            <option value="5"{{ old('orderQuanitity') == "5" ? 'selected' : ''}}>5</option>
+                                            <option value="6"{{ old('orderQuanitity') == "6" ? 'selected' : ''}}>6</option>
+                                            <option value="7"{{ old('orderQuanitity') == "7" ? 'selected' : ''}}>7</option>
+                                            <option value="8"{{ old('orderQuanitity') == "8" ? 'selected' : ''}}>8</option>
+                                            <option value="9"{{ old('orderQuanitity') == "9" ? 'selected' : ''}}>9</option>
+                                            <option value="10"{{ old('orderQuanitity') == "10" ? 'selected' : ''}}>10</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            we need to know how many you would like
+                                            </div>
+                                        </div>
+                                        <div class="card milk mt-2 mb-4">
+                                            <h6 class="card-header">Milk</h6>
+                                            <div class="form-group card-body">
+                                                <select class="form-control" id="orderMilk" name="milk" required>
+                                                    <option selected>which milk...</option>
+                                                    <option value="Full Cream"{{ old('milk') == "Full Cream" ? 'selected' : ''}}>Full Cream</option>
+                                                    <option value="Skim"{{ old('milk') == "Skim" ? 'selected' : ''}}>Skim</option>
+                                                    <option value="Soy"{{ old('milk') == "Soy" ? 'selected' : ''}}>Soy</option>
+                                                    <option value="Zymil"{{ old('milk') == "Zymil" ? 'selected' : ''}}>Zymil</option>
+                                                    <option value="Almond"{{ old('milk') == "Almond" ? 'selected' : ''}}>Almond</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                we need to know which milk
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="card sugars mt-2 mb-4">
+                                        <h6 class="card-header">Sugar</h6>
+                                        <div class="form-group card-body">
+                                            <select class="form-control" id="orderSugars" name="sugar" required>
+                                                <option selected>how many sugars...</option>
+                                                <option value="None"{{ old('sugar') == "None" ? 'selected' : ''}}>None</option>
+                                                <option value="1"{{ old('sugar') == "1" ? 'selected' : ''}}>1</option>
+                                                <option value="2"{{ old('sugar') == "2" ? 'selected' : ''}}>2</option>
+                                                <option value="3"{{ old('sugar') == "3" ? 'selected' : ''}}>3</option>
+                                                <option value="4"{{ old('sugar') == "4" ? 'selected' : ''}}>4</option>
+                                                <option value="5"{{ old('sugar') == "5" ? 'selected' : ''}}>5</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                we need to know how many sugars you'd like
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card syurps mt-2 mb-4">
+                                            <h6 class="card-header">Syrup</h6>
+                                            <div class="form-group - card-body">
+                                                <select class="form-control" id="orderSyrup" name="syrup" required>
+                                                    <option selected>Syrup...</option>
+                                                    <option value="No Thanks"{{ old('syrup') == "NO Thanks" ? 'selected' : ''}}>No Thanks</option>
+                                                    <option value="Caramel"{{ old('syrup') == "Caramel" ? 'selected' : ''}}>Caramel</option>
+                                                    <option value="Vanilla"{{ old('syrup') == "Vanilla" ? 'selected' : ''}}>Vanilla</option>
+                                                    <option value="Hazelnut"{{ old('syrup') == "Hazelnut" ? 'selected' : ''}}>Hazelnut</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                    we need to know if you would like syrup
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group d-grid gap-2 col-12 mx-auto">
+                                                <button id="addOrderbtn" type="submit"  value="submit" class="btn btn-success btm-block"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                                    <path fill-rule="evenodd" d="M8.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
+                                                    </svg>
+                                                     add to cart</button>
+                                            </div>
+                                </div>
+                                </div>
+                                
+                            </div>
+                        {{-- </div> --}}
+                        @endforeach
+                    </div>
+                </div>    
+            @else
+
+                <h3> No items in Cart </h3>
+                
+            @endif
+            <div class="form-group">
+                <input hidden type="text" class="form-control" id="orderVendor_id" name="orderVendor_id" value="{{app('request')->input('vendor_id')}}" placeholder="business ID..." required>
+                <div class="invalid-feedback">
+                    we need to know which business your buying from
+                </div>
+                <div>       
+                    <table>            
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                    <td>Subtotal</td>
+                                    <td><?php echo Cart::subtotal(); ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                    <td>Tax</td>
+                                    <td><?php echo Cart::tax(); ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                    <td>Total</td>
+                                    <td><strong><?php echo Cart::total(); ?></strong></td>
+                                </tr>
+                            </tfoot>
+                    </table>
+                </div> 
+                
+            </form>
+        </div>
+</div>
+</main><!-- /.container -->
+@endsection
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script></body>
