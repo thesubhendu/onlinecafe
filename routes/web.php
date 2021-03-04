@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
@@ -48,6 +50,9 @@ Route::get('/user/likes', [FavouritesController::class, 'userlikes'])->name('use
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+Route::get('/cards', [CardController::class, 'index'])->name('cards');
 
 Route::get('empty', function() {
     Cart::destroy();

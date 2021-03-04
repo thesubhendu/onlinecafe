@@ -84,8 +84,8 @@
 {{-- bottom Nav --}}
 <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark justify-content-between mt-4">
     <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
-    <a class="nav-link" href="orders.html"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
-    <a class="nav-link" href="cards.html"><i class="fas fa-id-card fa-lg"></i></a>
+    <a class="nav-link" href="{{ route('orders') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
+    <a class="nav-link" href="{{ route('cards') }}"><i class="fas fa-id-card fa-lg"></i></a>
     <a class="nav-link" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
 </nav>
     @yield('content')
