@@ -31,6 +31,8 @@
         @if (Cart::count() > 0) 
             <div class="modal-body">
                 <form id="newOrderForm" method="POST" action="" class="needs-validation" novalidate>
+                    @csrf
+                    
                     <h3>{{ Cart::count() }} items in shopping Cart<h3>
                     <!-- <div class="form-group">
                     <input type="text" class="form-control" id="orderUser_id" name="orderUser_id" value="" placeholder="User ID..." required>
@@ -51,8 +53,19 @@
                                     </div>
                                     <h5 class="card-title">{{ $item->name }}</h5>
                                     <p class="card-text"> ${{ $item->price }}</p>
+                                    <div class="d-flex">
+                                        <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-default">Remove</button>
+                                        </form>
+                                        <form action="{{ route('cart.saveForLater', $item->rowId) }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-default">Save For Later</button>
+                                        </form>
                                     </div>
-                                    <div class="form-group mt-2">
+                                    </div>
+                                    <div class="form-group mt-2 mr-4">
                                         <select class="form-control" id="orderQuanitity" name="orderQuanitity" required>
                                             <option selected>how many...</option>
                                             <option value="1"{{ old('orderQuanitity') == "1" ? 'selected' : ''}}>1</option>
@@ -70,7 +83,7 @@
                                             we need to know how many you would like
                                             </div>
                                         </div>
-                                        <div class="card milk mt-2 mb-4">
+                                        <div class="card milk mt-2 mb-4 mr-4">
                                             <h6 class="card-header">Milk</h6>
                                             <div class="form-group card-body">
                                                 <select class="form-control" id="orderMilk" name="milk" required>
@@ -86,7 +99,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <div class="card sugars mt-2 mb-4">
+                                    <div class="card sugars mt-2 mb-4 mr-4">
                                         <h6 class="card-header">Sugar</h6>
                                         <div class="form-group card-body">
                                             <select class="form-control" id="orderSugars" name="sugar" required>
@@ -103,7 +116,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card syurps mt-2 mb-4">
+                                        <div class="card syurps mt-2 mb-4 mr-4">
                                             <h6 class="card-header">Syrup</h6>
                                             <div class="form-group - card-body">
                                                 <select class="form-control" id="orderSyrup" name="syrup" required>
@@ -160,7 +173,30 @@
                                 </tr>
                             </tfoot>
                     </table>
-                </div> 
+                </div>
+                @if (Cart::instance('saveForLater')->count() > 0)
+                <div class="saveForLater">
+                    @foreach(Cart::instance('saveForLater')->content() as $item)
+                <div class="card mt-4" style="width: 18rem;">
+                    <img src="{{asset('storage/img/nostamp.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{$item->name}}</h5>
+                      <p class="card-text">${{$item->price}}</p>
+                      <div class="d-flex">
+                        <form action="{{ route('saveforlaer.addtocart', $item->rowId) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Order</button>
+                        </form>
+                        <form action="{{ route('saveforlater.remove', $item->rowId) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-default">Remove</button>
+                        </form>
+                    </div>
+                  </div>
+                  @endforeach
+                </div>
+                @endif
                 
             </form>
         </div>

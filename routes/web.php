@@ -12,6 +12,7 @@ use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CartSaveForLaterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,11 @@ Route::get('/user/likes', [FavouritesController::class, 'userlikes'])->name('use
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
+Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemForLater'])->name('cart.saveForLater');
+
+Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
+Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/cards', [CardController::class, 'index'])->name('cards');
@@ -59,9 +65,8 @@ Route::get('empty', function() {
 });
 
 Route::view('/vendor', 'vendor');
-Route::view('/orders', 'orders');
 Route::view('/comment', 'comment');
 Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou');
-Route::view('/cards', 'cards');
+
 

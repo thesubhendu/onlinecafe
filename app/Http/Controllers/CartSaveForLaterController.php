@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class CartController extends Controller
+class CartSaveForLaterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart');
+        //
     }
 
     /**
@@ -35,12 +35,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        Cart::add($request->id, $request->name, 1, $request->price)
-                ->associate(Product::class);
-
-            return redirect()->route('cart')
-            ->with('product')
-            ->with('success_message', 'Item added to your cart'); 
+        //
     }
 
     /**
@@ -85,29 +80,26 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
+        Cart::instance('saveForLater')->remove($id);
 
-        Cart::instance('default')->remove($id);
-
-        return back()->with('success_message', 'Item has been removed from your cart');
+        return back()->with('success_message', 'Item has been removed from save for later');
     }
 
     /**
-     * move to save for later.
+     * move item to the cart.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function saveItemForLater($id)
+    public function moveToCart($id)
     {
-        $item = Cart::get($id);
+        $item = Cart::instance('saveForLater')->get($id);
         
-        Cart::remove($id);
+        Cart::instance('saveForLater')->remove($id);
 
-        Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)
+        Cart::instance('default')->add($item->id, $item->name, 1, $item->price)
                 ->associate(Product::class);
 
-        return back()->with('success_message', 'Item has been moved to save for later');
+        return back()->with('success_message', 'Item has been moved to cart');
     }
-
-
 }
