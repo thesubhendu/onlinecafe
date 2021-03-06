@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -20,6 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        
         return view('cart');
     }
 
@@ -84,18 +86,33 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the selected item from the cart.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        $item = Cart::get($id);
 
-        Cart::instance('default')->remove($id);
+        Cart::remove($item);
 
         return back()->with('success_message', 'Item has been removed from your cart');
     }
+
+    //  /**
+    //  * Remove the selected item from the cart.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function removeFromCart($id)
+    // {
+
+    //     Cart::remove($id);
+
+    //     return back()->with('success_message', 'Item has been removed from your cart');
+    // }
 
     /**
      * move to save for later.

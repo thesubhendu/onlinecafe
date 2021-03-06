@@ -53,6 +53,7 @@
                                     </div>
                                     <h5 class="card-title">{{ $item->name }}</h5>
                                     <p class="card-text"> ${{ $item->price }}</p>
+                                    {{-- @dd($item); --}}
                                     <div class="d-flex">
                                         <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
                                             @csrf

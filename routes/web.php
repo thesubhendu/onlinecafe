@@ -64,7 +64,6 @@ Route::get('empty', function() {
     Cart::destroy();
 });
 
-Route::view('/vendor', 'vendor');
 Route::view('/comment', 'comment');
 Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou');
