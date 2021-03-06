@@ -13,10 +13,9 @@
     </div>
 </div>
 <hr>
-  <div class="vendor-index mt-4">
-
-    <div>
-      <div class="card mt-4" style="max-width: 540px;">
+  <div class="container d-flex mt-4">
+    {{-- <div> --}}
+      <div class="card mt-4 mr-3" style="max-width: 540px;">
         <div class="card-logo card-header">
           <img src="storage/img/nostamp.png" style="max-width: 10%; height: auto;">
           Cafe One
@@ -66,7 +65,7 @@
           </div>
         </div>
       </div>
-    </div>
+    {{-- </div> --}}
   </div>
 
 </main><!-- /.container -->

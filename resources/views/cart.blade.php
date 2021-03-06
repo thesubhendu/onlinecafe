@@ -137,7 +137,6 @@
                                             </div>
                                 </div>
                                 </div>
-                                
                             </div>
                         {{-- </div> --}}
                         @endforeach
@@ -176,6 +175,7 @@
                 </div>
                 @if (Cart::instance('saveForLater')->count() > 0)
                 <div class="saveForLater">
+                    <h3 class="mt-4">Save for later</h3>
                     @foreach(Cart::instance('saveForLater')->content() as $item)
                 <div class="card mt-4" style="width: 18rem;">
                     <img src="{{asset('storage/img/nostamp.png')}}" class="card-img-top" alt="...">
@@ -185,7 +185,7 @@
                       <div class="d-flex">
                         <form action="{{ route('saveforlaer.addtocart', $item->rowId) }}" method="post">
                             @csrf
-                            <button type="submit" class="btn btn-success">Order</button>
+                            <button type="submit" class="btn btn-default">Order</button>
                         </form>
                         <form action="{{ route('saveforlater.remove', $item->rowId) }}" method="post">
                             @csrf
