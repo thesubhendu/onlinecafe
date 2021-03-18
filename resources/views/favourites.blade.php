@@ -24,28 +24,33 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
-            <p class="card-text"><small class="text-muted">2 days ago</small></p>
+            <p class="card-text"><small class="text-muted">{{$vendor->vendor->updated_at}}</small></p>
           </div>
           <a href="" class="btn btn-success">Order</a>
+          <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
+            @csrf
+                  @method('DELETE')
           <button id="fav_unlike" type="submit" class="fav_unlike float-right mr-2"><span class="fas fa-coffee fa-lg"></span></button>
+              </form>
           {{-- @else
             <p>you havent liked anything</p> --}}
   
          
-        {{-- @if (!$favourite->likedBy(auth()->user()))
-                <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
+        {{-- @if (!$vendor->likedBy(auth()->user())) --}}
+                {{-- <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
                   @csrf 
                 <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
-                </form>
-              @else
-                <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
+                </form> --}}
+                {{-- <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
                   @csrf
                   @method('DELETE')
                 <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
                 </form>
+              @else
+                <div>  <p>you havent liked anything</p>  </div>
               @endif --}}
         </div>
-        {{-- <div>  <p>you havent liked anything</p>  </div> --}}
+        
       </div>
     </div>
     @endforeach

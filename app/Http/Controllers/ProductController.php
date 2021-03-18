@@ -21,6 +21,7 @@ class ProductController extends Controller
     public function vendorproducts($vendor)
     {
         
+        
         $products = Product::where('vendor_id', $vendor)
         ->with('vendor')
         ->get();
