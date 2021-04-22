@@ -19,17 +19,17 @@
             <img src="storage/img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{$vendor->vendor_name}}</h5>
-              <span class="card-text fa fa-star checked"></span>
-                <span class="card-text fa fa-star checked"></span>
-                <span class="card-text fa fa-star checked"></span>
-                <span class="card-text fa fa-star"></span>
-                <span class="card-text fa fa-star"></span><span class="badge badge-pill badge-success"> 3.0</span>
+                <span class="card-text fas fa-coffee checked"></span>
+                <span class="card-text fas fa-coffee checked"></span>
+                <span class="card-text fas fa-coffee checked"></span>
+                <span class="card-text fas fa-coffee unchecked"></span>
+                <span class="card-text fas fa-coffee unchecked"></span><span class="badge badge-pill badge-success ml-2"> 3.0</span>
               <p class="card-text">{{$vendor->suburb}}</p>
               <a id="menubtn" href="{{route( 'vendor.products', $vendor )}}" class="btn btn-success btn-sm">Menu</a>
               <a id="vendorbtn" href="{{route('vendor.show', $vendor)}}" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
-                <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
+                {{-- <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
                 <a id="addRatingBtn" href="#" class="homeScreenRating btn btn-secondary btn-sm"><i class="fas fa-star" ></i></a>
-                <div class="flex">
+                <div class="flex"> --}}
                   @auth
                   @if (!$vendor->likedBy(auth()->user()))
                     <form action="{{ route('vendor.likes', $vendor) }}" method='post'>

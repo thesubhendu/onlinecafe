@@ -45,11 +45,11 @@
         <div class="card">
             <div class="card-header">
                 Reviews
-                <span class="card-text fa fa-star checked"></span>
-                <span class="card-text fa fa-star checked"></span>
-                <span class="card-text fa fa-star checked"></span>
-                <span class="card-text fa fa-star"></span>
-                <span class="card-text fa fa-star"></span><span class="badge badge-pill badge-dark"> 3.0</span>
+                <span class="card-text fas fa-coffee checked"></span>
+                <span class="card-text fas fa-coffee checked"></span>
+                <span class="card-text fas fa-coffee checked"></span>
+                <span class="card-text fas fa-coffee unchecked"></span>
+                <span class="card-text fas fa-coffee unchecked"></span><span class="badge badge-pill badge-dark ml-2"> 3.0</span>
             </div>
             <div class="row">
               <div class="col-sm-7">
@@ -64,23 +64,23 @@
                     <div class="col-sm-9">
                       <div class="review-block-rate">
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star" aria-hidden="true"></span>
+                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star" aria-hidden="true"></span>
+                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
                         </button>
                       </div>
-                      <div class="review-block-title ml-4">this was nice in buy</div>
-                      <div class="review-block-description ml-4">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                      <div class="review-block-title ml-4">Lorem ipsum dolor sit amet.</div>
+                      <div class="review-block-description ml-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem quod neque odit, ea esse labore incidunt sequi ut porro commodi, quisquam sunt qui architecto doloribus ipsa autem animi, aspernatur tempora error eum eius quia! Debitis consequatur non magni molestiae rerum.</div>
                     </div>
                   </div>
                   <hr/>
@@ -93,19 +93,19 @@
                     <div class="col-sm-9">
                       <div class="review-block-rate">
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star" aria-hidden="true"></span>
+                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star" aria-hidden="true"></span>
+                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
                         </button>
                       </div>
                       <div class="review-block-title ml-4">this was nice in buy</div>
@@ -122,19 +122,19 @@
                     <div class="col-sm-9">
                       <div class="review-block-rate">
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star checked" aria-hidden="true"></span>
+                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-star" aria-hidden="true"></span>
+                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
                         </button> 
                       </div>
                       <div class="review-block-title ml-4">Lorem ipsum dolor sit amet.</div>

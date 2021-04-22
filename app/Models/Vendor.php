@@ -30,6 +30,16 @@ class Vendor extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function rate($rating)
+    {
+        $this->ratings()->create(['rating' => $rating]);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }
 
 

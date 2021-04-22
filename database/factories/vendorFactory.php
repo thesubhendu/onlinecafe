@@ -6,7 +6,7 @@ use App\Models\vendor;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class vendorFactory extends Factory
+class VendorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -28,7 +28,7 @@ class vendorFactory extends Factory
             'contact_name' => $this->faker->name,
             'contact_lastname' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'mobile' => $this->faker->name,           
+            'mobile' => $this->faker->PhoneNumber,           
             'address' => $this->faker->address,
             'suburb' => $this->faker->city,
             'pc' => $this->faker->postcode,
