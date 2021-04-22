@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Like;
 use App\Models\User;
+use App\Models\Rating;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,6 +30,7 @@ class Vendor extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+        // $this->products()->create(['' => $product]); refer to rating function below
     }
 
     public function rate($rating)
@@ -39,6 +41,11 @@ class Vendor extends Model
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+
+    public function rating()
+    {
+        return $this->ratings->avg('rating');
     }
 }
 

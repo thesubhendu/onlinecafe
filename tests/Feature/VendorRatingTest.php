@@ -16,11 +16,30 @@ class VendorRatingTest extends TestCase
    function it_can_be_rated()
    {
       
-    $vendor = vendor::factory()->make();
+    $vendor = vendor::factory()->create();
 
     $vendor->rate(5);
 
     $this->assertCount(1, $vendor->ratings);
+   }
+
+   function it_can_calculate_the_average_rating()
+   {
+    $vendor = vendor::factory()->create();
+
+    $vendor->rate(5);
+    $vendor->rate(1);
+
+    $this->assertEquals(3, $vendor->rating());
+   }
+
+   function it_cannot_be_rated_above_5()
+   {
+    $vendor = vendor::factory()->create();
+
+    $this->expectException(\InvalidArgumentException::class);
+
+    $vendor->rate(6);
    }
 
 
