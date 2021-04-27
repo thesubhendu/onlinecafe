@@ -30,9 +30,9 @@ class VendorFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'mobile' => $this->faker->PhoneNumber,           
             'address' => $this->faker->address,
-            'suburb' => $this->faker->city,
+            'suburb' => $this->faker->cityPrefix,
             'pc' => $this->faker->postcode,
-            'state' => 'QLD',
+            'state' => $this->faker->stateAbbr,
             'cardstamps' => 10,
             // 'email_verified_at' => now(),
             // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
