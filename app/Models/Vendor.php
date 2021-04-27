@@ -33,18 +33,17 @@ class Vendor extends Model
         // $this->products()->create(['' => $product]); refer to rating function below
     }
 
-    public function rate($number)
+    public function rate($rating, $user = null)
     {
-        if($number > 5 || $number < 1){
+        if($rating > 5 || $rating < 1){
             throw new \InvalidArgumentException('Rating must be between 1-5.');
         }
 
-        $rating = Rating::where([
-            'user_id' => auth()->id(),
-            'vendorz_id' => $this->id
-        ]);
-
-        $rating->fill(['rating' => $number])->save();
+        $this
+        ->ratings()
+        ->updateOrCreate([
+            'user_id' => $user ? $user->id : auth()->id(),
+        ], compact('rating'));
 
         // $this->ratings()->create(['rating' => $rating]);
     }
