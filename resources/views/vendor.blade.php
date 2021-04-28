@@ -44,12 +44,26 @@
           </div>
         <div class="card">
             <div class="card-header">
-                Reviews
-                <span class="card-text fas fa-coffee checked"></span>
+                Reviews<span class="badge badge-pill badge-dark ml-3"> 3.0</span>
+                <div class="review-block-rate d-flex">
+                  <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                  </div>
+              </div>
+                {{-- <span class="card-text fas fa-coffee checked"></span>
                 <span class="card-text fas fa-coffee checked"></span>
                 <span class="card-text fas fa-coffee checked"></span>
                 <span class="card-text fas fa-coffee unchecked"></span>
-                <span class="card-text fas fa-coffee unchecked"></span><span class="badge badge-pill badge-dark ml-2"> 3.0</span>
+                <span class="card-text fas fa-coffee unchecked"></span><span class="badge badge-pill badge-dark ml-2"> 3.0</span> --}}
+              <div class="rating-comment">
+                <div class="form-group">
+                  <textarea class="form-control"></textarea>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-sm-7">
@@ -59,88 +73,31 @@
                     <div class="col-sm-3 ml-4">
                       <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
                       <div class="review-block-name"><a href="#">nktailor</a></div>
-                      <div class="review-block-date">June 16, 2016<br/>1 day ago</div>
-                    </div>
-                    <div class="col-sm-9">
-                      <div class="review-block-rate">
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
-                        </button>
-                      </div>
-                      <div class="review-block-title ml-4">Lorem ipsum dolor sit amet.</div>
-                      <div class="review-block-description ml-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem quod neque odit, ea esse labore incidunt sequi ut porro commodi, quisquam sunt qui architecto doloribus ipsa autem animi, aspernatur tempora error eum eius quia! Debitis consequatur non magni molestiae rerum.</div>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="row">
-                    <div class="col-sm-3 ml-4">
-                      <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                      <div class="review-block-name"><a href="#">nktailor</a></div>
                       <div class="review-block-date">March 6, 2016<br/>1 day ago</div>
                     </div>
-                    <div class="col-sm-9">
-                      <div class="review-block-rate">
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-grey btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
-                        </button>
+                    <form action="/vendor/{{$vendor->id}}/rate" method="POST">
+                      @csrf
+                      <div class="col-sm-9">
+                        <div class="review-block-rate d-flex">
+                          <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                          {{-- <span class="fas fa-coffee checked ml-4" aria-hidden="true"></span>                          
+                          <span class="fas fa-coffee checked ml-4" aria-hidden="true"></span>                          
+                          <span class="fas fa-coffee checked ml-4" aria-hidden="true"></span>                          
+                          <span class="fas fa-coffee unchecked ml-4" aria-hidden="true"></span>                          
+                          <span class="fas fa-coffee unchecked ml-4" aria-hidden="true"></span> --}}
+                        </div>
+                        <div class="review-block-title ml-4">Lorem ipsum dolor sit amet.</div>
+                        <div class="review-block-description ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit suscipit maxime vitae accusantium quidem amet dignissimos. Ex, hic vero a quisquam sit dolor officiis? Ipsam, nostrum qui voluptatibus culpa hic debitis accusantium possimus neque consequuntur voluptate necessitatibus dolorum id similique.</div>
                       </div>
-                      <div class="review-block-title ml-4">this was nice in buy</div>
-                      <div class="review-block-description ml-4">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                   <hr/>
-                  <div class="row">
-                    <div class="col-sm-3 ml-4">
-                      <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                      <div class="review-block-name"><a href="#">nktailor</a></div>
-                      <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
-                    </div>
-                    <div class="col-sm-9">
-                      <div class="review-block-rate">
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee checked" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-xs" aria-label="Left Align">
-                          <span class="fas fa-coffee unchecked" aria-hidden="true"></span>
-                        </button> 
-                      </div>
-                      <div class="review-block-title ml-4">Lorem ipsum dolor sit amet.</div>
-                      <div class="review-block-description ml-4">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

@@ -30,6 +30,8 @@ class VendorTest extends TestCase
     $this->assertCount(1, $this->vendor->ratings);
    }
 
+   /** @test */ 
+
    function it_can_calculate_the_average_rating()
    {
 
@@ -39,6 +41,8 @@ class VendorTest extends TestCase
     $this->assertEquals(3, $this->vendor->rating());
    }
 
+   /** @test */ 
+
    function it_cannot_be_rated_above_5()
    {
 
@@ -47,6 +51,8 @@ class VendorTest extends TestCase
     $this->vendor->rate(6);
    }
 
+   /** @test */ 
+
    function it_cannot_be_rated_below_1()
    {
 
@@ -54,6 +60,8 @@ class VendorTest extends TestCase
 
     $this->vendor->rate(-1);
    }
+
+   /** @test */ 
 
    function it_can_only_be_rated_once_per_user()
    {

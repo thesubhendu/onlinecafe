@@ -25,7 +25,7 @@ class productFactory extends Factory
             return [
                 'ProductName' => $this->faker->word,
                 'ProductDescription' => $this->faker->sentence,
-                'productPrice' => $this->faker->randomDigit,
+                'productPrice' => $this->faker->numberBetween($min = 3, $max = 6),
                 'vendor_id' => vendor::all()->random()->id,
             ];
         

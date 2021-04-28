@@ -11,6 +11,7 @@ use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\VendorRatingController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartSaveForLaterController;
 
@@ -45,7 +46,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
 Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy'])->name('vendor.likes');
 
-Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->name('vendor.rating');
+Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->name('vendor.rating')->middleware('auth');
 
 Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproducts'])->name('vendor.products');
 
