@@ -14,7 +14,7 @@
         </div>
     </div>
         <div class="card mb-3">
-            <img src="{{asset('storage/img/cafe1.jpg')}}" class="card-img-top img-fluid" alt="...">
+            <img src="/storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{$vendor->vendor_name}}</h5>
               <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto reprehenderit sint dignissimos cumque cupiditate eos voluptas laudantium harum ullam quibusdam.</p>

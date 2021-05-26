@@ -18,7 +18,7 @@ class LandingPageController extends Controller
         $vendors = Vendor::inRandomOrder()
             ->take(3)
             ->get();
-        return view('landing-page')
+        return view('landing-page-new')
             ->with('vendors', $vendors);
     }
 }

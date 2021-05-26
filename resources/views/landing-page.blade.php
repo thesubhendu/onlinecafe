@@ -16,7 +16,7 @@
   </div>
       @foreach ($vendors as $vendor)
         <div class="card mb-3">
-            <img src="storage/img/cafe1.jpg" class="card-img-top img-fluid" alt="...">
+            <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{$vendor->vendor_name}}</h5>
                 <span class="card-text fas fa-coffee checked"></span>

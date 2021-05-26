@@ -2,6 +2,8 @@
 :root {
     --success-color: #2eec71;
     --error-color: #e74c3c;
+    --checked-color: #28a745;
+    --unchecked: lightgray;
 }
 
 html,
@@ -14,7 +16,7 @@ body {
 }
 
 span .checked {
-    color: yellow;
+    color: var(--checked-color);
 }
 
 .checked {
