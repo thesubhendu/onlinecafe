@@ -4,7 +4,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
           @foreach ($vendors as $vendor)
             <div class="col">
-                <div class="card h-100 ">
+                <div class="card h-100">
                   <a class="vendor-card" href="{{ route('vendor.show', $vendor) }}">
                     <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                   </a>
