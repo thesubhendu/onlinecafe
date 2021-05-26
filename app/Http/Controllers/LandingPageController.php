@@ -16,10 +16,9 @@ class LandingPageController extends Controller
     public function index()
     {
         $vendors = Vendor::inRandomOrder()
-        ->take(3)
-        ->get();
+            ->take(3)
+            ->get();
         return view('landing-page')
-        ->with('vendors', $vendors);
+            ->with('vendors', $vendors);
     }
-
 }
