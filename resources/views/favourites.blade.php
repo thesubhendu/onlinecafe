@@ -24,9 +24,9 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
-            <p class="card-text"><small class="text-muted">{{$vendor->vendor->updated_at}}</small></p>
+            <p class="card-text"><small class="text-muted">Last updated {{$vendor->vendor->updated_at->diffForHumans()}}</small></p>
+            <a href="" class="btn btn-success px-3 mr-3">Order</a>
           </div>
-          <a href="" class="btn btn-success">Order</a>
           <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
             @csrf
                   @method('DELETE')

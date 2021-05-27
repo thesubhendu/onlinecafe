@@ -13,7 +13,7 @@ class CartController extends Controller
     {
         $this->middleware(['auth']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        
+
         return view('cart');
     }
 
@@ -43,12 +43,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        Cart::add($request->id, $request->name, 1, $request->price)
-                ->associate(Product::class);
+        Cart::add($request->id, $request->name, 1, $request->price, array $options = ([
+            $request->ordermilk,
+            $request->ordersugar, 
+            $request->ordersyrup
+        ])
+            ->associate(Product::class);
 
-            return redirect()->route('cart')
+        return redirect()->route('cart')
             ->with('product')
-            ->with('success_message', 'Item added to your cart'); 
+            ->with('success_message', 'Item added to your cart');
+
+        // , $request->ordermilk, $request->ordersugar, $request->ordersyrup
     }
 
     /**
@@ -93,7 +99,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $item = Cart::get($id);
 
         Cart::remove($item);
@@ -124,14 +130,12 @@ class CartController extends Controller
     public function saveItemForLater($id)
     {
         $item = Cart::get($id);
-        
+
         Cart::remove($id);
 
         Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)
-                ->associate(Product::class);
+            ->associate(Product::class);
 
         return back()->with('success_message', 'Item has been moved to save for later');
     }
-
-
 }

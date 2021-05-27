@@ -61,14 +61,13 @@ Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'de
 Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+Route::get('/orders/{vendor}', [OrderController::class, 'create'])->name('new.order');
 Route::get('/cards', [CardController::class, 'index'])->name('cards');
 
-Route::get('empty', function() {
+Route::get('empty', function () {
     Cart::destroy();
 });
 
 Route::view('/comment', 'comment');
 Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou');
-
-

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -21,9 +22,18 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $order_product = Product::where('id', $id)
+            ->get();
+        return view('order')
+            ->with('order_product', $order_product);
+
+        // $vendors = Vendor::inRandomOrder()
+        //     ->take(3)
+        //     ->get();
+        // return view('landing-page')
+        //     ->with('vendors', $vendors);
     }
 
     /**

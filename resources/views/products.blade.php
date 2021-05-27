@@ -15,6 +15,7 @@
     <hr>
     <div class="container">
         @foreach ($vendorproducts as $product)
+        {{-- @dd($vendorproducts); --}}
         <div class="card mt-4">
             <div class="row no-gutters">
                 <div class="product-info card-body">
@@ -31,16 +32,16 @@
                             <p class="card-text">${{ $product->productPrice}}</p>
                         </div>
                         <div class="float-sm-right">
-                            <form action="{{ route('cart.store') }}" method="POST">
+                            <form action="{{ route('new.order', $product) }}" method="POST"> {{--{{ route('cart.store') }}--}}
                                 @csrf
                                 
                                 <input type="hidden" name="id" value="{{ $product->id}}">
                                 <input type="hidden" name="name" value="{{ $product->productName}}">
                                 <input type="hidden" name="price" value="{{ $product->productPrice}}">
-                                <button type="submit" name="order_submit"class="btn btn-success"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <a href="{{ route('new.order', $product) }}" name="order_submit"class="btn btn-success"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                                     <path fill-rule="evenodd" d="M8.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
-                                  </svg></button>
+                                  </svg></a>
                             </form>
                         </div>
                     </div>

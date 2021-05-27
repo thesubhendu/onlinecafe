@@ -1,59 +1,53 @@
-
 @extends('layout.app')
 @section('content')
-<main role="main" class="container mb-5">
-  <div class="vendor-index mt-4">
-    <div class="vendor-view d-flex flex-row justify-content-between card-header mb-3 mt-4">
-      <div class="">
-          <img src="storage/img/nostamp.png" width="50" height="50" alt="">
-      </div>
-      <div>
-          <h1>My Coffee</h1>
-      </div>
-      <div>
-          <!-- <a href="index.html" class="btn btn-success">go back</a> -->
-      </div>
-  </div>
-      @foreach ($vendors as $vendor)
-        <div class="card mb-3">
-            <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{$vendor->vendor_name}}</h5>
-                <span class="card-text fas fa-coffee checked"></span>
-                <span class="card-text fas fa-coffee checked"></span>
-                <span class="card-text fas fa-coffee checked"></span>
-                <span class="card-text fas fa-coffee unchecked"></span>
-                <span class="card-text fas fa-coffee unchecked"></span><span class="badge badge-pill badge-success ml-2"> 3.0</span>
-              <p class="card-text">{{$vendor->suburb}}</p>
-              <a id="menubtn" href="{{route( 'vendor.products', $vendor )}}" class="btn btn-success btn-sm">Menu</a>
-              <a id="vendorbtn" href="{{route('vendor.show', $vendor)}}" class="homeScreenVendors btn btn-secondary btn-sm">View</a>
-                {{-- <a id="addCommentbtn" href="#" class="homeScreenViewComment btn btn-secondary btn-sm"><i class="fas fa-comment-dots" ></i></a>
-                <a id="addRatingBtn" href="#" class="homeScreenRating btn btn-secondary btn-sm"><i class="fas fa-star" ></i></a>
-                <div class="flex"> --}}
-                  @auth
-                  @if (!$vendor->likedBy(auth()->user()))
-                    <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
-                      @csrf 
-                    <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
-                    </form>
-                  @else
-                    <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
-                      @csrf
-                      @method('DELETE')
-                    <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
-                    </form>
-                  @endif
-                  @endauth
-              </div>
-                <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
-            </div>
+      <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
+          @foreach ($vendors as $vendor)
+            <div class="col">
+                <div class="card h-100">
+                  <a class="vendor-card" href="{{ route('vendor.show', $vendor) }}">
+                    <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
+                  </a>
+                  {{-- @foreach ($vendors as $vendor) --}}
+                    <div class="card-body">
+                        <h5 class="card-title">{{$vendor->vendor_name}}</h5>
+                        <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}</p>
+                        <div class="user-ratin d-flex justify-content-between">
+                            <div class="rating">
+                            <span><i class="fas fa-coffee checked"></i></span>
+                            <span><i class="fas fa-coffee checked"></i></span>
+                            <span><i class="fas fa-coffee checked"></i></span>
+                            <span><i class="fas fa-coffee unchecked"></i></span>
+                            <span><i class="fas fa-coffee unchecked"></i></span><span class="rating-avg badge rounded-pill bg-light text-dark mx-3"> 3.0</span>
+                            </div>
+                            <div class="favourite">
+                            @auth
+                            @if (!$vendor->likedBy(auth()->user()))
+                                <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
+                                @csrf
+                                <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button> <!--wil need to be changed to a button in laravel-->
+                                </form>
+                            @else
+                                <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
+                                @csrf
+                                @method('DELETE')
+                                <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
+                                </form>
+                            @endif
+                            @endauth
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
+                    </div>
+                    {{-- @endforeach --}}
+                  </div>
+                </div>
+                @endforeach
           </div>
-      @endforeach
-  </div>
-</main><!-- /.container -->
-@endsection
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script></body>
-</body>
-</html> --}}
+      </div> <!--container end-->
+      @endsection
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> --}}
+  {{-- </body> --}}
+{{-- </html> --}}
