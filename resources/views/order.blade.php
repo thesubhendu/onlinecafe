@@ -2,12 +2,10 @@
 @section('content')
 <div  class="container py-4 mb-5">
     <div class="vendor-index mt-4">
-        <div class="container">
-            <div class="modal-header">
+        <div class="container" style="border: none;">
+            <div class="modal-header" style="border: none;">
                 <h3 class="modal-title" id="titleLabel">New Order</h3>
-                <div>
-                    <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
-                </div>
+                <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
             </div>
         </div>
         <div class="mt-2">
@@ -112,10 +110,10 @@
                 </div>
             </div>
             @endforeach
-            <div class="col-md-10">
+            <div class="col-sm-12 d-flex p-2 justify-content-between align-items-center">
             <form action="{{ route('cart.store') }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
                 @csrf
-                <div class="form-group mt-2 ml-4 mr-4">
+                <div class="form-group">
                     <input type="hidden" name="id" value="{{$product->id}}">
                     <input type="hidden" name="name" value="{{$product->name}}">
                     <input type="hidden" name="price" value="{{$product->price}}"> {{--move to session for production--}}
@@ -124,9 +122,9 @@
                     <input type="hidden" name="milk" value="{{app('request')->input('ordermilk')}}">
                     <input type="hidden" name="sugars" value="{{app('request')->input('ordersugar')}}">
                     <input type="hidden" name="syrup" value="{{app('request')->input('ordersyrup')}}"> --}}
-                    <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
-                        add to cart</button>
                 </div>
+                <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
+                    add to cart</button>
             </form>
             </div>
         </div>

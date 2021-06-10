@@ -14,7 +14,7 @@
         </div>
     </div>
         <div class="card mb-3">
-            <img src="/storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top img-fluid" alt="...">
+            <img src="/storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top img-fluid" alt="..." style="max-width: 100%;">
             <div class="card-body">
               <h5 class="card-title">{{$vendor->vendor_name}}</h5>
               <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto reprehenderit sint dignissimos cumque cupiditate eos voluptas laudantium harum ullam quibusdam.</p>
@@ -22,7 +22,7 @@
               <p class="card-text">{{$vendor->suburb}} {{$vendor->pc}}</p>
               <p class="card-text">{{$vendor->state}}</p>
               <p class="card-text"><small class="text-muted">Last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
-              <div class="flex">
+              <div class="row d-flex">
                 @auth
                 @if (!$vendor->likedBy(auth()->user()))
                   <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
@@ -44,14 +44,14 @@
           </div>
         <div class="card">
             <div class="card-header">
-                Reviews<span class="badge badge-pill badge-dark ml-3"> 3.0</span>
-                <div class="review-block-rate d-flex">
-                  <div class="rating">
-                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+              <div class="review-block-rate d-flex">
+                <div class="rating">
+                  <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                  <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                  <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                  <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                  <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                  <span class="badge rounded-pill bg-dark ml-3"> 3.0</span>
                   </div>
               </div>
                 {{-- <span class="card-text fas fa-coffee checked"></span>
@@ -70,14 +70,14 @@
                 <hr/>
                 <div class="review-block">
                   <div class="row">
-                    <div class="col-sm-3 ml-4">
+                    <div class="col-6 col-sm-3 ml-4">
                       <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
                       <div class="review-block-name"><a href="#">nktailor</a></div>
                       <div class="review-block-date">March 6, 2016<br/>1 day ago</div>
                     </div>
                     <form action="/vendor/{{$vendor->id}}/rate" method="POST">
                       @csrf
-                      <div class="col-sm-9">
+                      <div class="col-6 col-sm-9">
                         <div class="review-block-rate d-flex">
                           <div class="rating">
                             <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
