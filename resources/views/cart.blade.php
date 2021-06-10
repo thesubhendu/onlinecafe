@@ -36,6 +36,7 @@
         
                 <div class="mt-4">
                     <div class="row border-bottom border-top border-secondary">
+                        @foreach()
                         <div class="col d-flex justify-content-between mr-3">
                             <a href="#"><img src="{{asset('storage/img/nostamp.png')}}" alt="item" width="30" height="30"class="cart-table-img btn" style="max-width: 50px; max-width: 50px;"></a>
                             <div class="order-details ml-3">

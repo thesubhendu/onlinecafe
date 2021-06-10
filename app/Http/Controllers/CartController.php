@@ -43,12 +43,9 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        Cart::add($request->id, $request->name, 1, $request->price,[
-            $request->ordermilk,
-            $request->ordersugar, 
-            $request->ordersyrup
-        ])
-        ->associate(Product::class);
+        // dd($request->all());
+        Cart::add($request->id, $request->name, 1, $request->price)
+            ->associate(Product::class);
 
         return redirect()->route('cart')
             ->with('product')

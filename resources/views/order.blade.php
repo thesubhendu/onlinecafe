@@ -115,8 +115,8 @@
                 @csrf
                 <div class="form-group">
                     <input type="hidden" name="id" value="{{$product->id}}">
-                    <input type="hidden" name="name" value="{{$product->name}}">
-                    <input type="hidden" name="price" value="{{$product->price}}"> {{--move to session for production--}}
+                    <input type="hidden" name="name" value="{{$product->productName}}">
+                    <input type="hidden" name="price" value="{{$product->productPrice}}"> {{--move to session for production--}}
                     <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
                     {{-- <input type="hidden" name="quanitity" value="{{app('request')->input('orderQuanitity')}}">
                     <input type="hidden" name="milk" value="{{app('request')->input('ordermilk')}}">
