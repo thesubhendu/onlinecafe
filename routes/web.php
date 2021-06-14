@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -33,7 +34,7 @@ use App\Http\Controllers\CartSaveForLaterController;
 // Route::view('/', 'landing-page');
 // route::get('/', 'App\http\Controllers\LandingPageController@index')->name('landing-page');
 route::get('/', [LandingPageController::class, 'index'])->name('home');
-route::get('/vendor/{vendor}', 'App\http\Controllers\VendorController@show')->name('vendor.show');
+route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
