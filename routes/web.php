@@ -1,11 +1,12 @@
 <?php
 
+use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FavouritesController;
@@ -72,3 +73,8 @@ Route::get('empty', function () {
 Route::view('/comment', 'comment');
 Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
