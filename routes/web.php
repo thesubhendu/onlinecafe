@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\VendorLikeController;
@@ -65,6 +66,8 @@ Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::cl
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/orders/{vendor}', [OrderController::class, 'create'])->name('new.order');
 Route::get('/cards', [CardController::class, 'index'])->name('cards');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 Route::get('empty', function () {
     Cart::destroy();

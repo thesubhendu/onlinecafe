@@ -43,15 +43,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        Cart::add($request->id, $request->name, 1, $request->price)
+
+        Cart::add(['id' => $request->id, 'name' => $request->name, 'qty' => 1, 'price' => $request->price, 'weight' => '1000', 'options' => [
+            'milk' => 'Full Cream',
+            'Sugar' => 1,
+            'syrup' => 'No Thanks'
+
+        ]])
             ->associate(Product::class);
 
         return redirect()->route('cart')
             ->with('product')
             ->with('success_message', 'Item added to your cart');
-
-        // , $request->ordermilk, $request->ordersugar, $request->ordersyrup
     }
 
     /**
@@ -130,7 +133,11 @@ class CartController extends Controller
 
         Cart::remove($id);
 
-        Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)
+        Cart::instance('saveForLater')->add(['id' => $item->id, 'name' => $item->name, 'qty' => 1, 'price' => $item->price, 'options' => [
+            'milk' => 'Full Cream',
+            'sugar' => 1,
+            'syrup' => 'No Thanks'
+        ]])
             ->associate(Product::class);
 
         return back()->with('success_message', 'Item has been moved to save for later');
