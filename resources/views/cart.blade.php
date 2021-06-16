@@ -45,7 +45,7 @@
                             </div>
                             <div class="d-flex align-items-center justifiy-content-between">
                                 <div class="d-flex flex-column">
-                                    <form action="{{ route('saveforlater.remove', $item->rowId) }}" method="post">
+                                    <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn"><i class="fa fa-trash mb-1 text-danger"></i></button>

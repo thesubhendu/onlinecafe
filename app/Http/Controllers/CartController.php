@@ -100,6 +100,13 @@ class CartController extends Controller
     public function destroy($id)
     {
 
+        // $rowId = Cart::search(array('id' => "$id"));
+        // $rowId = $rowId[0];
+        // $item = Cart::get($rowId);
+        // Cart::remove($rowId);
+        // $cart = Cart::content();
+        // return view('order/basket', compact('cart'));
+
         $item = Cart::get($id);
 
         Cart::remove($item);
