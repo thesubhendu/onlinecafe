@@ -39,10 +39,13 @@
                                 </h4>
                                 @foreach($cartItems as $item )
                                 <div class="row">
-                                  <a href="#"><img src="{{asset('storage/img/nostamp.png')}}" alt="item"class="cart-table-img" style="max-width: 30%; max-width: 30%;"></a>
-                                  <div class="col d-flex justify-content-between align-items-center">
-                                    <div class="px-3 btn">
-                                      <a href="">{{$item->name}} </a><span><small class="text-mute">{{$item->options->milk}}, {{$item->options->sugar}}, {{$item->options->syrup}}</small></span><span class="price">${{$item->price}}</span>
+                                    <div class="col d-flex justify-content-between align-items-center align-middle">
+                                      <a href="#"><img src="{{asset('storage/img/nostamp.png')}}" alt="item"class="cart-table-img" style="max-width: 30%; max-width: 30%;"></a>
+                                    <div class="col btn flex-fill">
+                                      <a href="">{{$item->name}} </a><span><small class="text-mute">{{$item->options->milk}}, {{$item->options->sugar}}, {{$item->options->syrup}}</small></span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="price">${{$item->price}}</span>
                                     </div>
                                   </div>
                                 </div>
@@ -52,7 +55,7 @@
                                 <p>Tax <span class="price" style="color:black"><b>${{Cart::tax()}}</b></span></p>
                                 <p>Total <span class="price" style="color:black"><b>${{Cart::total()}}</b></span></p>
                                 <div>
-                                    <a href="order_suibmitted.html"class="btn btn-success mt-4"><i class="fas fa-credit-card"></i> Checkout</a>
+                                    <a href="order_submitted"class="btn btn-success mt-4"><i class="fas fa-credit-card"></i> Checkout</a>
                                 </div>
                             </div>
                         </div>

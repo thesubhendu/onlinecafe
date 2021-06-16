@@ -1,40 +1,36 @@
 @extends('layout.app')
 @section('content')
-<main role="main" class="container py-4 mb-5">
+<main role="main" class="container py-4 mb-5 border-0">
     <div class="vendor-menu d-flex flex-row justify-content-between mb-3 mt-4">
-        <div class="">
-            <img src="{{asset('storage/img/nostamp.png')}}" width="50" height="50" alt="">
-        </div>
         <div class="vendor">
-            <h1>Vendor Menu</h1>
+            <h1>Products</h1>
         </div>
         <div>
             <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
         </div>
     </div>
     <hr>
-    <div class="container">
+    <div class="container mx-auto">
         @foreach ($vendorproducts as $product)
         {{-- @dd($vendorproducts); --}}
         <div class="card mt-4">
             <div class="row no-gutters">
-                <div class="product-info card-body">
+                <div class="product-info card-body d-flex">
                     <div class="flex-fill">
                           <img src="{{asset('storage/img/nostamp.png')}}" class="card-product-img" alt="...">
                       </div>
-                        <div class="flex-fill">
+                        <div class="col">
                             <p class="card-text">{{ $product->productName}}</p>
                         </div>
-                        <div class="flex-fill">
+                        <div class="col d-none d-md-block flex-fill">
                             <p class="card-text">{{ $product->productDescription}}</p>
                         </div>
-                        <div class="flex-fill">
+                        <div class="col">
                             <p class="card-text">${{ $product->productPrice}}</p>
                         </div>
-                        <div class="float-sm-right">
+                        <div class="col float-sm-right">
                             <form action="{{ route('new.order', $product) }}" method="POST"> {{--{{ route('cart.store') }}--}}
                                 @csrf
-                                
                                 <input type="hidden" name="id" value="{{ $product->id}}">
                                 <input type="hidden" name="name" value="{{ $product->productName}}">
                                 <input type="hidden" name="price" value="{{ $product->productPrice}}">

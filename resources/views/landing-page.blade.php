@@ -28,7 +28,7 @@
                                 <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button> <!--wil need to be changed to a button in laravel-->
                                 </form>
                             @else
-                                <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
+                                <form action="{{ route('vendor.', $vendor->id) }}" method='post'>
                                 @csrf
                                 @method('DELETE')
                                 <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
