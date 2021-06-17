@@ -8,6 +8,7 @@
                   <a class="vendor-card" href="{{ route('vendor.show', $vendor) }}">
                     <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                   </a>
+                  <a class="vendor-card" href="{{ route('vendor.newshow', $vendor) }}">New Show Vendor</a>
                   {{-- @foreach ($vendors as $vendor) --}}
                     <div class="card-body">
                         <h5 class="card-title">{{$vendor->vendor_name}}</h5>
@@ -28,7 +29,7 @@
                                 <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button> <!--wil need to be changed to a button in laravel-->
                                 </form>
                             @else
-                                <form action="{{ route('vendor.', $vendor->id) }}" method='post'>
+                                <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
                                 @csrf
                                 @method('DELETE')
                                 <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>

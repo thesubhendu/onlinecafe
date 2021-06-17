@@ -16,10 +16,12 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
-            $table->dateTime('number');
-            $table->boolean('is_confirmed');
-            $table->foreignId('user_id');
-            $table->bigInteger('vendor_id');
+            $table->string('order_number');
+            $table->boolean('is_confirmed')->default(false);
+            $table->enum('payment_method', ['in_store', 'credit_card'])->default('in_store');
+            $table->integer('order_total');
+            $table->unsignedBigInteger('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('vendor_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

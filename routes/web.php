@@ -37,6 +37,7 @@ use App\Http\Controllers\CartSaveForLaterController;
 // route::get('/', 'App\http\Controllers\LandingPageController@index')->name('landing-page');
 route::get('/', [LandingPageController::class, 'index'])->name('home');
 route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
+Route::get('/vendornew/{vendor}', [VendorController::class, 'vendorshow'])->name('vendor.newshow');
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
@@ -53,6 +54,7 @@ Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->
 
 Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproducts'])->name('vendor.products');
 
+
 Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
@@ -63,13 +65,16 @@ Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemFor
 Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
 Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
 
-Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-Route::get('/orders/{vendor}', [OrderController::class, 'create'])->name('new.order');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders/{vendor}', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+// Route::resource('orders', OrderController::class);
 Route::get('/cards', [CardController::class, 'index'])->name('cards');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-Route::view('/order_submitted', 'order_submitted');
+// Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou');
 
 Route::get('empty', function () {

@@ -17,10 +17,9 @@ class VendorController extends Controller
 
     public function index()
     {
-        
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -51,10 +50,26 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-    
+
         $vendor = Vendor::where('id', $id)->firstOrFail();
-        return view('vendor')->with('vendor',$vendor);
-    
+        return view('vendor')
+            ->with('vendor', $vendor)
+            ->with('products');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function vendorshow($id)
+    {
+
+        $vendor = Vendor::where('id', $id)->firstOrFail();
+        return view('vendorNew')
+            ->with('vendor', $vendor)
+            ->with('products');
     }
 
     /**

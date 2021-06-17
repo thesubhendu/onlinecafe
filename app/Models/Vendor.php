@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Like;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Rating;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,7 +23,12 @@ class Vendor extends Model
         return $this->belongsTo(User::class);
     }
 
-        public function likes()
+    public function vendors()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function likes()
     {
         return $this->hasMany(Like::class);
     }
@@ -35,15 +41,15 @@ class Vendor extends Model
 
     public function rate($rating, $user = null)
     {
-        if($rating > 5 || $rating < 1){
+        if ($rating > 5 || $rating < 1) {
             throw new \InvalidArgumentException('Rating must be between 1-5.');
         }
 
         $this
-        ->ratings()
-        ->updateOrCreate([
-            'user_id' => $user ? $user->id : auth()->id(),
-        ], compact('rating'));
+            ->ratings()
+            ->updateOrCreate([
+                'user_id' => $user ? $user->id : auth()->id(),
+            ], compact('rating'));
 
         // $this->ratings()->create(['rating' => $rating]);
     }
@@ -58,5 +64,3 @@ class Vendor extends Model
         return $this->ratings->avg('rating');
     }
 }
-
-

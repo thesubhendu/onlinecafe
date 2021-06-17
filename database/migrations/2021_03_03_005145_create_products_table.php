@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('productName');
             $table->string('productDescription');
             $table->decimal('productPrice');
+            $table->string('product_image')->default('default_product.jpg');
             $table->unsignedBigInteger('vendor_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

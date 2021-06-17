@@ -3,12 +3,9 @@
 <main role="main" class="container mb-5">
 
     <div class="vendor-view d-flex flex-row justify-content-between card-header mb-3 mt-4">
-        <div class="">
-            <img src="/storage/img/nostamp.png" width="50" height="50" alt="">
-        </div>
-        <div>
+        {{-- <div>
             <h1>Vendor View</h1>
-        </div>
+        </div> --}}
         <div>
         <a href="{{route('home')}}" class="btn btn-success"><i class="fas fa-chevron-left"></i> go back</a>
         </div>

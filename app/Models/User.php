@@ -21,6 +21,7 @@ class User extends \TCG\Voyager\Models\User
     protected $fillable = [
         'name',
         'email',
+        'mobile',
         'password',
     ];
 
@@ -48,12 +49,13 @@ class User extends \TCG\Voyager\Models\User
         return $this->hasMany(Vendor::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
-
-   
-
-    
 }
