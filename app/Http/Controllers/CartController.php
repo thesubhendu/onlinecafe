@@ -109,7 +109,7 @@ class CartController extends Controller
 
         $item = Cart::get($id);
 
-        Cart::remove($item);
+        Cart::remove($item->rowId);
 
         return back()->with('success_message', 'Item has been removed from your cart');
     }

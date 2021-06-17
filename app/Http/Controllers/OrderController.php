@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class OrderController extends Controller
 {
@@ -24,16 +26,11 @@ class OrderController extends Controller
      */
     public function create($id)
     {
+
         $order_product = Product::where('id', $id)
             ->get();
         return view('order')
             ->with('order_product', $order_product);
-
-        // $vendors = Vendor::inRandomOrder()
-        //     ->take(3)
-        //     ->get();
-        // return view('landing-page')
-        //     ->with('vendors', $vendors);
     }
 
     /**
@@ -44,7 +41,21 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'vendor_id' => 'required',
+        ]);
+
+        $order = new Order();
+
+        $order->order_number = uniqid();
+        $order->order_total = Cart::total();
+        $order->user_id = Auth()->id();
+        $order->vendor_id = $request->input('vendor');
+
+        $order->save();
+
+        dd('order created');
     }
 
     /**

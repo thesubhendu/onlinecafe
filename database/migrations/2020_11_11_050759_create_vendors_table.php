@@ -26,7 +26,7 @@ class CreateVendorsTable extends Migration
             $table->string('pc');
             $table->string('state');
             $table->string('cardstamps');
-            $table->string('vendor_image');
+            $table->string('vendor_image')->default('vendor_image.jpg');
             $table->timestamps();
         });
     }

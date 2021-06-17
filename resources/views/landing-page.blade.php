@@ -8,6 +8,7 @@
                   <a class="vendor-card" href="{{ route('vendor.show', $vendor) }}">
                     <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                   </a>
+                  <a class="vendor-card" href="{{ route('vendor.newshow', $vendor) }}">New Show Vendor</a>
                   {{-- @foreach ($vendors as $vendor) --}}
                     <div class="card-body">
                         <h5 class="card-title">{{$vendor->vendor_name}}</h5>

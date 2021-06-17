@@ -97,7 +97,10 @@
                     </div>
                 </div>
         @else
-            <h3> No items in Cart </h3>
+            <h3> Your Cart is Empty </h3>
+            <div class="cart-buttons d-flex justify-content-between">
+                <a href="" class="btn btn-outline-success">Continue Shopping</a>
+            </div>
         @endif 
         </div><!--end of new cart-->
                         
@@ -133,7 +136,7 @@
                             </div>
                         </div>
                             @else
-                            <h3> No items saved for later </h3>
+                            
                             @endif     
                  </div>    
     </div> {{--end vendor class --}}

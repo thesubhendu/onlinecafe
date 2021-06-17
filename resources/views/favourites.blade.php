@@ -3,10 +3,7 @@
 @section('content')
 <main role="main" class="container py-4 mb-5">
     <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
-      <div class="">
-          <img src="/storage/img/nostamp.png" width="30" height="30" alt="">
-      </div>
-      <div>
+      <div class="favourites">
           <h1>favourites</h1>
       </div>
       <div>
@@ -25,7 +22,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
             <p class="card-text"><small class="text-muted">Last updated {{$vendor->vendor->updated_at->diffForHumans()}}</small></p>
-            <a href="" class="btn btn-success px-3 mr-3">Order</a>
+            <a href="{{route( 'vendor.products', $vendor )}}" class="btn btn-success px-3 mr-3">Order</a>
           </div>
           <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
             @csrf

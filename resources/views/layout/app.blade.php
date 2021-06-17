@@ -21,8 +21,8 @@
     <!-- Image and text -->
   <nav class="navbar navbar-dark bg-dark d-flex flex-row">
   <a class="navbar-brand" href="/">
-    <img src="/storage/img/nostamp.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-    my coffee
+    <img src="/storage/img/nostamp.png" class="" alt="..." width="48" height="48">
+    {{ config('app.name', 'LaravelCoffee') }}
   </a>
   <ul class="navbar-nav ml-auto ">
     <div class="d-flex flex-row">
@@ -38,7 +38,7 @@
       <li class="nav-item nav-right">
         {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
         <li class="nav-item nav-right dropdown">
-          <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"> </i> {{ auth()->user()->name }}</a>
+          <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/user/{{ Auth::user()->avatar}}" class="mb-3" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%"> {{ auth()->user()->name }}</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
             <a class="dropdown-item p-3" href="#"><i class="fas fa-cog"> Settings</i></a>
@@ -65,7 +65,7 @@
 {{-- bottom Nav --}}
 <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark justify-content-between">
     <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
-    <a class="nav-link" href="{{ route('orders') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
+    <a class="nav-link" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
     <a class="nav-link" href="{{ route('cards') }}"><i class="fas fa-id-card fa-lg"></i></a>
     <a class="nav-link" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
 </nav>

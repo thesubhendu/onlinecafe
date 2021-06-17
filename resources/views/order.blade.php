@@ -30,6 +30,7 @@
         <h3>New Order<h3>
     </div> --}}
         <div class="card mb-3" style="max-width: 100%; border: none;">
+            
             @foreach($order_product as $product)
             <div class="row g-0">
                 <div class="col-sm-12">
@@ -109,24 +110,24 @@
                         {{-- </div> --}}
                 </div>
             </div>
-            @endforeach
             <div class="col-sm-12 d-flex p-2 justify-content-between align-items-center">
-            <form action="{{ route('cart.store') }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
-                @csrf
-                <div class="form-group">
-                    <input type="hidden" name="id" value="{{$product->id}}">
-                    <input type="hidden" name="name" value="{{$product->productName}}">
-                    <input type="hidden" name="price" value="{{$product->productPrice}}"> {{--move to session for production--}}
-                    <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
-                    {{-- <input type="hidden" name="quanitity" value="{{app('request')->input('orderQuanitity')}}">
-                    <input type="hidden" name="milk" value="{{app('request')->input('ordermilk')}}">
-                    <input type="hidden" name="sugars" value="{{app('request')->input('ordersugar')}}">
-                    <input type="hidden" name="syrup" value="{{app('request')->input('ordersyrup')}}"> --}}
+                <form action="{{ route('cart.store') }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
+                    @csrf
+                    <div class="form-group">
+                        <input type="hidden" name="id" value="{{$product->id}}">
+                        <input type="hidden" name="name" value="{{$product->productName}}">
+                        <input type="hidden" name="price" value="{{$product->productPrice}}"> {{--move to session for production--}}
+                        <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
+                        {{-- <input type="hidden" name="quanitity" value="{{app('request')->input('orderQuanitity')}}">
+                        <input type="hidden" name="milk" value="{{app('request')->input('ordermilk')}}">
+                        <input type="hidden" name="sugars" value="{{app('request')->input('ordersugar')}}">
+                        <input type="hidden" name="syrup" value="{{app('request')->input('ordersyrup')}}"> --}}
+                    </div>
+                    <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
+                        add to cart</button>
+                </form>
                 </div>
-                <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
-                    add to cart</button>
-            </form>
-            </div>
+            @endforeach 
         </div>
                         {{-- Save for later --}}
                         {{-- <div class=container>

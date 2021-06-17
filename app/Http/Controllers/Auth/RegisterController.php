@@ -13,7 +13,7 @@ class RegisterController extends Controller
     {
         $this->middleware(['guest']);
     }
-    
+
     public function index()
     {
         return view('auth.register');
@@ -21,17 +21,20 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+
         // validation
         $this->validate($request, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
+            'mobile' => 'required',
             'password' => 'required|confirmed',
         ]);
-        
+
         //store user
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
         ]);
 
