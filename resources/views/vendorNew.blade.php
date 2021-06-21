@@ -42,10 +42,10 @@
           <div class="card-body">
             <h3 class="card-title">Coffee</h3>
           </div>
-          <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 rounded">
+          <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 mb-2 rounded">
             @foreach ($vendor->products as $product)
             <div class="col">
-              <div class="card h-100 rounded">
+              <div class="card h-100 rounded mb-3">
                 <img src="https://via.placeholder.com/100x100" class="img-fluid" alt="...">
                 <div class="d-flex justify-content-between py-2 px-2">
                   <div class="card-text">{{$product->productName}}</div>

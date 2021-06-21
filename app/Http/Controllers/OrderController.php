@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Http\Controllers\Auth;
 
 class OrderController extends Controller
 {
@@ -42,20 +43,43 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate([
-            'vendor_id' => 'required',
+            'vendor' => 'required',
         ]);
+
+        $user_id = auth()->id();
+        $vendor_id = $request->input('vendor');
 
         $order = new Order();
 
         $order->order_number = uniqid();
+        $order->user_id = $user_id;
+        $order->vendor_id = $vendor_id;
         $order->order_total = Cart::total();
-        $order->user_id = Auth()->id();
-        $order->vendor_id = $request->input('vendor');
 
         $order->save();
 
-        dd('order created');
+        // save order products
+        $cartProducts = Cart::content();
+        foreach ($cartProducts as $product) {
+            $order->products()->attach($product->id, [
+                'price' => $product->price,
+                'quantity' =>  $product->qty,
+                'milk' => $product->model->milk,
+                'sugar' => $product->model->sugar,
+                'syrup' => $product->model->syrup
+            ]);
+        }
+
+        // empty cart
+        Cart::destroy();
+
+        // email customer and vendor
+
+        // redirect to order submitted page
+
+        return "order completed, waiting for vendor to confirm";
     }
 
     /**

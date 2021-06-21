@@ -71,7 +71,7 @@
                                 <div class="invalid-feedback">
                                 we need to know which milk
                                 </div>
-                                <select class="form-control mt-2" id="orderSugars" name="ordersugar" required>
+                                <select class="form-control mt-2" id="orderSugar" name="ordersugar" required>
                                     <option selected>how many sugars...</option>
                                     <option value="None"{{ old('sugar') == "None" ? 'selected' : ''}}>None</option>
                                     <option value="1"{{ old('sugar') == "1" ? 'selected' : ''}}>1</option>
@@ -118,10 +118,10 @@
                         <input type="hidden" name="name" value="{{$product->productName}}">
                         <input type="hidden" name="price" value="{{$product->productPrice}}"> {{--move to session for production--}}
                         <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
-                        {{-- <input type="hidden" name="quanitity" value="{{app('request')->input('orderQuanitity')}}">
+                        {{-- <input type="hidden" name="quanitity" value="{{app('request')->input('orderQuanitity')}}"> --}}
                         <input type="hidden" name="milk" value="{{app('request')->input('ordermilk')}}">
-                        <input type="hidden" name="sugars" value="{{app('request')->input('ordersugar')}}">
-                        <input type="hidden" name="syrup" value="{{app('request')->input('ordersyrup')}}"> --}}
+                        <input type="hidden" name="sugar" value="{{app('request')->input('ordersugar')}}">
+                        <input type="hidden" name="syrup" value="{{app('request')->input('ordersyrup')}}">
                     </div>
                     <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
                         add to cart</button>

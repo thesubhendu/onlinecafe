@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('content')
-<main role="main" class="container mb-5">
-
+<main role="main">
+  <div class="container mb-5">
     <div class="vendor-view d-flex flex-row justify-content-between card-header mb-3 mt-4">
         {{-- <div>
             <h1>Vendor View</h1>
@@ -99,6 +99,8 @@
               </div>
             </div>
           </div> 
+  </div>
+
   
   </main><!-- /.container -->
   @endsection

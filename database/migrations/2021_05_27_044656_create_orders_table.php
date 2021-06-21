@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date');
+            $table->dateTime('date')->default(now());
             $table->string('order_number');
             $table->boolean('is_confirmed')->default(false);
             $table->enum('payment_method', ['in_store', 'credit_card'])->default('in_store');

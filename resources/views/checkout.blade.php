@@ -20,8 +20,10 @@
         </div>
         @endif
         <main role="main" class="container py-4 mb-5 mt-4">
+        <form action="{{route('order.store')}}" method="post">
           <div class="vendor-index mt-4">
                 <h1>Checkout</h1>
+                    @csrf
                     <label for="fname"><i class="fa fa-user"></i></label>
                     <input type="text" id="fname" name="name" placeholder="John M. Doe" value="{{ $user->name}}">
                     <label for="email"><i class="fa fa-envelope"></i> Email</label>
@@ -54,14 +56,16 @@
                                 <p>Subtotal <span class="price" style="color:black"><b>${{Cart::subtotal()}}</b></span></p>
                                 <p>Tax <span class="price" style="color:black"><b>${{Cart::tax()}}</b></span></p>
                                 <p>Total <span class="price" style="color:black"><b>${{Cart::total()}}</b></span></p>
-                                <form action="{{route('orders.store')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" id="vendor" name="vendor" value="{{ $item->model->vendor_id}}">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-credit-card"></i> Checkout</button>
-                                </form>
+                                
+                                <input type="hidden" id="vendor" name="vendor" value="{{ $item->model->vendor_id}}">
+                                <input type="hidden" id="milk" name="milk" value="{{ $item->options->milk}}">
+                                <input type="hidden" id="sugar" name="sugar" value="{{ $item->options->sugar}}">
+                                <input type="hidden" id="syrup" name="syrup" value="{{ $item->options->syrup}}">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-credit-card"></i> Checkout</button>
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
+            </form>
         </main><!-- /.container -->
 @endsection
