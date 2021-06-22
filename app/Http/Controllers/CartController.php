@@ -43,14 +43,11 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->isMethod('post')) {
-            'new order';
-        }
 
         Cart::add(['id' => $request->id, 'name' => $request->name, 'qty' => 1, 'price' => $request->price, 'weight' => '1000', 'options' => [
-            'milk' => $request->ordermilk,
-            'sugar' => $request->ordersugar,
-            'syrup' => $request->ordersyrup
+            'milk' => $request->input('ordermilk'),
+            'sugar' => $request->input('ordersugar'),
+            'syrup' => $request->input('ordersyrup')
 
         ]])
             ->associate(Product::class);

@@ -30,7 +30,6 @@
         <h3>New Order<h3>
     </div> --}}
         <div class="card mb-3" style="max-width: 100%; border: none;">
-            
             @foreach($order_product as $product)
             <div class="row g-0">
                 <div class="col-sm-12">

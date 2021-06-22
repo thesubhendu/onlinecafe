@@ -67,11 +67,12 @@ Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::cl
 
 Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-Route::resource('orders', OrderController::class)->names([
-    'store' => 'order.store'
+// Route::get('/orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
+    'store' => 'order.store',
 ]);
+Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
 // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-// Route::get('/orders/{vendor}', [OrderController::class, 'create'])->name('orders.create');
 // Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/cards', [CardController::class, 'index'])->name('cards');

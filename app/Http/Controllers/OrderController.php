@@ -79,7 +79,10 @@ class OrderController extends Controller
 
         // redirect to order submitted page
 
-        return "order completed, waiting for vendor to confirm";
+        // return "order completed, waiting for vendor to confirm";
+        return view('order_submitted')
+            ->with('order', $order->products);
+        // ->with('orderProducts', $orderProducts);
     }
 
     /**
