@@ -19,6 +19,17 @@ class Order extends Model
         'date',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
+        'date' => 'datetime:d-m-Y'
+    ];
+
+    public function getFormattedDate()
+    {
+        return $this->date->format('d-m-Y');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

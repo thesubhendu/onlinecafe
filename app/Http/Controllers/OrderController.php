@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use App\Http\Controllers\Auth;
 
 class OrderController extends Controller
 {
@@ -17,7 +18,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('orders');
+        $user = Auth::user();
+        return view('orders')
+            ->with('user', $user->orders)
+            ->with('products');
     }
 
     /**
@@ -72,14 +76,14 @@ class OrderController extends Controller
             ]);
         }
 
+        // email customer and vendor
+        Mail::to($order->vendor->id)->send(new orderSubmitted($order));
+
         // empty cart
         Cart::destroy();
 
-        // email customer and vendor
-
         // redirect to order submitted page
 
-        // return "order completed, waiting for vendor to confirm";
         return view('order_submitted')
             ->with('order', $order->products);
         // ->with('orderProducts', $orderProducts);

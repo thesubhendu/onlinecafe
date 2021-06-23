@@ -1,15 +1,12 @@
 @extends('layout.app')
 @section('content')
-<main role="main" class="container py-4 mb-5 mt-4">
+<main role="main" class="container-fluid py-4 mb-5 mt-4">
   <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
-    <div class="">
-        <img src="storage/img/nostamp.png" width="50" height="50" alt="">
-    </div>
     <div>
         <h1>Orders</h1>
     </div>
     <div>
-        <a href="index.html" class="btn btn-success"><i class="fas fa-backward"></i></a>
+        <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
     </div>
 </div>
 <hr>
@@ -18,36 +15,30 @@
     <div>
       <table class="table table-striped">
         <thead>
-          <tr>
+          {{-- <tr>
             <th scope="col">#</th>
             <th scope="col">Venue</th>
             <th scope="col">Date</th>
+            <th scope="col">Image</th>
+            <th scope="col">Product</th>
             <th scope="col">Total</th>
             <th scope="col"></th>
-          </tr>
+          </tr> --}}
         </thead>
         <tbody>
+          @foreach($user as $order)
           <tr>
-            <th scope="row">1</th>
-            <td>Cafe One</td>
-            <td>01/10/2020</td>
-            <td>$5.50</td>
-            <td><a href="cart.html" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i></a></td>
+            {{-- <th scope="row">1</th> --}}
+            {{-- <td>{{$order->vendor_id}}</td> --}}
+            <td>{{$order->getFormattedDate('date')}}</td>
+            @foreach($order->products as $product) {{--{{asset('/storage/app/public/img/'.'$product->product_image')}}--}}
+            <td><img src="storage/img/{{$product->product_image}}" width="48" height="48"></td>
+            <td>{{$product->productName}}<div><small class="text-muted">Full Cream, Sugar - 1, Syrup - No Thanks</small></div></td>
+            <td>${{$product->productPrice}}</td>
+            <td><a href="{{ route('orders.create', $product) }}" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i></a></td>
+            @endForEach
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Cafe Two</td>
-            <td>05/10/2020</td>
-            <td>$5.50</td>
-            <td><a href="cart.html" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i></a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Cafe One</td>
-            <td>07/10/2020</td>
-            <td>$5.50</td>
-            <td><a href="cart.html" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i></a></td>
-          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

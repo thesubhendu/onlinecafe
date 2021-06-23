@@ -46,11 +46,13 @@
             @foreach ($vendor->products as $product)
             <div class="col">
               <div class="card h-100 rounded mb-3">
-                <img src="https://via.placeholder.com/100x100" class="img-fluid" alt="...">
+                <div class="text-center">
+                  <img src="/storage/img/{{$product->product_image}}" class="img-fluid" alt="..." height="100" width="100">
+                </div>
                 <div class="d-flex justify-content-between py-2 px-2">
                   <div class="card-text">{{$product->productName}}</div>
                   <div class="card-text">${{$product->productPrice}}</div>
-                  <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-cart-plus"></i></a>
+                  <a href="{{ route('orders.create', $product->id) }}" class="btn btn-outline-success btn-sm"><i class="fas fa-cart-plus"></i></a>
                 </div>
             </div>
           </div>
@@ -63,22 +65,30 @@
           <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 rounded">
             <div class="col">
               <div class="card h-100 rounded">
-                <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                <div class="text-center">
+                  <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                </div>
               </div>
             </div>
             <div class="col">
               <div class="card h-100">
-                <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                <div class="text-center">
+                  <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                </div>
                 </div>
             </div>
             <div class="col">
               <div class="card h-100">
-                <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                <div class="text-center">
+                  <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                </div>
               </div>
             </div>
             <div class="col">
               <div class="card h-100">
-                <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                <div class="text-center">
+                  <img src="/storage/app/public/img/nostamp.png" class="img-fluid" alt="...">
+                </div>
               </div>
             </div>
           </div>

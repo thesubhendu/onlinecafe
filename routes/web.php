@@ -79,7 +79,7 @@ Route::get('/cards', [CardController::class, 'index'])->name('cards');
 
 
 // Route::view('/order_submitted', 'order_submitted');
-Route::view('/thankyou', 'thankyou');
+Route::view('/thankyou', 'thankyou')->name('order.thankyou');
 
 Route::get('empty', function () {
     Cart::destroy();

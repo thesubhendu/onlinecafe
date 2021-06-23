@@ -27,7 +27,7 @@
         <hr>
       </div>
       <div>
-        <a class="btn btn-outline-dark float-right" href="thankyou.html"></a>
+        <a class="btn btn-outline-dark float-right" href="{{route('order.thankyou')}}"></a>
       </div>
   </div>
 @endsection
