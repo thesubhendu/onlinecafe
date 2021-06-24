@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Mail\orderSubmitted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -76,8 +77,10 @@ class OrderController extends Controller
             ]);
         }
 
+        // dd($order->vendor->email, $order);
+
         // email customer and vendor
-        Mail::to($order->vendor->id)->send(new orderSubmitted($order));
+        Mail::to($order->vendor->email)->send(new orderSubmitted($order));
 
         // empty cart
         Cart::destroy();
