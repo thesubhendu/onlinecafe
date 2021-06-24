@@ -65,17 +65,21 @@ Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemFor
 Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
 Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
 
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-Route::get('/orders/{vendor}', [OrderController::class, 'create'])->name('orders.create');
-Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-// Route::resource('orders', OrderController::class);
+// Route::get('/orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
+    'store' => 'order.store',
+]);
+Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+// Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
 Route::get('/cards', [CardController::class, 'index'])->name('cards');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 // Route::view('/order_submitted', 'order_submitted');
-Route::view('/thankyou', 'thankyou');
+Route::view('/thankyou', 'thankyou')->name('order.thankyou');
 
 Route::get('empty', function () {
     Cart::destroy();

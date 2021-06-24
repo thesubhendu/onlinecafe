@@ -4,9 +4,6 @@
 
   <div class="vendor-index mt-4">
     <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
-        <div class="">
-            <img src="storage/img/nostamp.png" width="50" height="50" alt="">
-        </div>
         <div>
             <!-- <h1>Thank You</h1> -->
         </div>
@@ -24,7 +21,7 @@
         <hr>
         
         <p class="lead">
-          <a class="btn btn-success btn-sm" href="index.html" role="button">Back to homepage</a>
+          <a class="btn btn-success btn-sm" href="/" role="button">Back to homepage</a>
         </p>
         <!-- <p>
             Having trouble? <a href="">Contact us</a>

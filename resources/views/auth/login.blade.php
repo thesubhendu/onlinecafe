@@ -2,9 +2,6 @@
 @section('content')
 <main role="main" class="container mb-5 mt-4">
     <div class="register-view d-flex flex-row justify-content-between card-header mb-3 mt-4">
-        <div class="">
-            <img src="/storage/img/nostamp.png" width="50" height="50" alt="">
-        </div>
         <div>
             <h1>Login</h1>
         </div>
