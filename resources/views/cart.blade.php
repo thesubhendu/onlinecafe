@@ -102,43 +102,42 @@
                 <a href="" class="btn btn-outline-success">Continue Shopping</a>
             </div>
         @endif 
-        </div><!--end of new cart-->
-                        
-                        {{-- Save for later --}}
-                        @if (Cart::instance('saveForLater')->count() > 0)
-                        <div class=container>
-                            <div class="row">
-                                <h3 class="mt-4">Saved for later</h3>
-                                @foreach(Cart::instance('saveForLater')->content() as $item)
-                                <div class="d-flex saveForLater mx-auto mb-5">
-                                        <div class="card mt-4" style="width: 5rem;">
-                                            <div class="mr-1">
-                                                <img src="{{asset('storage/img/nostamp.png')}}" class="" alt="product" width="70" height="70">
-                                            </div>
-                                            {{-- <img src="{{asset('storage/img/nostamp.png')}}" class="card-img-top" alt="product" width="70"> --}}
-                                            <div class="card-body">
-                                            <h5 class="card-title">{{$item->name}}</h5>
-                                            <p class="card-text">${{$item->price}}</p>
-                                        </div>
-                                        <div class="d-flex">
-                                            <form action="{{ route('saveforlaer.addtocart', $item->rowId) }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-default"><i class="fas fa-cart-plus"></i></button>
-                                            </form>
-                                            <form action="{{ route('saveforlater.remove', $item->rowId) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    @endforeach
+        </div><!--end of new cart-->           
+            {{-- Save for later --}}
+            @if (Cart::instance('saveForLater')->count() > 0)
+            <div class=container>
+                <div class="row">
+                    <h3 class="mt-4">Saved for later</h3>
+                    @foreach(Cart::instance('saveForLater')->content() as $item)
+                    <div class="d-flex saveForLater mx-auto mb-5">
+                            <div class="card mt-4" style="width: 5rem;">
+                                <div class="mr-1">
+                                    <img src="{{asset('storage/img/nostamp.png')}}" class="" alt="product" width="70" height="70">
+                                </div>
+                                {{-- <img src="{{asset('storage/img/nostamp.png')}}" class="card-img-top" alt="product" width="70"> --}}
+                                <div class="card-body">
+                                <h5 class="card-title">{{$item->name}}</h5>
+                                <p class="card-text">${{$item->price}}</p>
+                            </div>
+                            <div class="d-flex">
+                                <form action="{{ route('saveforlaer.addtocart', $item->rowId) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-cart-plus"></i></button>
+                                </form>
+                                <form action="{{ route('saveforlater.remove', $item->rowId) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
+                                </form>
                             </div>
                         </div>
-                            @else
-                            
-                            @endif     
-                 </div>    
+                        @endforeach
+                </div>
+            </div>
+            @else
+            
+            @endif     
+        </div>    
     </div> {{--end vendor class --}}
 </div>{{-- end of contatiner--}}
 @endsection

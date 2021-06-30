@@ -26,9 +26,6 @@
         @endif
         {{-- order --}}
     <div class="container">
-     {{-- <div class="row">
-        <h3>New Order<h3>
-    </div> --}}
         <div class="card mb-3" style="max-width: 100%; border: none;">
             @foreach($order_product as $product)
             <div class="row g-0">
@@ -95,12 +92,12 @@
                                 </div>
                                 </div>
                                 <div class="d-flex justify-content-between cart-actions ml-2">
-                                    <form action="#" method="post"> {{--{{ route('cart.remove', $item->rowId) }}--}}
+                                    <form action="#" method="post"> {{--{{ route('cart.remove', $product->rowId) }}--}}
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
                                     </form>
-                                    <form action="#" method="post"> {{--{{ route('cart.saveForLater', $item->rowId) }}--}}
+                                    <form action="#" method="post"> {{--{{ route('cart.saveForLater', $product->rowId) }}--}}
                                         @csrf
                                         <button type="submit" class="btn btn-default"><i class="fas fa-cart-arrow-down text-info"></i></button>
                                     </form>
@@ -127,7 +124,7 @@
                         add to cart</button>
                 </form>
                 </div>
-            @endforeach 
+            @endforeach
         </div>
                         {{-- Save for later --}}
                         {{-- <div class=container>
@@ -160,7 +157,7 @@
                             {{-- @else
                             <h3> No items saved for later </h3>
                             @endif      --}}
-                 </div>    
+                 {{-- </div>     --}}
      {{--end vendor class --}}
 </div>{{-- end of contatiner--}}
 @endsection

@@ -9,7 +9,6 @@
                     <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                   </a>
                   <a class="vendor-card" href="{{ route('vendor.newshow', $vendor) }}">New Show Vendor</a>
-                  {{-- @foreach ($vendors as $vendor) --}}
                     <div class="card-body">
                         <h5 class="card-title">{{$vendor->vendor_name}}</h5>
                         <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}</p>
@@ -42,13 +41,9 @@
                     <div class="card-footer">
                         <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
                     </div>
-                    {{-- @endforeach --}}
                   </div>
                 </div>
                 @endforeach
           </div>
       </div> <!--container end-->
       @endsection
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> --}}
-  {{-- </body> --}}
-{{-- </html> --}}
