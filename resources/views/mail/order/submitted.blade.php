@@ -4,12 +4,14 @@
 @foreach($order->products as $product) 
 <div class="card" style="width: 18rem;">
     <div class="card-body">
+      {{$product}}
       <h5 class="card-title">New Order</h5>
-      <p class="card-text">{{$product->productName}}</p>
-      <p class="card-text">${{$product->pivot->price}}</p>
-      <p class="card-text">Qty; {{$product->pivot->quantity}}</p>
+      <img src="{{asset('storage/img/nostamp.png')}}" alt="">
+      <p class="card-text">{{$product->pivot->quantity}} x {{$product->productName}}</p>
       <div><span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span></div>
-      <p class="card-text">Total: ${{$product->pivot->price}}</p>
+      <div>
+        <p class="card-text">Total: ${{$product->pivot->price}}</p>
+      </div>
       <a href="#" class="card-link btn btn-dark">Confirm order</a>
     </div>
 </div>

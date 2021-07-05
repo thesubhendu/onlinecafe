@@ -26,9 +26,6 @@
         @endif
         {{-- order --}}
     <div class="container">
-     {{-- <div class="row">
-        <h3>New Order<h3>
-    </div> --}}
         <div class="card mb-3" style="max-width: 100%; border: none;">
             @foreach($order_product as $product)
             <div class="row g-0">
@@ -39,22 +36,23 @@
                                 <h5 class="card-title">{{$product->productName}}</h5>
                                 <p class="card-text"> ${{$product->productPrice}}</p>
                                 <label class="sr-only" for="quantity">Quantity</label>
-                                <select class="form-control form-select" id="quantity" name="quantity" required style="max-width:50%;">
+                                <select class="form-control form-select" id="quantity" name="quantity" required style="max-width:30%;">
                                     <option selected>how many...</option>
-                                    <option value="1"{{ old('quantity') == "1" ? 'selected' : ''}}>1</option>
-                                    <option value="2"{{ old('quantity') == "2" ? 'selected' : ''}}>2</option>
-                                    <option value="3"{{ old('quantity') == "3" ? 'selected' : ''}}>3</option>
-                                    <option value="4"{{ old('quantity') == "4" ? 'selected' : ''}}>4</option>
-                                    <option value="5"{{ old('quantity') == "5" ? 'selected' : ''}}>5</option>
-                                    <option value="6"{{ old('quantity') == "6" ? 'selected' : ''}}>6</option>
-                                    <option value="7"{{ old('quantity') == "7" ? 'selected' : ''}}>7</option>
-                                    <option value="8"{{ old('quantity') == "8" ? 'selected' : ''}}>8</option>
-                                    <option value="9"{{ old('quantity') == "9" ? 'selected' : ''}}>9</option>
-                                    <option value="10"{{ old('quantity') == "10" ? 'selected' : ''}}>10</option>
+                                    <option {{ old('quantity') == "1" ? 'selected' : ''}} value="1">1</option>
+                                    <option {{ old('quantity') == "2" ? 'selected' : ''}} value="2">2</option>
+                                    <option {{ old('quantity') == "3" ? 'selected' : ''}} value="3">3</option>
+                                    <option {{ old('quantity') == "4" ? 'selected' : ''}} value="4">4</option>
+                                    <option {{ old('quantity') == "5" ? 'selected' : ''}} value="5">5</option>
+                                    <option {{ old('quantity') == "6" ? 'selected' : ''}} value="6">6</option>
+                                    <option {{ old('quantity') == "7" ? 'selected' : ''}} value="7">7</option>
+                                    <option {{ old('quantity') == "8" ? 'selected' : ''}} value="8">8</option>
+                                    <option {{ old('quantity') == "9" ? 'selected' : ''}} value="9">9</option>
+                                    <option {{ old('quantity') == "10" ? 'selected' : ''}} value="10">10</option>
                                 </select>
                                 <div class="invalid-feedback">
                                 we need to know how many you would like
                                 </div>
+
                             </div>
                             <div class="card mt-4 mb-4">
                                 <h6 class="card-header mt-2">options</h6>
@@ -95,12 +93,12 @@
                                 </div>
                                 </div>
                                 <div class="d-flex justify-content-between cart-actions ml-2">
-                                    <form action="#" method="post"> {{--{{ route('cart.remove', $item->rowId) }}--}}
+                                    <form action="#" method="post"> {{--{{ route('cart.remove', $product->rowId) }}--}}
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
                                     </form>
-                                    <form action="#" method="post"> {{--{{ route('cart.saveForLater', $item->rowId) }}--}}
+                                    <form action="#" method="post"> {{--{{ route('cart.saveForLater', $product->rowId) }}--}}
                                         @csrf
                                         <button type="submit" class="btn btn-default"><i class="fas fa-cart-arrow-down text-info"></i></button>
                                     </form>
@@ -111,7 +109,7 @@
                 </div>
             </div>
             <div class="col-sm-12 d-flex p-2 justify-content-between align-items-center">
-                <form action="{{ route('cart.store') }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
+                <form action="{{ route('cart.store', $product->rowId) }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
                     @csrf
                     <div class="form-group">
                         <input type="hidden" name="id" value="{{$product->id}}">
@@ -127,7 +125,7 @@
                         add to cart</button>
                 </form>
                 </div>
-            @endforeach 
+            @endforeach
         </div>
                         {{-- Save for later --}}
                         {{-- <div class=container>
@@ -160,7 +158,7 @@
                             {{-- @else
                             <h3> No items saved for later </h3>
                             @endif      --}}
-                 </div>    
+                 {{-- </div>     --}}
      {{--end vendor class --}}
 </div>{{-- end of contatiner--}}
 @endsection

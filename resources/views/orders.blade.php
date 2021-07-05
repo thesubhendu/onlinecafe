@@ -26,6 +26,7 @@
           </tr> --}}
         </thead>
         <tbody>
+          @auth
           @foreach($user as $order)
           <tr>
             {{-- <th scope="row">1</th> --}}
@@ -39,6 +40,7 @@
             @endForEach
           </tr>
           @endforeach
+          @endauth
         </tbody>
       </table>
     </div>

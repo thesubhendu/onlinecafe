@@ -4,6 +4,7 @@ use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CardsController;
 use App\Http\Controllers\OrderController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\VendorController;
@@ -70,12 +71,12 @@ Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checko
 // Route::get('/orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
 Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
     'store' => 'order.store',
-]);
-Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+])->middleware('auth');
+Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 // Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
-Route::get('/cards', [CardController::class, 'index'])->name('cards');
+Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
 
 
 // Route::view('/order_submitted', 'order_submitted');

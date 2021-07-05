@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CardController extends Controller
+class CardsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,16 @@ class CardController extends Controller
      */
     public function index()
     {
-        return view('cards');
+        // $user = Auth::user();
+        // $cards = Card::where('user_id', $user->id);
+        // return view('cards')
+        //     ->with('cards', $cards)
+        //     ->with('user', $user);
+
+        $user = Auth::user();
+        return view('cards')
+            ->with('user', $user->cards)
+            ->with('vendor');
     }
 
     /**
@@ -40,10 +51,10 @@ class CardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Card  $cards
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Card $cards)
     {
         //
     }
@@ -51,10 +62,10 @@ class CardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Card  $cards
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Card $cards)
     {
         //
     }
@@ -63,10 +74,10 @@ class CardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Card  $cards
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Card $cards)
     {
         //
     }
@@ -74,10 +85,10 @@ class CardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Card  $cards
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Card $cards)
     {
         //
     }
