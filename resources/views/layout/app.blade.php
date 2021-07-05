@@ -29,6 +29,14 @@
       <li class="nav-item nav-right">
           <a class="nav-link p-3" href="/" class="text-sm text-gray-700 underline">Home</a>
       </li>
+      @guest
+      <li class="nav-item nav-right">
+        <a class="btn btn-outline-success p-3" href="{{ route('register') }}">Register</a>
+      </li>
+      <li class="nav-item nav-right">
+        <a class="nav-link p-3" href="{{ route('login') }}">Login</a>
+      </li>
+      @endguest
       @auth
       <li class="nav-item nav-right">
         <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline"> <i class="fas fa-shopping-cart"></i>@if (Cart::instance('default')->count() > 0)<span class="badge bg-light text-dark"> {{Cart::instance('default')->count()}}</span>@endif</a>
@@ -55,9 +63,13 @@
 @guest
   <div class="container vendor-register mt-4t">
     <div class="d-flex justify-content-between">
-      <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
-      <a class="btn btn-outline-success px-3" href="{{ route('login') }}">Login</a>
-      {{-- <a href="#" class=" ">Register my shop</a> --}}
+      <h5>Need an Account?</h5>
+      <div>
+        <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
+        
+        {{-- <a href="#" class=" ">Register my shop</a> --}}
+      </div>
+      
     </div>
   </div>
   @endguest
@@ -66,7 +78,7 @@
 <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark justify-content-between">
     <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
     <a class="nav-link" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
-    <a class="nav-link" href="{{ route('cards') }}"><i class="fas fa-id-card fa-lg"></i></a>
+    <a class="nav-link" href="{{ route('cards.index') }}"><i class="fas fa-id-card fa-lg"></i></a>
     <a class="nav-link" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
 </nav>
     @yield('content')

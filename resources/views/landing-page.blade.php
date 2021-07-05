@@ -5,7 +5,7 @@
           <h1>Lorem, ipsum dolor.</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           <div class="d-flex justify-content-between">
-            <a href="#" class="btn btn-outline-success ">Register</a>
+            <a href="#" class="btn btn-outline-success ">Register My Shop</a>
             <a href="#" class="text-success">Learn More</a>
           </div>
         </div>

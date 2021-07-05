@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Order;
 use App\Models\Product;
 use App\Mail\orderSubmitted;
@@ -82,6 +83,22 @@ class OrderController extends Controller
         // email customer and vendor
         Mail::to($order->vendor->email)->send(new orderSubmitted($order));
 
+
+
+        // check if card is active
+        // create card
+        $card = new card;
+        $card->user_id = $user_id;
+        $card->vendor_id = $vendor_id;
+        $card->maxStamps = 10;
+        $card->is_active = true;
+
+        $card->save();
+        // check maxStamps
+        // check number of stamps on card
+        // create or stamp card
+
+
         // empty cart
         Cart::destroy();
 
@@ -135,5 +152,13 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCardStatus($user, $vendor)
+    {
+        Card::where('user_id', $user)
+            ->where('vendor_id', $vendor)
+            ->where("is_active", true);
+        return true;
     }
 }

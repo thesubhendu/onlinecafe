@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Card;
 use App\Models\Like;
 use App\Models\Vendor;
 use Illuminate\Notifications\Notifiable;
@@ -57,5 +58,10 @@ class User extends \TCG\Voyager\Models\User
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
     }
 }
