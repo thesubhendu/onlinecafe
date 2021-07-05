@@ -1,6 +1,14 @@
 @extends('layout.app')
 @section('content')
       <div class="container mt-4">
+        <div id="showcase" class="showcase">
+          <h1>Lorem, ipsum dolor.</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <div class="d-flex justify-content-between">
+            <a href="#" class="btn btn-outline-success ">Register</a>
+            <a href="#" class="text-success">Learn More</a>
+          </div>
+        </div>
         <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
           @foreach ($vendors as $vendor)
             <div class="col">

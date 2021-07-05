@@ -66,11 +66,11 @@ class OrderController extends Controller
         $order->save();
 
         // save order products
-        $cartProducts = Cart::content();
-        foreach ($cartProducts as $product) {
+        // $cartProducts = Cart::content();
+        foreach (Cart::content() as $product) {
             $order->products()->attach($product->id, [
                 'price' => $product->price,
-                'quantity' =>  $product->qty,
+                'quantity' => $product->qty,
                 'milk' => $product->model->milk,
                 'sugar' => $product->model->sugar,
                 'syrup' => $product->model->syrup

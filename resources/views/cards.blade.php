@@ -11,7 +11,14 @@
 </div>
 <hr>
   <div class="container mt-4">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div id="card-showcase" class="">
+      <h1>Pay it Forward.</h1>
+      <div class="d-flex justify-content-between">
+        <a href="#" class="btn btn-outline-success ">Register</a>
+        <a href="#" class="text-success">Learn More</a>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
       <div class="col">
         <div class="card h-100">
           <div class="card-logo card-header">

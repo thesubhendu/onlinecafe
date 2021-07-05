@@ -70,8 +70,8 @@ Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checko
 // Route::get('/orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
 Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
     'store' => 'order.store',
-]);
-Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+])->middleware('auth');
+Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 // Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 

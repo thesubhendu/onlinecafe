@@ -31,7 +31,7 @@
             <div class="cart-section container"> <!--new cart-->
                 <div>
         
-                    <h2>{{ Cart::count() }} item(s) in Shopping Cart</h2>
+                    <h2>{{ Cart::count() }}  {{ Str::plural('item', Cart::count())}} in Shopping Cart</h2>
             
                     <div class="mt-4">
                         @foreach(Cart::content() as $item)
@@ -90,9 +90,10 @@
                         </div>
                     </div> <!-- end cart-totals -->
                     <hr>
-            
                     <div class="cart-buttons d-flex justify-content-between">
-                        <a href="" class="btn btn-outline-success">Continue Shopping</a>
+                        @foreach(Cart::content() as $vendor)
+                        <a href="{{route('vendor.products', $vendor->model->vendor_id )}}" class="btn btn-outline-success">Continue Shopping</a>
+                        @endforeach
                         <a href="{{route('checkout.index')}}" class="btn btn-success">Proceed to Checkout</a>
                     </div>
                 </div>

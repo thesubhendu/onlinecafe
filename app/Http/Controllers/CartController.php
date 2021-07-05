@@ -43,8 +43,8 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        Cart::add(['id' => $request->id, 'name' => $request->name, 'quantity' => 1, 'price' => $request->price, 'weight' => '1000', 'options' => [
+
+        Cart::add(['id' => $request->id, 'name' => $request->name, 'qty' => 1, 'price' => $request->price, 'weight' => '1000', 'options' => [
             'milk' => $request->input('milk'),
             'sugar' => $request->input('sugar'),
             'syrup' => $request->input('syrup')

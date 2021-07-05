@@ -10,11 +10,10 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    {{-- <link href="/css/app.css" rel="stylesheet"> --}}
     <script src="https://kit.fontawesome.com/1e6705f353.js" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
   </head>
   <body>
   {{-- < class="mb-4"> --}}
@@ -23,8 +22,9 @@
   <a class="navbar-brand" href="/">
     <img src="/storage/img/nostamp.png" class="" alt="..." width="48" height="48">
     {{ config('app.name', 'LaravelCoffee') }}
+    {{-- d-sm-none .d-md-block --}}
   </a>
-  <ul class="navbar-nav ml-auto ">
+  <ul class="navbar-nav ml-auto">
     <div class="d-flex flex-row">
       <li class="nav-item nav-right">
           <a class="nav-link p-3" href="/" class="text-sm text-gray-700 underline">Home</a>
@@ -47,22 +47,22 @@
               <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i></button>
             </form>
           </div>
-      </li>
-      </li>
       @endauth
-      @guest
-      <li class="nav-item nav-right">
-        <a class="nav-link p-3" href="{{ route('register') }}">Register</a>
-      </li>
-      <li class="nav-item nav-right">
-        {{-- <a class="nav-link" href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a> --}}
-        <a class="nav-link p-3" href="{{ route('login') }}">Login</a>
-      </li>
-      @endguest
+    
     </div>
   </ul>
 </nav>
+@guest
+  <div class="container vendor-register mt-4t">
+    <div class="d-flex justify-content-between">
+      <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
+      <a class="btn btn-outline-success px-3" href="{{ route('login') }}">Login</a>
+      {{-- <a href="#" class=" ">Register my shop</a> --}}
+    </div>
+  </div>
+  @endguest
 {{-- bottom Nav --}}
+
 <nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark justify-content-between">
     <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
     <a class="nav-link" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
