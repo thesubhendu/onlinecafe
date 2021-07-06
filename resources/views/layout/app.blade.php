@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/1e6705f353.js" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet" type="text/css">
   </head>
   <body>
   {{-- < class="mb-4"> --}}
@@ -75,11 +75,21 @@
   @endguest
 {{-- bottom Nav --}}
 
-<nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark justify-content-between">
+<nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark d-flex flex-row">
     <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
-    <a class="nav-link" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
-    <a class="nav-link" href="{{ route('cards.index') }}"><i class="fas fa-id-card fa-lg"></i></a>
-    <a class="nav-link" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
+    <ul class="navbar-nav">
+      <div class="d-flex flex-row">
+        <li class="nav-item">
+          <a class="nav-link p-3" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link p-3" href="{{ route('cards.index') }}"><i class="fas fa-id-card fa-lg"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link p-3" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
+        </li>
+      </div>
+    </ul>
 </nav>
     @yield('content')
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

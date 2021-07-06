@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\User;
+use App\Models\Stamp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,11 +23,21 @@ class CardsController extends Controller
         //     ->with('cards', $cards)
         //     ->with('user', $user);
 
-        $user = Auth::user();
+        $cards = Card::where('user_id', Auth::id())
+            ->with('vendor')
+            ->with('stamps')
+            ->get();
+
+        // $usercards = Card::where('user_id', Auth::id())
+        //     ->with('vendor')
+        //     ->with('stamps')
+        //     ->get();
+
         return view('cards')
-            ->with('user', $user->cards)
-            ->with('vendor');
+            ->with('cards', $cards,);
+        // ->with('cardstamps', $cardstamps);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,23 +52,41 @@ class CardsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Card  $card
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Card $card, $id)
     {
         //
+        $card = Card::where('user_id', Auth::id())
+            ->where('card_id', $card->id)
+            ->where('is_active', true)
+            ->with('vendor')
+            ->with('stamps')
+            ->get();
+        $card->stamp->create([
+            'user_id' => Auth::id(),
+            'vendor_id' => $card->vendor_id,
+            'card_id' => $card->card_id,
+            'order_id' => $id
+        ]);
+        return back();
+
+        // $card->stamp(Card('stamp'));
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Card  $cards
+     * @param  \App\Models\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function show(Card $cards)
+    public function show(Card $card)
     {
         //
+
     }
 
     /**

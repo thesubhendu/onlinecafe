@@ -20,4 +20,9 @@ class Card extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function stamps()
+    {
+        return $this->hasMany(Stamp::class);
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCardsTable extends Migration
+class CreateStampsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('stamps', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('card_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('order_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id')->constrained()->onDelete('cascade');
-            $table->integer('maxStamps');
-            $table->boolean('is_Active');
-            $table->string('card_logo')->nullable()->default('card_logo.jpg');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('stamps');
     }
 }

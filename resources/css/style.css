@@ -13,14 +13,14 @@ body {
     padding: 0;
 }
 
-span .checked {
+/* span .checked {
     color: var(--checked-color);
     background-color: none;
-}
+} */
 
-.checked {
+/* .checked {
     color: var(--checked-color);
-}
+} */
 
 #fav_like .checked {
     border-style: none;
@@ -55,13 +55,13 @@ a:hover {
     color: #333;
 }
 
-span .unchecked {
+/* span .unchecked {
     color: var(--unchecked);
-}
+} */
 
-span .unchecked:hover {
+/* span .unchecked:hover {
     color: var(--checked-color);
-}
+} */
 
 .card-img-top {
     max-width: 100%;
@@ -197,16 +197,16 @@ progress {
     margin-bottom: 30px;
 } */
 
-#showcase .row {
+/* #showcase .row {
     height: 50px;
-}
+} */
 
-#showcase h1 {
+/* #showcase h1 {
     font-size: 30px;
     color: white;
     margin: 0;
     padding-bottom: 20px;
-}
+} */
 
 .review-block {
     background-color: #fafafa;

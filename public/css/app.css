@@ -16,17 +16,34 @@ body {
 }
 
 /* Showcase */
-.showcase {
-    background: #333 url("/storage/app/public/img/showcase.jpg") no-repeat
-        center center/cover;
-    height: 10vh;
+#showcase {
+    background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
+    height: 30vh;
     color: #fff;
+    border-bottom: 1px solid #4caf50;
+    margin-bottom: 30px;
 }
 
-.card-showcase {
-    background: #333 url("/storage/app/public/img/showcase.jpg") no-repeat
-        center center/cover;
-    height: 10vh;
+#showcase .showcase-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+    /* Overlay */
+    /* position: absolute; */
+    top: 65px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#card-showcase {
+    background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
+    height: 30vh;
     color: #fff;
 }
 
@@ -34,6 +51,13 @@ span .checked {
     color: var(--checked-color);
 }
 
+span .unchecked {
+    color: var(--unchecked);
+}
+
+span .unchecked:hover {
+    color: var(--checked-color);
+}
 .checked {
     color: #28a745;
 }
@@ -267,14 +291,14 @@ body {
     padding: 0;
 }
 
-span .checked {
+/* span .checked {
     color: var(--checked-color);
     background-color: none;
-}
+} */
 
-.checked {
+/* .checked {
     color: var(--checked-color);
-}
+} */
 
 #fav_like .checked {
     border-style: none;
@@ -309,13 +333,13 @@ a:hover {
     color: #333;
 }
 
-span .unchecked {
+/* span .unchecked {
     color: var(--unchecked);
-}
+} */
 
-span .unchecked:hover {
+/* span .unchecked:hover {
     color: var(--checked-color);
-}
+} */
 
 .card-img-top {
     max-width: 100%;
@@ -446,16 +470,16 @@ progress {
     margin-bottom: 30px;
 } */
 
-#showcase .row {
+/* #showcase .row {
     height: 50px;
-}
+} */
 
-#showcase h1 {
+/* #showcase h1 {
     font-size: 30px;
     color: white;
     margin: 0;
     padding-bottom: 20px;
-}
+} */
 
 .review-block {
     background-color: #fafafa;
