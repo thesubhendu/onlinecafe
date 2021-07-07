@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use App\Models\Order;
+use App\Models\Stamp;
 use App\Models\Product;
 use App\Mail\orderSubmitted;
 use Illuminate\Http\Request;
@@ -84,8 +85,9 @@ class OrderController extends Controller
         Mail::to($order->vendor->email)->send(new orderSubmitted($order));
 
 
-
         // check if card is active
+        // $card = Card::getCard();
+
         // create card
         $card = new card;
         $card->user_id = $user_id;
@@ -97,6 +99,16 @@ class OrderController extends Controller
         // check maxStamps
         // check number of stamps on card
         // create or stamp card
+
+        Stamp::stampCard('id');
+
+        $stamp = new Stamp;
+        $stamp->card_id = $card->id;
+        $stamp->order_id = $order->id;
+        $stamp->user_id = $user_id;
+        $stamp->vendor_id = $vendor_id;
+
+        $stamp->save();
 
 
         // empty cart
