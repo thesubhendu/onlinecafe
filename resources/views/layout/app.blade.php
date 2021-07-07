@@ -61,15 +61,13 @@
   </ul>
 </nav>
 @guest
-  <div class="container vendor-register mt-4t">
-    <div class="d-flex justify-content-between">
-      <h5>Need an Account?</h5>
+  <div id="showcase" class="container vendor-register mt-3">
+    <div class="showcase-content">
+      <h5 class="showcase-heading">What! do mean you dont have an account?</h5>
+      <P class="showcase-lead">Register here and you can order your coffee from anywhere with your favourite chooffee shop</P>
       <div>
         <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
-        
-        {{-- <a href="#" class=" ">Register my shop</a> --}}
-      </div>
-      
+      </div>  
     </div>
   </div>
   @endguest

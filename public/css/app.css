@@ -16,6 +16,17 @@ body {
 }
 
 /* Showcase */
+.showcase-heading {
+    font-size: 4rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+}
+
+.showcase-lead {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
 #showcase {
     background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
     height: 30vh;

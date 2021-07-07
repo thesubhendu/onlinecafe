@@ -100,7 +100,7 @@
         @else
             <h3> Your Cart is Empty </h3>
             <div class="cart-buttons d-flex justify-content-between">
-                <a href="" class="btn btn-outline-success">Continue Shopping</a>
+                <a href="/" class="btn btn-outline-success">Continue Shopping</a>
             </div>
         @endif 
         </div><!--end of new cart-->           
