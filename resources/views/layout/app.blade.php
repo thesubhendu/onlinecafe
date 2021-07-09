@@ -61,9 +61,9 @@
   </ul>
 </nav>
 @guest
-  <div id="showcase" class="container vendor-register mt-3">
+  <div id="showcase-register" class="user-register">
     <div class="showcase-content">
-      <h5 class="showcase-heading">What! do mean you dont have an account?</h5>
+      <h5 class="showcase-heading">What! do you mean you dont have an account?</h5>
       <P class="showcase-lead">Register here and you can order your coffee from anywhere with your favourite chooffee shop</P>
       <div>
         <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>

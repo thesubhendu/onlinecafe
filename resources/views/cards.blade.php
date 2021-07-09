@@ -1,23 +1,16 @@
 @extends('layout.app')
 @section('content')
-<main role="main" class="container py-4 mb-5 mt-4">
-  {{-- <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
-    <div>
-        <h1>Your Cards</h1>
+<main role="main" class="">
+<div id="card-showcase" class="">
+  <div class="showcase-content">
+    <h3 class="showcase-heading">Pay it Forward.</h3>
+    <p class="showcase-lead">Lorem ipsum dolor sit amet.</p>
+    <div class="d-flex justify-content-between">
+      <a href="#" class="btn btn-outline-success">Learn More</a>
     </div>
-    <div>
-        <a href="index.html" class="btn btn-success"><i class="fas fa-backward"></i></a>
-    </div>
+  </div>
 </div>
-<hr> --}}
-  <div class="container mt-4">
-    <div id="" class="card-showcase">
-      <h3>Pay it Forward.</h3>
-      <p>Lorem ipsum dolor sit amet.</p>
-      <div class="d-flex justify-content-between">
-        <a href="#" class="btn btn-outline-success">Learn More</a>
-      </div>
-    </div>
+  <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
       @foreach ($cards as $card)
       <div class="col">

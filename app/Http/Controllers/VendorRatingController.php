@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class VendorRatingController extends Controller
 {
+    public function index(Vendor $vendor)
+    {
+        return view('rate')
+            ->with('vendor_rating', $vendor);
+    }
+
+
     public function store(Vendor $vendor)
     {
         request()->validate([
