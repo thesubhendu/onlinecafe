@@ -77,6 +77,7 @@ Route::get('orders/create/{product}', [OrderController::class, 'create'])->name(
 // Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
+Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
 
 
 // Route::view('/order_submitted', 'order_submitted');

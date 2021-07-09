@@ -27,12 +27,40 @@ body {
     margin-bottom: 2rem;
 }
 
-#showcase {
-    background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
+#showcase-register {
+    background: url("/storage/img/showcase-account.jpg") no-repeat left
+        center/cover;
+    position: relative;
     height: 30vh;
     color: #fff;
     border-bottom: 1px solid #4caf50;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
+}
+
+#showcase-register .showcase-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+    /* Overlay */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#showcase {
+    background: url("/storage/img/showcase.jpg") no-repeat left center/cover;
+    position: relative;
+    height: 30vh;
+    color: #fff;
+    border-bottom: 1px solid #4caf50;
+    /* margin-bottom: 30px; */
 }
 
 #showcase .showcase-content {
@@ -44,8 +72,8 @@ body {
     height: 100%;
     padding: 0 2rem;
     /* Overlay */
-    /* position: absolute; */
-    top: 65px;
+    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -55,7 +83,25 @@ body {
 #card-showcase {
     background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
     height: 30vh;
+    position: relative;
     color: #fff;
+}
+
+#card-showcase .showcase-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+    /* Overlay */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 span .checked {
@@ -253,8 +299,11 @@ progress {
     padding-right: 2px;
 }
 .rating label:before {
-    content: "★";
-    font-size: 42px;
+    /* content: "★"; */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f7b6";
+    font-size: 28px;
     color: #cccccc;
     line-height: 1;
 }

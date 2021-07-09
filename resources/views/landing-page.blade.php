@@ -4,23 +4,28 @@
   <div class="showcase-content">
     <h1>Lorem, ipsum dolor.</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    <div class="showcase-content">
-      <a href="#" class="btn btn-outline-success ">Register My Shop</a>
-      <a href="#" class="btn btn-success">Learn More</a>
+    <div class="d-flex justify-content-between">
+      <div>
+        <a href="#" class="btn btn-outline-success ">Register My Shop</a>
+      </div>
+      <div>
+        <a href="#" class="btn btn-success">Learn More</a>
+      </div>
     </div>
   </div>
 </div>
-      <div class="container mt-4">
-        <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
+      <div class="container"> 
+        <div class="row row-cols-1 row-cols-md-3 g-3">
           @foreach ($vendors as $vendor)
             <div class="col">
                 <div class="card h-100">
                   <a class="vendor-card" href="{{ route('vendor.show', $vendor) }}">
                     <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                   </a>
-                  <a class="vendor-card" href="{{ route('vendor.newshow', $vendor) }}">New Show Vendor</a>
                     <div class="card-body">
+                      <a href="{{ route('vendor.show', $vendor) }}">
                         <h5 class="card-title">{{$vendor->vendor_name}}</h5>
+                      </a>
                         <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}</p>
                         <div class="user-ratin d-flex justify-content-between">
                             <div class="rating">
