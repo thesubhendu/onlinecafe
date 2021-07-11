@@ -100,7 +100,7 @@ class OrderController extends Controller
         // check number of stamps on card
         // create or stamp card
 
-        Stamp::stampCard('id');
+        // Stamp::stampCard('id');
 
         $stamp = new Stamp;
         $stamp->card_id = $card->id;

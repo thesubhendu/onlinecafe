@@ -3,8 +3,8 @@
 <main role="main" class="">
 <div id="card-showcase" class="">
   <div class="showcase-content">
-    <h3 class="showcase-heading">Pay it Forward.</h3>
-    <p class="showcase-lead">Lorem ipsum dolor sit amet.</p>
+    <h3 class="">Pay it Forward.</h3>
+    <p class="">Lorem ipsum dolor sit amet.</p>
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-outline-success">Learn More</a>
     </div>

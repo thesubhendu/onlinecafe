@@ -6,10 +6,10 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     <div class="d-flex justify-content-between">
       <div>
-        <a href="#" class="btn btn-outline-success ">Register My Shop</a>
+        <a href="#" class="btn btn-success ">Register My Shop</a>
       </div>
       <div>
-        <a href="#" class="btn btn-success">Learn More</a>
+        <a href="#" class="btn btn-outline-light">Learn More</a>
       </div>
     </div>
   </div>

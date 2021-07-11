@@ -1,15 +1,7 @@
 @extends('layout.app')
 @section('content')
 <div  class="container py-4 mb-5">
-    <div class="vendor-index mt-4">
-        <div class="container">
-            <div class="modal-header">
-                <h5 class="modal-title text-center">Your cart</h5>
-                <div>
-                    <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
-                </div>
-            </div>
-        </div>
+    <div class="cart-index">
         <div class="mt-2">
             @if (session()->has('success_message'))
             <div class="alert alert-success">

@@ -32,9 +32,9 @@
                     <input type="text" id="Mobile" name="mobile" placeholder="0412345678" value="{{ $user->mobile}}">
                     <div class="cart-row">
                         <div class="col-75">
-                            <div class="container">
+                            <div class="">
                                 <h4 class="mt-2">Cart
-                                    <span class="price" style="color:black">
+                                    <span class="price" style="color:grey">
                                         <i class="fa fa-shopping-cart"></i>
                                         <b>{{ Cart::count() }}</b>
                                     </span>
@@ -62,6 +62,10 @@
                                 <input type="hidden" id="sugar" name="sugar" value="{{ $item->options->sugar}}">
                                 <input type="hidden" id="syrup" name="syrup" value="{{ $item->options->syrup}}">
                                 <button type="submit" class="btn btn-success"><i class="fas fa-credit-card"></i> Checkout</button>
+                                {{-- <button class="btn btn-primary" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    submitting...
+                                </button> --}}
                             </div>
                         </div>
                     </div>

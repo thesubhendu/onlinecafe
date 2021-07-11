@@ -28,12 +28,12 @@ body {
 }
 
 #showcase-register {
-    background: url("/storage/img/showcase-account.jpg") no-repeat left
+    background: url("/storage/img/showcase-account.jpg") no-repeat center
         center/cover;
     position: relative;
-    height: 30vh;
+    height: 10vh;
     color: #fff;
-    border-bottom: 1px solid #4caf50;
+    border-bottom: 1px solid #28a745;
     /* margin-bottom: 30px; */
 }
 
@@ -59,7 +59,7 @@ body {
     position: relative;
     height: 30vh;
     color: #fff;
-    border-bottom: 1px solid #4caf50;
+    border-bottom: 1px solid #28a745;
     /* margin-bottom: 30px; */
 }
 

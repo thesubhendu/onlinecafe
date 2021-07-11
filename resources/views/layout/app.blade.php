@@ -26,69 +26,56 @@
   </a>
   <ul class="navbar-nav ml-auto">
     <div class="d-flex flex-row">
-      <li class="nav-item nav-right">
-          <a class="nav-link p-3" href="/" class="text-sm text-gray-700 underline">Home</a>
+        <li class="nav-item nav-right">
+            <a class="nav-link p-3" href="/" class="text-sm text-gray-700 underline">Home</a>
+        </li>
+        @guest
+        <li class="nav-item nav-right">
+          <a class="btn btn-outline-success p-3" href="{{ route('register') }}">Register</a>
+        </li>
+        <li class="nav-item nav-right">
+          <a class="nav-link p-3" href="{{ route('login') }}">Login</a>
+        </li>
+        @endguest
+        @auth
+        <li class="nav-item nav-right">
+          <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline"> <i class="fas fa-shopping-cart"></i>@if (Cart::instance('default')->count() > 0)<span class="badge bg-light text-dark"> {{Cart::instance('default')->count()}}</span>@endif</a>
       </li>
-      @guest
-      <li class="nav-item nav-right">
-        <a class="btn btn-outline-success p-3" href="{{ route('register') }}">Register</a>
-      </li>
-      <li class="nav-item nav-right">
-        <a class="nav-link p-3" href="{{ route('login') }}">Login</a>
-      </li>
-      @endguest
-      @auth
-      <li class="nav-item nav-right">
-        <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline"> <i class="fas fa-shopping-cart"></i>@if (Cart::instance('default')->count() > 0)<span class="badge bg-light text-dark"> {{Cart::instance('default')->count()}}</span>@endif</a>
-    </li>
-    @endauth
-      @auth
-      <li class="nav-item nav-right">
-        {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
-        <li class="nav-item nav-right dropdown">
-          <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/user/{{ Auth::user()->avatar}}" class="mb-3" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%"> {{ auth()->user()->name }}</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
-            <a class="dropdown-item p-3" href="#"><i class="fas fa-cog"> Settings</i></a>
-            <form action="{{ route('logout') }}" method="post">
-              @csrf
-              <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i></button>
-            </form>
-          </div>
       @endauth
-    
+        @auth
+        <li class="nav-item nav-right">
+          {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
+          <li class="nav-item nav-right dropdown">
+            <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/user/{{ Auth::user()->avatar}}" class="mb-3" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%"> {{ auth()->user()->name }}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
+              <a class="dropdown-item p-3" href="#"><i class="fas fa-cog"> Settings</i></a>
+              <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i></button>
+              </form>
+            </div>
+        @endauth
     </div>
   </ul>
+</nav>
+{{-- bottom Nav --}}
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="nav-link p-3" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
+    <a class="nav-link p-3" href="{{ route('cards.index') }}"><i class="fas fa-id-card fa-lg"></i></a>
+    <a class="nav-link p-3" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
+  </div>
 </nav>
 @guest
   <div id="showcase-register" class="user-register">
     <div class="showcase-content">
-      <h5 class="showcase-heading">What! do you mean you dont have an account?</h5>
-      <P class="showcase-lead">Register here and you can order your coffee from anywhere with your favourite chooffee shop</P>
-      <div>
-        <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
-      </div>  
-    </div>
+          <h3>What! do you mean you dont have an account?</h3>
+          <P>Register here and you can order your coffee from anywhere with your favourite coffee shop</P>
+          <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
+        </div>  
   </div>
   @endguest
-{{-- bottom Nav --}}
-
-<nav class="navbar navbar-expand-md fixed-bottom navbar-dark bg-dark d-flex flex-row">
-    <!-- <a class="nav-link" href="index.html"><i id="homeicon" class="fa fa-home"><span class="sr-only">(current)</span></i></a> -->
-    <ul class="navbar-nav">
-      <div class="d-flex flex-row">
-        <li class="nav-item">
-          <a class="nav-link p-3" href="{{ route('orders.index') }}"><i id="ordersicon" class="fas fa-dollar-sign fa-lg"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link p-3" href="{{ route('cards.index') }}"><i class="fas fa-id-card fa-lg"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link p-3" href="{{ route('user.likes') }}"><i id="favicon" class="fas fa-coffee fa-lg"></i></a>
-        </li>
-      </div>
-    </ul>
-</nav>
     @yield('content')
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
