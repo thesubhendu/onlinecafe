@@ -17,11 +17,6 @@ class CardsController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $cards = Card::where('user_id', $user->id);
-        // return view('cards')
-        //     ->with('cards', $cards)
-        //     ->with('user', $user);
 
         $cards = Card::where('user_id', Auth::id())
             ->with('vendor')
@@ -34,8 +29,7 @@ class CardsController extends Controller
         //     ->get();
 
         return view('cards')
-            ->with('cards', $cards,);
-        // ->with('cardstamps', $cardstamps);
+            ->with('cards', $cards);
     }
 
 

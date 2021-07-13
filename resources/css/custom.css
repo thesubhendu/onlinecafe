@@ -55,7 +55,7 @@ body {
 }
 
 #showcase {
-    background: url("/storage/img/showcase.jpg") no-repeat left center/cover;
+    background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
     position: relative;
     height: 30vh;
     color: #fff;

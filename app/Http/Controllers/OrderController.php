@@ -14,6 +14,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class OrderController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -79,23 +80,35 @@ class OrderController extends Controller
             ]);
         }
 
-        // dd($order->vendor->email, $order);
-
-        // email customer and vendor
-        Mail::to($order->vendor->email)->send(new orderSubmitted($order));
-
-
         // check if card is active
-        // $card = Card::getCard();
+        // $card = Card::where('user_id', Auth::id())
+        //     ->where('vendor_id', $vendor_id)
+        //     ->where('is_Active', true)
+        //     ->get();
+        $card = Card::activeCard($vendor_id);
 
-        // create card
-        $card = new card;
-        $card->user_id = $user_id;
-        $card->vendor_id = $vendor_id;
-        $card->maxStamps = 10;
-        $card->is_active = true;
+        if ($card) {
+            // if ($card->stamps->count() < $card->maxStamps);
+            // dd('stamp card');
+            $card = new card;
+            $card->user_id = $user_id;
+            $card->vendor_id = $vendor_id;
+            $card->maxStamps = 10;
+            $card->is_active = true;
 
-        $card->save();
+            $card->save();
+        } else {
+            // create card
+            // $card = new card;
+            // $card->user_id = $user_id;
+            // $card->vendor_id = $vendor_id;
+            // $card->maxStamps = 10;
+            // $card->is_active = true;
+
+            // $card->save();
+        }
+
+
         // check maxStamps
         // check number of stamps on card
         // create or stamp card
@@ -110,6 +123,9 @@ class OrderController extends Controller
 
         $stamp->save();
 
+        // email customer and vendor
+        // Mail::to($order->vendor->email)->send(new orderSubmitted($order));
+        Mail::to('coffeeshoporders0@gmail.com')->send(new orderSubmitted($order));
 
         // empty cart
         Cart::destroy();

@@ -25,26 +25,26 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between row row-cols-1 row-cols-md-5 g-4">
               @foreach ($card->stamps as $stamp)
-              <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+              <div class="col">
+                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+              </div>
               @endforeach
-              @if($card->maxStamp > $card->vendor->cardstamps)
-              <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
+              @if($card->maxStamp < $card->stamps->count())
+              <div class="col">
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
+              </div>
               @endif
-              {{-- <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-              <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-              <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-              <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp"> --}}
-            </div>
-            <div class="d-flex justify-content-between">
-              {{-- <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
-              <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
-              <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
-              <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
-              <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp"> --}}
-            </div>
-            
+            </div>            
           </div>
           <div class="card-footer">
             <small class="text-muted">{{$card->updated_at->diffForHumans()}}</small>

@@ -6,7 +6,7 @@
     <div class="card-body">
       {{$product}}
       <h5 class="card-title">New Order</h5>
-      <img src="{{asset('storage/img/nostamp.png')}}" alt="">
+      <img src="{{asset('storage/img/nostamp.png')}}" alt="" height="50" width="50">
       <p class="card-text">{{$product->pivot->quantity}} x {{$product->productName}}</p>
       <div><span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span></div>
       <div>
@@ -18,7 +18,7 @@
 @endforeach
 
 @component('mail::button', ['url' => ''])
-Button Text
+Confirm Order
 @endcomponent
 
 Thanks,<br>

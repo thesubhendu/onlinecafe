@@ -25,7 +25,7 @@
                 <h1>Checkout</h1>
                     @csrf
                     <label for="fname"><i class="fa fa-user"></i></label>
-                    <input type="text" id="fname" name="name" placeholder="John M. Doe" value="{{ $user->name}}">
+                    <input type="text" id="name" name="name" placeholder="John M. Doe" value="{{ $user->name}}">
                     <label for="email"><i class="fa fa-envelope"></i> Email</label>
                     <input type="text" id="email" name="email" placeholder="john@example.com" value="{{ $user->email}}">
                     <label for="email"><i class="fas fa-mobile-alt"></i> Mobile</label>
