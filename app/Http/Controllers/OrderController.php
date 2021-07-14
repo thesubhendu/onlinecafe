@@ -59,6 +59,38 @@ class OrderController extends Controller
         $user_id = auth()->id();
         $vendor_id = $request->input('vendor');
 
+
+        // get active card for vendor and user check if card is active cardStatus($vendor) user auth->id() in the model to get the user id
+        // $active_card = new Card;
+        // $active_card->getCard($vendor_id);
+
+        $active_card = Card::where('user_id', $user_id)
+            ->where('vendor_id', $vendor_id)
+            ->where('is_active', true)->get()->toArray();
+
+        if ($active_card) {
+            $active_card = collect([$active_card]);
+            dd($active_card);
+        } else {
+
+            dd('no card');
+            $new_card = new card;
+            $new_card->user_id = $user_id;
+            $new_card->vendor_id = $vendor_id;
+            $new_card->maxStamps = 10;
+            $new_card->is_active = true;
+
+            $new_card->save();
+
+            $active_card = $new_card->id;
+        }
+
+
+
+        // dd($active_card);
+
+
+
         $order = new Order();
 
         $order->order_number = uniqid();
@@ -69,7 +101,7 @@ class OrderController extends Controller
         $order->save();
 
         // save order products
-        // $cartProducts = Cart::content();
+
         foreach (Cart::content() as $product) {
             $order->products()->attach($product->id, [
                 'price' => $product->price,
@@ -80,33 +112,34 @@ class OrderController extends Controller
             ]);
         }
 
-        // check if card is active
-        // $card = Card::where('user_id', Auth::id())
+        // get active card for vendor and user check if card is active cardStatus($vendor) user auth->id() in the model to get the user id
+        // $card_id = Card::getCard($vendor_id);
+
+        // dd($card_id);
+
+        // $card = Card::where('user_id', $user_id)
         //     ->where('vendor_id', $vendor_id)
-        //     ->where('is_Active', true)
-        //     ->get();
-        $card = Card::activeCard($vendor_id);
+        //     ->where('is_active', true)->get();
 
-        if ($card) {
-            // if ($card->stamps->count() < $card->maxStamps);
-            // dd('stamp card');
-            $card = new card;
-            $card->user_id = $user_id;
-            $card->vendor_id = $vendor_id;
-            $card->maxStamps = 10;
-            $card->is_active = true;
+        // dd($card);
 
-            $card->save();
-        } else {
-            // create card
-            // $card = new card;
-            // $card->user_id = $user_id;
-            // $card->vendor_id = $vendor_id;
-            // $card->maxStamps = 10;
-            // $card->is_active = true;
+        // if active check number of stamps on card
 
-            // $card->save();
-        }
+        // if less than max stamps stamp card
+
+        // else create new card and stamp
+        // $card->stamp->create() something like this??
+
+
+        // create new cardcard
+        $card = new card;
+        $card->user_id = $user_id;
+        $card->vendor_id = $vendor_id;
+        $card->maxStamps = 10;
+        $card->is_active = true;
+
+        $card->save();
+
 
 
         // check maxStamps
@@ -180,13 +213,5 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getCardStatus($user, $vendor)
-    {
-        Card::where('user_id', $user)
-            ->where('vendor_id', $vendor)
-            ->where("is_active", true);
-        return true;
     }
 }

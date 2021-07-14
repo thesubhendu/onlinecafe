@@ -35,11 +35,11 @@ body {
     color: #fff;
     border-bottom: 1px solid #28a745;
     /* margin-bottom: 30px; */
+    overflow: hidden;
 }
 
 #showcase-register .showcase-content {
     display: flex;
-    flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -61,6 +61,7 @@ body {
     color: #fff;
     border-bottom: 1px solid #28a745;
     /* margin-bottom: 30px; */
+    overflow: hidden;
 }
 
 #showcase .showcase-content {
@@ -85,6 +86,7 @@ body {
     height: 30vh;
     position: relative;
     color: #fff;
+    overflow: hidden;
 }
 
 #card-showcase .showcase-content {

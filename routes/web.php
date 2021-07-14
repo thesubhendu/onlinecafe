@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Card;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
@@ -85,6 +86,12 @@ Route::view('/thankyou', 'thankyou')->name('order.thankyou');
 
 Route::get('empty', function () {
     Cart::destroy();
+});
+
+Route::get('/testcard', function () {
+    $card = Card::find(1);
+
+    dd($card->stamps->groupBy('card_id'));
 });
 
 Route::view('/comment', 'comment');

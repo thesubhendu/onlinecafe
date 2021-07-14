@@ -28,43 +28,36 @@ class Card extends Model
         return $this->hasMany(Stamp::class);
     }
 
-    public static function activeCard($id)
+    public function orders()
     {
-        $card = Card::where('user_id', Auth::id())
+        return $this->hasMany(Order::class);
+    }
+
+    public function getCard($id)
+    {
+        $card = Card::with('stamps')
+            ->where('user_id', Auth::id())
             ->where('vendor_id', $id)
-            ->where('is_Active', true)
-            ->get();
-        return $card;
+            ->where('is_Active', true)->get();
 
+        $active_card = collect([$card]);
 
-        // $card = Card::where('user_id', Auth::id())
-        //     ->where('vendor_id', $id)
-        //     ->where('is_Active', true)
-        //     ->get();
-        // return $card->id->value();
+        // foreach ($card_items->groupBy('id') as $card_id => $card_maxStamp) {
+        //     dd($card_id, $card_maxStamp);
+        //     $card = Card::find($card_id);
+        // }
 
-        // return static::where('user_id', Auth::id())
-        //     ->where('vendor_id', $id)
-        //     ->where('is_active', true)
-        //     ->get();
+        // $card_items = $card->pluck('id', 'maxStamps');
+        // dd($card_items->all());
+        return $active_card;
 
+        // return $this->$card->getCard();
 
+        $card = $this->card();
+    }
 
-        // $card = collect(
-        //     [
-        //         'user_id', Auth::id(),
-        //         'vendor_id', $id,
-        //         'is_Active', true
-        //     ]
-        // )
-        //     ->map(function ($card) {
-        //     })->reject(function ($is_Active) {
-        //         return empty($is_Active);
-        //     });
-
-        // return $this->vendor->contains('vendor_id', $id->id);
-
-
-
+    public function stampCard()
+    {
+        //
     }
 }
