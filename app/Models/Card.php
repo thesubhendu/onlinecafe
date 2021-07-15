@@ -35,26 +35,36 @@ class Card extends Model
 
     public function getCard($id)
     {
-        $card = Card::with('stamps')
+        // $card = Card::with('stamps')
+        //     ->where('user_id', Auth::id())
+        //     ->where('vendor_id', $id)
+        //     ->where('is_Active', true)->get();
+
+        // $active_card = collect([$card]);
+
+        // return $this->$active_card($card)->all();
+
+        // return (new static)::with('stamps')
+        //     ->where('user_id', Auth::id())
+        //     ->where('vendor_id', $id)
+        //     ->where('is_Active', true)->first();
+
+        $get_card = Card::with('stamps')
             ->where('user_id', Auth::id())
             ->where('vendor_id', $id)
-            ->where('is_Active', true)->get();
+            ->where('is_Active', true)->first();
+        $card = collect([
+            'id' => $get_card->id,
+            'maxStamps' => $get_card->maxStamps
+        ]);
 
-        $active_card = collect([$card]);
+        $active_card = $card->mapWithKeys(function ($card_items) {
+            return [$card_items['id'] => $card_items['maxStamps']];
+        });
 
-        // foreach ($card_items->groupBy('id') as $card_id => $card_maxStamp) {
-        //     dd($card_id, $card_maxStamp);
-        //     $card = Card::find($card_id);
-        // }
-
-        // $card_items = $card->pluck('id', 'maxStamps');
-        // dd($card_items->all());
-        return $active_card;
-
-        // return $this->$card->getCard();
-
-        $card = $this->card();
+        $active_card->all();
     }
+
 
     public function stampCard()
     {

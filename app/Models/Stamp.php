@@ -14,4 +14,11 @@ class Stamp extends Model
     {
         return $this->belongsTo(Card::class);
     }
+
+    public function getStamps($id)
+    {
+        $stamp_count = Stamp::where('card_id', $id)->count();
+
+        return $this->$stamp_count;
+    }
 }
