@@ -13,6 +13,8 @@ class Card extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'vendor_id', 'is_Active'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -36,10 +38,20 @@ class Card extends Model
     public static function activeCard($id)
     {
 
-        return static::with('stamps')
-            ->where('user_id', Auth::id())
+        $card = static::where('user_id', Auth::id())
             ->where('vendor_id', $id)
-            ->where('is_Active', true)->firstOrFail();
+            ->where('is_Active', true)->first();
+
+        if ($card) {
+            return $card;
+        }
+
+        return false;
+    }
+
+    public function create()
+    {
+        //
     }
 
 

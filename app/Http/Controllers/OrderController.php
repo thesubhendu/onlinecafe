@@ -57,10 +57,11 @@ class OrderController extends Controller
             'vendor' => 'required',
         ]);
 
+
+
         // $user_id = auth()->id();
         $vendor_id = $request->input('vendor');
         $active_card = Card::activeCard($vendor_id);
-
 
         // get active card for vendor and user 
         //check if card is active cardStatus($vendor) 
@@ -77,6 +78,17 @@ class OrderController extends Controller
             $order->order_total = Cart::total();
 
             $order->save();
+
+            // $orderItems = Cart::session(auth()->id())->getContent();
+            foreach (Cart::content() as $product) {
+                $order->products()->attach($product->id, [
+                    'price' => $product->price,
+                    'quantity' => $product->qty,
+                    'milk' => $product->model->milk,
+                    'sugar' => $product->model->sugar,
+                    'syrup' => $product->model->syrup
+                ]);
+            }
 
             //get stamps and check count
             $card_stamp = Stamp::where('card_id', $active_card->id);
@@ -95,7 +107,7 @@ class OrderController extends Controller
         } else {
 
             // create new cardcard
-            dd('no card');
+            // dd('no card');
             $new_card = new card;
             $new_card->user_id = auth()->id();
             $new_card->vendor_id = $vendor_id;

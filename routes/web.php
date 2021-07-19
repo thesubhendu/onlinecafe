@@ -65,7 +65,7 @@ Route::get('orders/create/{product}', [OrderController::class, 'create'])->name(
 //     'store' => 'order.store'
 // ]])->middleware('auth');
 
-Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
+Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
     'store' => 'order.store'
 ])->middleware('auth');
 
