@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Card;
 use App\Models\Like;
 use App\Models\Vendor;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

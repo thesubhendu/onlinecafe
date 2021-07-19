@@ -45,8 +45,9 @@
         @auth
         <li class="nav-item nav-right">
           {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
+        </li>
           <li class="nav-item nav-right dropdown">
-            <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/user/{{ Auth::user()->avatar}}" class="mb-3" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%"> {{ auth()->user()->name }}</a>
+            <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/user/{{ Auth::user()->avatar}}" class="mb-3 px-auto" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%"> {{ auth()->user()->name }}</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
               <a class="dropdown-item p-3" href="#"><i class="fas fa-cog"> Settings</i></a>
@@ -55,6 +56,7 @@
                 <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i></button>
               </form>
             </div>
+          </li>
         @endauth
     </div>
   </ul>

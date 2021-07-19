@@ -1,6 +1,5 @@
 @extends('layout.app')
 @section('content')
-<div class="container">
     <div class="vendor-card">
       <div class="card">
         <img src="{{asset('storage/img/vendor/'.$vendor->vendor_image)}}" class="card-img-top" alt="...">

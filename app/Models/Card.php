@@ -33,36 +33,13 @@ class Card extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function getCard($id)
+    public static function activeCard($id)
     {
-        // $card = Card::with('stamps')
-        //     ->where('user_id', Auth::id())
-        //     ->where('vendor_id', $id)
-        //     ->where('is_Active', true)->get();
 
-        // $active_card = collect([$card]);
-
-        // return $this->$active_card($card)->all();
-
-        // return (new static)::with('stamps')
-        //     ->where('user_id', Auth::id())
-        //     ->where('vendor_id', $id)
-        //     ->where('is_Active', true)->first();
-
-        $get_card = Card::with('stamps')
+        return static::with('stamps')
             ->where('user_id', Auth::id())
             ->where('vendor_id', $id)
-            ->where('is_Active', true)->first();
-        $card = collect([
-            'id' => $get_card->id,
-            'maxStamps' => $get_card->maxStamps
-        ]);
-
-        $active_card = $card->mapWithKeys(function ($card_items) {
-            return [$card_items['id'] => $card_items['maxStamps']];
-        });
-
-        $active_card->all();
+            ->where('is_Active', true)->firstOrFail();
     }
 
 

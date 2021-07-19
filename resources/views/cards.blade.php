@@ -25,26 +25,19 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="d-flex justify-content-between row row-cols-1 row-cols-md-5 g-4">
+            <div class="row row-cols-1 row-cols-sm-5 g-4 justify-content-between">
+            <div class="d-flex">
               @foreach ($card->stamps as $stamp)
-              <div class="col">
+              <div>
                 <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+                @if($card->maxStamp < $card->stamps->count())
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
+                @endif
               </div>
               @endforeach
-              @if($card->maxStamp < $card->stamps->count())
-              <div class="col">
-                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
-                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
-                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="stamp">
-              </div>
-              @endif
-            </div>            
+            </div>
+          </div>
+          </div>            
           </div>
           <div class="card-footer">
             <small class="text-muted">{{$card->updated_at->diffForHumans()}}</small>

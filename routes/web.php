@@ -59,6 +59,18 @@ Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproduc
 
 Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
+Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
+
+Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
+    'store' => 'order.store',
+])->middleware('auth');
+
+Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
+
+// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+// Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
@@ -67,15 +79,7 @@ Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemFor
 Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
 Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
 
-Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-// Route::get('/orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
-Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
-    'store' => 'order.store',
-])->middleware('auth');
-Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
-// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-// Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
 Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');

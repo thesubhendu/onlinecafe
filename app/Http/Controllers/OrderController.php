@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Stamp;
 use App\Models\Product;
@@ -58,22 +59,12 @@ class OrderController extends Controller
 
         // $user_id = auth()->id();
         $vendor_id = $request->input('vendor');
+        $active_card = Card::activeCard($vendor_id);
 
 
         // get active card for vendor and user check if card is active cardStatus($vendor) user auth->id() in the model to get the user id
-        // $active_card = new Card();
-        // $active_card->getCard($vendor_id);
 
-        $user = Auth::user();
 
-        $active_card = Card::where('vendor_id', $vendor_id)
-            ->where('is_active', true)->first()->toArray();
-        // $active_card = $user->cards->where('vendor_id', $vendor_id)->where('is_Active', true);
-
-        // $active_card = new Card();
-        // $active_card->getCard($vendor_id);
-
-        dd($active_card);
 
         if ($active_card) {
             $order = new Order();
@@ -86,11 +77,10 @@ class OrderController extends Controller
             $order->save();
 
             //get stamps and check count
-            getStamps($active_card_id);
-            $card_stamps = Stamp::where('card_id', $active_card->id);
+            $card_stamp = Stamp::where('card_id', $active_card->id);
 
             // if less than max stamps stamp card
-            if ($card_stamps->count() < $active_card->maxStamps) {
+            if ($card_stamp->count() < $active_card->maxStamps) {
                 $stamp = new Stamp;
                 $stamp->card_id = $active_card->id;
                 $stamp->order_id = $order->id;
@@ -111,81 +101,24 @@ class OrderController extends Controller
             $new_card->is_active = true;
 
             $new_card->save();
+
+            $order = new Order();
+
+            $order->order_number = uniqid();
+            $order->user_id = auth()->id();
+            $order->vendor_id = $vendor_id;
+            $order->order_total = Cart::total();
+
+            $order->save();
+
+            $stamp = new Stamp;
+            $stamp->card_id = $new_card->id;
+            $stamp->order_id = $order->id;
+            $stamp->user_id = auth()->id();
+            $stamp->vendor_id = $vendor_id;
+
+            $stamp->save();
         }
-        // $order = new Order();
-
-        // $order->order_number = uniqid();
-        // $order->user_id = auth()->id();
-        // $order->vendor_id = $vendor_id;
-        // $order->order_total = Cart::total();
-
-        // $order->save();
-
-        // // save order products
-
-        // foreach (Cart::content() as $product) {
-        //     $order->products()->attach($product->id, [
-        //         'price' => $product->price,
-        //         'quantity' => $product->qty,
-        //         'milk' => $product->model->milk,
-        //         'sugar' => $product->model->sugar,
-        //         'syrup' => $product->model->syrup
-        //     ]);
-        // }
-
-        // get active card for vendor and user check if card is active cardStatus($vendor) user auth->id() in the model to get the user id
-
-        // dd($card_id);
-        dd($active_card);
-
-        // $card = Card::where('user_id', $user_id)
-        //     ->where('vendor_id', $vendor_id)
-        //     ->where('is_active', true)->get();
-
-        // dd($card);
-
-        // if active check number of stamps on card
-
-        // if less than max stamps stamp card
-        // if ($stamps->count < $active_card->maxStamps) {
-
-        //     $active_card->stamps->each(function ($stamp) {
-
-        $stamp = new Stamp;
-        $stamp->card_id = $active_card->id;
-        $stamp->order_id = $order->id;
-        $stamp->user_id = auth()->id();
-        $stamp->vendor_id = $vendor_id;
-
-        $stamp->save();
-        //     });
-        // } else {
-        //     //
-        // }
-
-
-        // $stamp = new Stamp;
-        // $stamp->card_id = $active_card->id;
-        // $stamp->order_id = $order->id;
-        // $stamp->user_id = auth()->id();
-        // $stamp->vendor_id = $vendor_id;
-
-        // $stamp->save();
-
-        // else create new card and stamp
-        // $card->stamp->create() something like this??
-
-
-
-
-
-
-        // check maxStamps
-        // check number of stamps on card
-        // create or stamp card
-
-        // Stamp::stampCard('id');
-
 
 
         // email customer and vendor
