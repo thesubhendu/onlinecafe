@@ -62,7 +62,9 @@ class OrderController extends Controller
         $active_card = Card::activeCard($vendor_id);
 
 
-        // get active card for vendor and user check if card is active cardStatus($vendor) user auth->id() in the model to get the user id
+        // get active card for vendor and user 
+        //check if card is active cardStatus($vendor) 
+        //user auth->id() in the model to get the user id
 
 
 

@@ -61,21 +61,21 @@ Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name
 
 Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 
+// Route::resource('orders', OrderController::class, ['names' => [
+//     'store' => 'order.store'
+// ]])->middleware('auth');
+
 Route::resource('orders', OrderController::class, ['except' => 'create'])->names([
-    'store' => 'order.store',
+    'store' => 'order.store'
 ])->middleware('auth');
 
 Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-
-// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-// Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
-Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemForLater'])->name('cart.saveForLater');
 
+Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemForLater'])->name('cart.saveForLater');
 Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
 Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
 
@@ -84,8 +84,6 @@ Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::cl
 Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
 Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
 
-
-// Route::view('/order_submitted', 'order_submitted');
 Route::view('/thankyou', 'thankyou')->name('order.thankyou');
 
 Route::get('empty', function () {

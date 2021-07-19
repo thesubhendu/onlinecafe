@@ -121,10 +121,10 @@
                         <input type="hidden" name="sugar" value="{{app('request')->input('sugar')}}">
                         <input type="hidden" name="syrup" value="{{app('request')->input('syrup')}}">
                     </div>
-                    <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
+                    <button id="addOrderbtn" type="submit" class="w-100 btn btn-success d-block">
                         add to cart</button>
                 </form>
-                </div>
+            </div>
             @endforeach
         </div>
                         {{-- Save for later --}}
