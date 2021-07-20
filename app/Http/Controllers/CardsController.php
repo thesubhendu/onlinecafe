@@ -23,14 +23,11 @@ class CardsController extends Controller
             ->with('stamps')
             ->get();
 
-        // $usercards = Card::where('user_id', Auth::id())
-        //     ->with('vendor')
-        //     ->with('stamps')
-        //     ->get();
-
         return view('cards')
             ->with('cards', $cards);
     }
+
+
 
 
     /**

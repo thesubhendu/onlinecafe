@@ -21,4 +21,11 @@ class Stamp extends Model
 
         return $this->$stamp_count;
     }
+
+    public static function stampBalance($id)
+    {
+        $stamp_count = static::where('card_id', $id)->count();
+
+        return $stamp_count;
+    }
 }

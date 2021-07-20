@@ -7,11 +7,11 @@
     {{-- @if ($vendors->likedBy(auth()->user())) @endif --}}
     @foreach ($userlikes as $vendor)
       <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col col-sm-4">
+        <div class="row g-0 d-flex">
+          <div class="col-sm-4">
             <img src="{{asset('storage/img/vendor/'.$vendor->vendor_image)}}" alt="..." class="img-fluid">
           </div>
-          <div class="col col-sm-8">
+          <div class="col-sm-8">
             <div class="card-body">
               <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
               <p class="card-text"><small class="text-muted">Last updated {{$vendor->vendor->updated_at->diffForHumans()}}</small></p>

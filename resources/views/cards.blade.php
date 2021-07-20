@@ -25,16 +25,19 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="row row-cols-1 row-cols-sm-5 g-4 justify-content-between">
+            <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-between">
             <div class="d-flex">
-              @foreach ($card->stamps as $stamp)
               <div>
+                @foreach ($card->stamps as $stamp)
                 <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
-                @if($card->maxStamp < $card->stamps->count())
-                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
-                @endif
-              </div>
               @endforeach
+                @php 
+                $stampBalance = $card->maxStamps - count($card->stamps);
+                @endphp
+                @for ($i = 0; $i < $stampBalance; $i++)   
+                <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
+                @endfor
+              </div>
             </div>
           </div>
           </div>            
