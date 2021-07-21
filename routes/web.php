@@ -1,7 +1,10 @@
 <?php
 
 use App\Models\Card;
+use App\Models\Order;
+use App\Mail\orderSubmitted;
 use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CartController;
@@ -94,6 +97,13 @@ Route::get('/testcard', function () {
     $card = Card::find(1);
 
     dd($card->stamps->groupBy('card_id'));
+});
+
+Route::get('/email', function () {
+
+    $order = Order::find(134);
+    Mail::to('coffeeshoporders0@gmail.com')->send(new orderSubmitted($order));
+    return new orderSubmitted($order);
 });
 
 Route::view('/comment', 'comment');

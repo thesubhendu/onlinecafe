@@ -71,17 +71,15 @@
 </nav>
 {{-- @guest
   <div id="showcase-register" class="user-register">
-    <div class="showcase-content">
-      <div class="row align-items-center">
-        <div class="col-6 col-sm-3">
-          <h6>What! do you mean you dont have an account?</h6>
-          <P>Register here and you can order your coffee from anywhere with your favourite coffee shop</P>
-        </div>
-        <div class="col-6 col-sm-3">
-          <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
-        </div>
-      </div>
-    </div>  
+        <div class="showcase-content">
+            <div class="">
+              <h6>What! do you mean you dont have an account?</h6>
+            </div>
+            <P>Register here and you can order your coffee from anywhere with your favourite coffee shop</P>
+            <div class="">
+              <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
+            </div>
+        </div>  
   </div>
   @endguest --}}
     @yield('content')

@@ -55,13 +55,13 @@ body {
 }
 
 #showcase {
-    background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
+    background: url("/storage/img/showcase.jpg") no-repeat center top/cover;
     position: relative;
     height: 30vh;
     color: #fff;
     border-bottom: 1px solid #28a745;
     /* margin-bottom: 30px; */
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #showcase .showcase-content {
@@ -79,6 +79,10 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+#showcase .content p {
+    max-width: 600px;
 }
 
 #card-showcase {

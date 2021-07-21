@@ -5,17 +5,17 @@
     <h1>Lorem, ipsum dolor.</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     <div class="d-flex justify-content-between">
-      <div class="mr-3">
+      {{-- <div class="mr-3">
         <a href="#" class="btn btn-success ">Register My Shop</a>
-      </div>
+      </div> --}}
       <div>
         <a href="#" class="btn btn-outline-light">Learn More</a>
       </div>
     </div>
   </div>
 </div>
-      <div class="container">
-        <div class="row">
+      <div class="containern">
+        <div class="row justify-content-between mx-3">
           <div class="row row-cols-1 row-cols-md-5 g-3">
             @foreach ($vendors as $vendor)
               <div class="col">

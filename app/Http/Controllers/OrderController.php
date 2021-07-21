@@ -52,7 +52,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
             'vendor' => 'required',
         ]);
@@ -84,9 +83,9 @@ class OrderController extends Controller
                 $order->products()->attach($product->id, [
                     'price' => $product->price,
                     'quantity' => $product->qty,
-                    'milk' => $product->model->milk,
-                    'sugar' => $product->model->sugar,
-                    'syrup' => $product->model->syrup
+                    'milk' => $product->options->milk,
+                    'sugar' => $product->options->sugar,
+                    'syrup' => $product->options->syrup
                 ]);
             }
 
@@ -124,6 +123,17 @@ class OrderController extends Controller
             $order->order_total = Cart::total();
 
             $order->save();
+
+            foreach (Cart::content() as $product) {
+                $order->products()->attach($product->id, [
+                    'price' => $product->price,
+                    'quantity' => $product->qty,
+                    'milk' => $product->model->milk,
+                    'sugar' => $product->model->sugar,
+                    'syrup' => $product->model->syrup
+
+                ]);
+            }
 
             $stamp = new Stamp;
             $stamp->card_id = $new_card->id;

@@ -1,11 +1,9 @@
 @extends('layout.app')
 @section('content')
 <main role="main" class="">
-  <div class="row">
-    <div class="container mb-5">
-          <div class="card-header">
-              <h1>Login</h1>
-          </div>
+  <div class="container">
+    <h1>Login</h1>
+    <div class="row mb-5">    
       <div class="justify-center p-3 border-rounded">
           @if (session('status'))
           <div class="alert alert-danger">
@@ -13,7 +11,7 @@
           </div>
           @endif
       </div>
-          <form action="{{ route('login') }}" method="post" class=" needs-validation" novalidate>
+          <form action="{{ route('login') }}" method="post" class="needs-validation" novalidate>
               @csrf
                 <label for="email_username" class="form-label">Email</label>
                 <div class="input-group has-validation">
@@ -29,9 +27,9 @@
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-key"></i></span>
                   <input type="password" class="form-control @error('password') border-danger @enderror" name="password" id="password" aria-describedby="inputGroupPrepend" required>
-                  @error('password')
-                  <div class="text-danger mt-2 text-sm">
-                      {{ $message }}
+                    @error('password')
+                    <div class="text-danger mt-2 text-sm">
+                        {{ $message }}
                     </div>
                     @enderror
                 </div>
@@ -57,8 +55,8 @@
                   <button class="btn btn-success btn-block mt-2" type="submit">Login</button>
                 </div>
             </form>
-    </div><!-- /.container -->
-  </div><!-- /.row -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
