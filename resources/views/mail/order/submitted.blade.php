@@ -1,4 +1,4 @@
-@component('mail::message')avatar}}
+@component('mail::message')
 # Your customer <img class="img-fluid rounded-start" src="{{asset('storage/img/user/default_user.jpg')}}" alt="" height="50" width="50"> {{auth()->user()->name}}
 # Submitted Order {{$order->id }} 
 # please click on the link below to confirm receipt of the order, will then message {{auth()->user()->name}} to come a collect the order.
@@ -24,8 +24,11 @@
   @endforeach
 </div>
 @endcomponent
+{{-- $product->options->milk,
+$product->options->sugar
+$product->options->syrup --}}
 
-@component('mail::button', ['url' => 'laracelcoffee.test'])
+@component('mail::button', ['url' => 'https://laravelcoffee.test/confirm/'.$order->id])
 Confirm Order
 @endcomponent
 {{$product}}

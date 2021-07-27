@@ -74,7 +74,7 @@
                                 </div>
                                 <select class="form-control mt-2" id="sugar" name="sugar" required>
                                     <option selected>how many sugars...</option>
-                                    <option {{ old('sugar') == "None" ? 'selected' : ''}} value="None">None</option>
+                                    <option {{ old('sugar') == "None" ? 'selected' : ''}} value="0">None</option>
                                     <option {{ old('sugar') == "1" ? 'selected' : ''}} value="1">1</option>
                                     <option {{ old('sugar') == "2" ? 'selected' : ''}} value="2">2</option>
                                     <option {{ old('sugar') == "3" ? 'selected' : ''}} value="3">3</option>
@@ -86,7 +86,7 @@
                                 </div>
                                 <select class="form-control mt-2" id="syrup" name="syrup" required>
                                     <option selected>Syrup...</option>
-                                    <option {{ old('syrup') == "NO Thanks" ? 'selected' : ''}} value="No Thanks">No Thanks</option>
+                                    <option {{ old('syrup') == "No Thanks" ? 'selected' : ''}} value="No Thanks">No Thanks</option>
                                     <option {{ old('syrup') == "Caramel" ? 'selected' : ''}} value="Caramel">Caramel</option>
                                     <option {{ old('syrup') == "Vanilla" ? 'selected' : ''}} value="Vanilla">Vanilla</option>
                                     <option {{ old('syrup') == "Hazelnut" ? 'selected' : ''}} value="Hazelnut">Hazelnut</option>

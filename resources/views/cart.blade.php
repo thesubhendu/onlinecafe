@@ -45,11 +45,12 @@
                                         </div>
                                         <div class="form-group mt-3">
                                             <select class="form-control form-select" id="cartQuantity">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                            <option selected>{{$item->qty}}</option>
+                                            <option {{ old('quantity') == "1" ? 'selected' : ''}} value="1">1</option>
+                                            <option {{ old('quantity') == "2" ? 'selected' : ''}} value="2">2</option>
+                                            <option {{ old('quantity') == "3" ? 'selected' : ''}} value="3">3</option>
+                                            <option {{ old('quantity') == "4" ? 'selected' : ''}} value="4">4</option>
+                                            <option {{ old('quantity') == "5" ? 'selected' : ''}} value="5">5</option>
                                             </select>
                                         </div>
                                         <div class="col mt-3">$ {{ $item->price }}</div>

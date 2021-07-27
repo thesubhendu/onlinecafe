@@ -91,17 +91,21 @@ class OrderController extends Controller
 
             //get stamps and check count
             $card_stamp = Stamp::where('card_id', $active_card->id);
+            $numberStamps = $product->qty;
 
             // if less than max stamps stamp card
             if ($card_stamp->count() < $active_card->maxStamps) {
-                $stamp = new Stamp;
-                $stamp->card_id = $active_card->id;
-                $stamp->order_id = $order->id;
-                $stamp->user_id = auth()->id();
-                $stamp->vendor_id = $vendor_id;
-                $stamp->order_id = $order->id;
+                for ($i = 0; $i < $numberStamps; $i++) {
 
-                $stamp->save();
+                    $stamp = new Stamp;
+                    $stamp->card_id = $active_card->id;
+                    $stamp->order_id = $order->id;
+                    $stamp->user_id = auth()->id();
+                    $stamp->vendor_id = $vendor_id;
+                    $stamp->order_id = $order->id;
+
+                    $stamp->save();
+                }
             }
         } else {
 
@@ -124,6 +128,8 @@ class OrderController extends Controller
 
             $order->save();
 
+
+
             foreach (Cart::content() as $product) {
                 $order->products()->attach($product->id, [
                     'price' => $product->price,
@@ -134,15 +140,21 @@ class OrderController extends Controller
 
                 ]);
             }
+            $numberStamps = $product->qty;
+            for ($i = 0; $i < $numberStamps; $i++) {
 
-            $stamp = new Stamp;
-            $stamp->card_id = $new_card->id;
-            $stamp->order_id = $order->id;
-            $stamp->user_id = auth()->id();
-            $stamp->vendor_id = $vendor_id;
+                $stamp = new Stamp;
+                $stamp->card_id = $new_card->id;
+                $stamp->order_id = $order->id;
+                $stamp->user_id = auth()->id();
+                $stamp->vendor_id = $vendor_id;
+                $stamp->order_id = $order->id;
 
-            $stamp->save();
+                $stamp->save();
+            }
         }
+
+
 
 
         // email customer and vendor

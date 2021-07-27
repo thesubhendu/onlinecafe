@@ -17,7 +17,8 @@
             <i class="far fa-check-circle display-tick"></i> 
         </div>
         <h1 class="display-3">Thank You!</h1>
-        <p class="lead"><strong>Your Order has been confirmed by the venue</strong> payment will be required on pickup</p>
+        <p class="lead"><strong>Your Order {{$order->products}} </p>
+        <p>has been confirmed by the venue</strong> payment will be required on pickup</p>
         <hr>
         
         <p class="lead">

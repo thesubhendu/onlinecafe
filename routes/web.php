@@ -19,6 +19,7 @@ use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\VendorRatingController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartSaveForLaterController;
@@ -62,6 +63,7 @@ Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproduc
 
 Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
+Route::get('/confirm/order/{order}', [ConfirmOrderController::class, 'update'])->name('confirm_order.update');
 Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 
 // Route::resource('orders', OrderController::class, ['names' => [
@@ -80,7 +82,7 @@ Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart
 
 Route::post('/cart/saveforlater/{product}', [CartController::class, 'saveItemForLater'])->name('cart.saveForLater');
 Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
-Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlaer.addtocart');
+Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlater.addtocart');
 
 
 
@@ -88,6 +90,7 @@ Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
 Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
 
 Route::view('/thankyou', 'thankyou')->name('order.thankyou');
+
 
 Route::get('empty', function () {
     Cart::destroy();
