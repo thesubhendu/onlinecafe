@@ -24,14 +24,10 @@
   @endforeach
 </div>
 @endcomponent
-{{-- $product->options->milk,
-$product->options->sugar
-$product->options->syrup --}}
 
-@component('mail::button', ['url' => 'https://laravelcoffee.test/confirm/'.$order->id])
+@component('mail::button', ['url' => route('confirm_order.update', $order)]) 
 Confirm Order
 @endcomponent
-{{$product}}
 
 Thanks,<br>
 {{ config('app.name') }}
