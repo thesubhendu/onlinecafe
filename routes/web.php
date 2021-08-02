@@ -20,6 +20,7 @@ use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ConfirmOrderController;
+use App\Http\Controllers\VendorOrdersController;
 use App\Http\Controllers\VendorRatingController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartSaveForLaterController;
@@ -44,6 +45,7 @@ use App\Http\Controllers\CartSaveForLaterController;
 route::get('/', [LandingPageController::class, 'index'])->name('home');
 route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
 Route::get('/vendornew/{vendor}', [VendorController::class, 'vendorshow'])->name('vendor.newshow');
+Route::get('/vendor/{vendor}/orders', [VendorOrdersController::class, 'index'])->name('vendor.orders');
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
@@ -63,7 +65,7 @@ Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproduc
 
 Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
-Route::get('/confirm/order/{order}', [ConfirmOrderController::class, 'update'])->name('confirm_order.update');
+Route::get('/confirm/{order}/update', [ConfirmOrderController::class, 'update'])->name('confirm_order.update');
 Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 
 // Route::resource('orders', OrderController::class, ['names' => [

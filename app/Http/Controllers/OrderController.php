@@ -6,9 +6,11 @@ use App\Models\Card;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Stamp;
+use App\Models\Vendor;
 use App\Models\Product;
 use App\Mail\orderSubmitted;
 use Illuminate\Http\Request;
+use App\Events\VendorConfirmsOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -58,9 +60,10 @@ class OrderController extends Controller
 
 
 
-        // $user_id = auth()->id();
+        $user = $request->user();
         $vendor_id = $request->input('vendor');
         $active_card = Card::activeCard($vendor_id);
+        $vendor = Vendor::find($vendor_id);
 
         // get active card for vendor and user 
         //check if card is active cardStatus($vendor) 
@@ -134,9 +137,9 @@ class OrderController extends Controller
                 $order->products()->attach($product->id, [
                     'price' => $product->price,
                     'quantity' => $product->qty,
-                    'milk' => $product->model->milk,
-                    'sugar' => $product->model->sugar,
-                    'syrup' => $product->model->syrup
+                    'milk' => $product->options->milk,
+                    'sugar' => $product->options->sugar,
+                    'syrup' => $product->options->syrup
 
                 ]);
             }
@@ -165,7 +168,7 @@ class OrderController extends Controller
         Cart::destroy();
 
         // redirect to order submitted page
-
+        // event(new VendorConfirmsOrder($vendor, $order, $user));
         return view('order_submitted')
             ->with('order', $order->products);
         // ->with('orderProducts', $orderProducts);

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Vendor;
 use App\Mail\orderConfirmed;
 use Illuminate\Http\Request;
+use App\Events\VendorConfirmsOrder;
 use Illuminate\Support\Facades\Mail;
 
 class ConfirmOrderController extends Controller
@@ -26,13 +27,6 @@ class ConfirmOrderController extends Controller
 
         $vendor = Vendor::find($order->vendor_id);
 
-        // dd($order, $vendor);
-
-        Mail::to('coffeeshoporders0@gmail.com')->send(new orderConfirmed($order, $vendor));
-
-        return view('thankyou')
-            ->with('order', $order)
-            ->with('vendor', $vendor)
-            ->with('products');
+        return redirect()->action([VendorOrdersController::class, 'index'], $vendor);
     }
 }
