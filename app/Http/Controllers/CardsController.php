@@ -17,26 +17,17 @@ class CardsController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $cards = Card::where('user_id', $user->id);
-        // return view('cards')
-        //     ->with('cards', $cards)
-        //     ->with('user', $user);
 
         $cards = Card::where('user_id', Auth::id())
             ->with('vendor')
             ->with('stamps')
             ->get();
 
-        // $usercards = Card::where('user_id', Auth::id())
-        //     ->with('vendor')
-        //     ->with('stamps')
-        //     ->get();
-
         return view('cards')
-            ->with('cards', $cards,);
-        // ->with('cardstamps', $cardstamps);
+            ->with('cards', $cards);
     }
+
+
 
 
     /**

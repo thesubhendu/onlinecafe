@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -42,6 +43,22 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('price', 'quantity', 'milk', 'sugar', 'syrup');
+        return $this->belongsToMany(Product::class)->withPivot('price', 'quantity', 'milk', 'sugar', 'syrup')->withTimestamps();
+    }
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
+    public function orderConfirmed(Order $order)
+    {
+        if ($order) {
+
+            $this->is_confirmed = 1;
+            $this->save();
+        }
+
+        return $this;
     }
 }

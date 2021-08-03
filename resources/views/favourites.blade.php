@@ -1,58 +1,51 @@
 
 @extends('layout.app')
 @section('content')
-<main role="main" class="container py-4 mb-5">
-    <div class="vendor-view d-flex flex-row justify-content-between mb-3 mt-4">
-      <div class="favourites">
-          <h1>favourites</h1>
-      </div>
-      <div>
-          <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
-      </div>
-  </div>
-  <hr>
-  {{-- @if ($vendors->likedBy(auth()->user())) @endif --}}
-  @foreach ($userlikes as $vendor)
-    <div class="card mb-3">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="/storage/img/cafe1.jpg" alt="..." class="img-fluid">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
-            <p class="card-text"><small class="text-muted">Last updated {{$vendor->vendor->updated_at->diffForHumans()}}</small></p>
-            <a href="{{route( 'vendor.products', $vendor )}}" class="btn btn-success px-3 mr-3">Order</a>
+<main role="main" class="">
+<div class="container">
+  <div class="row">
+    {{-- @if ($vendors->likedBy(auth()->user())) @endif --}}
+    @foreach ($userlikes as $vendor)
+      <div class="card mb-3">
+        <div class="row g-0 d-flex">
+          <div class="col-sm-4">
+            <img src="{{asset('storage/img/vendor/'.$vendor->vendor_image)}}" alt="..." class="img-fluid">
           </div>
-          <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
-            @csrf
-                  @method('DELETE')
-          <button id="fav_unlike" type="submit" class="fav_unlike float-right mr-2"><span class="fas fa-coffee fa-lg"></span></button>
-              </form>
-          {{-- @else
-            <p>you havent liked anything</p> --}}
-  
-         
-        {{-- @if (!$vendor->likedBy(auth()->user())) --}}
-                {{-- <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
-                  @csrf 
-                <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
-                </form> --}}
-                {{-- <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
-                  @csrf
-                  @method('DELETE')
-                <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
+          <div class="col-sm-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ $vendor->vendor->vendor_name }}</h5>
+              <p class="card-text"><small class="text-muted">Last updated {{$vendor->vendor->updated_at->diffForHumans()}}</small></p>
+              <a href="{{route( 'vendor.products', $vendor )}}" class="btn btn-success px-3 mr-3">Order</a>
+            </div>
+            <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
+              @csrf
+                    @method('DELETE')
+            <button id="fav_unlike" type="submit" class="fav_unlike float-right mr-2"><span class="fas fa-coffee fa-lg"></span></button>
                 </form>
-              @else
-                <div>  <p>you havent liked anything</p>  </div>
-              @endif --}}
+            {{-- @else
+              <p>you havent liked anything</p> --}}
+    
+           
+          {{-- @if (!$vendor->likedBy(auth()->user())) --}}
+                  {{-- <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
+                    @csrf 
+                  <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
+                  </form> --}}
+                  {{-- <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
+                    @csrf
+                    @method('DELETE')
+                  <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
+                  </form>
+                @else
+                  <div>  <p>you havent liked anything</p>  </div>
+                @endif --}}
+          </div>
         </div>
-        
       </div>
-    </div>
-    @endforeach
-
-</main><!-- /.container -->
+      @endforeach
+  </div><!-- /.row -->
+</div><!-- /.container -->
+</main>
 @endsection
 
 {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -30,6 +30,8 @@
             @foreach($order_product as $product)
             <div class="row g-0">
                 <div class="col-sm-12">
+                    <form action="{{ route('cart.store', $product->rowId) }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
+                        @csrf
                 {{-- <div class="card-body d-flex p-2 justify-content-between align-content-center"> --}}
                             <div class="form-group card-body d-flex p-2 justify-content-between align-items-center">
                                 <img src="{{asset('storage/img/nostamp.png')}}" alt="product" width="100px" height="100px">
@@ -49,6 +51,7 @@
                                     <option {{ old('quantity') == "9" ? 'selected' : ''}} value="9">9</option>
                                     <option {{ old('quantity') == "10" ? 'selected' : ''}} value="10">10</option>
                                 </select>
+                                {{-- <input type="submit" value="Submit"> --}}
                                 <div class="invalid-feedback">
                                 we need to know how many you would like
                                 </div>
@@ -71,37 +74,54 @@
                                 </div>
                                 <select class="form-control mt-2" id="sugar" name="sugar" required>
                                     <option selected>how many sugars...</option>
-                                    <option value="None"{{ old('sugar') == "None" ? 'selected' : ''}}>None</option>
-                                    <option value="1"{{ old('sugar') == "1" ? 'selected' : ''}}>1</option>
-                                    <option value="2"{{ old('sugar') == "2" ? 'selected' : ''}}>2</option>
-                                    <option value="3"{{ old('sugar') == "3" ? 'selected' : ''}}>3</option>
-                                    <option value="4"{{ old('sugar') == "4" ? 'selected' : ''}}>4</option>
-                                    <option value="5"{{ old('sugar') == "5" ? 'selected' : ''}}>5</option>
+                                    <option {{ old('sugar') == "None" ? 'selected' : ''}} value="0">None</option>
+                                    <option {{ old('sugar') == "1" ? 'selected' : ''}} value="1">1</option>
+                                    <option {{ old('sugar') == "2" ? 'selected' : ''}} value="2">2</option>
+                                    <option {{ old('sugar') == "3" ? 'selected' : ''}} value="3">3</option>
+                                    <option {{ old('sugar') == "4" ? 'selected' : ''}} value="4">4</option>
+                                    <option {{ old('sugar') == "5" ? 'selected' : ''}} value="5">5</option>
                                 </select>
                                 <div class="invalid-feedback">
                                 we need to know how many sugars you'd like
                                 </div>
                                 <select class="form-control mt-2" id="syrup" name="syrup" required>
                                     <option selected>Syrup...</option>
-                                    <option value="No Thanks"{{ old('syrup') == "NO Thanks" ? 'selected' : ''}}>No Thanks</option>
-                                    <option value="Caramel"{{ old('syrup') == "Caramel" ? 'selected' : ''}}>Caramel</option>
-                                    <option value="Vanilla"{{ old('syrup') == "Vanilla" ? 'selected' : ''}}>Vanilla</option>
-                                    <option value="Hazelnut"{{ old('syrup') == "Hazelnut" ? 'selected' : ''}}>Hazelnut</option>
+                                    <option {{ old('syrup') == "No Thanks" ? 'selected' : ''}} value="No Thanks">No Thanks</option>
+                                    <option {{ old('syrup') == "Caramel" ? 'selected' : ''}} value="Caramel">Caramel</option>
+                                    <option {{ old('syrup') == "Vanilla" ? 'selected' : ''}} value="Vanilla">Vanilla</option>
+                                    <option {{ old('syrup') == "Hazelnut" ? 'selected' : ''}} value="Hazelnut">Hazelnut</option>
                                 </select>
                                 <div class="invalid-feedback">
                                 we need to know if you would like syrup
                                 </div>
                                 </div>
+                                    {{-- <div class="form-group"> --}}
+                                        <input type="hidden" name="id" value="{{$product->id}}">
+                                        <input type="hidden" name="name" value="{{$product->productName}}">
+                                        <input type="hidden" name="price" value="{{$product->productPrice}}">
+                                        <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
+                                        {{-- <input type="hidden" name="quantity" value="{{app('request')->input('quantity')}}">
+                                        <input type="hidden" name="milk" value="{{app('request')->input('milk')}}">
+                                        <input type="hidden" name="sugar" value="{{app('request')->input('sugar')}}">
+                                        <input type="hidden" name="syrup" value="{{app('request')->input('syrup')}}"> --}}
+                                    {{-- </div> --}}
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-cart-arrow-down text-info"></i></button>
+                                    </div>
+                                    <button id="addOrderbtn" type="submit" value="submit" class="w-100 btn btn-success d-block">
+                                        add to cart</button>
+                                </form>
                                 <div class="d-flex justify-content-between cart-actions ml-2">
-                                    <form action="#" method="post"> {{--{{ route('cart.remove', $product->rowId) }}--}}
+                                    {{-- <form action="#" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
                                     </form>
-                                    <form action="#" method="post"> {{--{{ route('cart.saveForLater', $product->rowId) }}--}}
+                                    <form action="#" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-default"><i class="fas fa-cart-arrow-down text-info"></i></button>
-                                    </form>
+                                    </form> --}}
                                     
                                 </div>
                             </div>
@@ -109,22 +129,22 @@
                 </div>
             </div>
             <div class="col-sm-12 d-flex p-2 justify-content-between align-items-center">
-                <form action="{{ route('cart.store', $product->rowId) }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
+                {{-- <form action="{{ route('cart.store', $product->rowId) }}" method="post"> 
                     @csrf
                     <div class="form-group">
                         <input type="hidden" name="id" value="{{$product->id}}">
                         <input type="hidden" name="name" value="{{$product->productName}}">
-                        <input type="hidden" name="price" value="{{$product->productPrice}}"> {{--move to session for production--}}
+                        <input type="hidden" name="price" value="{{$product->productPrice}}"> 
                         <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
                         <input type="hidden" name="quantity" value="{{app('request')->input('quantity')}}">
                         <input type="hidden" name="milk" value="{{app('request')->input('milk')}}">
                         <input type="hidden" name="sugar" value="{{app('request')->input('sugar')}}">
                         <input type="hidden" name="syrup" value="{{app('request')->input('syrup')}}">
                     </div>
-                    <button id="addOrderbtn" type="submit" class="btn btn-success d-block">
+                    <button id="addOrderbtn" type="submit" class="w-100 btn btn-success d-block">
                         add to cart</button>
-                </form>
-                </div>
+                </form> --}}
+            </div>
             @endforeach
         </div>
                         {{-- Save for later --}}

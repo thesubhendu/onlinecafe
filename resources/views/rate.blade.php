@@ -29,7 +29,7 @@
           <span class="card-text fas fa-coffee unchecked"></span>
           <span class="card-text fas fa-coffee unchecked"></span><span class="badge badge-pill badge-dark ml-2"> 3.0</span> --}}
       </div>
-      @foreach ($vendor_rating as $rating)
+      @foreach ($rating as $rate)
       <div class="row">
         <div class="col col-md-6">
           <div class="review-block">

@@ -1,26 +1,35 @@
 @component('mail::message')
-# Order Submitted
-
-@foreach($order->products as $product) 
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      {{$product}}
-      <h5 class="card-title">New Order</h5>
-      <img src="{{asset('storage/img/nostamp.png')}}" alt="">
-      <p class="card-text">{{$product->pivot->quantity}} x {{$product->productName}}</p>
-      <div><span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span></div>
-      <div>
-        <p class="card-text">Total: ${{$product->pivot->price}}</p>
+# Your customer <img class="img-fluid rounded-start" src="{{asset('storage/img/user/default_user.jpg')}}" alt="" height="50" width="50"> {{auth()->user()->name}}
+# Submitted Order {{$order->id }} 
+# please click on the link below to confirm receipt of the order, will then message {{auth()->user()->name}} to come a collect the order.
+@component('mail::panel')
+<div class="container">
+  
+  @foreach($order->products as $product) 
+  <div class="card" style="width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img class="img-fluid rounded-start" src="{{asset('storage/img/nostamp.png')}}" alt="" height="50" width="50">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">New Order</h5>
+          <p class="card-text">{{$product->pivot->quantity}} x {{$product->productName}}</p>
+          <span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span>
+          <p class="card-text">Total: ${{$product->pivot->price}}</p>
+        </div>
       </div>
-      <a href="#" class="card-link btn btn-dark">Confirm order</a>
     </div>
+  </div>
+  @endforeach
 </div>
-@endforeach
+@endcomponent
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => route('confirm_order.update', $order)]) 
+Confirm Order
 @endcomponent
 
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent
+
