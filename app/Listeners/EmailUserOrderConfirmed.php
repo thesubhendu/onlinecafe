@@ -2,9 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Mail\orderConfirmed;
 use App\Events\VendorConfirmsOrder;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EmailUserOrderConfirmed
 {
@@ -26,7 +28,6 @@ class EmailUserOrderConfirmed
      */
     public function handle(VendorConfirmsOrder $event)
     {
-        dd('Email User');
-        // Mail::to($order->user->email)->send(new orderConfirmed($order, $vendor));
+        Mail::to($event->order->user->email)->send(new orderConfirmed($event->order, $event->vendor));
     }
 }

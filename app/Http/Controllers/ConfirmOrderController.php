@@ -22,8 +22,10 @@ class ConfirmOrderController extends Controller
     {
 
         Order::find($order);
-        $order->is_confirmed = 1;
-        $order->save();
+        // $order->is_confirmed = 1;
+        // $order->save();
+
+        $order->orderConfirmed($order);
 
         $vendor = Vendor::find($order->vendor_id);
 

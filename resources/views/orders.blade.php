@@ -25,7 +25,7 @@
                 <td>{{$order->getFormattedDate('date')}}</td>
                 @foreach($order->products as $product) {{--{{asset('/storage/app/public/img/'.'$product->product_image')}}--}}
                 <td><img src="storage/img/{{$product->product_image}}" width="48" height="48"></td>
-                <td>{{$product->productName}}<div><small class="text-muted">Full Cream, Sugar - 1, Syrup - No Thanks</small></div></td>
+                <td>{{$product->productName}}<div><small class="text-muted">Milk - {{$product->pivot->milk}}, Sugar - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</small></div></td>
                 <td>${{$product->productPrice}}</td>
                 <td><a href="{{ route('orders.create', $product) }}" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i></a></td>
                 @endForEach

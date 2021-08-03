@@ -50,4 +50,15 @@ class Order extends Model
     {
         return $this->hasMany(Card::class);
     }
+
+    public function orderConfirmed(Order $order)
+    {
+        if ($order) {
+
+            $this->is_confirmed = 1;
+            $this->save();
+        }
+
+        return $this;
+    }
 }
