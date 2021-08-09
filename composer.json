@@ -16,6 +16,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "orangehill/iseed": "^3.0",
+        "spatie/opening-hours": "^2.10",
         "tcg/voyager": "^1.4"
     },
     "require-dev": {
