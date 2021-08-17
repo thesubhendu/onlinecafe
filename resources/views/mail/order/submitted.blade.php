@@ -1,11 +1,10 @@
 @component('mail::message')
 # Your customer <img class="img-fluid rounded-start" src="{{asset('storage/img/user/default_user.jpg')}}" alt="" height="50" width="50"> {{auth()->user()->name}}
-# Submitted Order {{$order->id }} 
+# Submitted Order {{$order->id }}
 # please click on the link below to confirm receipt of the order, will then message {{auth()->user()->name}} to come a collect the order.
 @component('mail::panel')
 <div class="container">
-  
-  @foreach($order->products as $product) 
+  @foreach($order->products as $product)
   <div class="card" style="width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
@@ -25,7 +24,7 @@
 </div>
 @endcomponent
 
-@component('mail::button', ['url' => route('confirm_order.update', $order)]) 
+@component('mail::button', ['url' => $url])
 Confirm Order
 @endcomponent
 

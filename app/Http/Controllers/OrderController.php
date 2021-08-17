@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Mail\orderSubmitted;
 use Illuminate\Http\Request;
 use App\Events\VendorConfirmsOrder;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -65,8 +66,8 @@ class OrderController extends Controller
         $active_card = Card::activeCard($vendor_id);
         $vendor = Vendor::find($vendor_id);
 
-        // get active card for vendor and user 
-        //check if card is active cardStatus($vendor) 
+        // get active card for vendor and user
+        //check if card is active cardStatus($vendor)
         //user auth->id() in the model to get the user id
 
 
@@ -81,8 +82,24 @@ class OrderController extends Controller
 
             $order->save();
 
+            // $order = [
+            //     'order_number' => uniqid(),
+            //     'vendor_id' => $vendor_id,
+            //     'order_total' => Cart::total()
+            // ];
+
+            // $request->user()->orders()->create([
+            //     'order_number' => uniqid(),
+            //     'vendor_id' => $vendor_id,
+            //     'order_total' => Cart::total()
+            // ]);
+
+
+
             // $orderItems = Cart::session(auth()->id())->getContent();
-            foreach (Cart::content() as $product) {
+            $cart_items = Cart::content();
+
+            foreach ($cart_items as $product) {
                 $order->products()->attach($product->id, [
                     'price' => $product->price,
                     'quantity' => $product->qty,
@@ -120,7 +137,22 @@ class OrderController extends Controller
             $new_card->maxStamps = 10; // need to get vendor maxstamps/cardstamps from model
             $new_card->is_active = true;
 
+            // $new_card = [
+            //     'vendor_id' => $vendor_id,
+            //     'maxStamps' => 10, // need to get vendor maxstamps/cardstamps from model
+            //     'is_Active' => true,
+            // ];
+
             $new_card->save();
+
+            // $request->user()->cards()->create($new_card);
+
+            // $order = [
+            //     'order_number' => uniqid(),
+            //     'vendor_id' => $vendor_id,
+            //     'order_total' => Cart::total(),
+
+            //     ];
 
             $order = new Order();
 
@@ -130,10 +162,11 @@ class OrderController extends Controller
             $order->order_total = Cart::total();
 
             $order->save();
+            // $request->user()->orders()->create([$order]);
 
+            $cart_items = Cart::content();
 
-
-            foreach (Cart::content() as $product) {
+            foreach ($cart_items as $product) {
                 $order->products()->attach($product->id, [
                     'price' => $product->price,
                     'quantity' => $product->qty,
@@ -158,11 +191,11 @@ class OrderController extends Controller
         }
 
 
-
+        $confirm_url = URL::signedRoute('confirm_order.update', $order->id);
 
         // email customer and vendor
         // Mail::to($order->vendor->email)->send(new orderSubmitted($order));
-        Mail::to('coffeeshoporders0@gmail.com')->send(new orderSubmitted($order));
+        Mail::to('coffeeshoporders0@gmail.com')->send(new orderSubmitted($order, $confirm_url));
 
         // empty cart
         Cart::destroy();

@@ -13,15 +13,17 @@ class orderSubmitted extends Mailable
     use Queueable, SerializesModels;
 
     public $order;
+    public $url;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $url)
     {
         $this->order = $order;
+        $this->url = $url;
     }
 
     /**

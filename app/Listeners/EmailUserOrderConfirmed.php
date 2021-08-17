@@ -2,6 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Models\User;
+use App\Models\Order;
 use App\Mail\orderConfirmed;
 use App\Events\VendorConfirmsOrder;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +19,7 @@ class EmailUserOrderConfirmed
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -28,6 +30,7 @@ class EmailUserOrderConfirmed
      */
     public function handle(VendorConfirmsOrder $event)
     {
+        dd($event);
         Mail::to($event->order->user->email)->send(new orderConfirmed($event->order, $event->vendor));
     }
 }
