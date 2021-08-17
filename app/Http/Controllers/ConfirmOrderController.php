@@ -21,6 +21,10 @@ class ConfirmOrderController extends Controller
     public function update(Request $request, Order $order)
     {
 
+        if(! $request->hasValidSignature()) {
+            abort(403);
+        }
+
         Order::find($order);
         // $order->is_confirmed = 1;
         // $order->save();
@@ -29,6 +33,9 @@ class ConfirmOrderController extends Controller
 
         $vendor = Vendor::find($order->vendor_id);
 
-        return redirect()->action([VendorOrdersController::class, 'index'], $vendor);
+        return $order->vendor->vendor_name; $order->order_number;
+
+        // return redirect()->action([VendorOrdersController::class, 'index'], $vendor);
+        // return redirect()->action([VendorOrdersController::class, 'index'], $order);
     }
 }

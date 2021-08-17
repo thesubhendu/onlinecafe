@@ -13,7 +13,7 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'vendor_id', 'is_Active'];
+    protected $fillable = ['user_id', 'vendor_id', 'maxStamps', 'is_Active'];
 
     public function user()
     {
