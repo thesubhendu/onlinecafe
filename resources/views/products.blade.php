@@ -1,16 +1,21 @@
 @extends('layout.app')
 @section('content')
 <main role="main" class="container py-4 mb-5 border-0">
-    <div class="vendor-menu d-flex flex-row justify-content-between mb-3 mt-4">
-        <div class="vendor">
-            <h1>Products</h1>
+    <div class="card mb-3 d-flex" style="max-width:1080px;" >
+        <div class="row g-0">
+          <div class="col-sm-4">
+            <img src="/storage/img/nostamp.png" class="img-fluid p-0" alt="..." height="100" width="100">
+          </div>
+          <div class="col-sm-8">
+            <div class="card-body">
+              <h5 class="card-title text-success">Featured</h5>
+              <p class="card-text text-muted">Lorem, ipsum..</p>
+            </div>
+          </div>
         </div>
-        <div>
-            <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
-        </div>
-    </div>
+      </div>
     <hr>
-    <div class="container mx-auto">
+    <div class="mx-auto">
         @foreach ($vendorproducts as $product)
         {{-- @dd($vendorproducts); --}}
         <div class="card mt-4">
@@ -45,6 +50,6 @@
                 </div>
             </div>
             @endforeach
-    </div>  
+    </div>
   </main><!-- /.container -->
   @endsection

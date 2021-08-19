@@ -17,6 +17,9 @@ class CardsController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()) {
+            return view ('cards_index');
+        }
 
         $cards = Card::where('user_id', Auth::id())
             ->with('vendor')

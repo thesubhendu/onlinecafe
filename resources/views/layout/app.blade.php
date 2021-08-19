@@ -19,11 +19,15 @@
   {{-- < class="mb-4"> --}}
     <!-- Image and text -->
   <nav class="navbar navbar-dark bg-dark d-flex flex-row">
-  <a class="navbar-brand" href="/">
-    <img src="/storage/img/nostamp.png" class="" alt="..." width="48" height="48">
-    {{ config('app.name', 'LaravelCoffee') }}
-    {{-- d-sm-none .d-md-block --}}
-  </a>
+      <div class="">
+          <a class="navbar-brand" href="/">
+            <img src="/storage/img/nostamp.png" class="" alt="..." width="48" height="48">
+            <div class="small">
+                {{ config('app.name', 'LaravelCoffee') }}
+            </div>
+            {{-- d-sm-none .d-md-block --}}
+          </a>
+      </div>
   <ul class="navbar-nav ml-auto">
     <div class="d-flex flex-row">
         <li class="nav-item nav-right">
@@ -79,7 +83,7 @@
             <div class="">
               <a class="btn btn-success px-3" href="{{ route('register') }}">Register</a>
             </div>
-        </div>  
+        </div>
   </div>
   @endguest --}}
     @yield('content')
