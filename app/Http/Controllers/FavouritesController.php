@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class FavouritesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,15 +23,15 @@ class FavouritesController extends Controller
      */
     public function index()
     {
-    
-        
-        
+
+
+
        return view('favourites', [
         // 'favourites' => $favourites,
-        
-        
+
+
        ]);
-            
+
 
     }
 
@@ -38,7 +44,7 @@ class FavouritesController extends Controller
         // dd($userlikes);
         return view('favourites', [
             'userlikes' => $userlikes,
-            
+
            ]);
 
     }

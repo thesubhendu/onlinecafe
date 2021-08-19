@@ -42,11 +42,11 @@ class Card extends Model
             ->where('vendor_id', $id)
             ->where('is_Active', true)->first();
 
-        if ($card) {
-            return $card;
+        if (! $card) {
+            return false;
         }
 
-        return false;
+        return $card;
     }
 
     public function create()
