@@ -14,12 +14,12 @@
     </div>
   </div>
 </div>
-      <div class="container">
+      <div class="container border-0">
         <div class="row justify-content-between mx-3">
-          <div class="row row-cols-1 row-cols-md-5 g-3">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             @foreach ($vendors as $vendor)
               <div class="col">
-                  <div class="card h-100 mb-2">
+                  <div class="card h-100 mb-2 mt-2">
                     <a class="" href="{{ route('vendor.show', $vendor) }}">
                       <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                     </a>

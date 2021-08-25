@@ -61,10 +61,10 @@
                 <h3 class="card-title my-0">Coffee</h3>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4 rounded-3">
+        <div class="row row-cols row-cols-md-3 row-cols-lg-4 g-4 rounded-3">
           @foreach ($vendor->products as $product)
           <div class="col">
-            <div class="card h-100">
+            <div class="card h-100 p-3">
               <div class="text-center">
                 <img src="/storage/img/{{$product->product_image}}" class="img-fluid" alt="..." height="100" width="100">
               </div>
@@ -82,7 +82,7 @@
                 <h3 class="card-title my-0">Cold Drinks</h3>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 rounded">
+        <div class="row row-cols row-cols-md-4 g-4 mt-2 rounded">
           <div class="col">
             <div class="card h-100 rounded">
               <div class="text-center">
