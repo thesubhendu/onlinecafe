@@ -9,7 +9,7 @@
           <div class="col-sm-8">
             <div class="card-body">
               <h5 class="card-title text-success">Featured</h5>
-              <p class="card-text text-muted">Lorem, ipsum..</p>
+              <p class="card-text text-muted">{{$featured}}</p>
             </div>
           </div>
         </div>

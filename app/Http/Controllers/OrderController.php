@@ -195,7 +195,8 @@ class OrderController extends Controller
 
         // email customer and vendor
         // Mail::to($order->vendor->email)->send(new orderSubmitted($order));
-        Mail::to('coffeeshoporders0@gmail.com')->send(new orderSubmitted($order, $confirm_url));
+        Mail::to('coffeeshoporders0@gmail.com')
+        ->send(new orderSubmitted($order, $confirm_url));
 
         // empty cart
         Cart::destroy();

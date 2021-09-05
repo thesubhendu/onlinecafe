@@ -17,7 +17,7 @@
         <div class="card h-100 mt-2 mb-3">
           <div class="card-logo card-header">
             <img src="storage/img/vendor/{{$card->card_logo}}" style="max-width: 10%; height: auto;">
-            {{$card->vendor->vendor_name}} 
+            {{$card->vendor->vendor_name}}
             <a href="{{route('vendor.products', $card->vendor_id )}}" class="btn btn-success btn-small float-right">Order</a>
             <div>
               <small class="card-text text-muted">Buy {{$card->vendor->cardstamps}} coffees get 1 free</small>
@@ -32,20 +32,20 @@
                     @foreach ($card->stamps as $stamp)
                     <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
                   @endforeach
-                    @php 
+                    @php
                     $stampBalance = $card->maxStamps - count($card->stamps);
                     @endphp
-                    @for ($i = 0; $i < $stampBalance; $i++)   
+                    @for ($i = 0; $i < $stampBalance; $i++)
                     <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
                     @endfor
                   </div>
                 </div>
               </div>
           </div>
-          </div>            
           </div>
           <div class="card-footer">
             <small class="text-muted">{{$card->updated_at->diffForHumans()}}</small>
+          </div>
           </div>
         </div>
       </div>
