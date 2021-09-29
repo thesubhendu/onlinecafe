@@ -9,17 +9,17 @@
         <a href="#" class="btn btn-success ">Register My Shop</a>
       </div> --}}
       <div>
-        <a href="#" class="btn btn-outline-light">Learn More</a>
+        <a href="{{ route('subscriptions.plans') }}" class="btn btn-outline-light">Learn More</a>
       </div>
     </div>
   </div>
 </div>
-      <div class="container">
+      <div class="container grid border-0">
         <div class="row justify-content-between mx-3">
-          <div class="row row-cols-1 row-cols-md-5 g-3">
+          <div class="grid-row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             @foreach ($vendors as $vendor)
-              <div class="col">
-                  <div class="card h-100 mb-2">
+              <div class="g-col-6">
+                  <div class="card h-100 mb-2 mt-2">
                     <a class="" href="{{ route('vendor.show', $vendor) }}">
                       <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
                     </a>

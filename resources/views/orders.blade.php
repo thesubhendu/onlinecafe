@@ -3,7 +3,7 @@
 <main role="main">
   <div class="container">
     <div class="row">
-          <table class="table table-striped">
+          <table class="table table-light table-striped table-borderless">
             <thead>
               <tr>
                 {{-- <th scope="col">#</th> --}}

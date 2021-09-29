@@ -51,9 +51,10 @@
           {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
         </li>
           <li class="nav-item nav-right dropdown">
-            <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/users/{{ Auth::user()->avatar}}" class="mb-3 px-auto" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%"> {{ auth()->user()->name }}</a>
+            <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/users/{{ Auth::user()->avatar}}" class="mb-3 px-auto" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%;"> {{ auth()->user()->name }}</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
+              <a class="dropdown-item p-3" href="{{ route('subscriptions.plans') }}"><i class="fas fa-file-invoice-dollar"> Plans</i></a> <!--should only been seen if account is a vendor role-->
               <a class="dropdown-item p-3" href="#"><i class="fas fa-cog"> Settings</i></a>
               <form action="{{ route('logout') }}" method="post">
                 @csrf
@@ -87,6 +88,14 @@
   </div>
   @endguest --}}
     @yield('content')
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2021 mycofees.com.au</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>

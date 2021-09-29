@@ -1,15 +1,13 @@
-
 @extends('layout.app')
 @section('content')
-<main role="main" class="">
-<div class="container">
-  <div class="row">
+<div class="container grid">
+  <div class="grid-row">
     {{-- @if ($vendors->likedBy(auth()->user())) @endif --}}
     @foreach ($userlikes as $vendor)
       <div class="card mb-3">
-        <div class="row g-0 d-flex">
+        <div class="row g-0">
           <div class="col-sm-4">
-            <img src="{{asset('storage/img/vendor/'.$vendor->vendor_image)}}" alt="..." class="img-fluid">
+            <img src="/storage/img/vendor/{{$vendor->vendor->vendor_image}}" alt="..." class="img-fluid">
           </div>
           <div class="col-sm-8">
             <div class="card-body">
@@ -24,11 +22,11 @@
                 </form>
             {{-- @else
               <p>you havent liked anything</p> --}}
-    
-           
+
+
           {{-- @if (!$vendor->likedBy(auth()->user())) --}}
                   {{-- <form action="{{ route('vendor.likes', $favourite->vendor_id) }}" method='post'>
-                    @csrf 
+                    @csrf
                   <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button>
                   </form> --}}
                   {{-- <form action="{{ route('vendor.likes', $vendor->vendor_id) }}" method='post'>
@@ -45,7 +43,6 @@
       @endforeach
   </div><!-- /.row -->
 </div><!-- /.container -->
-</main>
 @endsection
 
 {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

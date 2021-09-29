@@ -8,7 +8,8 @@
 
 html,
 body {
-    background-color: #f9fafb;
+    /* background-color: #f9fafb; */
+    background-color: #566573;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -82,6 +83,38 @@ body {
 }
 
 #showcase .content p {
+    max-width: 600px;
+}
+
+#price-showcase {
+    background: url("/storage/img/pricing_showcase.jpg") no-repeat center
+        top/cover;
+    position: relative;
+    height: 30vh;
+    color: #fff;
+    border-bottom: 1px solid #28a745;
+    /* margin-bottom: 30px; */
+    /* overflow: hidden; */
+}
+
+#price-showcase .showcase-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+    /* Overlay */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#price-showcase .content p {
     max-width: 600px;
 }
 
@@ -351,7 +384,8 @@ progress {
 
 html,
 body {
-    background-color: #f9fafb;
+    /* background-color: #f9fafb; */
+    background-color: #abb2b9;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -577,7 +611,7 @@ progress {
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
 @media (max-width: 800px) {
     .row {
-        flex-direction: column-reverse;
+        /* flex-direction: column-reverse; */
     }
     .col-25 {
         margin-bottom: 20px;
