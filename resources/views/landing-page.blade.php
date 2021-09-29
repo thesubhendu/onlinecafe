@@ -9,7 +9,7 @@
         <a href="#" class="btn btn-success ">Register My Shop</a>
       </div> --}}
       <div>
-        <a href="#" class="btn btn-outline-light">Learn More</a>
+        <a href="{{ route('subscriptions.plans') }}" class="btn btn-outline-light">Learn More</a>
       </div>
     </div>
   </div>

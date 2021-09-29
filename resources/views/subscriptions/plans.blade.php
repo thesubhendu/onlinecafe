@@ -1,11 +1,41 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Pricing') }}</div>
-
+                <div id="price-showcase">
+                    <div class="showcase-content">
+                      <h1>Save, time & money.</h1>
+                      <p>in 3 simple steps.</p>
+                      <div class="d-flex justify-content-between">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="steps">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5>step 1.</h5>
+                                <p>register you business</p>
+                            </div>
+                            <a href="#" class="w-100 btn btn-sm btn-primary">Register Here</a>
+                        </li>
+                        <li class="list-group-item d-flex disabled">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5>step 2.</h5>
+                                <p>Select your subscription plan</p>
+                            </div>
+                        </li>
+                        <li class="list-group-item disabled">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5>step 3.</h5>
+                                <p>Set up your shop</p>
+                            </div>
+                        </li>
+                    </ul>
+                  </div>
                 <div class="card-body">
                     <div class="container py-3">
                         <header>

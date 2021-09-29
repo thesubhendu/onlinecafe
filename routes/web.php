@@ -25,6 +25,8 @@ use App\Http\Controllers\VendorRatingController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartSaveForLaterController;
 use App\Http\Controllers\Subscriptions\PlanController;
+use App\Http\Controllers\Subscriptions\SubscriptionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +50,7 @@ route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.
 Route::get('/vendornew/{vendor}', [VendorController::class, 'vendorshow'])->name('vendor.newshow');
 Route::get('/vendor/{vendor}/orders', [VendorOrdersController::class, 'index'])->name('vendor.orders');
 
-Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
-    Route::get('/', [AccountController::class, 'index'])->name('account');
-});
+
 
 Route::group(['namespace' => 'Subscriptions'], function () {
     Route::get('plans', [PlanController::class, 'index'])
@@ -59,6 +59,10 @@ Route::group(['namespace' => 'Subscriptions'], function () {
     ->name('plan.subscriptions');
     Route::post('/subscriptions', [SubscriptionController::class, 'store'])
     ->name('subscriptions.store');
+});
+
+Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
+    Route::get('/', [AccountController::class, 'index'])->name('account');
 });
 
 Route::group(['namespace' => 'Subscriptions', 'prefix' => 'subscriptions'], function () {

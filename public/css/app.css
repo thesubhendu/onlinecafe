@@ -86,6 +86,38 @@ body {
     max-width: 600px;
 }
 
+#price-showcase {
+    background: url("/storage/img/pricing_showcase.jpg") no-repeat center
+        top/cover;
+    position: relative;
+    height: 30vh;
+    color: #fff;
+    border-bottom: 1px solid #28a745;
+    /* margin-bottom: 30px; */
+    /* overflow: hidden; */
+}
+
+#price-showcase .showcase-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+    /* Overlay */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#price-showcase .content p {
+    max-width: 600px;
+}
+
 #card-showcase {
     background: url("/storage/img/showcase.jpg") no-repeat center center/cover;
     height: 30vh;

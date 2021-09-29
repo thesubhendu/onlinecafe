@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -19,7 +19,7 @@
                                     <form class="p-2">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Promo code">
-                                            <button type="submit" class="btn btn-secondary">Apply</button>
+                                            <button type="submit" class="btn btn-outline-success">Apply</button>
                                         </div>
                                     </form>
 
@@ -53,7 +53,7 @@
                                             <x:card-form :action="route('subscriptions.store')">
                                                 <input type="hidden" name="plan" value="{{ request('plan') }}">
 
-                                                <button id="card-button" class="w-100 btn btn-primary btn-lg" type="submit" data-secret="{{ $intent->client_secret }}">
+                                                <button id="card-button" class="w-100 btn btn-success btn-lg" type="submit" data-secret="{{ $intent->client_secret }}">
                                                     Proceed to Checkout.
                                                 </button>
                                             </x:card-form>
