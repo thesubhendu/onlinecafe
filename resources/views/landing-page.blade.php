@@ -2,14 +2,14 @@
 @section('content')
 <div id="showcase">
   <div class="showcase-content">
-    <h1>Lorem, ipsum dolor.</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <h1>Open Your Shop</h1>
+    <p>Set up your coffee shop</p>
     <div class="d-flex justify-content-between">
       {{-- <div class="mr-3">
         <a href="#" class="btn btn-success ">Register My Shop</a>
       </div> --}}
       <div>
-        <a href="{{ route('subscriptions.plans') }}" class="btn btn-outline-light">Learn More</a>
+        <a href="{{ route('subscriptions.plans') }}" class="btn btn-outline-light">Subscribe</a>
       </div>
     </div>
   </div>
