@@ -88,6 +88,18 @@
         </div>
   </div>
   @endguest --}}
+
+{{--  validation error section--}}
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
+
     @yield('content')
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2021 mycofees.com.au</p>

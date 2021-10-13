@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\vendor;
-use App\Models\product;
+use App\Models\Vendor;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class productFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -26,8 +26,8 @@ class productFactory extends Factory
                 'ProductName' => $this->faker->word,
                 'ProductDescription' => $this->faker->sentence,
                 'productPrice' => $this->faker->numberBetween($min = 3, $max = 6),
-                'vendor_id' => vendor::all()->random()->id,
+                'vendor_id' => Vendor::all()->random()->id,
             ];
-        
+
     }
 }

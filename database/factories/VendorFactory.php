@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\vendor;
+use App\Models\Vendor;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,7 +13,7 @@ class VendorFactory extends Factory
      *
      * @var string
      */
-    protected $model = vendor::class;
+    protected $model = Vendor::class;
 
     /**
      * Define the model's default state.
