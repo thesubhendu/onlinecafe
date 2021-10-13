@@ -14,6 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
   {{-- < class="mb-4"> --}}
