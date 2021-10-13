@@ -23,9 +23,9 @@
                                         </div>
                                     </form>
 
-                                    <form id="card-form" action="{{ route('subscriptions.store')}}" method="post"
+                                    {{-- <form id="checkout-form" action="{{ route('subscriptions.store')}}" method="post"
                                         class="needs-validation" novalidate>
-                                        @csrf
+                                        @csrf --}}
                                         <div class="my-3">
                                             <div class="form-check">
                                                 <input id="credit" name="paymentMethod" type="radio"
@@ -37,9 +37,10 @@
                                             <div class="form-check">
                                                 <input id="debit" name="paymentMethod" type="radio"
                                                     class="form-check-input" required>
-                                                <label class="form-check-label" for="debit"><span class="mr-2"><i
-                                                            class="fas fa-cash-register text-muted"></i></span> In
-                                                    Store</label>
+                                                    <label class="form-check-label" for="debit">
+                                                        <span class="mr-2">
+                                                            <i class="fas fa-cash-register text-muted"></i>
+                                                        </span> In Store</label>
                                             </div>
                                             {{-- <div class="form-check">
                                                 <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
@@ -49,16 +50,16 @@
                                         <hr class="my-4">
                                         <div class="row gy-3 form-group">
                                             <div class="col-md-12">
+                                                <x:card-form :action="route('subscriptions.store')">
+                                                    <input type="hidden" name="plan" value="{{ request('plan') }}">
 
-                                            <x:card-form :action="route('subscriptions.store')">
-                                                <input type="hidden" name="plan" value="{{ request('plan') }}">
-
-                                                <button id="card-button" class="w-100 btn btn-success btn-lg" type="submit" data-secret="{{ $intent->client_secret }}">
-                                                    Proceed to Checkout.
-                                                </button>
-                                            </x:card-form>
+                                                    <button id="card-button" class="w-100 btn btn-success btn-lg mt-2" type="submit" data-secret="{{ $intent->client_secret }}">
+                                                        Proceed to Checkout.
+                                                    </button>
+                                                </x:card-form>
+                                            </div>
                                         </div>
-                                    </form>
+                                    {{-- </form> --}}
                                 </div>
                             </div>
                         </main>

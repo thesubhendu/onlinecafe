@@ -13,11 +13,10 @@
                     </div>
                 </div>
 
-                <div class="">
-
-                </div>
-
-                <div id="card-element" class="col-md-12 mt-2">
+                <div class="col-md-12 mt-2">
+                    <label for="name">Card Details</label>
+                    <div id="card-element"></div>
+                    <div id="card-errors" role="alert"></div>
                 </div>
 
                 <hr class="my-4">
@@ -72,5 +71,4 @@
                 form.submit()
             }
         })
-
     </script>
