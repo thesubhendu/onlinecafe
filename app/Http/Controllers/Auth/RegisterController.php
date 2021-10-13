@@ -43,6 +43,6 @@ class RegisterController extends Controller
         auth()->attempt($request->only('email', 'password'));
         //redirect
 
-        return redirect()->route('home');
+        return redirect()->intended(route('home'));
     }
 }
