@@ -62,9 +62,9 @@ Route::group(['namespace' => 'Subscriptions'], function () {
     Route::get('plans', [PlanController::class, 'index'])
     ->name('subscriptions.plans');
     Route::get('/plans/subscriptions', [SubscriptionController::class, 'index'])
-    ->name('plan.subscriptions');
+    ->name('plan.subscriptions')->middleware('auth');
     Route::post('/subscriptions', [SubscriptionController::class, 'store'])
-    ->name('subscriptions.store');
+    ->name('subscriptions.store')->middleware('auth');
 });
 
 Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
@@ -91,13 +91,7 @@ Route::group(['namespace' => 'Subscriptions', 'prefix' => 'subscriptions'], func
 
 });
 
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store']);
-
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+require(__DIR__ . '/partials/_auth.php');
 
 Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
 Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy']);
