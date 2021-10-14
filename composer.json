@@ -16,12 +16,14 @@
         "laravel/cashier": "^13.5",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.6",
         "orangehill/iseed": "^3.0",
         "spatie/opening-hours": "^2.10",
         "symfony/routing": "^5.3",
         "tcg/voyager": "^1.4"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
