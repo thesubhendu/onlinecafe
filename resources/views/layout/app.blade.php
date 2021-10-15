@@ -56,7 +56,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
               <a class="dropdown-item p-3" href="{{ route('subscriptions.plans') }}"><i class="fas fa-file-invoice-dollar"> Plans</i></a> <!--should only been seen if account is a vendor role-->
-              <a class="dropdown-item p-3" href="#"><i class="fas fa-cog"> Settings</i></a>
+              <a class="dropdown-item p-3" href="{{ route('account') }}"><i class="fas fa-cog"> Account</i></a>
               <form action="{{ route('logout') }}" method="post">
                 @csrf
                 <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i></button>

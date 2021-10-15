@@ -23,6 +23,7 @@ use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\VendorOrdersController;
 use App\Http\Controllers\VendorRatingController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\CartSaveForLaterController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
@@ -68,13 +69,13 @@ Route::group(['namespace' => 'Subscriptions'], function () {
 });
 
 Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
-    Route::get('/', [AccountController::class, 'index'])->name('account');
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
 });
 
 Route::group(['namespace' => 'Subscriptions', 'prefix' => 'subscriptions'], function () {
     Route::get('/', [AcountSubscrition::class, 'index'])->name('account.subscriptions');
     Route::get('/cancel', [SubscriptionCancelController::class, 'index'])->name('account.subscriptions.cancel');
-    Route::post('/cancel', [SubscriptionCancelController::class, 'store'])->name('account.subscriptions.store');
+    Route::post('/cancel', [SubscriptionCancelController::class, 'store']);
 
     Route::get('/resume', [SubscriptionResumeController::class, 'index'])->name('account.subscriptions.resume');
     Route::post('/resume', [SubscriptionResumeController::class, 'store']);
