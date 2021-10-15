@@ -31,7 +31,7 @@ use App\Http\Controllers\Account\Subscriptions\SubscriptionSwapController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionCancelController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionResumeController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionInvoiceController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionController as AcountSubscrition;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionController as AccountSubscription;
 
 
 /*
