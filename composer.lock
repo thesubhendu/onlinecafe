@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b3a1de0179ad253bfb1ccc5f956610b",
+    "content-hash": "749e731a5058e93fde652420437ed8d6",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3982,6 +3982,69 @@
                 "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.3.1"
             },
             "time": "2020-06-01T09:10:00+00:00"
+        },
+        {
+            "name": "sparkeleven/abn-lookup",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/sparkeleven/abn-lookup.git",
+                "reference": "5303ecdb0b8529259a5fe963d4a8cdfc7692e1df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/sparkeleven/abn-lookup/get/5303ecdb0b8529259a5fe963d4a8cdfc7692e1df.zip",
+                "reference": "5303ecdb0b8529259a5fe963d4a8cdfc7692e1df",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-soap": "*",
+                "ext-xml": "*",
+                "illuminate/http": "^5|^6|^7|^8|^9",
+                "illuminate/support": "^5|^6|^7|^8|^9",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SparkEleven\\AbnLookup\\AbnLookupServiceProvider"
+                    ],
+                    "aliases": {
+                        "AbnLookup": "SparkEleven\\AbnLookup\\Facades\\AbnLookup"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SparkEleven\\AbnLookup\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Theodore Yaosin",
+                    "email": "theo@sparkeleven.com.au"
+                }
+            ],
+            "description": "ABN Lookup",
+            "homepage": "https://bitbucket.org/sparkeleven/abn-lookup",
+            "support": {
+                "source": "https://bitbucket.org/sparkeleven/abn-lookup.git"
+            },
+            "time": "2020-12-22T01:16:24+00:00"
         },
         {
             "name": "spatie/opening-hours",

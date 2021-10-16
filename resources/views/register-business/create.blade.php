@@ -1,11 +1,7 @@
 @extends('layout.app')
 
-
 @section('content')
 
-    <h3>Register your business</h3>
-
-
-
+    @livewire('vendor-registration')
 
 @endsection

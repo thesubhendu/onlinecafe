@@ -25,6 +25,19 @@ use App\Http\Controllers\CartSaveForLaterController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
 
+Route::get('tinker', function () {
+// searchByAbn
+    try {
+        $result = \SparkEleven\AbnLookup\Facades\AbnLookup::searchByAbn('46359057280');
+        dd($result);
+        echo $result['mainName']['organisationName']; // Google Australia Pty Ltd
+
+    } catch (\Exception $e) {
+        dd('business not registered');
+    }
+
+});
+
 
 route::get('/', [LandingPageController::class, 'index'])->name('home');
 route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
@@ -104,7 +117,8 @@ Route::get('/email', function () {
 
 Route::view('/comment', 'comment');
 
-Route::resource('register-business', RegisterBusinessController::class)->only('create','store')->middleware('auth');
+Route::resource('register-business', RegisterBusinessController::class)->only('store')->middleware('auth');
+Route::get('register-business', \App\Http\Livewire\VendorRegistration::class)->name('register-business.create')->middleware('auth');
 
 
 Route::group(['prefix' => 'admin'], function () {
