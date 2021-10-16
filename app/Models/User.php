@@ -66,4 +66,9 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany(Card::class);
     }
+
+    public function shop()
+    {
+        return $this->hasOne(Vendor::class, 'owner_id');
+    }
 }

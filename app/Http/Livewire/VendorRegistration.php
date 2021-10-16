@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Vendor;
+use App\Services\AbnChecker;
 use Livewire\Component;
 
 class VendorRegistration extends Component
@@ -26,6 +28,25 @@ class VendorRegistration extends Component
             'abn'=>'required',
             'agreement'=>'required',
         ]);
+
+        // check if valid business (ABN check)
+
+        $isValid = (new AbnChecker($this->abn))->isValidBusiness();
+
+        if(!$isValid) {
+            session()->flash('error', "Not Valid ABN");
+        }else {
+
+            auth()->user()->shop()->create([
+                'name'=> $this->name,
+                'email'=> $this->email,
+                'phone'=> $this->phone,
+                'abn'=> $this->abn,
+                'is_active'=> true
+            ]);
+
+
+        }
 
 
     }
