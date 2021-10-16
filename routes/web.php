@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\RegisterBusinessController;
 use App\Models\Card;
 use App\Models\Order;
 use App\Mail\orderSubmitted;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CardController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\OrderController;
@@ -14,43 +15,17 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\VendorLikeController;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\VendorOrdersController;
 use App\Http\Controllers\VendorRatingController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartSaveForLaterController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionCardController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionSwapController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionCancelController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionResumeController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionInvoiceController;
-use App\Http\Controllers\Account\Subscriptions\SubscriptionController as AcountSubscrition;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::view('/', 'landing-page');
-// route::get('/', 'App\http\Controllers\LandingPageController@index')->name('landing-page');
 route::get('/', [LandingPageController::class, 'index'])->name('home');
 route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
 Route::get('/vendornew/{vendor}', [VendorController::class, 'vendorshow'])->name('vendor.newshow');
@@ -71,26 +46,7 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
     Route::get('/', [AccountController::class, 'index'])->name('account');
 });
 
-Route::group(['namespace' => 'Subscriptions', 'prefix' => 'subscriptions'], function () {
-    Route::get('/', [AcountSubscrition::class, 'index'])->name('account.subscriptions');
-    Route::get('/cancel', [SubscriptionCancelController::class, 'index'])->name('account.subscriptions.cancel');
-    Route::post('/cancel', [SubscriptionCancelController::class, 'store']);
-
-    Route::get('/resume', [SubscriptionResumeController::class, 'index'])->name('account.subscriptions.resume');
-    Route::post('/resume', [SubscriptionResumeController::class, 'store']);
-
-    Route::get('/swap', [SubscriptionSwapController::class, 'index'])->name('account.subscriptions.swap');
-    Route::post('/swap', [SubscriptionSwapController::class,'store']);
-
-    Route::get('/card', [SubscriptionCardController::class, 'index'])->name('account.subscriptions.card');
-    Route::post('/card', [SubscriptionCardController::class,'store']);
-
-    Route::get('/invoices', [SubscriptionInvoiceController::class, 'index'])->name('account.subscriptions.invoices');
-    Route::get('/invoices/{id}', [SubscriptionInvoiceController::class, 'show'])->name('account.subscriptions.invoice');
-    // Route::post('/resume', [SubscriptionResumeController::class, 'store']);
-
-});
-
+require(__DIR__ . '/partials/_manage-subscriptions.php');
 require(__DIR__ . '/partials/_auth.php');
 
 Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
@@ -106,9 +62,6 @@ Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name
 Route::get('/confirm/{order}/update', [ConfirmOrderController::class, 'update'])->name('confirm_order.update');
 Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 
-// Route::resource('orders', OrderController::class, ['names' => [
-//     'store' => 'order.store'
-// ]])->middleware('auth');
 
 Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
     'store' => 'order.store'
@@ -151,6 +104,7 @@ Route::get('/email', function () {
 
 Route::view('/comment', 'comment');
 
+Route::resource('register-business', RegisterBusinessController::class)->only('create','store')->middleware('auth');
 
 
 Route::group(['prefix' => 'admin'], function () {

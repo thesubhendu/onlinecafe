@@ -20,7 +20,7 @@
                                 <h5>step 1.</h5>
                                 <p>register you business</p>
                             </div>
-                            <a href="#" class="w-100 btn btn-sm btn-primary">Register Here</a>
+                            <a href="{{route('register-business.create')}}" class="w-100 btn btn-sm btn-primary">Register Here</a>
                         </li>
                         <li class="list-group-item d-flex disabled">
                             <div class="d-flex w-100 justify-content-between">
