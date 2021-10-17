@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\VendorOnboarding;
 
-use App\Models\Vendor;
 use App\Services\AbnChecker;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class VendorRegistration extends Component
+class Registration extends Component
 {
     public $name;
     public $contactName;

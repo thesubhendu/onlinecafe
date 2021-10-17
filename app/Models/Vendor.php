@@ -13,6 +13,8 @@ class Vendor extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['owner_id'];
+
     public function likedBy(User $user)
     {
         return $this->likes->contains('user_id', $user->id);

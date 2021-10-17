@@ -62,7 +62,7 @@
                                                 <li>1 user included</li>
                                                 <li>Email support</li>
                                             </ul>
-                                            <a href="{{ route('plan.subscriptions', ['plan' => $plan->slug])}}"
+                                            <a href="{{ route('plans.subscribe', ['plan' => $plan->slug])}}"
                                                 class="w-100 btn btn-lg btn-outline-success">Sign up for
                                                 {{$plan->title}}</a>
                                         </div>

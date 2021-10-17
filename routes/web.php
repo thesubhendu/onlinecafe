@@ -49,8 +49,10 @@ Route::get('/vendor/{vendor}/orders', [VendorOrdersController::class, 'index'])-
 Route::group(['namespace' => 'Subscriptions'], function () {
     Route::get('plans', [PlanController::class, 'index'])
     ->name('subscriptions.plans');
+
     Route::get('/plans/subscriptions', [SubscriptionController::class, 'index'])
-    ->name('plan.subscriptions')->middleware('auth');
+    ->name('plans.subscribe')->middleware('auth');
+
     Route::post('/subscriptions', [SubscriptionController::class, 'store'])
     ->name('subscriptions.store')->middleware('auth');
 });
@@ -117,8 +119,7 @@ Route::get('/email', function () {
 
 Route::view('/comment', 'comment');
 
-Route::resource('register-business', RegisterBusinessController::class)->only('store')->middleware('auth');
-Route::get('register-business', \App\Http\Livewire\VendorRegistration::class)->name('register-business.create')->middleware('auth');
+Route::get('vendor-onboarding', \App\Http\Livewire\VendorOnboarding::class)->name('register-business.create')->middleware('auth');
 
 
 Route::group(['prefix' => 'admin'], function () {
