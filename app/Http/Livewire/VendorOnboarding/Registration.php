@@ -23,7 +23,7 @@ class Registration extends Component
 
     public function render()
     {
-        return view('livewire.vendor-registration');
+        return view('livewire.vendor-onboarding.registration');
     }
 
     public function register()
