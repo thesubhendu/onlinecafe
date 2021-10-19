@@ -16,7 +16,7 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Swap</button>
+            <button type="submit" class="btn btn-primary mt-4">Swap</button>
         </form>
     </div>
 </div>

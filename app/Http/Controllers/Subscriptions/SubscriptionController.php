@@ -10,7 +10,7 @@ class SubscriptionController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware(['auth', 'not.subscribed']);
+        $this->middleware(['auth', 'not.subscribed']);
     }
 
     public function index(Request $request)

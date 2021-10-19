@@ -9,7 +9,7 @@
 html,
 body {
     /* background-color: #f9fafb; */
-    background-color: #566573;
+    background-color: lightgray;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -385,7 +385,7 @@ progress {
 html,
 body {
     /* background-color: #f9fafb; */
-    background-color: #abb2b9;
+    background-color: lightgray;
     height: 100%;
     margin: 0;
     padding: 0;
