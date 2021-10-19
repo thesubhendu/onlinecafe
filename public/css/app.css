@@ -265,9 +265,7 @@ a.nav-link:hover {
 }
 
 input[type="text"] {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 12px;
+    /*margin-bottom: 20px;*/
     border: 1px solid #ccc;
     border-radius: 3px;
 }
@@ -483,7 +481,6 @@ a:hover {
 
 input[type="text"] {
     width: 100%;
-    margin-bottom: 20px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -643,12 +640,9 @@ progress {
   background: rgba(0, 0, 0, 0.6);
 } */
 
-body{margin:40px;}
-
 .stepwizard-step p {
     margin-top: 10px;
 }
-
 .stepwizard-row {
     display: table-row;
 }
@@ -671,7 +665,7 @@ body{margin:40px;}
     content: " ";
     width: 100%;
     height: 1px;
-    background-color: #ccc;
+    background-color: #000000;
     z-order: 0;
 
 }
