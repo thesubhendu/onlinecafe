@@ -85,10 +85,7 @@
     </div>
 </div>
 
-@push('js')
-
-
-    <script>
+<script>
         const stripe = Stripe('{{ config('cashier.key')}}')
 
         const elements = stripe.elements()
@@ -125,6 +122,3 @@
             }
         })
     </script>
-
-
-@endpush
