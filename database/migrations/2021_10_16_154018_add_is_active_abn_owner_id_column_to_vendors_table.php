@@ -18,7 +18,9 @@ class AddIsActiveAbnOwnerIdColumnToVendorsTable extends Migration
             $table->boolean('is_active')->default(false);
             $table->boolean('is_subscribed')->default(false);
             $table->string('abn', 15)->nullable();
-
+            $table->string('shop_name', 60)->nullable();
+            $table->text('description')->nullable();
+            $table->json('opening_hours')->nullable();
         });
     }
 
@@ -31,7 +33,7 @@ class AddIsActiveAbnOwnerIdColumnToVendorsTable extends Migration
     {
         Schema::table('vendors', function (Blueprint $table) {
             $table->dropForeign('vendors_owner_id_foreign');
-            $table->dropColumn(['is_active', 'abn','owner_id','is_subscribed']);
+            $table->dropColumn(['is_active', 'abn','owner_id','is_subscribed','shop_name','description','opening_hours']);
         });
     }
 }

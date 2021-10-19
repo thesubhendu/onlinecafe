@@ -13,7 +13,7 @@ class Registration extends Component
     public $contactLastName;
     public $abn;
     public $email;
-    public $phone;
+    public $mobile;
     public $address;
     public $suburb;
     public $pc;
@@ -30,10 +30,10 @@ class Registration extends Component
     {
         $this->validate([
             'name'=>'required',
-            'email'=>'email|required',
+            'email'=>'email|required|unique:vendors',
             'contactName'=>'required',
             'contactLastName'=>'required',
-            'phone'=>'digits:10|required',
+            'mobile'=>'digits:10|required|unique:vendors',
             'abn'=>'required',
             'suburb'=>'required',
             'pc'=>'required',
@@ -49,14 +49,16 @@ class Registration extends Component
             return response()->json(['error'=>'Not Valid ABN'], 422);
         }
 
-        auth()->user()->shop()->create([
+        $authUser = auth()->user();
+
+        $authUser->shop()->create([
             'vendor_name'=> $this->name,
             'slug'=> Str::slug($this->name),
             'email'=> $this->email,
             'contact_name'=> $this->contactName,
             'contact_lastname'=> $this->contactLastName,
             'address'=> $this->address,
-            'mobile'=> $this->phone,
+            'mobile'=> $this->mobile,
             'suburb'=> $this->suburb,
             'pc'=> $this->pc,
             'cardstamps'=> $this->cardstamps,
@@ -65,6 +67,7 @@ class Registration extends Component
         ]);
 
         //set user role to vendor
+        $authUser->setRole('vendor');
 
         session()->flash('message', 'Vendor Registered');
 

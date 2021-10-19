@@ -61,9 +61,9 @@
                 @error('cardstamps') <span class="text-danger">{{ $message }}</span> @enderror
 
 
-                <label for="phone" class="form-label"> Phone</label>
-                <input class="form-control" type="number" wire:model.lazy="phone">
-                @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
+                <label for="mobile" class="form-label"> Phone</label>
+                <input class="form-control" type="number" wire:model.lazy="mobile">
+                @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <div class="form-check m-2" >
                     <input class="form-check-input" type="checkbox" wire:model="agreement" />

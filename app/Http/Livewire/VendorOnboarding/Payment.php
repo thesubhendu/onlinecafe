@@ -19,7 +19,9 @@ class Payment extends Component
 
     public function mount()
     {
-        $this->availablePlans = Plan::pluck('slug', 'title')->all();
+        $this->availablePlans = cache()->remember('plans',3600, function() {
+            return Plan::pluck('slug', 'title')->all();
+        });
         $this->clientSecret = auth()->user()->createSetupIntent()->client_secret;
     }
     public function render()
@@ -41,6 +43,10 @@ class Payment extends Component
 
         auth()->user()->newSubscription('subscribed', $plan->stripe_id)
                 ->create($this->token);
+
+        $shop = auth()->user()->shop;
+        $shop->is_subscribed = true;
+        $shop->save();
 
         $this->emitUp('paymentSuccess');
     }
