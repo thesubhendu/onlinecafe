@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Account\Subscriptions;
 
-use App\Http\Controllers\Controller;
+use App\Models\Plan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubscriptionSwapController extends Controller
 {
