@@ -6,6 +6,7 @@ use App\Models\Card;
 use App\Models\Like;
 use App\Models\Vendor;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -65,5 +66,17 @@ class User extends \TCG\Voyager\Models\User
     public function cards()
     {
         return $this->hasMany(Card::class);
+    }
+
+    public function plan()
+    {
+        return $this->hasOneThrough(
+            Plan::class,
+            Subscription::class,
+            'user_id',
+            'stripe_id',
+            'id',
+            'stripe_price'
+        );
     }
 }

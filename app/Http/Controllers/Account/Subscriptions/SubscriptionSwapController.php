@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 
 class SubscriptionSwapController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         // dd($request->user()->plan);
 
@@ -20,7 +21,8 @@ class SubscriptionSwapController extends Controller
         return view('account.subscriptions.swap', compact('plans'));
     }
 
-    function store(Request $request) {
+    public function store(Request $request)
+    {
 
 
         $this->validate($request, [
@@ -31,7 +33,5 @@ class SubscriptionSwapController extends Controller
             ->swap(Plan::where('slug', $request->plan)->first()->stripe_id);
 
         return    redirect()->route('account.subscriptions');
-
-
     }
 }

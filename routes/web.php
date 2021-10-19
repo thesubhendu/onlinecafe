@@ -1,39 +1,38 @@
 <?php
 
-use app\Models\Card;
-use app\Models\Order;
-use app\Mail\orderSubmitted;
+use App\Models\Card;
+use App\Models\Order;
+use App\Mail\orderSubmitted;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\CardController;
-use app\Http\Controllers\CartController;
-use app\Http\Controllers\CardsController;
-use app\Http\Controllers\OrderController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CardsController;
+use App\Http\Controllers\OrderController;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use app\Http\Controllers\VendorController;
-use app\Http\Controllers\ProductController;
-use app\Http\Controllers\CheckoutController;
-use app\Http\Controllers\Auth\LoginController;
-use app\Http\Controllers\FavouritesController;
-use app\Http\Controllers\VendorLikeController;
-use app\Http\Controllers\Auth\LogoutController;
-use app\Http\Controllers\LandingPageController;
-use app\Http\Controllers\ConfirmOrderController;
-use app\Http\Controllers\VendorOrdersController;
-use app\Http\Controllers\VendorRatingController;
-use app\Http\Controllers\Auth\RegisterController;
-use app\Http\Controllers\Account\AccountController;
-use app\Http\Controllers\CartSaveForLaterController;
-use app\Http\Controllers\Subscriptions\PlanController;
-use app\Http\Controllers\Subscriptions\SubscriptionController;
-use app\Http\Controllers\Account\Subscriptions\SubscriptionCardController;
-use app\Http\Controllers\Account\Subscriptions\SubscriptionSwapController;
-use app\Http\Controllers\Account\Subscriptions\SubscriptionCancelController;
-use app\Http\Controllers\Account\Subscriptions\SubscriptionResumeController;
-use app\Http\Controllers\Account\Subscriptions\SubscriptionInvoiceController;
-use app\Http\Controllers\Account\Subscriptions\SubscriptionController as AccountSubscription;
-
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FavouritesController;
+use App\Http\Controllers\VendorLikeController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ConfirmOrderController;
+use App\Http\Controllers\VendorOrdersController;
+use App\Http\Controllers\VendorRatingController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\CartSaveForLaterController;
+use App\Http\Controllers\Subscriptions\PlanController;
+use App\Http\Controllers\Subscriptions\SubscriptionController;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionCardController;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionSwapController;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionCancelController;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionResumeController;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionInvoiceController;
+use App\Http\Controllers\Account\Subscriptions\SubscriptionController as AccountSubscription;
 
 /*
 |--------------------------------------------------------------------------
