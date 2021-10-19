@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 
 class SubscriptionResumeController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->middleware(['auth', 'subscribed']);
     }
 
-    public function index() {
+    public function index()
+    {
         return view('account.subscriptions.resume');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $this->authorize('resume', $subscription = $request->user()->subscription('subscribed'));
 

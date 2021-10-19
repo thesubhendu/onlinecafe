@@ -10,70 +10,65 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class VendorTest extends TestCase
 {
-   use RefreshDatabase;
+       use RefreshDatabase;
 
-   protected function setUp(): void
-   {
-      parent::setUp();
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-      $this->vendor = vendor::factory()->create();
-      $this->user = user::factory()->create();
+        $this->vendor = vendor::factory()->create();
+        $this->user = user::factory()->create();
+    }
 
-   }
+   /** @test */
+    public function itCanBeRated()
+    {
 
-   /** @test */ 
-   function it_can_be_rated()
-   {
+        $this->vendor->rate(5, $this->user);
 
-    $this->vendor->rate(5, $this->user);
+        $this->assertCount(1, $this->vendor->ratings);
+    }
 
-    $this->assertCount(1, $this->vendor->ratings);
-   }
+   /** @test */
 
-   /** @test */ 
+    public function itCanCalculateTheAverageRating()
+    {
 
-   function it_can_calculate_the_average_rating()
-   {
+        $this->vendor->rate(5, $this->user);
+        $this->vendor->rate(1, user::factory()->create());
 
-    $this->vendor->rate(5, $this->user);
-    $this->vendor->rate(1, user::factory()->create());
+        $this->assertEquals(3, $this->vendor->rating());
+    }
 
-    $this->assertEquals(3, $this->vendor->rating());
-   }
+   /** @test */
 
-   /** @test */ 
+    public function itCannotBeRatedAbove5()
+    {
 
-   function it_cannot_be_rated_above_5()
-   {
+        $this->expectException(\InvalidArgumentException::class);
 
-    $this->expectException(\InvalidArgumentException::class);
+        $this->vendor->rate(6);
+    }
 
-    $this->vendor->rate(6);
-   }
+   /** @test */
 
-   /** @test */ 
+    public function itCannotBeRatedBelow1()
+    {
 
-   function it_cannot_be_rated_below_1()
-   {
+        $this->expectException(\InvalidArgumentException::class);
 
-    $this->expectException(\InvalidArgumentException::class);
+        $this->vendor->rate(-1);
+    }
 
-    $this->vendor->rate(-1);
-   }
+   /** @test */
 
-   /** @test */ 
+    public function itCanOnlyBeRatedOncePerUser()
+    {
+        $this->actingAs($this->user);
 
-   function it_can_only_be_rated_once_per_user()
-   {
-    $this->actingAs($this->user);
+        $this->vendor->rate(5);
+        $this->vendor->rate(1);
 
-    $this->vendor->rate(5);
-    $this->vendor->rate(1);
-
-    $this->assertEquals(1, $this->vendor->rating());
-
-   }
-
-
-
+        $this->assertEquals(1, $this->vendor->rating());
+    }
 }

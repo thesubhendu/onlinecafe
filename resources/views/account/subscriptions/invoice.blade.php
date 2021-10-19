@@ -1,4 +1,4 @@
-@extends('layouts.account')
+@extends('layout.account')
 
 @section('account')
 <div class="card">

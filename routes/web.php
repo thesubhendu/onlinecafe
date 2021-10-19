@@ -45,7 +45,7 @@ Route::group(['namespace' => 'Subscriptions'], function () {
 });
 
 Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
-    Route::get('/', [AccountController::class, 'index'])->name('account');
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
 });
 
 require(__DIR__ . '/partials/_manage-subscriptions.php');

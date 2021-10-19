@@ -15,70 +15,64 @@ class VendorRatingTest extends TestCase
 
     /** @test */
 
-    function it_cannot_be_rated_by_guests()
+    public function itCannotBeRatedByGuests()
     {
-        
+
         $vendor = Vendor::factory()->create();
        //Vendor is rated at 5
-       $this->post("/vendor/{$vendor->id}/rate")->assertRedirect('login');
+        $this->post("/vendor/{$vendor->id}/rate")->assertRedirect('login');
 
-       $this->assertEmpty($vendor->ratings);
+        $this->assertEmpty($vendor->ratings);
     }
 
    /** @test */
 
-   function it_can_be_rated_by_authenticated_users()
-   {
+    public function itCanBeRatedByAuthenticatedUsers()
+    {
         // a user is signed in
         $this->actingAs(
             $user = User::factory()->create()
         );
         // We have a Vendor
-       $vendor = Vendor::factory()->create();
+        $vendor = Vendor::factory()->create();
        //Vendor is rated at 5
-       $this->post("/vendor/{$vendor->id}/rate", ['rating' => 5]);
+        $this->post("/vendor/{$vendor->id}/rate", ['rating' => 5]);
        // The Vendor's rating should be 5
-       $this->assertEquals(5, $vendor->rating());
-
-
-   }
+        $this->assertEquals(5, $vendor->rating());
+    }
 
    /** @test */
 
-   function it_can_update_a_users_rating()
-   {
+    public function itCanUpdateAUsersRating()
+    {
         // a user is signed in
         $this->actingAs(
             $user = User::factory()->create()
         );
         // We have a Vendor
-       $vendor = Vendor::factory()->create();
+        $vendor = Vendor::factory()->create();
        //Vendor is rated at 5
-       $this->post("/vendor/{$vendor->id}/rate", ['rating' => 5]);
+        $this->post("/vendor/{$vendor->id}/rate", ['rating' => 5]);
        // The Vendor's rating should be 5
-       $this->assertEquals(5, $vendor->rating());
+        $this->assertEquals(5, $vendor->rating());
         // the user then rates the vendor should be 1
     //    $this->post("/vendor/{$vendor->id}/rate", ['rating' => 1]);
     //      // the vendor's rating should be 1
     //    $this->assertEquals(1, $vendor->rating());
-
-
-
-
-   }
+    }
 
 /** @test */
 
-function it_requires_a_valid_rating()
-{
-    $this->actingAs(
-        $user = User::factory()->create()
-    );
+    public function itRequiresAValidRating()
+    {
+        $this->actingAs(
+            $user = User::factory()->create()
+        );
     // We have a Vendor
-   $vendor = Vendor::factory()->create();
+        $vendor = Vendor::factory()->create();
    //Vendor is rated at 5
-   $this->post("/vendor/{$vendor->id}/rate")->assertSessionHasErrors('rating');
+        $this->post("/vendor/{$vendor->id}/rate")->assertSessionHasErrors('rating');
 
-   $this->post("/vendor/{$vendor->id}/rate", ['rating' => 'foo'])->assertSessionHasErrors('rating');
-}
+        $this->post("/vendor/{$vendor->id}/rate", ['rating' => 'foo'])->assertSessionHasErrors('rating');
+    }
 }

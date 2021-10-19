@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class SubscriptionCardController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return view('account.subscriptions.card', [
             'intent' => $request->user()->createSetupIntent()
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         $this->validate($request, [
             'token' => 'required'

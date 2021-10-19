@@ -23,6 +23,7 @@ class SubscriptionCancelController extends Controller
         $this->authorize('cancel', $subscription = $request
         ->user()->subscription('subscribed'));
 
+
         $subscription->cancel();
 
         return redirect()->route('account.subscriptions');
