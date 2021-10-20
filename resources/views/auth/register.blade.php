@@ -1,77 +1,72 @@
-@extends('layout.app')
-@section('content')
-<main role="main" class="">
-  <div class="row">
-      <div class="container mb-5">
-            <div class="card-header">
-                <h1>Register</h1>
-            </div>
-          <form action="{{ route('register') }}" method="post" class="needs-validation" novalidate>
-              @csrf
-              <label for="name" class="form-label">Name</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text" id="nameGroupPrepend"><i class="far fa-user"></i></span>
-                <input type="text" class="form-control @error('name') border-danger @enderror" name="name" placeholder="Enter your fullname..." id="name" value="{{ old('name')}}" required>
-                @error('name')
-                <div class="text-danger mt-2 text-sm">
-                  {{ $message }}
+
+<x-guest-layout>
+    <x-jet-authentication-card>
+        <x-slot name="logo">
+            <x-jet-authentication-card-logo />
+        </x-slot>
+
+        <x-jet-validation-errors class="mb-3" />
+
+        <div class="card-body">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Name') }}" />
+
+                    <x-jet-input class="{{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name"
+                                 :value="old('name')" required autofocus autocomplete="name" />
+                    <x-jet-input-error for="name"></x-jet-input-error>
                 </div>
-                @enderror
-              </div>
-                <label for="email" class="form-label">Email</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="emailGroupPrepend"><i class="fas fa-at"></i></span>
-                  <input type="email" class="form-control @error('email') border-danger @enderror" name="email" placeholder="Enter your email address..." id="email_username" value="{{ old('email')}}" required>
-                  @error('email')
-                  <div class="text-danger mt-2 text-sm">
-                    {{ $message }}
-                  </div>
-                  @enderror
+
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Email') }}" />
+
+                    <x-jet-input class="{{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email"
+                                 :value="old('email')" required />
+                    <x-jet-input-error for="email"></x-jet-input-error>
                 </div>
-                <label for="mobile" class="form-label">Mobile</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="mobileGroupPrepend"><i class="fas fa-mobile-alt"></i></span>
-                  <input type="text" class="form-control @error('mobile') border-danger @enderror" name="mobile" placeholder="Enter your mobile..." id="mobile" value="{{ old('mobile')}}" required>
-                  @error('mobile')
-                  <div class="text-danger mt-2 text-sm">
-                    {{ $message }}
-                  </div>
-                  @enderror
+
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Password') }}" />
+
+                    <x-jet-input class="{{ $errors->has('password') ? 'is-invalid' : '' }}" type="password"
+                                 name="password" required autocomplete="new-password" />
+                    <x-jet-input-error for="password"></x-jet-input-error>
                 </div>
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="passwordGroupPrepend"><i class="fas fa-key"></i></span>
-                  <input type="password" class="form-control @error('password') border-danger @enderror" name="password" id="password" aria-describedby="passwordGroupPrepend" required>
-                  @error('password')
-                  <div class="text-danger mt-2 text-sm">
-                      {{ $message }}
+
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Confirm Password') }}" />
+
+                    <x-jet-input class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" />
+                </div>
+
+                @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                    <div class="mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <x-jet-checkbox id="terms" name="terms" />
+                            <label class="custom-control-label" for="terms">
+                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                            'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'">'.__('Terms of Service').'</a>',
+                                            'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'">'.__('Privacy Policy').'</a>',
+                                    ]) !!}
+                            </label>
+                        </div>
                     </div>
-                    @enderror
+                @endif
+
+                <div class="mb-0">
+                    <div class="d-flex justify-content-end align-items-baseline">
+                        <a class="text-muted me-3 text-decoration-none" href="{{ route('login') }}">
+                            {{ __('Already registered?') }}
+                        </a>
+
+                        <x-jet-button>
+                            {{ __('Register') }}
+                        </x-jet-button>
+                    </div>
                 </div>
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="confirmGroupPrepend"><i class="fas fa-key"></i></span>
-                  <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" aria-describedby="confirmGroupPrepend" required>
-                  <div class="invalid-feedback">
-                    confirm password
-                  </div>
-                </div>
-                {{-- <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                  <label class="form-check-label" for="invalidCheck">
-                    Agree to terms and conditions
-                  </label>
-                  <div class="invalid-feedback">
-                    You must agree before submitting.
-                  </div>
-                </div>
-              </div> --}}
-              <div class="">
-                  <button class="btn btn-success mt-2" type="submit">Register</button>
-              </div>
             </form>
-      </div> <!-- /.container -->
-  </div> <!-- /.row -->
-</main>
-@endsection
+        </div>
+    </x-jet-authentication-card>
+</x-guest-layout>

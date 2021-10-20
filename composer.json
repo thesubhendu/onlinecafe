@@ -15,8 +15,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/cashier": "^13.5",
         "laravel/framework": "^8.12",
+        "laravel/jetstream": "^2.4",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.6",
+        "livewire/livewire": "^2.5",
         "orangehill/iseed": "^3.0",
         "sparkeleven/abn-lookup": "^1.0",
         "spatie/opening-hours": "^2.10",
@@ -28,6 +29,7 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
+        "nascent-africa/jetstrap": "^2.5",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },

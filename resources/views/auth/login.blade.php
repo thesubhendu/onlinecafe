@@ -1,64 +1,60 @@
-@extends('layout.app')
-@section('content')
-<main role="main" class="">
-  <div class="container">
-    <h1>Login</h1>
-    <div class="row mb-5">    
-      <div class="justify-center p-3 border-rounded">
-          @if (session('status'))
-          <div class="alert alert-danger">
-              {{ session('status')}}
-          </div>
-          @endif
-      </div>
-          <form action="{{ route('login') }}" method="post" class="needs-validation" novalidate>
-              @csrf
-                <label for="email_username" class="form-label">Email</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="inputGroupPrepend">@</span>
-                  <input type="email" class="form-control @error('email') border-danger @enderror" name="email" placeholder="Enter your email address..." id="email_username" value="{{ old('email')}}" aria-describedby="inputGroupPrepend" required>
-                  @error('email')
-                  <div class="text-danger mt-2 text-sm">
-                    {{ $message }}
-                  </div>
-                  @enderror
+<x-guest-layout>
+    <x-jet-authentication-card>
+        <x-slot name="logo">
+            <x-jet-authentication-card-logo />
+        </x-slot>
+
+        <div class="card-body">
+
+            <x-jet-validation-errors class="mb-3 rounded-0" />
+
+            @if (session('status'))
+                <div class="alert alert-success mb-3 rounded-0" role="alert">
+                    {{ session('status') }}
                 </div>
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-key"></i></span>
-                  <input type="password" class="form-control @error('password') border-danger @enderror" name="password" id="password" aria-describedby="inputGroupPrepend" required>
-                    @error('password')
-                    <div class="text-danger mt-2 text-sm">
-                        {{ $message }}
+            @endif
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Email') }}" />
+
+                    <x-jet-input class="{{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
+                                 name="email" :value="old('email')" required />
+                    <x-jet-input-error for="email"></x-jet-input-error>
+                </div>
+
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Password') }}" />
+
+                    <x-jet-input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="password"
+                                 name="password" required autocomplete="current-password" />
+                    <x-jet-input-error for="password"></x-jet-input-error>
+                </div>
+
+                <div class="mb-3">
+                    <div class="custom-control custom-checkbox">
+                        <x-jet-checkbox id="remember_me" name="remember" />
+                        <label class="custom-control-label" for="remember_me">
+                            {{ __('Remember Me') }}
+                        </label>
                     </div>
-                    @enderror
                 </div>
-                <div class="input-group mb-3">
-                    <div class="d-flex mt-2 ">
-                      <input type="checkbox" name="remember" id="remember" class="mr-1">
-                      <label for="remember">Remember Me</label>
+
+                <div class="mb-0">
+                    <div class="d-flex justify-content-end align-items-baseline">
+                        @if (Route::has('password.request'))
+                            <a class="text-muted me-3" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+
+                        <x-jet-button>
+                            {{ __('Log in') }}
+                        </x-jet-button>
                     </div>
-      
-                </div>
-                {{-- <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                  <label class="form-check-label" for="invalidCheck">
-                    Agree to terms and conditions
-                  </label>
-                  <div class="invalid-feedback">
-                    You must agree before submitting.
-                  </div>
-                </div>
-              </div> --}}
-              <div class="">
-                  <button class="btn btn-success btn-block mt-2" type="submit">Login</button>
                 </div>
             </form>
-    </div><!-- /.row -->
-  </div><!-- /.container -->
-</main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-@endsection
+        </div>
+    </x-jet-authentication-card>
+</x-guest-layout>
