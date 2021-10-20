@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -129,25 +129,5 @@ class CartController extends Controller
     //     return back()->with('success_message', 'Item has been removed from your cart');
     // }
 
-    /**
-     * move to save for later.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function saveItemForLater($id)
-    {
-        $item = Cart::get($id);
 
-        Cart::remove($id);
-
-        Cart::instance('saveForLater')->add(['id' => $item->id, 'name' => $item->name, 'qty' => 1, 'price' => $item->price, 'options' => [
-            'milk' => 'Full Cream',
-            'sugar' => 1,
-            'syrup' => 'No Thanks'
-        ]])
-            ->associate(Product::class);
-
-        return back()->with('success_message', 'Item has been moved to save for later');
-    }
 }
