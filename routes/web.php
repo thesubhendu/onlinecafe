@@ -70,6 +70,8 @@ Route::middleware('auth')->group(function() {
     Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
         'store' => 'order.store'
     ]);
+
+    Route::get('/order-submitted/{order}', \App\Http\Livewire\OrderSubmitted::class)->name('order.submitted');
 });
 
 Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
@@ -86,8 +88,6 @@ Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::cl
 
 Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
 Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
-
-Route::view('/thankyou', 'thankyou')->name('order.thankyou');
 
 
 Route::get('empty', function () {

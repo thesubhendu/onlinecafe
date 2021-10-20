@@ -201,11 +201,7 @@ class OrderController extends Controller
         // empty cart
         Cart::destroy();
 
-        // redirect to order submitted page
-        // event(new VendorConfirmsOrder($vendor, $order, $user));
-        return view('order_submitted')
-            ->with('order', $order->products);
-        // ->with('orderProducts', $orderProducts);
+        return redirect()->route('order.submitted', $order);
     }
 
     /**
