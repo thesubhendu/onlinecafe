@@ -1,6 +1,0 @@
-Laravel PHPUNIT testing
-
-** Run test **
-$ php vendor/phpunit/phpunit/phpunit
-
-Review system restart 13:28

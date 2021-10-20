@@ -1,9 +1,0 @@
-$order->items()->newPivotStatement()->insert(
-    Cart::content()->map(function ($item) use ($order) {
-        return [
-            'order_id' => $order->id,
-            'item_id' => $item->id,
-            'qty' => $item->qty,
-        ];
-    })->all()
-);
