@@ -1,7 +1,7 @@
 @component('mail::message')
-# whoo! {{auth()->user()->name}},
+# whoo!
 
-your order 
+Your order
 @foreach($order->products as $product)
 <p class="card-text">{{$product->pivot->quantity}} x {{$product->productName}}</p>
 <span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span>

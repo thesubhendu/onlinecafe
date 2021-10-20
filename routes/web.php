@@ -62,12 +62,15 @@ Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproduc
 Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
 Route::get('/confirm/{order}/update', [ConfirmOrderController::class, 'update'])->name('confirm_order.update');
-Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create')->middleware('auth');
 
+//Auth Routes
+Route::middleware('auth')->group(function() {
 
-Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
-    'store' => 'order.store'
-])->middleware('auth');
+    Route::get('orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+    Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
+        'store' => 'order.store'
+    ]);
+});
 
 Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 

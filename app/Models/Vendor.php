@@ -65,4 +65,9 @@ class Vendor extends Model
     {
         return $this->ratings->avg('rating');
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }
