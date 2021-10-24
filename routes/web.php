@@ -9,6 +9,7 @@ use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PhoneVerificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
@@ -74,7 +75,8 @@ Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart
 
 Route::post('/cart/saveforlater/{product}', [CartSaveForLaterController::class, 'save'])->name('saveforlater.save');
 Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
-Route::post('/saveforlater/addtocart/{product}', [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlater.addtocart');
+Route::post('/saveforlater/addtocart/{product}',
+    [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlater.addtocart');
 
 
 Route::get('/cards', [CardsController::class, 'index'])->name('cards.index')->middleware('auth');
@@ -82,7 +84,16 @@ Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('ve
 
 
 Route::view('/comment', 'comment');
-Route::get('vendor-onboarding', \App\Http\Livewire\VendorOnboarding::class)->name('register-business.create')->middleware('auth');
+Route::get('vendor-onboarding',
+    \App\Http\Livewire\VendorOnboarding::class)->name('register-business.create')->middleware('auth');
+
+
+//send mobile verification code
+Route::post('phone-verification/send',
+    [PhoneVerificationController::class, 'send'])->name('phone-verification.send')//    ->middleware(['throttle:3,1'])
+;
+Route::post('phone-verification/verify',
+    [PhoneVerificationController::class, 'verify'])->name('phone-verification.verify');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

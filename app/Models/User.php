@@ -2,20 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Card;
-use App\Models\Like;
-use App\Models\Vendor;
-use Laravel\Cashier\Billable;
-use Laravel\Cashier\Subscription;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 
-class User extends \TCG\Voyager\Models\User
+class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
     use HasFactory;
     use HasProfilePhoto;
@@ -99,5 +94,15 @@ class User extends \TCG\Voyager\Models\User
             'id',
             'stripe_price'
         );
+    }
+
+    public function hasVerifiedPhone()
+    {
+        return ! is_null($this->phone_verified_at);
+    }
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->mobile;
     }
 }

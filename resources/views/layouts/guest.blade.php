@@ -17,6 +17,10 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="bg-light font-sans antialiased">
-        {{ $slot }}
+
+    <x-validation-errors></x-validation-errors>
+    <x-message></x-message>
+
+    {{ $slot }}
     </body>
 </html>

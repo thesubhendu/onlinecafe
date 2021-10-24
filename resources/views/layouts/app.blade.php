@@ -19,13 +19,15 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased bg-light">
-        <x-jet-banner />
-        @livewire('navigation-menu')
+    <x-jet-banner/>
+    @livewire('navigation-menu')
 
-        <!-- Page Heading -->
-        <header class="d-flex py-3 bg-white shadow-sm border-bottom">
-            <div class="container">
-                {{ $header }}
+    <x-validation-errors></x-validation-errors>
+    <x-message></x-message>
+    <!-- Page Heading -->
+    <header class="d-flex py-3 bg-white shadow-sm border-bottom">
+        <div class="container">
+            {{ $header }}
             </div>
         </header>
 
