@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
@@ -51,13 +49,11 @@ class Order extends Model
         return $this->hasMany(Card::class);
     }
 
-    public function orderConfirmed(Order $order)
+    public function confirm()
     {
-        if ($order) {
-
-            $this->is_confirmed = 1;
-            $this->save();
-        }
+        $this->confirmed_at = now();
+        $this->confirmed_by = auth()->id();
+        $this->save();
 
         return $this;
     }

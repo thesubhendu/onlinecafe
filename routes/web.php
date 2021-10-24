@@ -53,7 +53,8 @@ Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproduc
 
 Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
 
-Route::get('/confirm/{order}/update', [ConfirmOrderController::class, 'update'])->name('confirm_order.update');
+Route::get('/confirm/{order}/update',
+    [ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
 
 //Auth Routes
 Route::middleware('auth')->group(function() {

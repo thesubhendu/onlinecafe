@@ -3,13 +3,11 @@
 namespace App\Mail;
 
 use App\Models\Order;
-use App\Models\Vendor;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class orderConfirmed extends Mailable
+class OrderConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,10 +19,10 @@ class orderConfirmed extends Mailable
      *
      * @return void
      */
-    public function __construct(Order $order, Vendor $vendor)
+    public function __construct(Order $order)
     {
-        $this->order = $order;
-        $this->vendor = $vendor;
+        $this->order  = $order;
+        $this->vendor = $order->vendor;
     }
 
     /**

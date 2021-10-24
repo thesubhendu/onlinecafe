@@ -17,17 +17,16 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->dateTime('date')->default(now());
             $table->string('order_number');
-            $table->boolean('is_confirmed')->default(false);
-            $table->boolean('confirmed_at')->nullable();
-            $table->unsignedBigInteger('conformed_by')->nullable()
-                ->constrained()->onDelete('cascade');
+            $table->timestamp('confirmed_at')->nullable();
+            $table->unsignedBigInteger('confirmed_by')->nullable()
+                  ->constrained()->onDelete('cascade');
             $table->enum('payment_method', ['in_store', 'credit_card'])
-                ->default('in_store');
+                  ->default('in_store');
             $table->integer('order_total');
             $table->unsignedBigInteger('user_id')
-                ->constrained()->onDelete('cascade');
+                  ->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id')
-                ->constrained()->onDelete('cascade');
+                  ->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
