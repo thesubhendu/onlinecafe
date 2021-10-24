@@ -41,7 +41,6 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
 });
 
 require(__DIR__ . '/partials/_manage-subscriptions.php');
-//require(__DIR__ . '/partials/_auth.php');
 
 Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
 Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy']);

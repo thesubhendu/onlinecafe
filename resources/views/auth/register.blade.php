@@ -20,18 +20,26 @@
                 </div>
 
                 <div class="mb-3">
-                    <x-jet-label value="{{ __('Email') }}" />
+                    <x-jet-label value="{{ __('Email') }}"/>
 
                     <x-jet-input class="{{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email"
-                                 :value="old('email')" required />
+                                 :value="old('email')" required/>
                     <x-jet-input-error for="email"></x-jet-input-error>
                 </div>
 
                 <div class="mb-3">
-                    <x-jet-label value="{{ __('Password') }}" />
+                    <x-jet-label value="{{ __('Mobile') }}"/>
+
+                    <x-jet-input class="{{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="number" name="mobile"
+                                 :value="old('mobile')" required/>
+                    <x-jet-input-error for="email"></x-jet-input-error>
+                </div>
+
+                <div class="mb-3">
+                    <x-jet-label value="{{ __('Password') }}"/>
 
                     <x-jet-input class="{{ $errors->has('password') ? 'is-invalid' : '' }}" type="password"
-                                 name="password" required autocomplete="new-password" />
+                                 name="password" required autocomplete="new-password"/>
                     <x-jet-input-error for="password"></x-jet-input-error>
                 </div>
 
