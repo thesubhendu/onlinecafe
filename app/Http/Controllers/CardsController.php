@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
-use App\Models\User;
-use App\Models\Stamp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +15,6 @@ class CardsController extends Controller
      */
     public function index()
     {
-        if(! auth()->user()) {
-            return view ('cards_index');
-        }
-
         $cards = Card::where('user_id', Auth::id())
             ->with('vendor')
             ->with('stamps')

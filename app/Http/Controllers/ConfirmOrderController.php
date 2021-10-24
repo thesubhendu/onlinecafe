@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Vendor;
-use App\Mail\orderConfirmed;
 use Illuminate\Http\Request;
-use App\Events\VendorConfirmsOrder;
-use Illuminate\Support\Facades\Mail;
 
 class ConfirmOrderController extends Controller
 {
@@ -35,7 +32,5 @@ class ConfirmOrderController extends Controller
 
         return $order->vendor->vendor_name; $order->order_number;
 
-        // return redirect()->action([VendorOrdersController::class, 'index'], $vendor);
-        // return redirect()->action([VendorOrdersController::class, 'index'], $order);
     }
 }

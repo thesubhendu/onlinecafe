@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartSaveForLaterController extends Controller
@@ -12,70 +12,30 @@ class CartSaveForLaterController extends Controller
     {
         $this->middleware(['auth']);
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * move to save for later.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function save($id)
     {
-        //
-    }
+        $item = Cart::get($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        Cart::remove($id);
+
+        Cart::instance('saveForLater')->add([
+            'id' => $item->id, 'name' => $item->name, 'qty' => 1, 'price' => $item->price, 'options' => [
+                'milk'  => 'Full Cream',
+                'sugar' => 1,
+                'syrup' => 'No Thanks',
+            ],
+        ])
+            ->associate(Product::class);
+
+        return back()->with('success_message', 'Item has been moved to save for later');
     }
 
     /**
@@ -100,7 +60,7 @@ class CartSaveForLaterController extends Controller
     public function moveToCart($id)
     {
         $item = Cart::instance('saveForLater')->get($id);
-        
+
         Cart::instance('saveForLater')->remove($id);
 
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price)
