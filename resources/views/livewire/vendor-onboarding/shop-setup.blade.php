@@ -14,9 +14,11 @@
                     <input class="form-control" type="text" wire:model.lazy="form.shop_name">
                     @error('form.shop_name') <span class="text-danger">{{ $message }}</span> @enderror
 
-                    <label for="form.description" class="form-label">Description</label>
-                    <textarea class="form-control"  wire:model.lazy="form.description"> </textarea>
-                    @error('form.description') <span class="text-danger">{{ $message }}</span> @enderror
+                    <div class="form-group">
+                        <label for="form.description" class="form-label">Description</label>
+                        <textarea class="form-control" wire:model.lazy="form.description"> </textarea>
+                        @error('form.description') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
 
 
                     <div class="form-group">
@@ -25,12 +27,36 @@
                         @error('logo') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
+                    <strong class="h4 mb-3">Add Opening Hours</strong>
 
-                    <div class="form-group">
-                        <label for="form.opening_hours" class="form-label">Add Opening Hours</label>
-                        <input class="form-control" type="text" wire:model="form.opening_hours">
-                        @error('form.opening_hours') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
+                    @foreach($daysInWeek as $day)
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">{{$day}}</label>
+                            <div class="col-sm-3">
+                                <select class="form-control" wire:model="form.opening_hours.{{$day}}.from">
+                                    @foreach($openingHoursOptions as $option)
+                                        <option>{{$option}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <select class="form-control" wire:model="form.opening_hours.{{$day}}.to">
+                                    @foreach($openingHoursOptions as $option)
+                                        <option>{{$option}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            @if($day == 'Mon')
+                                <div class="col-sm-3">
+                                    <button type="button" wire:click.prevent="applyTimesToAllDays">+ Apply times to all
+                                        days
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
 
 
                     <button type="submit" class="btn btn-success mt-2">Setup</button>
@@ -38,5 +64,5 @@
             </div>
         </div>
 
-    </div>
+</div>
 
