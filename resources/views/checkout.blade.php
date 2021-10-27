@@ -1,6 +1,5 @@
-@extends('layout.app')
-@section('content')
-<div  class="container py-4 mb-5">
+<x-app-layout>
+    <div class="container py-4 mb-5">
 
         <div class="mt-2">
             @if (session()->has('success_message'))
@@ -100,7 +99,7 @@
                             <p>Subtotal <span class="price" style="color:black"><b>${{Cart::subtotal()}}</b></span></p>
                             <p>Tax <span class="price" style="color:black"><b>${{Cart::tax()}}</b></span></p>
                             <p>Total <span class="price" style="color:black"><b>${{Cart::total()}}</b></span></p>
-                            
+
                             <input type="hidden" id="vendor" name="vendor" value="{{ $item->model->vendor_id}}">
                             <input type="hidden" id="milk" name="milk" value="{{ $item->options->milk}}">
                             <input type="hidden" id="sugar" name="sugar" value="{{ $item->options->sugar}}">
@@ -113,8 +112,8 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-</div>
-</main><!-- /.container -->
-@endsection
+                </form>
+            </div>
+    </div>
+    </main><!-- /.container -->
+</x-app-layout>

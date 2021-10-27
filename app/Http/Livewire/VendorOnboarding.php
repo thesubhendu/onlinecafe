@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class VendorOnboarding extends Component
 {
-    public $step = 'register';
+    public $step;
 
     private $allSteps =
         [
@@ -17,14 +17,18 @@ class VendorOnboarding extends Component
 
     protected $listeners = [
         'vendorRegistered' => 'onVendorRegistration',
-        'paymentSuccess' => 'onPaymentSuccess',
-        'shopSetup' => 'onShopSetup',
+        'paymentSuccess'   => 'onPaymentSuccess',
+        'shopSetup'        => 'onShopSetup',
     ];
+
+    public function mount()
+    {
+        $this->step = 'shop-setup';
+    }
 
     public function render()
     {
-        return view('livewire.vendor-onboarding')
-            ->extends('layout.app');
+        return view('livewire.vendor-onboarding');
     }
 
     public function updateStep($step)

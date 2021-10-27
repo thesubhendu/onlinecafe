@@ -1,15 +1,14 @@
-@extends('layout.app')
-@section('content')
-<div  class="container py-4 mb-5">
-    <div class="vendor-index mt-4">
-        <div class="container" style="border: none;">
-            <div class="modal-header" style="border: none;">
-                <h3 class="modal-title" id="titleLabel">New Order</h3>
-                <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
+<x-app-layout>
+    <div class="container py-4 mb-5">
+        <div class="vendor-index mt-4">
+            <div class="container" style="border: none;">
+                <div class="modal-header" style="border: none;">
+                    <h3 class="modal-title" id="titleLabel">New Order</h3>
+                    <a href="/" class="btn btn-success"><i class="fas fa-backward"></i></a>
+                </div>
             </div>
-        </div>
-        <div class="mt-2">
-            @if (session()->has('success_message'))
+            <div class="mt-2">
+                @if (session()->has('success_message'))
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
             </div>
@@ -122,19 +121,19 @@
                                         @csrf
                                         <button type="submit" class="btn btn-default"><i class="fas fa-cart-arrow-down text-info"></i></button>
                                     </form> --}}
-                                    
+
                                 </div>
                             </div>
                         {{-- </div> --}}
                 </div>
             </div>
             <div class="col-sm-12 d-flex p-2 justify-content-between align-items-center">
-                {{-- <form action="{{ route('cart.store', $product->rowId) }}" method="post"> 
+                {{-- <form action="{{ route('cart.store', $product->rowId) }}" method="post">
                     @csrf
                     <div class="form-group">
                         <input type="hidden" name="id" value="{{$product->id}}">
                         <input type="hidden" name="name" value="{{$product->productName}}">
-                        <input type="hidden" name="price" value="{{$product->productPrice}}"> 
+                        <input type="hidden" name="price" value="{{$product->productPrice}}">
                         <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
                         <input type="hidden" name="quantity" value="{{app('request')->input('quantity')}}">
                         <input type="hidden" name="milk" value="{{app('request')->input('milk')}}">
@@ -181,4 +180,4 @@
                  {{-- </div>     --}}
      {{--end vendor class --}}
 </div>{{-- end of contatiner--}}
-@endsection
+</x-app-layout>

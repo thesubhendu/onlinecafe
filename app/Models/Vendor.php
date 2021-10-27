@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Like;
-use App\Models\User;
-use App\Models\Order;
-use App\Models\Rating;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
     use HasFactory;
 
     protected $guarded = ['owner_id'];
+    protected $casts = [
+        'opening_hours' => 'array',
+    ];
 
     public function likedBy(User $user)
     {

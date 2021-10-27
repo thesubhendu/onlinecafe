@@ -17,7 +17,7 @@ class ShopSetup extends Component
         'opening_hours',
     ];
     public $openingHoursOptions = [];
-    public $daysInWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     public function mount()
     {
@@ -33,8 +33,9 @@ class ShopSetup extends Component
     private function initializeOpeningHours()
     {
         foreach ($this->daysInWeek as $day) {
-            $this->form['opening_hours'][$day]['from'] = '';
-            $this->form['opening_hours'][$day]['to']   = '';
+            $this->form['opening_hours'][$day]['from']      = '';
+            $this->form['opening_hours'][$day]['to']        = '';
+            $this->form['opening_hours'][$day]['is_active'] = true;
         }
     }
 
@@ -50,11 +51,11 @@ class ShopSetup extends Component
 
     public function applyTimesToAllDays()
     {
-        $referenceTimeFrom = $this->form['opening_hours']['Mon']['from'];
-        $referenceTimeTo   = $this->form['opening_hours']['Mon']['to'];
+        $referenceTimeFrom = $this->form['opening_hours']['Monday']['from'];
+        $referenceTimeTo   = $this->form['opening_hours']['Monday']['to'];
 
         foreach ($this->daysInWeek as $day) {
-            if ($day != 'Mon') {
+            if ($day != 'Monday') {
                 $this->form['opening_hours'][$day]['from'] = $referenceTimeFrom;
                 $this->form['opening_hours'][$day]['to']   = $referenceTimeTo;
             }
@@ -64,7 +65,9 @@ class ShopSetup extends Component
     public function submit()
     {
         $this->validate([
-            'form.shop_name' => 'required',
+            'form.shop_name'     => 'required',
+            'form.description'   => 'required',
+            'form.opening_hours' => 'required',
         ]);
 
         $shop = auth()->user()->shop()->first();
@@ -77,7 +80,7 @@ class ShopSetup extends Component
         $shop->update([
             'shop_name'     => $this->form['shop_name'],
             'description'   => $this->form['description'],
-            'opening_hours' => json_encode($this->form['opening_hours']),
+            'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
         ]);
 
         if ( ! empty($this->logo)) {
@@ -87,5 +90,17 @@ class ShopSetup extends Component
         }
 
         return redirect()->route('vendor.show', $shop->id);
+    }
+
+    private function formatOpeningHours(array $opening_hours)
+    {
+        return collect($opening_hours)->map(function ($item, $key) use ($opening_hours) {
+            $formatted         = $opening_hours[$key];
+            $formatted['from'] = Carbon::parse($item['from'])->format('H:i');
+            $formatted['to']   = Carbon::parse($item['to'])->format('H:i');
+
+            return $formatted;
+        });
+
     }
 }

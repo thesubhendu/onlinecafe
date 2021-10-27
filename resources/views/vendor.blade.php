@@ -1,21 +1,24 @@
-@extends('layout.app')
-@section('content')
-    <div class="continer">
-      <div class="card">
-        <img src="{{asset('storage/img/vendor/'.$vendor->vendor_image)}}" class="card-img-top w-100" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{$vendor->vendor_name}}</h5>
-          <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}, {{$vendor->state}}, {{$vendor->pc}}</p>
-          <p class="card-text"><i class="fas fa-at px-1"></i>{{$vendor->email}}</p>
-          <div class="d-flex justify-content-between">
-            <div class="rating">
-            <span><i class="fas fa-coffee fa-xs checked"></i></span>
-            <span><i class="fas fa-coffee fa-xs checked"></i></span>
-            <span><i class="fas fa-coffee fa-xs checked"></i></span>
-            <span><i class="fas fa-coffee fa-xs unchecked"></i></span>
-            <span><i class="fas fa-coffee fa-xs unchecked"></i></span><span class="rating-avg badge rounded-pill bg-success mx-3 align-middle text-white"> 3.0</span>
-            <div>
-                <a class="small" href="{{ route('vendor_rating.index', $vendor) }}">leave review</a>
+<x-app-layout>
+    <div class="container">
+        <div class="card">
+            {{--        <img src="{{asset('storage/img/vendor/'.$vendor->vendor_image)}}" class="card-img-top w-100" alt="...">--}}
+
+            <div class="card-body">
+                <h5 class="card-title">{{$vendor->vendor_name}}</h5>
+                <h3>Shop Opening Status: {{$openingInfo}}</h3>
+                <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}
+                    , {{$vendor->state}}, {{$vendor->pc}}</p>
+                <p class="card-text"><i class="fas fa-at px-1"></i>{{$vendor->email}}</p>
+                <div class="d-flex justify-content-between">
+                    <span><i class="fas fa-coffee fa-xs checked"></i></span>
+                    <div class="rating">
+                        <span><i class="fas fa-coffee fa-xs checked"></i></span>
+                        <span><i class="fas fa-coffee fa-xs checked"></i></span>
+                        <span><i class="fas fa-coffee fa-xs unchecked"></i></span>
+                        <span><i class="fas fa-coffee fa-xs unchecked"></i></span><span
+                            class="rating-avg badge rounded-pill bg-success mx-3 align-middle text-white"> 3.0</span>
+                        <div>
+                            <a class="small" href="{{ route('vendor_rating.index', $vendor) }}">leave review</a>
             </div>
             </div>
             <div class="favourite">
@@ -124,14 +127,14 @@
               <div class="text-center">
                 <img src="/storage/img/cold_drink.png" class="img-fluid" alt="..." height="100" width="100">
               </div>
-              <div class="card-footer d-flex justify-content-between py-2 px-2">
-                <div class="card-text">name</div>
-                <div class="card-text">$0.00</div>
-                <a href="" class="btn btn-outline-success btn-sm"><i class="fas fa-cart-plus"></i></a>
-              </div>
+                <div class="card-footer d-flex justify-content-between py-2 px-2">
+                    <div class="card-text">name</div>
+                    <div class="card-text">$0.00</div>
+                    <a href="" class="btn btn-outline-success btn-sm"><i class="fas fa-cart-plus"></i></a>
+                </div>
             </div>
           </div>
         </div>
     </div>
-</div><!--container end-->
-@endsection
+    </div><!--container end-->
+</x-app-layout>

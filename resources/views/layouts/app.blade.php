@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         @livewireStyles
+        <script src="https://js.stripe.com/v3/"></script>
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
@@ -25,20 +26,20 @@
     <x-validation-errors></x-validation-errors>
     <x-message></x-message>
     <!-- Page Heading -->
-    <header class="d-flex py-3 bg-white shadow-sm border-bottom">
-        <div class="container">
-            {{ $header }}
-            </div>
-        </header>
+    {{--    <header class="d-flex py-3 bg-white shadow-sm border-bottom">--}}
+    {{--        <div class="container">--}}
+    {{--            {{ $header }}--}}
+    {{--        </div>--}}
+    {{--    </header>--}}
 
-        <!-- Page Content -->
-        <main class="container my-5">
-            {{ $slot }}
-        </main>
+    <!-- Page Content -->
+    <main class="container my-5">
+        {{ $slot }}
+    </main>
 
-        @stack('modals')
+    @stack('modals')
 
-        @livewireScripts
+    @livewireScripts
 
         @stack('scripts')
     </body>

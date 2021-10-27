@@ -1,5 +1,3 @@
-@extends('layout.app')
-
-@section('content')
+<x-app-layout>
     <h3>Comment here</h3>
-@endsection
+</x-app-layout>

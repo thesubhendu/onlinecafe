@@ -1,15 +1,14 @@
-@extends('layout.app')
-@section('content')
-<main role="main" class="container py-4 mb-5 border-0">
-    <div class="card mb-3 d-flex" style="max-width:1080px;" >
-        <div class="row g-0">
-          <div class="col-sm-4">
-            <img src="/storage/img/nostamp.png" class="img-fluid p-0" alt="..." height="100" width="100">
-          </div>
-          <div class="col-sm-8">
-            <div class="card-body">
-              <h5 class="card-title text-success">Featured</h5>
-              <p class="card-text text-muted">{{$featured}}</p>
+<x-app-layout>
+    <main role="main" class="container py-4 mb-5 border-0">
+        <div class="card mb-3 d-flex" style="max-width:1080px;">
+            <div class="row g-0">
+                <div class="col-sm-4">
+                    <img src="/storage/img/nostamp.png" class="img-fluid p-0" alt="..." height="100" width="100">
+                </div>
+                <div class="col-sm-8">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Featured</h5>
+                        <p class="card-text text-muted">{{$featured}}</p>
             </div>
           </div>
         </div>
@@ -51,5 +50,5 @@
             </div>
             @endforeach
     </div>
-  </main><!-- /.container -->
-  @endsection
+    </main><!-- /.container -->
+</x-app-layout>

@@ -1,12 +1,11 @@
-@extends('layout.app')
-@section('content')
-<main role="main">
-  <div class="container">
-    <div class="row">
-          <table class="table table-light table-striped table-borderless">
-            <thead>
-              <tr>
-                {{-- <th scope="col">#</th> --}}
+<x-app-layout>
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <table class="table table-light table-striped table-borderless">
+                    <thead>
+                    <tr>
+                        {{-- <th scope="col">#</th> --}}
                 {{-- <th scope="col">Venue</th> --}}
                 <th scope="col">Date</th>
                 <th scope="col">Image</th>
@@ -36,8 +35,8 @@
               @endforeach
               @endauth
             </tbody>
-          </table>
-    </div><!-- /.row -->
-  </div><!-- /.container -->
-</main>
-@endsection
+                </table>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </main>
+</x-app-layout>

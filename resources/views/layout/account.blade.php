@@ -1,12 +1,11 @@
-@extends('layout.app')
+<x-app-layout>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-3">
-            <ul class="nav flex-column mb-4">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('account') }}">Account</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <ul class="nav flex-column mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('account') }}">Account</a>
                 </li>
             </ul>
 
@@ -43,6 +42,6 @@
         <div class="col-md-9">
             @yield('account')
         </div>
+        </div>
     </div>
-</div>
-@endsection
+</x-app-layout>

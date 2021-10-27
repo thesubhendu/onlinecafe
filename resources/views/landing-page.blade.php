@@ -1,30 +1,27 @@
-@extends('layout.app')
-@section('content')
-<div id="showcase">
-  <div class="showcase-content">
-    <h1>Open Your Shop</h1>
-    <p>Set up your coffee shop</p>
-    <div class="d-flex justify-content-between">
-      {{-- <div class="mr-3">
-        <a href="#" class="btn btn-success ">Register My Shop</a>
-      </div> --}}
-      <div>
-        <a href="{{ route('subscriptions.plans') }}" class="btn btn-outline-light">Subscribe</a>
-      </div>
+<x-app-layout>
+
+    <div id="showcase">
+        <div class="showcase-content">
+            <h1>Open Your Shop</h1>
+            <p>Set up your coffee shop</p>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a href="{{ route('subscriptions.plans') }}" class="btn btn-primary">Subscribe</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-      <div class="container grid border-0">
+    <div class="container grid border-0">
         <div class="row justify-content-between mx-3">
-          <div class="grid-row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-            @foreach ($vendors as $vendor)
-              <div class="g-col-6">
-                  <div class="card h-100 mb-2 mt-2">
-                    <a class="" href="{{ route('vendor.show', $vendor) }}">
-                      <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
-                    </a>
-                      <div class="card-body">
-                        <a href="{{ route('vendor.show', $vendor) }}">
+            <div class="grid-row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                @foreach ($vendors as $vendor)
+                    <div class="g-col-6">
+                        <div class="card h-100 mb-2 mt-2">
+                            <a class="" href="{{ route('vendor.show', $vendor) }}">
+                                <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <a href="{{ route('vendor.show', $vendor) }}">
                           <h5 class="card-title">{{$vendor->vendor_name}}</h5>
                         </a>
                           <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}</p>
@@ -62,5 +59,6 @@
                   @endforeach
             </div>
         </div>
-      </div> <!--container end-->
-      @endsection
+    </div> <!--container end-->
+
+</x-app-layout>

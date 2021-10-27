@@ -24,7 +24,10 @@
             @endguest
             @auth
                 <li class="nav-item nav-right">
-                    <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline"> <i class="fas fa-shopping-cart"></i>@if (Cart::instance('default')->count() > 0)<span class="badge bg-light text-dark"> {{Cart::instance('default')->count()}}</span>@endif</a>
+                    <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline">
+                        <i class="fas fa-shopping-cart"></i>@if (Cart::instance('default')->count() > 0)<span
+                            class="badge bg-light text-dark"> {{Cart::instance('default')->count()}}</span>@endif
+                    </a>
                 </li>
             @endauth
             @auth
@@ -32,7 +35,11 @@
                     {{-- <a class="nav-link" href=""><i class="fas fa-user-circle"> </i></a> --}}
                 </li>
                 <li class="nav-item nav-right dropdown">
-                    <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/storage/img/users/{{ Auth::user()->avatar}}" class="mb-3 px-auto" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%;"> {{ auth()->user()->name }}</a>
+                    <a class="nav-link dropdown-toggle p-3" href="#" id="dropdown01" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><img
+                            src="/storage/img/users/{{ Auth::user()->avatar}}" class="mb-3 px-auto"
+                            style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%;"> {{ auth()->user()->name }}
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <!-- <a class="dropdown-item" href="#"><i class="far fa-folder"> Admin</i></a> -->
                         <a class="dropdown-item p-3" href="{{ route('subscriptions.plans') }}"><i class="fas fa-file-invoice-dollar"> Plans</i></a> <!--should only been seen if account is a vendor role-->

@@ -1,10 +1,9 @@
-@extends('layout.app')
-@section('content')
-<div class="container py-4 mb-5">
-    <div class="row>">
-        <div class="cart-index">
-            <div class="mt-2">
-                @if (session()->has('success_message'))
+<x-app-layout>
+    <div class="container py-4 mb-5">
+        <div class="row>">
+            <div class="cart-index">
+                <div class="mt-2">
+                    @if (session()->has('success_message'))
                 <div class="alert alert-success">
                     {{ session()->get('success_message') }}
                 </div>
@@ -71,7 +70,7 @@
                             <div class="col cart-totals-left alert alert-danger">
                                 Please note that payment will be required on collection from "(vendor name goes here)"
                             </div>
-                
+
                             <div class="col cart-totals-right align-items-start">
                                 <div>
                                     <span>Subtotal</span> <span class="float-right">$<?php echo Cart::subtotal(); ?></span><br>
@@ -84,28 +83,30 @@
                         <hr>
                         <div class="cart-buttons d-flex justify-content-between">
                             @foreach(Cart::content() as $vendor)
-                            <a href="{{route('vendor.products', $vendor->model->vendor_id )}}" class="btn btn-outline-success">Continue Shopping</a>
+                                <a href="{{route('vendor.products', $vendor->model->vendor_id )}}"
+                                   class="btn btn-outline-success">Continue Shopping</a>
                             @endforeach
                             <a href="{{route('checkout.index')}}" class="btn btn-success">Proceed to Checkout</a>
                         </div>
-                    </div>
-            @else
-                <h3> Your Cart is Empty </h3>
-                <div class="cart-buttons d-flex justify-content-between">
-                    <a href="/" class="btn btn-outline-success">Continue Shopping</a>
                 </div>
-            @endif 
-            </div><!--end of new cart-->           
-                {{-- Save for later --}}
-                @if (Cart::instance('saveForLater')->count() > 0)
+                @else
+                    <h3> Your Cart is Empty </h3>
+                    <div class="cart-buttons d-flex justify-content-between">
+                        <a href="/" class="btn btn-outline-success">Continue Shopping</a>
+                    </div>
+                @endif
+            </div><!--end of new cart-->
+            {{-- Save for later --}}
+            @if (Cart::instance('saveForLater')->count() > 0)
                 <div class=container>
                     <div class="row">
                         <h3 class="mt-4">Saved for later</h3>
                         @foreach(Cart::instance('saveForLater')->content() as $item)
-                        <div class="d-flex saveForLater mx-auto mb-5">
+                            <div class="d-flex saveForLater mx-auto mb-5">
                                 <div class="card mt-4" style="width: 5rem;">
                                     <div class="mr-1">
-                                        <img src="{{asset('storage/img/nostamp.png')}}" class="" alt="product" width="70" height="70">
+                                        <img src="{{asset('storage/img/nostamp.png')}}" class="" alt="product"
+                                             width="70" height="70">
                                     </div>
                                     {{-- <img src="{{asset('storage/img/nostamp.png')}}" class="card-img-top" alt="product" width="70"> --}}
                                     <div class="card-body">
@@ -120,17 +121,18 @@
                                     <form action="{{ route('saveforlater.remove', $item->rowId) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
+                                        <button type="submit" class="btn btn-default"><i
+                                                class="fa fa-trash mb-1 text-danger"></i></button>
                                     </form>
                                 </div>
+                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
                     </div>
+                    @else
+
+                    @endif
                 </div>
-                @else
-                
-                @endif     
-            </div>    
         </div> {{--end cart row --}}
-</div>{{-- end of contatiner--}}
-@endsection
+    </div>{{-- end of contatiner--}}
+</x-app-layout>

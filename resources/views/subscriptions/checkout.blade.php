@@ -1,10 +1,9 @@
-@extends('layout.app')
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Checkout') }}</div>
+<x-app-layout>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Checkout') }}</div>
                 <div class="card-body">
                     <div class="container py-3">
                         <main>
@@ -41,8 +40,8 @@
 
                     </div>
                 </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-app-layout>

@@ -1,15 +1,14 @@
-@extends('layout.app')
-@section('content')
-<main role="main" class="">
-<div id="card-showcase" class="">
-  <div class="showcase-content">
-    <h3 class="">Pay it Forward.</h3>
-    <p class="">Lorem ipsum dolor sit amet.</p>
-    <div class="d-flex justify-content-between">
-      <a href="#" class="btn btn-outline-success">Learn More</a>
-    </div>
-  </div>
-</div>
+<x-app-layout>
+    <main role="main" class="">
+        <div id="card-showcase" class="">
+            <div class="showcase-content">
+                <h3 class="">Pay it Forward.</h3>
+                <p class="">Lorem ipsum dolor sit amet.</p>
+                <div class="d-flex justify-content-between">
+                    <a href="#" class="btn btn-outline-success">Learn More</a>
+                </div>
+            </div>
+        </div>
   <div class="container">
     @foreach ($cards as $card)
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
@@ -50,8 +49,8 @@
         </div>
       </div>
       @endforeach
-    </div>
   </div>
+        </div>
 
-</main><!-- /.container -->
-@endsection
+    </main><!-- /.container -->
+</x-app-layout>

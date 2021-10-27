@@ -1,4 +1,3 @@
-
 <div class="mt-3">
         <div class="row">
             <div class="container mb-5">
@@ -27,10 +26,13 @@
                         @error('logo') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
-                    <strong class="h4 mb-3">Add Opening Hours</strong>
+                    <strong class="h4 mb-3">Shop Opening Hours</strong>
 
                     @foreach($daysInWeek as $day)
                         <div class="row mb-3">
+                            <input type="checkbox" class="form-check-input"
+                                   wire:model="form.opening_hours.{{$day}}.is_active"
+                                   checked>
                             <label for="inputEmail3" class="col-sm-2 col-form-label">{{$day}}</label>
                             <div class="col-sm-3">
                                 <select class="form-control" wire:model="form.opening_hours.{{$day}}.from">
@@ -48,7 +50,7 @@
                                 </select>
                             </div>
 
-                            @if($day == 'Mon')
+                            @if($day == 'Monday')
                                 <div class="col-sm-3">
                                     <button type="button" wire:click.prevent="applyTimesToAllDays">+ Apply times to all
                                         days
