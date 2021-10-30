@@ -26,7 +26,10 @@
                         @error('logo') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
-                    <strong class="h4 mb-3">Shop Opening Hours</strong>
+                    <br>
+
+                    <hr>
+                    <p class="h4 mb-2">Shop Opening Hours</p>
 
                     @foreach($daysInWeek as $day)
                         <div class="row mb-3">
@@ -59,6 +62,47 @@
                             @endif
                         </div>
                     @endforeach
+
+                    <section class="menu-section my-4">
+                        <hr>
+                        <h3>Choose your menus</h3>
+
+                        <ol>
+                            @foreach ($menus as $menu)
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="" id=""
+                                                   value="checkedValue" checked>
+                                            {{$menu}}
+                                        </label>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ol>
+
+
+                    </section>
+                    <section class="menu-option-section my-4">
+                        <hr>
+                        <h3>Choose your options</h3>
+
+                        <ol>
+                            @foreach ($menuOptions as $menu)
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="" id=""
+                                                   value="checkedValue" checked>
+                                            {{$menu}}
+                                        </label>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ol>
+
+
+                    </section>
 
 
                     <button type="submit" class="btn btn-success mt-2">Setup</button>

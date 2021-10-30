@@ -157,7 +157,7 @@ class UsersTableSeeder extends Seeder
                 ),
         ));
 
-        User::factory()->create(['email' => 'webdevmatics@gmail.com', 'mobile' => 9779809333222]);
+        User::factory()->create(['email' => 'webdevmatics@gmail.com', 'mobile' => 9779809333222, 'role_id' => '1']);
 
     }
 }

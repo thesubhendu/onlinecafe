@@ -19,10 +19,15 @@ class ShopSetup extends Component
     public $openingHoursOptions = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+    public $menus;
+    public $menuOptions;
+
     public function mount()
     {
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
+        $this->menus       = ['menu1', 'menu2'];
+        $this->menuOptions = ['menu1Opt', 'menu2Opt'];
     }
 
     public function render()
