@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\VendorOnboarding;
 
+use App\Models\AllProduct;
+use App\Models\ProductOption;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -26,8 +28,8 @@ class ShopSetup extends Component
     {
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
-        $this->menus       = ['menu1', 'menu2'];
-        $this->menuOptions = ['menu1Opt', 'menu2Opt'];
+        $this->menus       = AllProduct::all();
+        $this->menuOptions = ProductOption::all();
     }
 
     public function render()
@@ -106,6 +108,5 @@ class ShopSetup extends Component
 
             return $formatted;
         });
-
     }
 }

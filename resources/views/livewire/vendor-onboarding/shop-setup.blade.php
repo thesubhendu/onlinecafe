@@ -74,7 +74,7 @@
                                         <label class="form-check-label">
                                             <input type="checkbox" class="form-check-input" name="" id=""
                                                    value="checkedValue" checked>
-                                            {{$menu}}
+                                            {{$menu->name}}
                                         </label>
                                     </div>
                                 </li>
@@ -94,7 +94,7 @@
                                         <label class="form-check-label">
                                             <input type="checkbox" class="form-check-input" name="" id=""
                                                    value="checkedValue" checked>
-                                            {{$menu}}
+                                            {{$menu->name}}
                                         </label>
                                     </div>
                                 </li>
