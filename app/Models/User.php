@@ -59,11 +59,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    public function vendor()
-    {
-        return $this->hasMany(Vendor::class);
-    }
-
     public function orders()
     {
         return $this->hasMany(Order::class);
