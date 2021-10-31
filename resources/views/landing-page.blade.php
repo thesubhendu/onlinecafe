@@ -1,64 +1,47 @@
 <x-app-layout>
 
-    <div id="showcase">
-        <div class="showcase-content">
-            <h1>Open Your Shop</h1>
-            <p>Set up your coffee shop</p>
-            <div class="d-flex justify-content-between">
-                <div>
-                    <a href="{{ route('subscriptions.plans') }}" class="btn btn-primary">Subscribe</a>
+    <!-- IMAGE SLIDER WITH CAPTION -->
+    <section>
+        <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/images/slide-1.jpeg" alt="Los Angeles">
+                    <div class="carousel-caption">
+                        <h3>Get your <span>50% Discount</span> on Sunday <strong>Coffee</strong></h3>
+                    </div>
                 </div>
             </div>
+
+            <!-- Left and right controls -->
+            <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a> -->
         </div>
-    </div>
-    <div class="container grid border-0">
-        <div class="row justify-content-between mx-3">
-            <div class="grid-row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-                @foreach ($vendors as $vendor)
-                    <div class="g-col-6">
-                        <div class="card h-100 mb-2 mt-2">
-                            <a class="" href="{{ route('vendor.show', $vendor) }}">
-                                <img src="storage/img/vendor/{{$vendor->vendor_image}}" class="card-img-top" alt="...">
-                            </a>
-                            <div class="card-body">
-                                <a href="{{ route('vendor.show', $vendor) }}">
-                          <h5 class="card-title">{{$vendor->vendor_name}}</h5>
-                        </a>
-                          <p class="card-text"><i class="fas fa-map-marker-alt px-1"></i>{{$vendor->address}}, {{$vendor->suburb}}</p>
-                          <div class="user-rating d-flex justify-content-between">
-                              <div class="rating">
-                              <span><i class="fas fa-coffee checked"></i></span>
-                              <span><i class="fas fa-coffee checked"></i></span>
-                              <span><i class="fas fa-coffee checked"></i></span>
-                              <span><i class="fas fa-coffee unchecked"></i></span>
-                              <span><i class="fas fa-coffee unchecked"></i></span><span class="rating-avg badge rounded-pill bg-light text-dark mx-3"> 3.0</span>
-                              </div>
-                              <div class="favourite">
-                              @auth
-                              @if (!$vendor->likedBy(auth()->user()))
-                                  <form action="{{ route('vendor.likes', $vendor) }}" method='post'>
-                                  @csrf
-                                  <button id="fav_like" type="submit" class="fav_like float-right"><span class="fas fa-coffee fa-lg"></span></button> <!--wil need to be changed to a button in laravel-->
-                                  </form>
-                              @else
-                                  <form action="{{ route('vendor.likes', $vendor->id) }}" method='post'>
-                                  @csrf
-                                  @method('DELETE')
-                                  <button id="fav_unlike" type="submit" class="fav_unlike float-right"><span class="fas fa-coffee fa-lg"></span></button>
-                                  </form>
-                              @endif
-                              @endauth
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card-footer">
-                          <p class="card-text"><small class="text-muted">last updated {{$vendor->updated_at->diffForHumans()}}</small></p>
-                      </div>
+    </section>
+
+    <!-- COFFEE SHOP VENDER CARD -->
+    <section class="category">
+        <div class="container">
+            <!-- TITLE  -->
+            <div class="row">
+                <div class="col-md-12 m-0 p-0 ">
+                    <div class="content-heading">
+                        <h3 class="title">Our Coffee Shop Venders</h3>
                     </div>
-                  </div>
-                  @endforeach
+                </div>
+            </div>
+
+            <!-- VENDER CARDS -->
+            <div class="row">
+                @foreach ($vendors as $vendor)
+                    <x-vendor-card :vendor="$vendor"></x-vendor-card>
+                @endforeach
             </div>
         </div>
-    </div> <!--container end-->
-
+    </section>
 </x-app-layout>
