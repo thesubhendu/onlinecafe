@@ -144,25 +144,29 @@
                             <thead>
                               <tr>
                                 {{-- <th scope="col">#</th> --}}
-                                {{-- <th scope="col">Venue</th> --}}
-                                <th scope="col">Image</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Total</th>
+                                  {{-- <th scope="col">Venue</th> --}}
+                                  <th scope="col">Image</th>
+                                  <th scope="col">Product</th>
+                                  <th scope="col">Total</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr> 
+                            <tr>
                                 @foreach($dataTypeContent->products as $product) {{--{{asset('/storage/app/public/img/'.'$product->product_image')}}--}}
                                 <td><img src="/storage/img/{{$product->product_image}}" width="48" height="48"></td>
-                                <td>{{$product->productName}}<div><small class="text-muted">Milk - {{$product->pivot->milk}}, Sugar - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</small></div></td>
-                                <td>${{$product->productPrice}}</td>
+                                <td>{{$product->name}}
+                                    <div><small class="text-muted">Milk - {{$product->pivot->milk}}, Sugar
+                                            - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</small>
+                                    </div>
+                                </td>
+                                <td>${{$product->price}}</td>
                                 @endForEach
-                              </tr>
+                            </tr>
                             </tbody>
-                          </table>
-                          <p>Order Total: $ {{$dataTypeContent->order_total}}
+                        </table>
+                        <p>Order Total: $ {{$dataTypeContent->order_total}}
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>

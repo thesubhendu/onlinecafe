@@ -17,7 +17,7 @@
             <h1 class="display-3">Thank You!</h1>
             <p class="lead"><strong>Your Order  </p>
             {{-- @foreach($order->products as $product)
-            <p class="card-text">{{$product->pivot->quantity}} x {{$product->productName}}</p>
+            <p class="card-text">{{$product->pivot->quantity}} x {{$product->name}}</p>
             <span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span>
             <p class="card-text">Total: ${{$product->pivot->price}}</p>
             @endforeach --}}

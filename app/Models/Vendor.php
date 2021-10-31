@@ -40,6 +40,11 @@ class Vendor extends Model
         // $this->products()->create(['' => $product]); refer to rating function below
     }
 
+    public function productOptions()
+    {
+        return $this->hasMany(VendorProductOption::class);
+    }
+
     public function rate($rating, $user = null)
     {
         if ($rating > 5 || $rating < 1) {

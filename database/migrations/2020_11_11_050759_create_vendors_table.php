@@ -22,11 +22,18 @@ class CreateVendorsTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile')->unique();
             $table->string('address');
-            $table->string('suburb');
+            $table->string('suburb')->nullable();
             $table->string('pc');
             $table->string('state');
-            $table->string('cardstamps');
-            $table->string('vendor_image')->default('vendor_image.jpg');
+            $table->string('cardstamps')->nullable();
+            $table->string('vendor_image')->nullable()->default('vendor_image.jpg');
+            $table->foreignId('owner_id')->default(1)->constrained('users');
+            $table->boolean('is_active')->default(false);
+            $table->boolean('is_subscribed')->default(false);
+            $table->string('abn', 15)->nullable();
+            $table->string('shop_name', 60)->nullable();
+            $table->text('description')->nullable();
+            $table->json('opening_hours')->nullable();
             $table->timestamps();
         });
     }

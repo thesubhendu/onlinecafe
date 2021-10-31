@@ -12,6 +12,12 @@ class ShopSetup extends Component
 {
     use WithFileUploads;
 
+    protected $rules = [
+        'menus.*.isSelected'   => 'boolean',
+        'menus.*.price'        => 'required',
+        'options.*.isSelected' => 'boolean',
+        'options.*.price'      => 'required|decimal',
+    ];
     public $logo;
     public $form = [
         'shop_name',
@@ -22,14 +28,23 @@ class ShopSetup extends Component
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     public $menus;
-    public $menuOptions;
+    public $options;
 
     public function mount()
     {
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
-        $this->menus       = AllProduct::all();
-        $this->menuOptions = ProductOption::all();
+        $this->menus = AllProduct::all()->map(function ($product) {
+            $product->isSelected = true;
+
+            return $product;
+        });
+
+        $this->options = ProductOption::all()->map(function ($option) {
+            $option->isSelected = true;
+
+            return $option;
+        });
     }
 
     public function render()
@@ -73,30 +88,49 @@ class ShopSetup extends Component
     {
         $this->validate([
             'form.shop_name'     => 'required',
-            'form.description'   => 'required',
             'form.opening_hours' => 'required',
         ]);
 
-        $shop = auth()->user()->shop()->first();
+        $vendor = auth()->user()->shop()->first();
 
-        if (empty($shop)) {
+        if (empty($vendor)) {
             //register business first
             return redirect()->route('register-business.create');
         }
 
-        $shop->update([
+        $vendor->update([
             'shop_name'     => $this->form['shop_name'],
-            'description'   => $this->form['description'],
+            'description'   => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
         ]);
 
         if ( ! empty($this->logo)) {
-            $fileName           = $this->logo->store('vendor-logos');
-            $shop->vendor_image = $fileName;
-            $shop->save();
+            $fileName             = $this->logo->store('vendor-logos');
+            $vendor->vendor_image = $fileName;
+            $vendor->save();
         }
 
-        return redirect()->route('vendor.show', $shop->id);
+        foreach ($this->menus->filter(fn($item) => $item->isSelected) as $menu) {
+            $vendor->products()->create([
+                'name'          => $menu->name,
+                'description'   => $menu->description ?? "dummy description",
+                'product_image' => $menu->image,
+                'price'         => $menu->price,
+                'category_id'   => $menu->category_id,
+            ]);
+        }
+
+        foreach ($this->options->filter(fn($item) => $item->isSelected) as $option) {
+            $vendor->productOptions()->create([
+                'name'        => $option->name,
+                'description' => $option->description,
+                'image'       => $option->image,
+                'price'       => $option->price,
+                'category_id' => $option->category_id,
+            ]);
+        }
+
+        return redirect()->route('vendor.show', $vendor->id);
     }
 
     private function formatOpeningHours(array $opening_hours)

@@ -24,28 +24,32 @@
         </div>
         @endif
         {{-- order --}}
-    <div class="container">
-        <div class="card mb-3" style="max-width: 100%; border: none;">
-            @foreach($order_product as $product)
-            <div class="row g-0">
-                <div class="col-sm-12">
-                    <form action="{{ route('cart.store', $product->rowId) }}" method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
-                        @csrf
-                {{-- <div class="card-body d-flex p-2 justify-content-between align-content-center"> --}}
-                            <div class="form-group card-body d-flex p-2 justify-content-between align-items-center">
-                                <img src="{{asset('storage/img/nostamp.png')}}" alt="product" width="100px" height="100px">
-                                <h5 class="card-title">{{$product->productName}}</h5>
-                                <p class="card-text"> ${{$product->productPrice}}</p>
-                                <label class="sr-only" for="quantity">Quantity</label>
-                                <select class="form-control form-select" id="quantity" name="quantity" required style="max-width:30%;">
-                                    <option selected>how many...</option>
-                                    <option {{ old('quantity') == "1" ? 'selected' : ''}} value="1">1</option>
-                                    <option {{ old('quantity') == "2" ? 'selected' : ''}} value="2">2</option>
-                                    <option {{ old('quantity') == "3" ? 'selected' : ''}} value="3">3</option>
-                                    <option {{ old('quantity') == "4" ? 'selected' : ''}} value="4">4</option>
-                                    <option {{ old('quantity') == "5" ? 'selected' : ''}} value="5">5</option>
-                                    <option {{ old('quantity') == "6" ? 'selected' : ''}} value="6">6</option>
-                                    <option {{ old('quantity') == "7" ? 'selected' : ''}} value="7">7</option>
+            <div class="container">
+                <div class="card mb-3" style="max-width: 100%; border: none;">
+                    @foreach($order_product as $product)
+                        <div class="row g-0">
+                            <div class="col-sm-12">
+                                <form action="{{ route('cart.store', $product->rowId) }}"
+                                      method="post"> {{--{{ route('cart.store', $item->rowId) }}--}}
+                                    @csrf
+                                    {{-- <div class="card-body d-flex p-2 justify-content-between align-content-center"> --}}
+                                    <div
+                                        class="form-group card-body d-flex p-2 justify-content-between align-items-center">
+                                        <img src="{{asset('storage/img/nostamp.png')}}" alt="product" width="100px"
+                                             height="100px">
+                                        <h5 class="card-title">{{$product->name}}</h5>
+                                        <p class="card-text"> ${{$product->price}}</p>
+                                        <label class="sr-only" for="quantity">Quantity</label>
+                                        <select class="form-control form-select" id="quantity" name="quantity" required
+                                                style="max-width:30%;">
+                                            <option selected>how many...</option>
+                                            <option {{ old('quantity') == "1" ? 'selected' : ''}} value="1">1</option>
+                                            <option {{ old('quantity') == "2" ? 'selected' : ''}} value="2">2</option>
+                                            <option {{ old('quantity') == "3" ? 'selected' : ''}} value="3">3</option>
+                                            <option {{ old('quantity') == "4" ? 'selected' : ''}} value="4">4</option>
+                                            <option {{ old('quantity') == "5" ? 'selected' : ''}} value="5">5</option>
+                                            <option {{ old('quantity') == "6" ? 'selected' : ''}} value="6">6</option>
+                                            <option {{ old('quantity') == "7" ? 'selected' : ''}} value="7">7</option>
                                     <option {{ old('quantity') == "8" ? 'selected' : ''}} value="8">8</option>
                                     <option {{ old('quantity') == "9" ? 'selected' : ''}} value="9">9</option>
                                     <option {{ old('quantity') == "10" ? 'selected' : ''}} value="10">10</option>
@@ -86,28 +90,34 @@
                                 <select class="form-control mt-2" id="syrup" name="syrup" required>
                                     <option selected>Syrup...</option>
                                     <option {{ old('syrup') == "No Thanks" ? 'selected' : ''}} value="No Thanks">No Thanks</option>
-                                    <option {{ old('syrup') == "Caramel" ? 'selected' : ''}} value="Caramel">Caramel</option>
-                                    <option {{ old('syrup') == "Vanilla" ? 'selected' : ''}} value="Vanilla">Vanilla</option>
-                                    <option {{ old('syrup') == "Hazelnut" ? 'selected' : ''}} value="Hazelnut">Hazelnut</option>
+                                    <option {{ old('syrup') == "Caramel" ? 'selected' : ''}} value="Caramel">Caramel
+                                    </option>
+                                    <option {{ old('syrup') == "Vanilla" ? 'selected' : ''}} value="Vanilla">Vanilla
+                                    </option>
+                                    <option {{ old('syrup') == "Hazelnut" ? 'selected' : ''}} value="Hazelnut">
+                                        Hazelnut
+                                    </option>
                                 </select>
-                                <div class="invalid-feedback">
-                                we need to know if you would like syrup
-                                </div>
-                                </div>
-                                    {{-- <div class="form-group"> --}}
-                                        <input type="hidden" name="id" value="{{$product->id}}">
-                                        <input type="hidden" name="name" value="{{$product->productName}}">
-                                        <input type="hidden" name="price" value="{{$product->productPrice}}">
-                                        <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
-                                        {{-- <input type="hidden" name="quantity" value="{{app('request')->input('quantity')}}">
-                                        <input type="hidden" name="milk" value="{{app('request')->input('milk')}}">
-                                        <input type="hidden" name="sugar" value="{{app('request')->input('sugar')}}">
-                                        <input type="hidden" name="syrup" value="{{app('request')->input('syrup')}}"> --}}
-                                    {{-- </div> --}}
-                                    <div class="d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-trash mb-1 text-danger"></i></button>
-                                        <button type="submit" class="btn btn-default"><i class="fas fa-cart-arrow-down text-info"></i></button>
+                                    <div class="invalid-feedback">
+                                        we need to know if you would like syrup
                                     </div>
+                                </div>
+                                {{-- <div class="form-group"> --}}
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <input type="hidden" name="name" value="{{$product->name}}">
+                                <input type="hidden" name="price" value="{{$product->price}}">
+                                <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
+                                {{-- <input type="hidden" name="quantity" value="{{app('request')->input('quantity')}}">
+                                <input type="hidden" name="milk" value="{{app('request')->input('milk')}}">
+                                <input type="hidden" name="sugar" value="{{app('request')->input('sugar')}}">
+                                <input type="hidden" name="syrup" value="{{app('request')->input('syrup')}}"> --}}
+                                {{-- </div> --}}
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-default"><i
+                                            class="fa fa-trash mb-1 text-danger"></i></button>
+                                    <button type="submit" class="btn btn-default"><i
+                                            class="fas fa-cart-arrow-down text-info"></i></button>
+                                </div>
                                     <button id="addOrderbtn" type="submit" value="submit" class="w-100 btn btn-success d-block">
                                         add to cart</button>
                                 </form>
@@ -132,8 +142,8 @@
                     @csrf
                     <div class="form-group">
                         <input type="hidden" name="id" value="{{$product->id}}">
-                        <input type="hidden" name="name" value="{{$product->productName}}">
-                        <input type="hidden" name="price" value="{{$product->productPrice}}">
+                        <input type="hidden" name="name" value="{{$product->name}}">
+                        <input type="hidden" name="price" value="{{$product->price}}">
                         <input type="hidden" name="vendor" value="{{$product->vendor_id}}">
                         <input type="hidden" name="quantity" value="{{app('request')->input('quantity')}}">
                         <input type="hidden" name="milk" value="{{app('request')->input('milk')}}">

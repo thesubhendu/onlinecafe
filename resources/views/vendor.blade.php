@@ -65,22 +65,24 @@
             </div>
         </div>
         <div class="row row-cols row-cols-md-3 row-cols-lg-4 g-4 rounded-3">
-          @foreach ($vendor->products as $product)
-          <div class="col">
-            <div class="card h-100 p-3">
-              <div class="text-center">
-                <img src="/storage/img/{{$product->product_image}}" class="img-fluid" alt="..." height="100" width="100">
-              </div>
-              <div class="card-body d-flex justify-content-between py-2 px-2">
-                <div class="card-text">{{$product->productName}}</div>
-                <div class="card-text">${{$product->productPrice}}</div>
-                <a href="{{ route('orders.create', $product->id) }}" class="btn btn-outline-success btn-sm"><i class="fas fa-cart-plus"></i></a>
-              </div>
-          </div>
+            @foreach ($vendor->products as $product)
+                <div class="col">
+                    <div class="card h-100 p-3">
+                        <div class="text-center">
+                            <img src="/storage/img/{{$product->product_image}}" class="img-fluid" alt="..." height="100"
+                                 width="100">
+                        </div>
+                        <div class="card-body d-flex justify-content-between py-2 px-2">
+                            <div class="card-text">{{$product->name}}</div>
+                            <div class="card-text">${{$product->price}}</div>
+                            <a href="{{ route('orders.create', $product->id) }}" class="btn btn-outline-success btn-sm"><i
+                                    class="fas fa-cart-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        @endforeach
-      </div>
-      <div class="card text-white bg-dark" style="width: 100;">
+        <div class="card text-white bg-dark" style="width: 100;">
             <div class="card-body py-0">
                 <h3 class="card-title my-0">Cold Drinks</h3>
             </div>

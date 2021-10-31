@@ -68,15 +68,17 @@
                         <h3>Choose your menus</h3>
 
                         <ol>
-                            @foreach ($menus as $menu)
+                            @foreach ($menus as $index=>$menu)
                                 <li>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="" id=""
-                                                   value="checkedValue" checked>
+                                            <input type="checkbox" class="form-check-input"
+                                                   wire:model="menus.{{$index}}.isSelected"
+                                                   checked>
                                             {{$menu->name}}
                                         </label>
                                     </div>
+                                    $ <input type="text" placeholder="price" wire:model="menus.{{$index}}.price">
                                 </li>
                             @endforeach
                         </ol>
@@ -88,15 +90,20 @@
                         <h3>Choose your options</h3>
 
                         <ol>
-                            @foreach ($menuOptions as $menu)
+                            @foreach ($options as $index=>$menu)
                                 <li>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="" id=""
-                                                   value="checkedValue" checked>
+                                            <input type="checkbox" class="form-check-input"
+                                                   wire:model="options.{{$index}}.isSelected"
+                                                   checked>
                                             {{$menu->name}}
                                         </label>
                                     </div>
+
+                                    $ <input type="number" step='any' placeholder="price"
+                                             wire:model="options.{{$index}}.price">
+
                                 </li>
                             @endforeach
                         </ol>

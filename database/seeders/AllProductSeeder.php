@@ -15,6 +15,6 @@ class AllProductSeeder extends Seeder
      */
     public function run()
     {
-        AllProduct::factory()->count(22)->state(['category_id' => ProductCategory::first()->id])->create();
+        AllProduct::factory()->count(10)->state(['category_id' => ProductCategory::first()->id])->create();
     }
 }
