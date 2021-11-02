@@ -14,12 +14,6 @@
                                                 class="fab fa-cc-visa text-muted"></i></span><span class="mr-2"><i
                                                 class="fab fa-cc-mastercard text-muted"></i></span></h4>
 
-{{--                                    <form class="p-2">--}}
-{{--                                        <div class="input-group">--}}
-{{--                                            <input type="text" class="form-control" placeholder="Promo code">--}}
-{{--                                            <button type="submit" class="btn btn-outline-success">Apply</button>--}}
-{{--                                        </div>--}}
-{{--                                    </form>--}}
 
                                     <hr class="my-4">
                                     <div class="row gy-3 form-group">

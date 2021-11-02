@@ -1,85 +1,113 @@
-<div class="mt-3">
-    <div class="row">
-        <div class="container mb-5">
-            <div class="card-header">
-                <h1>Register your business</h1>
-            </div>
+<section>
+    <x-message type="error"></x-message>
+    <x-message type="message"></x-message>
 
-            <x-message type="error"></x-message>
-            <x-message type="message"></x-message>
-
-
-            <div wire:loading.delay.class.remove="d-none" class="d-none text-primary my-3 h3" role="status">
-                Validating ABN. Please Wait...
-            </div>
-
-            <form wire:submit.prevent="register">
-                <label for="name" class="form-label"> Business Name</label>
-                <input class="form-control" type="text" wire:model.lazy="name">
-                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <label for="abn" class="form-label">Enter ABN/ASIC</label>
-                <input class="form-control" type="text" wire:model.lazy="abn">
-                @error('abn') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <label for="email" class="form-label"> Email</label>
-                <input class="form-control" type="email" wire:model.lazy="email">
-                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <br>
-
-                <label for="contactName" class="form-label"> Contact First Name</label>
-                <input class="form-control" type="text" wire:model.lazy="contactName">
-                @error('contactName') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <label for="contactLastName" class="form-label"> Contact Last Name</label>
-                <input class="form-control" type="text" wire:model.lazy="contactLastName">
-                @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-                <label for="address" class="form-label"> Address</label>
-                <input class="form-control" type="text" wire:model.lazy="address">
-                @error('address') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-                <label for="suburb" class="form-label"> Suburb</label>
-                <input class="form-control" type="text" wire:model.lazy="suburb">
-                @error('suburb') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-                <label for="state" class="form-label"> State</label>
-                <input class="form-control" type="text" wire:model.lazy="state">
-                @error('state') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-                <label for="pc" class="form-label"> Postal Code</label>
-                <input class="form-control" type="number" wire:model.lazy="pc">
-                @error('pc') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <label for="cardstamps" class="form-label"> Card Stamps</label>
-                <input class="form-control" type="number" wire:model.lazy="cardstamps">
-                @error('cardstamps') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-                <label for="mobile" class="form-label"> Phone</label>
-                <input class="form-control" type="number" wire:model.lazy="mobile">
-                @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <div class="form-check m-2" >
-                    <input class="form-check-input" type="checkbox" wire:model="agreement" />
-                    <label class="form-check-label" for="invalidCheck">
-                        Agree to  <a style="color:#0056b3 !important;" href="#">terms and conditions</a>
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
-                    </div>
-                    @error('agreement') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
-
-
-                <button type="submit" class="btn btn-success mt-2">Register</button>
-            </form>
-        </div>
+    <div wire:loading.delay.class.remove="d-none" class="d-none text-primary my-3 h3" role="status">
+        Validating ABN. Please Wait...
     </div>
 
-</div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 ">
+            <h4 class="title mt-5 mb-4">Register your business</h4>
+            <div class="">
+                <form wire:submit.prevent="register">
+                    <div class="form-group">
+                        <label for="name" class="form-label"> Business Name</label>
+                        <input type="text" class="form-control" wire:model.lazy="name"
+                               placeholder="Business Name">
+                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="abn" class="form-label">Enter ABN/ASIC</label>
+                        <input type="text" class="form-control" wire:model.lazy="abn"
+                               placeholder="Enter ABN / ASIC">
+                        @error('abn') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label"> Email</label>
+                        <input type="email" class="form-control" wire:model.lazy="email"
+                               placeholder="Email">
+                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="contactName" class="form-label"> Contact First Name</label>
+                        <input type="text" class="form-control" wire:model.lazy="contactName"
+                               placeholder="Contact First Name">
+                        @error('contactName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="contactLastName" class="form-label"> Contact Last Name</label>
+
+                        <input type="text" class="form-control" wire:model.lazy="contactLastName"
+                               placeholder="Contact Last Name">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="form-label"> Address</label>
+
+                        <input type="text" class="form-control" wire:model.lazy="address"
+                               placeholder="Address">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="suburb" class="form-label"> Suburb</label>
+                        <input type="text" class="form-control" wire:model.lazy="suburb"
+                               placeholder="Suburb">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="form-label"> State</label>
+                        <input type="text" class="form-control" wire:model.lazy="state" placeholder="State">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="pc" class="form-label"> Postal Code</label>
+                        <input type="text" class="form-control" wire:model.lazy="pc"
+                               placeholder="Postal Code">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="cardstamps" class="form-label"> Card Stamps</label>
+                        <input type="text" class="form-control" wire:model.lazy="cardStamps"
+                               placeholder="Card Stamp">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile" class="form-label"> Phone</label>
+                        <input type="text" class="form-control" wire:model.lazy="mobile"
+                               placeholder="Phone No ">
+                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+                    <div class="form-group row mt-4">
+                        <div class="col-md-9">
+                            <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox"
+                                   wire:model="agreement">
+                            <label for="styled-checkbox-2"> Agree to <a href="">Terms & Conditions</a>
+                            </label>
+                            @error('agreement') <span class="text-danger">{{ $message }}</span> @enderror
+
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button type="submit" class="btn btn-success px-3">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+</section>
+
