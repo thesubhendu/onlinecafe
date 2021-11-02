@@ -5,9 +5,9 @@
             <div class="col-md-12">
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="{{route('home')}}">Home</a>
                     </li>
-                    <li><a href="#">Vender Registration</a></li>
+                    <li><a href="{{route('register-business.create')}}">Vender Registration</a></li>
                     <li>Register Business</li>
                 </ul>
             </div>
