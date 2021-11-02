@@ -6,21 +6,24 @@
             <!-- LOGO -->
             <div class="col-md-2 ">
                 <div class="middle-header-information">
-                    <a class="navbar-brand" href="index.php"><img src="assets/images/coffee-cup.png"> Mycoffee</a>
+                    <a class="navbar-brand" href="{{route('home')}}"><img
+                            src="{{asset('assets/images/coffee-cup.png')}}">
+                        {{ config('app.name', 'LaravelCoffee') }}
+                    </a>
                 </div>
             </div>
 
             <!-- SEARCH -->
             <div class="col-md-6">
-                <div class="input-group mt-2">
-                    <input type="text" class="form-control" placeholder="Search your favourite coffee & coffee shop..."
-                           _vkenabled="true">
-                    <div class="input-group-append">
-                        <button class="btn btn-default" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                {{--                <div class="input-group mt-2">--}}
+                {{--                    <input type="text" class="form-control" placeholder="Search your favourite coffee & coffee shop..."--}}
+                {{--                           _vkenabled="true">--}}
+                {{--                    <div class="input-group-append">--}}
+                {{--                        <button class="btn btn-default" type="button">--}}
+                {{--                            <i class="fa fa-search"></i>--}}
+                {{--                        </button>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
 
             <!-- RIGHT CONTENT -->

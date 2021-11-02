@@ -30,6 +30,7 @@
         "webpack": "^5.42.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.4",
         "bootstrap": "^4.5.3"
     }
 }

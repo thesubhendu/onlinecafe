@@ -477,7 +477,7 @@ i.selected {
 }
 
 .banner-inner {
-    background: url(../images/inner-banner.jpg) no-repeat, #090a0c;
+    background: url(../../public/assets/images/inner-banner.jpg) no-repeat, #090a0c;
     background-size: cover;
     position: relative;
     padding: 80px 0;
@@ -1107,7 +1107,7 @@ a.remove-item {
 
 /* PROFILE BANNER */
 .profile-banner {
-    background: url(../images/coffee-bg.png) repeat-x;
+    background: url(../../public/assets/images/coffee-bg.png) repeat-x;
 }
 
 .profile-content {

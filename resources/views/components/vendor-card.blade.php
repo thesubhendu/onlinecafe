@@ -8,7 +8,7 @@
                 <span><i class="ti-time"></i> &nbsp; Closed</span>
             </div>
             <div class="content">
-                <h3>{{$vendor->name}}</h3>
+                <h3>{{$vendor->vendor_name}}</h3>
                 <p><i class="fa fa-map-marker"></i> 90 Arno Corner Adaland, ACT 2163, West</p>
             </div>
             <div class="ratings">

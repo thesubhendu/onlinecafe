@@ -1,13 +1,11 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Josefin+Slab:ital,wght@0,600;0,700;1,300;1,400&display=swap');
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-// Custom
-@import "custom";
-
-@import "wizard.css";
+//@import "~@fortawesome/fontawesome-free";
+//@import "public/assets/css/responsive.css";
+@import "themify-icons.css";
+//@import "styles.css";  // not working from here
