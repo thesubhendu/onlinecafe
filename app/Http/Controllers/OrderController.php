@@ -38,12 +38,20 @@ class OrderController extends Controller
      */
     public function create($id)
     {
+        $product     = Product::where('id', $id)
+                              ->first();
+        $milkOptions = ['Cream', 'Skimmed', 'cow milk'];
 
-        $order_product = Product::where('id', $id)
-            ->get();
+        $sugar = ['None', 1, 2, 3, 4, 5];
+        $syrup = ['None', 1, 2, 3, 4, 5];
 
         return view('order')
-            ->with('order_product', $order_product);
+            ->with([
+                'product'     => $product,
+                'milkOptions' => $milkOptions,
+                'sugar'       => $sugar,
+                'syrup'       => $syrup,
+            ]);
     }
 
     /**
