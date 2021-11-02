@@ -25,8 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionRoleTableSeeder::class);
         $this->call(UsersTableSeeder::class);
 
-        $this->call(VendorsTableSeeder::class);
-        Product::factory(15)->create();
+        Product::factory(150)->create();
 
         $this->call(OrdersTableSeeder::class);
 
