@@ -33,7 +33,7 @@
     <section class="category">
         <div class="container">
 
-        @foreach ($vendor->products->groupBy('category_id') as $products)
+        @forelse ($vendor->products->groupBy('category_id') as $products)
             <!-- TITLE -->
                 <div class="row">
                     <div class="col-md-12 m-0 p-0 ">
@@ -49,7 +49,9 @@
                     @endforeach
                 </div>
 
-            @endforeach
+            @empty
+                <h2>No Products</h2>
+            @endforelse
 
 
         </div>
