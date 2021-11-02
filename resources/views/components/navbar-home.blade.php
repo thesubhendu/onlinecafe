@@ -13,22 +13,13 @@
                 </div>
             </div>
 
-            <!-- SEARCH -->
-            <div class="col-md-6">
-                {{--                <div class="input-group mt-2">--}}
-                {{--                    <input type="text" class="form-control" placeholder="Search your favourite coffee & coffee shop..."--}}
-                {{--                           _vkenabled="true">--}}
-                {{--                    <div class="input-group-append">--}}
-                {{--                        <button class="btn btn-default" type="button">--}}
-                {{--                            <i class="fa fa-search"></i>--}}
-                {{--                        </button>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-            </div>
-
             <!-- RIGHT CONTENT -->
-            <div class="col-md-4 text-right">
+            <div class="offset-4 col-md-6 text-right">
                 <ul class="cart">
+                    <li>
+                        <a href="{{ route('register-business.create') }}">Partner with Us</a>
+                        {{--                        <a href="{{ route('subscriptions.plans') }}">Partner with Us</a>--}}{{-- todo make vendor landing page --}}
+                    </li>
                     <li>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">
                             <i class="ti-shopping-cart"></i>
