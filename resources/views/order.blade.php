@@ -25,7 +25,7 @@
                 <div class="col-lg-4">
                     <h6>Quantity</h6>
                     <select name="quantity" id="" class="form-select" required>
-                        @foreach (['',1,2,3,4,5,6,7,8,9,10] as $option)
+                        @foreach ([1,2,3,4,5,6,7,8,9,10] as $option)
                             <option value="{{$option}}">{{$option}}</option>
                         @endforeach
                     </select>

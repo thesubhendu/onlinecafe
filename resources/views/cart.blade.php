@@ -31,7 +31,13 @@
                                 <!-- ITEM ROW -->
                                 <tr class="item-row">
                                     <td class="item-remove ">
-                                        <a href="#" class="remove-item">×</a>
+                                        <form action="{{ route('cart.remove', $item->rowId) }}"
+                                              method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn remove-item"><i
+                                                    class="fa fa-trash mb-1 text-danger"></i></button>
+                                        </form>
                                     </td>
                                     <td class="item-thumbnail">
                                         <img src="{{asset('assets/images/cappuccino.jpg')}}" alt="">

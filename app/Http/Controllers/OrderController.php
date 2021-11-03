@@ -42,8 +42,8 @@ class OrderController extends Controller
                               ->first();
         $milkOptions = ['Cream', 'Skimmed', 'cow milk'];
 
-        $sugar = ['None', 1, 2, 3, 4, 5];
-        $syrup = ['None', 1, 2, 3, 4, 5];
+        $sugar = ['', 1, 2, 3, 4, 5];
+        $syrup = ['', 1, 2, 3, 4, 5];
 
         return view('order')
             ->with([
