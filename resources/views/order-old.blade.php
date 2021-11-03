@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="container py-4 mb-5">
         <div class="vendor-index mt-4">
-            ddddddddddd
             {{-- order --}}
             <div class="container">
                 <div class="card mb-3" style="max-width: 100%; border: none;">

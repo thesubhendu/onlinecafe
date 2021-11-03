@@ -43,13 +43,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'quantity' => 'required',
+        ]);
 
-        Cart::add(['id' => $request->id, 'name' => $request->name, 'qty' => $request->quantity, 'price' => $request->price, 'weight' => '0', 'options' => [
-            'milk' => $request->milk,
-            'sugar' => $request->sugar,
-            'syrup' => $request->syrup
+        Cart::add([
+            'id'     => $request->id, 'name' => $request->name, 'qty' => $request->quantity, 'price' => $request->price,
+            'weight' => '0', 'options' => [
+                'milk'  => $request->milk,
+                'sugar' => $request->sugar,
+                'syrup' => $request->syrup,
 
-        ]])
+            ],
+        ])
             ->associate(Product::class);
 
 
