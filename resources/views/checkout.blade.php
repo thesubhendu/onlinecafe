@@ -1,23 +1,6 @@
 <x-app-layout>
     <div class="container py-4 mb-5">
 
-        <div class="mt-2">
-            @if (session()->has('success_message'))
-            <div class="alert alert-success">
-                {{ session()->get('success_message') }}
-            </div>
-            @endif
-        </div>
-        @if(count($errors) > 0)
-        <div id="cart_error" class="d-none alert alert-danger" role="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-
         <main role="main" class="container py-4 mb-5 mt-4">
             <div class="vendor-index mt-4">
                 <h1>Checkout</h1>
@@ -39,40 +22,7 @@
                     <label class="form-check-label" for="credit">Credit Card</label>
                     </div>
                 <hr>
-                {{-- <div class="row gy-3"> --}}
-                    {{-- <div class="col-md-3 my-3">
-                    <label for="cc-name" class="form-label">Name on card</label>
-                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                    <small class="text-muted">Full name as displayed on card</small>
-                    <div class="invalid-feedback">
-                        Name on card is required
-                    </div>
-                    </div>
 
-                    <div class="col-md-3">
-                    <label for="cc-number" class="form-label">Credit card number</label>
-                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                    <div class="invalid-feedback">
-                        Credit card number is required
-                    </div>
-                    </div>
-
-                    <div class="col-md-3">
-                    <label for="cc-expiration" class="form-label">Expiration</label>
-                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                    <div class="invalid-feedback">
-                        Expiration date required
-                    </div>
-                    </div>
-
-                    <div class="col-md-3">
-                    <label for="cc-cvv" class="form-label">CVV</label>
-                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                    <div class="invalid-feedback">
-                        Security code required
-                    </div>
-                    </div> --}}
-                {{-- </div> --}}
                 <div class="cart-row mt-3">
                     <div class="col-75">
                         <div class="">
