@@ -20,6 +20,7 @@ class Registration extends Component
     public $state;
     public $cardstamps;
     public $agreement;
+    public $is_pet_friendly;
 
     public function render()
     {
@@ -29,7 +30,7 @@ class Registration extends Component
     public function register()
     {
         $this->validate([
-            'name'=>'required',
+            'name'            =>'required',
             'email'=>'email|required|unique:vendors',
             'contactName'=>'required',
             'contactLastName'=>'required',
@@ -39,6 +40,7 @@ class Registration extends Component
             'pc'=>'required',
             'cardstamps'=>'required|integer',
             'agreement'=>'required',
+            'is_pet_friendly' => 'required',
         ]);
 
         // check if valid business (ABN check)
@@ -52,18 +54,19 @@ class Registration extends Component
         $authUser = auth()->user();
 
         $authUser->shop()->create([
-            'vendor_name'=> $this->name,
-            'slug'=> Str::slug($this->name),
-            'email'=> $this->email,
-            'contact_name'=> $this->contactName,
-            'contact_lastname'=> $this->contactLastName,
-            'address'=> $this->address,
-            'mobile'=> $this->mobile,
-            'suburb'=> $this->suburb,
-            'pc'=> $this->pc,
-            'cardstamps'=> $this->cardstamps,
-            'state'=> $this->state,
-            'abn'=> $this->abn,
+            'vendor_name'      => $this->name,
+            'slug'             => Str::slug($this->name),
+            'email'            => $this->email,
+            'contact_name'     => $this->contactName,
+            'contact_lastname' => $this->contactLastName,
+            'address'          => $this->address,
+            'mobile'           => $this->mobile,
+            'suburb'           => $this->suburb,
+            'pc'               => $this->pc,
+            'cardstamps'       => $this->cardstamps,
+            'state'            => $this->state,
+            'abn'              => $this->abn,
+            'is_pet_friendly'  => $this->abn,
         ]);
 
         //set user role to vendor

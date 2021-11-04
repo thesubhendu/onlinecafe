@@ -89,6 +89,18 @@
                         @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" wire:model="is_pet_friendly"
+                                   checked>
+                            Is Pet Friendly
+                        </label>
+
+                        @error('is_pet_friendly') <span class="text-danger">{{ $message }}</span> @enderror
+
+                    </div>
+
                     <div class="form-group row mt-4">
                         <div class="col-md-9">
                             <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox"
