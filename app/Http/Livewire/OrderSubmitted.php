@@ -14,6 +14,6 @@ class OrderSubmitted extends Component
     }
     public function render()
     {
-        return view('livewire.order-submitted')->extends('layout.app');
+        return view('livewire.order-submitted')->layout('layouts.app');
     }
 }

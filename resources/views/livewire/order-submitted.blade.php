@@ -1,5 +1,5 @@
 <div wire:poll role="main" class="">
-    @if($order->is_confirmed)
+    @if($order->confirmed_at)
         <x-order.thank-you></x-order.thank-you>
     @else
         <div class="container">
