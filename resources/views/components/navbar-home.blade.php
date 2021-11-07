@@ -20,34 +20,51 @@
                         <a href="{{ route('register-business.create') }}">Partner with Us</a>
                         {{--                        <a href="{{ route('subscriptions.plans') }}">Partner with Us</a>--}}{{-- todo make vendor landing page --}}
                     </li>
+
                     <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <a href="{{route('cart')}}">
                             <i class="ti-shopping-cart"></i>
-                            <span class="badge">8</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.php">
-                            <i class="ti-heart"></i>
                             <span class="badge">4</span>
                         </a>
                     </li>
                     <li>
-                        <a href="profile-details.php">
-                            <i class="ti-user"></i>
+                        <a href="#">
+                            <i class="ti-heart"></i>
+                            <span class="badge">4</span>
                         </a>
                     </li>
-                    <li class="register">
-                        <div class="dropdown login-dropdown">
-                            <a data-bs-toggle="dropdown">
-                                Login / Register &nbsp;<i class="ti-angle-down"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"> <i class="ti-user"></i> &nbsp; User Login</a>
-                                <a class="dropdown-item" href="#"> <i class="ti-unlock"></i> &nbsp; User Register</a>
+
+
+                    @guest
+                        <li class="register">
+                            <div class="dropdown login-dropdown">
+                                <a data-bs-toggle="dropdown">
+                                    Login / Register &nbsp;<i class="ti-angle-down"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp;
+                                        User Login</a>
+                                    <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>
+                                        &nbsp; User Register</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+
+                    @else
+                        <li>
+                            <a href="{{route('profile.show')}}">
+                                <i class="ti-user"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i>
+                                </button>
+                            </form>
+                        </li>
+                    @endguest
                 </ul>
             </div>
 
