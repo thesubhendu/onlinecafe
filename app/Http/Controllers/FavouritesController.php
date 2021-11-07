@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
-use App\Models\User;
-use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,11 +22,7 @@ class FavouritesController extends Controller
     public function index()
     {
 
-
-
        return view('favourites', [
-        // 'favourites' => $favourites,
-
 
        ]);
 
@@ -41,10 +35,8 @@ class FavouritesController extends Controller
         ->with('vendor')
         ->get();
 
-        // dd($userlikes);
         return view('favourites', [
             'userlikes' => $userlikes,
-
            ]);
 
     }
@@ -89,7 +81,6 @@ class FavouritesController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -101,7 +92,6 @@ class FavouritesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**

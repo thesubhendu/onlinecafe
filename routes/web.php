@@ -19,10 +19,9 @@ use App\Http\Controllers\VendorRatingController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
-route::get('/', [LandingPageController::class, 'index'])->name('home');
-
-route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
+Route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
 //Route::get('/vendor/{vendor}/orders', [VendorOrdersController::class, 'index'])->name('vendor.orders');
 
 

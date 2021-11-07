@@ -23,8 +23,8 @@ class VendorOnboarding extends Component
 
     public function mount()
     {
-//        $this->step = 'register';
-        $this->step = 'shop-setup';
+        $this->step = 'register';
+//        $this->step = 'shop-setup';
     }
 
     public function render()

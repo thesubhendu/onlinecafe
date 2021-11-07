@@ -38,7 +38,7 @@ class Registration extends Component
             'abn'=>'required',
             'suburb'=>'required',
             'pc'=>'required',
-            'cardstamps'=>'required|integer',
+//            'cardstamps'=>'required|integer',
             'agreement'=>'required',
             'is_pet_friendly' => 'required',
         ]);

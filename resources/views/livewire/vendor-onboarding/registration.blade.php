@@ -52,41 +52,35 @@
 
                         <input type="text" class="form-control" wire:model.lazy="address"
                                placeholder="Address">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('address') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
                     <div class="form-group">
                         <label for="suburb" class="form-label"> Suburb</label>
                         <input type="text" class="form-control" wire:model.lazy="suburb"
                                placeholder="Suburb">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                        {{--                        @error('suburb') <span class="text-danger">{{ $message }}</span> @enderror--}}
 
                     </div>
                     <div class="form-group">
                         <label for="state" class="form-label"> State</label>
                         <input type="text" class="form-control" wire:model.lazy="state" placeholder="State">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('state') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
                     <div class="form-group">
                         <label for="pc" class="form-label"> Postal Code</label>
                         <input type="text" class="form-control" wire:model.lazy="pc"
                                placeholder="Postal Code">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('pc') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
-                    <div class="form-group">
-                        <label for="cardstamps" class="form-label"> Card Stamps</label>
-                        <input type="text" class="form-control" wire:model.lazy="cardStamps"
-                               placeholder="Card Stamp">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
 
-                    </div>
                     <div class="form-group">
                         <label for="mobile" class="form-label"> Phone</label>
                         <input type="text" class="form-control" wire:model.lazy="mobile"
                                placeholder="Phone No ">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
 

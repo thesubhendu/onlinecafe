@@ -73,11 +73,6 @@ class OrderController extends Controller
         $active_card = Card::activeCard($vendor_id);
         $vendor      = Vendor::find($vendor_id);
 
-        // get active card for vendor and user
-        //check if card is active cardStatus($vendor)
-        //user auth->id() in the model to get the user id
-
-
         if ($active_card) {
             $order = new Order();
 
@@ -88,20 +83,6 @@ class OrderController extends Controller
 
             $order->save();
 
-            // $order = [
-            //     'order_number' => uniqid(),
-            //     'vendor_id' => $vendor_id,
-            //     'order_total' => Cart::total()
-            // ];
-
-            // $request->user()->orders()->create([
-            //     'order_number' => uniqid(),
-            //     'vendor_id' => $vendor_id,
-            //     'order_total' => Cart::total()
-            // ]);
-
-
-            // $orderItems = Cart::session(auth()->id())->getContent();
             $cart_items = Cart::content();
 
             foreach ($cart_items as $product) {
@@ -134,30 +115,15 @@ class OrderController extends Controller
             }
         } else {
 
-            // create new cardcard
-            // dd('no card');
             $new_card            = new card;
             $new_card->user_id   = auth()->id();
             $new_card->vendor_id = $vendor_id;
             $new_card->maxStamps = 10; // need to get vendor maxstamps/cardstamps from model
             $new_card->is_active = true;
 
-            // $new_card = [
-            //     'vendor_id' => $vendor_id,
-            //     'maxStamps' => 10, // need to get vendor maxstamps/cardstamps from model
-            //     'is_Active' => true,
-            // ];
 
             $new_card->save();
 
-            // $request->user()->cards()->create($new_card);
-
-            // $order = [
-            //     'order_number' => uniqid(),
-            //     'vendor_id' => $vendor_id,
-            //     'order_total' => Cart::total(),
-
-            //     ];
 
             $order = new Order();
 
@@ -167,8 +133,6 @@ class OrderController extends Controller
             $order->order_total  = Cart::total();
 
             $order->save();
-            // $request->user()->orders()->create([$order]);
-
             $cart_items = Cart::content();
 
             foreach ($cart_items as $product) {
@@ -194,7 +158,6 @@ class OrderController extends Controller
                 $stamp->save();
             }
         }
-
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
 

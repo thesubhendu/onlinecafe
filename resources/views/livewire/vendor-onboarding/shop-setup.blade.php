@@ -21,6 +21,14 @@
                     @error('form.description') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
 
+                {{--                <div class="form-group">--}}
+                {{--                    <label for="cardstamps" class="form-label"> Card Stamps</label>--}}
+                {{--                    <input type="text" class="form-control" wire:model.lazy="cardstamps"--}}
+                {{--                           placeholder="Card Stamp">--}}
+                {{--                    @error('cardstamps') <span class="text-danger">{{ $message }}</span> @enderror--}}
+
+                {{--                </div>--}}
+
 
                 <div class="form-group">
                     <label for="logo" class="form-label">Logo</label>
