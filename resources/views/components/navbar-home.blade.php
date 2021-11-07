@@ -24,15 +24,17 @@
                     <li>
                         <a href="{{route('cart')}}">
                             <i class="ti-shopping-cart"></i>
-                            <span class="badge">4</span>
+                            @if (Cart::count())
+                                <span class="badge">{{ Cart::count() }}</span>
+                            @endif
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="ti-heart"></i>
-                            <span class="badge">4</span>
-                        </a>
-                    </li>
+                    {{--                    <li>--}}
+                    {{--                        <a href="#">--}}
+                    {{--                            <i class="ti-heart"></i>--}}
+                    {{--                            <span class="badge">4</span>--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
 
 
                     @guest
