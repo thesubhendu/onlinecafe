@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Checkout') }}</div>
+{{--                <div class="card-header">{{ __('Checkout') }}</div>--}}
                 <div class="card-body">
                     <div class="container py-3">
                         <main>
@@ -13,7 +13,6 @@
                                                 class="fas fa-credit-card text-muted"></i></span><span class="mr-2"><i
                                                 class="fab fa-cc-visa text-muted"></i></span><span class="mr-2"><i
                                                 class="fab fa-cc-mastercard text-muted"></i></span></h4>
-
 
                                     <hr class="my-4">
                                     <div class="row gy-3 form-group">
@@ -28,21 +27,23 @@
                                                     <div class="form-check form-check-inline">
 
                                                         @foreach($availablePlans as $title => $slug)
-                                                            <label class="form-check-label pr-2">
-                                                                <input type="radio" class="form-check-input" wire:model="plan"
-                                                                       value="{{$slug}}" >
+                                                            <label class="form-check-label mx-4">
+                                                                <input type="radio" class="form-check-input"
+                                                                       wire:model="plan"
+                                                                       value="{{$slug}}">
                                                                 {{$title}}
                                                             </label>
-
                                                         @endforeach
 
-                                                        </div>
-
+                                                    </div>
+                                                    @error('plan') <span
+                                                        class="text-danger">{{ $message }}</span> @enderror
                                                 </div>
 
 
                                                 <div class="form-group">
-                                                    <label for="card-holder-name" class="form-label">Name on card</label>
+                                                    <label for="card-holder-name" class="form-label">Name on
+                                                        card</label>
                                                     <input type="text" class="form-control" id="card-holder-name"
                                                            placeholder="" required>
                                                     <small class="text-muted">Full name as displayed on card</small>
@@ -52,7 +53,6 @@
                                                 </div>
 
 
-
                                                 <div class="form-group mt-2">
                                                     <label for="name">Card Details</label>
                                                     <div id="card-element"></div>
@@ -60,7 +60,8 @@
                                                 </div>
 
 
-                                                <button id="card-button" class="w-100 btn btn-success btn-lg mt-2" type="submit" data-secret="{{ $clientSecret }}">
+                                                <button id="card-button" class="w-100 btn btn-success btn-lg mt-4"
+                                                        type="submit" data-secret="{{ $clientSecret }}">
                                                     Proceed to Checkout.
                                                 </button>
                                             </form>
