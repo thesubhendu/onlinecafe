@@ -66,7 +66,7 @@ class Registration extends Component
             'cardstamps'       => $this->cardstamps,
             'state'            => $this->state,
             'abn'              => $this->abn,
-            'is_pet_friendly'  => $this->abn,
+            'is_pet_friendly'  => $this->is_pet_friendly,
         ]);
 
         //set user role to vendor

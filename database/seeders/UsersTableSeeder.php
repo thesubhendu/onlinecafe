@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             , 'shop')->create([
             'name'   => 'Webdevmatics',
             'email'  => 'webdevmatics@gmail.com',
-            'mobile' => 9779809333221, 'role_id' => '1',
+            'mobile' => 9779809333221, 'role_id' => '3',
         ]);
 
         User::factory()

@@ -23,8 +23,15 @@ class VendorOnboarding extends Component
 
     public function mount()
     {
-        $this->step = 'register';
-//        $this->step = 'shop-setup';
+        $authUser = auth()->user();
+
+        if ( ! $authUser->hasRole('vendor')) {
+            $this->step = 'register';
+        } elseif ($authUser->shop && $authUser->shop->is_subscribed) {
+            $this->step = 'shop-setup';
+        } else {
+            $this->step = 'payment';
+        }
     }
 
     public function render()
