@@ -1,5 +1,6 @@
 body {
     font-family: "Josefin Sans", sans-serif;
+    overflow-x: hidden;
 }
 
 a {
@@ -387,6 +388,7 @@ ul.breadcrumb li a:hover {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding-bottom: 8px;
+    margin-bottom: 1.2rem;
 }
 
 .category-item a:hover {
@@ -477,7 +479,7 @@ i.selected {
 }
 
 .banner-inner {
-    background: url(../../public/assets/images/inner-banner.jpg) no-repeat, #090a0c;
+    background: url('../../assets/images/inner-banner.jpg') no-repeat, #090a0c;
     background-size: cover;
     position: relative;
     padding: 80px 0;
@@ -575,13 +577,13 @@ i.selected {
 
 a.shop-btn {
     border: 1px;
-    border: 2px solid #f7f7f7;
+    border-bottom: 2px solid #415321;
     display: block;
     text-align: center;
     padding: 5px 20px;
     border-radius: 300px;
-    background: #fdfdfd;
-    color: #b07946;
+    background: #556b2f;
+    color: #ffffff;
     font-weight: bold;
     font-size: 13px;
 }

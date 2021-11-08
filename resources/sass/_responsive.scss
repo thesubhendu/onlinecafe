@@ -1,0 +1,189 @@
+@include media-breakpoint-up(sm) {
+    .visible-xs {
+        display: none !important;
+    }
+}
+@include media-breakpoint-down(sm) {
+    .hidden-xs {
+        display: none !important;
+    }
+    .visible-xs {
+        display: flex !important;
+    }
+    .xs-left {
+        text-align: left !important;
+    }
+    .xs-right {
+        text-align: right !important;
+    }
+    .xs-block {
+        display: block !important;
+    }
+    .col-xs-2 {
+        flex: 0 0 16.66666667%;
+        max-width: 16.66666667%;
+    }
+    .col-xs-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .col-xs-4 {
+        flex: 0 0 33.33333333%;
+        max-width: 33.33333333%;
+    }
+    .col-xs-5 {
+        flex: 0 0 41.66666667%;
+        max-width: 41.66666667%;
+    }
+    .col-xs-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .col-xs-7 {
+        flex: 0 0 58.33333333%;
+        max-width: 58.33333333%;
+    }
+    .col-xs-8 {
+        flex: 0 0 66.66666667%;
+        max-width: 66.66666667%;
+    }
+    .col-xs-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+    .col-xs-10 {
+        flex: 0 0 83.33333333%;
+        max-width: 83.33333333%;
+    }
+    .col-xs-11 {
+        flex: 0 0 91.66666667%;
+        max-width: 91.66666667%;
+    }
+    .col-xs-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    //MIDDLE HEADER
+    .middle-header {
+        .cart {
+            padding: 0 !important;
+        }
+        .navbar-brand {
+            font-size: 1rem;
+        }
+    }
+
+    // SLIDER
+    .carousel {
+        border-bottom: none;
+        .carousel-caption {
+            display: none;
+        }
+    }
+
+    // AVATAR IMAGE
+    .login-dropdown {
+        justify-content: end;
+        margin: 0;
+        padding: 0;
+        .user-thumbnail {
+            overflow: hidden;
+            text-align: right;
+            padding-top: 10px;
+            img {
+                width: 34px;
+                border-radius: 50%;
+                border: 2px solid #d2d2d2;
+            }
+        }
+    }
+
+    // BOTTOM BAR
+    .bottom-bar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 1;
+        background: #ffffff;
+        padding: 4px 10px;
+        left: 0;
+        border-top: 1px solid #d0d0d0;
+        text-align: center;
+        .col {
+            margin: 0;
+            padding: 0;
+            border-right: 1px solid #eee;
+            a {
+                display: block;
+                padding: 8px0;
+                text-decoration: none;
+                color: #555;
+                font-family: "Roboto", sans-serif;
+                font-size: 12px;
+                i {
+                    display: block;
+                    font-size: 17px;
+                    margin-bottom: 5px;
+                }
+            }
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+
+    // TITLE
+    .content-heading {
+        padding: 0 1rem;
+        .title {
+            font-size: 1.1rem !important;
+        }
+    }
+
+    // CATEGORY
+    .category {
+        padding: 25px 0 60px !important;
+        .category-item {
+            .image {
+                max-height: 128px;
+                img {
+                    height: 115px;
+                    object-fit: cover;
+                }
+            }
+            .content {
+                .content h3 {
+                    font-size: 1.19rem;
+                }
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    // VENDOR DETAILS
+    .banner-inner {
+        padding: 50px 20px !important;
+        h2 {
+            font-size: 1.7rem !important;
+        }
+        .vendor-actions {
+            width: 100% !important;
+            div {
+                display: block !important;
+                a {
+                    border: 1px solid;
+                    padding: 8px;
+                    border-radius: 300px;
+                    margin: 12px 0;
+                    font-weight: 500;
+                }
+                .last-update {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

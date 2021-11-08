@@ -1,5 +1,5 @@
 <!-- MENU CARD -->
-<div class="col-md-3 col-sm-4 col-xs-6">
+<div class="col-md-3 col-sm-4">
     <div class="category-item product-item">
 
         <!-- IMAGE with ICON -->

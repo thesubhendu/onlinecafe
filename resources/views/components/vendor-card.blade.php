@@ -1,5 +1,5 @@
 <!-- CARD -->
-<div class="col-md-3 col-sm-4 col-xs-6">
+<div class="col-md-3 col-sm-4">
     <div class="category-item">
         <a href="{{route('vendor.show', $vendor)}}">
             <div class="image">

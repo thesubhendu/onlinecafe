@@ -15,14 +15,16 @@
                 </p>
                 <div class="vendor-actions">
                     <div class="icon-ratings">
-                        <i class="fa fa-coffee selected"></i>
-                        <i class="fa fa-coffee selected"></i>
-                        <i class="fa fa-coffee selected"></i>
-                        <i class="fa fa-coffee"></i>
-                        <i class="fa fa-coffee"></i>
-                        <span>3.0</span>
-                        <a href="">Add Review</a>
-                        <span>Last Update: {{$vendor->updated_at->diffForHumans()}}</span>
+                        <span class="xs-block">
+                            <i class="fa fa-coffee selected"></i>
+                            <i class="fa fa-coffee selected"></i>
+                            <i class="fa fa-coffee selected"></i>
+                            <i class="fa fa-coffee"></i>
+                            <i class="fa fa-coffee"></i>
+                            <span>3.0</span>
+                        </span>
+                        <a href="" class="xs-block">Add Review</a>
+                        <span class="xs-block last-update">Last Update: {{$vendor->updated_at->diffForHumans()}}</span>
                     </div>
                 </div>
             </div>
