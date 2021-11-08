@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 Product::factory()->count(10)
             )
                   ->state(function (array $attributes) {
-                      return ['vendor_name' => "Webdev ko Shop"];
+                      return ['vendor_name' => "Webdevmatics Pvt Ltd", 'shop_name' => 'Webdev coffee Shop'];
                   })
             , 'shop')->create([
             'name'   => 'Webdevmatics',

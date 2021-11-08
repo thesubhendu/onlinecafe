@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\OpeningHours\OpeningHours;
 
 class Vendor extends Model
 {
@@ -73,5 +74,25 @@ class Vendor extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function getIsOpenAttribute()
+    {
+        if ($this->opening_hours) {
+            $data = collect($this->opening_hours)
+                ->filter(fn($val, $key) => $val['is_active'])
+                ->map(fn($item, $key) => [$item['from'].'-'.$item['to']]);
+
+            $openingHours = OpeningHours::create($data->toArray());
+            $now          = now();
+            $range        = $openingHours->currentOpenRange($now);
+
+            if ($range) {
+                return true;
+//                $openingInfo = "Open Now. Closes at ".$range->end();
+            }
+
+            return false;
+        }
     }
 }
