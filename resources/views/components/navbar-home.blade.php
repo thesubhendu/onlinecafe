@@ -19,7 +19,7 @@
                             <a class="dropdown-item" href="#"> <i class="ti-unlock"></i> &nbsp; User Register</a>
                         </div>
                     </div>
-               
+
             </div>
 
             <!-- RIGHT CONTENT -->
