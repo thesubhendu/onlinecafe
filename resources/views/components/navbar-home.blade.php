@@ -6,19 +6,31 @@
             <!-- LOGO -->
             <div class="col-md-2 col-xs-12 text-right">
                 <div class="middle-header-information">
-                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('assets/images/coffee-cup.png')}}">
+                    <a class="navbar-brand" href="{{route('home')}}"><img
+                            src="{{asset('assets/images/coffee-cup.png')}}">
                         {{ config('app.name', 'LaravelCoffee') }}
                     </a>
                 </div>
                 <div class="dropdown login-dropdown visible-xs">
-                        <a data-bs-toggle="dropdown" class="user-thumbnail">
-                            <img src="/assets/images/images.jpg" alt="">
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#"> <i class="ti-user"></i> &nbsp; User Login</a>
-                            <a class="dropdown-item" href="#"> <i class="ti-unlock"></i> &nbsp; User Register</a>
-                        </div>
+                    <a data-bs-toggle="dropdown" class="user-thumbnail">
+                        <img src="/assets/images/images.jpg" alt="">
+                    </a>
+                    <div class="dropdown-menu">
+                        @guest
+                            <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp; User
+                                Login</a>
+                            <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i> &nbsp; User
+                                Register</a>
+                        @else
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i>
+                                </button>
+                            </form>
+                        @endguest
+
                     </div>
+                </div>
 
             </div>
 
@@ -30,30 +42,39 @@
                         {{-- <a href="{{ route('subscriptions.plans') }}">Partner with Us</a>--}}{{-- todo make vendor landing page --}}
                     </li>
                     <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <a href="{{route('cart')}}">
                             <i class="ti-shopping-cart"></i>
-                            <span class="badge">8</span>
+                            @if (Cart::count())
+                                <span class="badge">{{ Cart::count() }}</span>
+                            @endif
                         </a>
                     </li>
+
                     <li>
-                        <a href="">
-                            <i class="ti-heart"></i>
-                            <span class="badge">4</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
+                        <a href="{{route('profile.show')}}">
                             <i class="ti-user"></i>
                         </a>
                     </li>
                     <li class="register">
                         <div class="dropdown login-dropdown">
                             <a data-bs-toggle="dropdown">
-                                Login / Register &nbsp;<i class="ti-angle-down"></i>
+                                @guest Login / Register @else {{auth()->user()->name}} @endguest &nbsp;<i
+                                    class="ti-angle-down"></i>
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"> <i class="ti-user"></i> &nbsp; User Login</a>
-                                <a class="dropdown-item" href="#"> <i class="ti-unlock"></i> &nbsp; User Register</a>
+                                @guest
+                                    <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp;
+                                        User Login</a>
+                                    <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>
+                                        &nbsp; User Register</a>
+                                @else
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt">
+                                                logout</i>
+                                        </button>
+                                    </form>
+                                @endguest
                             </div>
                         </div>
                     </li>
