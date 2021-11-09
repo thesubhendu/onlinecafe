@@ -186,4 +186,37 @@
             }
         }
     }
+
+    // CART
+    .ordered-food-item {
+        font-family: "Roboto", sans-serif;
+        padding: 30px 0 60px !important;
+        h2 {
+            font-size: 1.45rem;
+        }
+        .coupen {
+            margin: 0;
+        }
+    }
+
+    // PRODUCT CONFIRM
+    .product-confirm {
+        padding: 30px 0 70px !important;
+        .product-card {
+            .image {
+                max-height: 150px;
+            }
+        }
+        .product-form {
+            h4{
+                font-size: 20px;
+            }
+            .total-submit{
+                button {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
