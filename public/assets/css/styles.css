@@ -13,13 +13,15 @@ a {
     border: 1px solid #dfdfdf;
 }
 
-.btn-primary, .btn-primary:hover {
+.btn-primary,
+.btn-primary:hover {
     background: #b07946;
     border: 1px solid #b07946;
     color: #fff;
 }
 
-.btn-secondary, .btn-secondary {
+.btn-secondary,
+.btn-secondary {
     background: #556b2f;
     border: 1px solid #556b2f;
     color: #fff;
@@ -479,7 +481,7 @@ i.selected {
 }
 
 .banner-inner {
-    background: url('../../assets/images/inner-banner.jpg') no-repeat, #090a0c;
+    background: url("../../assets/images/inner-banner.jpg") no-repeat, #090a0c;
     background-size: cover;
     position: relative;
     padding: 80px 0;
@@ -540,6 +542,7 @@ i.selected {
     margin: 20px auto 0;
     font-size: 15px;
     background: #ffffff;
+    width: 50%;
 }
 
 .vendor-actions i {
@@ -1511,7 +1514,7 @@ section.profile-content-details {
     width: 2px;
     height: 2px;
     box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white,
-    4px -6px 0 white, 4px -8px 0 white;
+        4px -6px 0 white, 4px -8px 0 white;
     transform: rotate(45deg);
 }
 
@@ -1557,4 +1560,44 @@ a.change-info {
     font-size: 14px;
     border: 1px solid #eee;
     border-radius: 300px;
+}
+
+/* CART  */
+.ordered-food-item {
+    font-family: "Roboto", sans-serif;
+}
+
+/* PRODUCT CONFIRM */
+.product-confirm {
+    font-family: "Roboto", sans-serif;
+    padding: 50px 0;
+    background: #fdfdfd;
+    min-height: 100vh;
+}
+.product-card {
+    background: #fff;
+    box-shadow: 0 2px 3px #eff0f7;
+    border-radius: 8px;
+}
+.product-card .image {
+    max-height: 180px;
+}
+
+.product-card p {
+    min-height: auto;
+    margin: 0;
+    font-weight: bold;
+}
+.product-form {
+    background: #fff;
+    box-shadow: 0 2px 3px #eff0f7;
+    border-radius: 8px;
+    padding: 20px;
+}
+.product-form .total-submit {
+    margin-top: 30px;
+}
+.product-form label {
+    font-weight: bold;
+    font-size: 15px;
 }
