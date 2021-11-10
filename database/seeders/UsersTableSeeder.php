@@ -72,7 +72,5 @@ class UsersTableSeeder extends Seeder
                 'shop')
             ->count(5)
             ->create()->each(fn($user) => $user->addRole($vendorRole)); //vendors
-
-//        User::factory()->count(5)->create(['role_id' => '2']); //customers
     }
 }
