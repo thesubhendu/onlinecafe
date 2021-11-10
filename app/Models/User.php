@@ -10,7 +10,7 @@ use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 
-class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
+class User extends \Illuminate\Foundation\Auth\User implements MustVerifyEmail
 {
     use HasFactory;
     use HasProfilePhoto;

@@ -17,7 +17,6 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\VendorRatingController;
 use Illuminate\Support\Facades\Route;
-use TCG\Voyager\Facades\Voyager;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
@@ -95,9 +94,6 @@ Route::post('phone-verification/send',
 Route::post('phone-verification/verify',
     [PhoneVerificationController::class, 'verify'])->name('phone-verification.verify');
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
