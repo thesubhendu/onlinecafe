@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
+use Orchid\Platform\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,10 +19,23 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create(['role_id' => '1', 'name' => 'admin', 'email' => 'admin@cafe.np']); //admin
-        User::factory()->create(['role_id' => '2', 'name' => 'admin', 'email' => 'customer@cafe.np']); //customer
+        $vendorRole = Role::create(
+            [
+                'name'        => 'Vendor',
+                'slug'        => 'vendor',
+                'permissions' => [
+                    "platform.index"              => "1",
+                    "platform.systems.roles"      => "0",
+                    "platform.systems.users"      => "0",
+                    "platform.systems.attachment" => "0",
+                ],
+            ]);
 
-        User::factory()->has(
+        Artisan::call('orchid:admin admin admin@cafe.np password');
+
+        User::factory()->create(['name' => 'Customer', 'email' => 'customer@cafe.np']); //customer
+
+        $vendor1 = User::factory()->has(
             Vendor::factory()->has(
                 Product::factory()->count(10)
             )
@@ -30,10 +45,10 @@ class UsersTableSeeder extends Seeder
             , 'shop')->create([
             'name'   => 'Webdevmatics',
             'email'  => 'webdevmatics@gmail.com',
-            'mobile' => 9779809333221, 'role_id' => '3',
+            'mobile' => 9779809333221,
         ]);
 
-        User::factory()->has(
+        $vendor2 = User::factory()->has(
             Vendor::factory()->has(
                 Product::factory()->count(3)
             )
@@ -43,8 +58,11 @@ class UsersTableSeeder extends Seeder
             , 'shop')->create([
             'name'   => 'Vendor',
             'email'  => 'vendor@cafe.np',
-            'mobile' => 9779809333222, 'role_id' => '3',
+            'mobile' => 9779809333222,
         ]);
+
+        $vendor1->addRole($vendorRole);
+        $vendor2->addRole($vendorRole);
 
         User::factory()
             ->has(
@@ -53,7 +71,7 @@ class UsersTableSeeder extends Seeder
                 ),
                 'shop')
             ->count(5)
-            ->create(['role_id' => '3']); //vendors
+            ->create()->each(fn($user) => $user->addRole($vendorRole)); //vendors
 
 //        User::factory()->count(5)->create(['role_id' => '2']); //customers
     }

@@ -22,12 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
 
 //        Product::factory(150)->create();
-
         $this->call(OrdersTableSeeder::class);
-
-
-        //voyager seeders
-        $this->call(PostsTableSeeder::class);
-
     }
 }

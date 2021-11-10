@@ -9,8 +9,10 @@ use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
+use Orchid\Platform\Models\User as Authenticatable;
 
-class User extends \Illuminate\Foundation\Auth\User implements MustVerifyEmail
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
     use HasProfilePhoto;
@@ -27,6 +29,7 @@ class User extends \Illuminate\Foundation\Auth\User implements MustVerifyEmail
         'email',
         'mobile',
         'password',
+        'permissions',
     ];
 
     /**
@@ -39,6 +42,7 @@ class User extends \Illuminate\Foundation\Auth\User implements MustVerifyEmail
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'permissions',
     ];
 
     /**
@@ -48,6 +52,32 @@ class User extends \Illuminate\Foundation\Auth\User implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'permissions'       => 'array',
+    ];
+
+    /**
+     * The attributes for which you can use filters in url.
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+        'id',
+        'name',
+        'email',
+        'permissions',
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'email',
+        'updated_at',
+        'created_at',
     ];
 
     /**
