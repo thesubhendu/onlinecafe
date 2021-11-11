@@ -16,6 +16,8 @@ use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\VendorRatingController;
+use App\Http\Livewire\VendorOnboarding;
+use App\Http\Livewire\VendorOnboarding\ShopSetup;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -84,7 +86,7 @@ Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('ve
 
 Route::view('/comment', 'comment');
 Route::get('vendor-onboarding',
-    \App\Http\Livewire\VendorOnboarding::class)->name('register-business.create')->middleware('auth');
+    VendorOnboarding::class)->name('register-business.create')->middleware('auth');
 
 
 //send mobile verification code
@@ -98,3 +100,5 @@ Route::post('phone-verification/verify',
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/manage-shop', ShopSetup::class)->middleware('auth')->name('manage-shop');
