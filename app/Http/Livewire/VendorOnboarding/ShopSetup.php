@@ -45,6 +45,13 @@ class ShopSetup extends Component
 
             return $option;
         });
+
+        $vendor = auth()->user()->shop()->first();
+
+        if ($vendor) {
+            $this->form['shop_name']   = $vendor->shop_name;
+            $this->form['description'] = $vendor->description;
+        }
     }
 
     public function render()

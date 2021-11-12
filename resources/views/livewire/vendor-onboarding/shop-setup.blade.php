@@ -21,15 +21,6 @@
                     @error('form.description') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
 
-                {{--                <div class="form-group">--}}
-                {{--                    <label for="cardstamps" class="form-label"> Card Stamps</label>--}}
-                {{--                    <input type="text" class="form-control" wire:model.lazy="cardstamps"--}}
-                {{--                           placeholder="Card Stamp">--}}
-                {{--                    @error('cardstamps') <span class="text-danger">{{ $message }}</span> @enderror--}}
-
-                {{--                </div>--}}
-
-
                 <div class="form-group">
                     <label for="logo" class="form-label">Logo</label>
                     <input class="form-control" type="file" wire:model="logo">
@@ -83,7 +74,8 @@
                                    wire:model="menus.{{$index}}.isSelected"
                                    checked>
                             <label for=""> {{$menu->name}}</label>
-                            $ <input type="text" class="form-control" wire:model="menus.{{$index}}.price"
+
+                            $ <input style="display:inline-block" type="text" wire:model="menus.{{$index}}.price"
                                      placeholder="price">
                         </div>
                     @endforeach
@@ -105,7 +97,8 @@
                                                wire:model="options.{{$index}}.isSelected"
                                                checked>
                                         <label for="">{{$menu->name}}</label>
-                                        $ <input class="form-control" type="number" step='any' placeholder="price"
+                                        $ <input style="display:inline-block" type="number" step='any'
+                                                 placeholder="price"
                                                  wire:model="options.{{$index}}.price">
                                     </div>
                                 </div>

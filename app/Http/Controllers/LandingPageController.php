@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vendor;
-use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
@@ -14,8 +13,8 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::inRandomOrder()
-            ->get();
+        $vendors = Vendor::inRandomOrder()->where('is_subscribed', '1')
+                         ->get();
         return view('landing-page')
             ->with('vendors', $vendors);
     }

@@ -33,8 +33,9 @@ class VendorFactory extends Factory
             'suburb'           => $this->faker->cityPrefix,
             'pc'               => $this->faker->postcode,
             'state'            => $this->faker->stateAbbr,
+            'is_subscribed'    => 1,
             'vendor_image'     => 'vendor_default.jpg',
-            'cardstamps' => 10,
+            'cardstamps'       => 10,
         ];
     }
 }
