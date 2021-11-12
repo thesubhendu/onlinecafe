@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Models\Product;
 use App\Orchid\Layouts\ProductListLayout;
+use Illuminate\Support\Facades\Gate;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
@@ -23,8 +24,16 @@ class ProductListScreen extends Screen
      */
     public function query(): array
     {
+        if (Gate::allows('admin')) {
+
+            $products = Product::with('vendor', 'category')->filters()->latest()->paginate(50);
+        } else {
+            $products = Product::with('vendor', 'category')->where('vendor_id',
+                auth()->user()->shop->id)->filters()->latest()->paginate(50);
+        }
+
         return [
-            'products' => Product::with('vendor', 'category')->filters()->latest()->paginate(50),
+            'products' => $products,
         ];
     }
 

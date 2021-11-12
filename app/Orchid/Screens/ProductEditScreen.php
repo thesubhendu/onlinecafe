@@ -7,6 +7,7 @@ use App\Models\ProductCategory;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Relation;
@@ -89,7 +90,7 @@ class ProductEditScreen extends Screen
                         ->placeholder('Brief description for preview'),
 
                 Input::make('product.price')->title('Price'),
-                Input::make('product.is_active')->title('Is Active'),
+                CheckBox::make('product.is_active')->value(1)->title('Is Active')->sendTrueOrFalse(),
                 Picture::make('product.product_image')
                        ->title('Large web banner image, generally in the front and center')
                        ->targetRelativeUrl()

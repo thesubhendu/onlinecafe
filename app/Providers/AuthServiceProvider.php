@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Policies\SubscriptionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Cashier\Subscription;
 use Orchid\Platform\Dashboard;
-use Orchid\Platform\ItemPermission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,13 +34,20 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('vendor', function (User $user) {
-            return $user->subscribed('subscribed') && $user->hasRole('vendor');
+            return $user->subscribed('subscribed');
         });
 
-        $permissions = ItemPermission::group('modules')
-                                     ->addPermission('analytics', 'Access to data analytics')
-                                     ->addPermission('monitor', 'Access to the system monitor');
+        Gate::define('visit-backend', function (User $user) {
+            return $user->hasAccess('platform.index');
+        });
 
-        $dashboard->registerPermissions($permissions);
+        Gate::define('admin', function (User $user) {
+            return $user->hasAccess('platform.systems.roles');
+        });
+
+//        $permissions = ItemPermission::group('backend')
+//                                     ->addPermission('visit-backend', 'Access to admin panel');
+//
+//        $dashboard->registerPermissions($permissions);
     }
 }
