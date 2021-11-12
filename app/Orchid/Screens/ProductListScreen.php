@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Orchid\Screens;
+
+use App\Models\Product;
+use App\Orchid\Layouts\ProductListLayout;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Screen;
+
+class ProductListScreen extends Screen
+{
+    /**
+     * Display header name.
+     *
+     * @var string
+     */
+    public $name = 'All Products';
+
+    /**
+     * Query data.
+     *
+     * @return array
+     */
+    public function query(): array
+    {
+        return [
+            'products' => Product::with('vendor', 'category')->filters()->latest()->paginate(50),
+        ];
+    }
+
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
+    public function commandBar(): array
+    {
+        return [
+            Link::make('Create new')
+                ->icon('pencil')
+                ->route('platform.product.edit'),
+        ];
+    }
+
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
+    public function layout(): array
+    {
+        return [
+            ProductListLayout::class,
+        ];
+    }
+}

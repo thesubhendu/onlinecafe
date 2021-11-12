@@ -45,7 +45,8 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Product Management')
                 ->icon('monitor')
-                ->route('manage-shop'),
+                ->route('platform.product.list'),
+
 //
 //            Menu::make('Dropdown menu')
 //                ->icon('code')

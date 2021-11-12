@@ -113,3 +113,8 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
+Route::screen('product/{product?}', \App\Orchid\Screens\ProductEditScreen::class)
+     ->name('platform.product.edit');
+
+Route::screen('products', \App\Orchid\Screens\ProductListScreen::class)
+     ->name('platform.product.list');
