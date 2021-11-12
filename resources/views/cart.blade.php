@@ -167,7 +167,7 @@
 
             <!-- CART TOTAL -->
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="col cart-totals-left alert alert-danger">
                         Please note that payment will be required on collection from "(vendor name goes here)"
                     </div>
