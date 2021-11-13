@@ -62,7 +62,6 @@ class OrderListScreen extends Screen
                 TD::make('payment_method'),
                 TD::make('confirmed_at'),
                 TD::make('confirmed_by'),
-                TD::make('confirmed_by'),
                 TD::make('user_id', "Ordered By")->render(fn($o) => $o->user->name),
                 TD::make('order_total'),
                 TD::make('Action')->render(function ($order) {
