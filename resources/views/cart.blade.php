@@ -3,40 +3,38 @@
     <section class="ordered-food-item ">
         <div class="container">
             <!-- TABLE ITEMS  -->
-            <div class="row">
+            <div class="row hidden-xs">
                 <div class="col-md-12">
-                    <h2>{{ Cart::count() }}  {{ Str::plural('item', Cart::count())}} in Shopping Cart</h2>
+                    <h2>{{ Cart::count() }} {{ Str::plural('item', Cart::count())}} in Shopping Cart</h2>
 
                     <div class="table-responsive">
                         <!-- TABLE -->
                         <table class="table">
                             <!-- TABLE HEAD -->
                             <thead>
-                            <tr>
-                                <th class="item-remove"></th>
-                                <th class="item-thumbnail">PRODUCT</th>
-                                <th class="item-name"></th>
-                                <th class="description"></th>
-                                <th class="price-box">PRICE</th>
-                                <th class="item-quantity">QUANTITY</th>
-                                {{--                                <th class="item-subtotal">TOTAL </th>--}}
+                                <tr>
+                                    <th class="item-remove"></th>
+                                    <th class="item-thumbnail">PRODUCT</th>
+                                    <th class="item-name"></th>
+                                    <th class="description"></th>
+                                    <th class="price-box">PRICE</th>
+                                    <th class="item-quantity">QUANTITY</th>
+                                    {{-- <th class="item-subtotal">TOTAL </th>--}}
 
-                            </tr>
+                                </tr>
                             </thead>
 
                             <!-- TABLE BODY -->
                             <tbody>
-                            @foreach(Cart::content() as $item)
+                                @foreach(Cart::content() as $item)
 
                                 <!-- ITEM ROW -->
                                 <tr class="item-row">
                                     <td class="item-remove ">
-                                        <form action="{{ route('cart.remove', $item->rowId) }}"
-                                              method="post">
+                                        <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn remove-item"><i
-                                                    class="fa fa-trash mb-1 text-danger"></i></button>
+                                            <button type="submit" class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
                                         </form>
                                     </td>
                                     <td class="item-thumbnail">
@@ -53,17 +51,16 @@
                                             <select class="form-control form-select" id="cartQuantity">
 
                                                 @foreach([1,2,3,'4',5] as $qty)
-                                                    <option
-                                                        value="{{$qty}}" {{$qty == $item->qty ? 'selected' : ''}}>{{$qty}}</option>
+                                                <option value="{{$qty}}" {{$qty == $item->qty ? 'selected' : ''}}>{{$qty}}</option>
                                                 @endforeach
 
                                             </select>
                                         </div>
                                     </td>
-                                    {{--                                    <td class="item-subtotal">$5.0</td>--}}
+                                    {{-- <td class="item-subtotal">$5.0</td>--}}
                                 </tr>
 
-                            @endforeach
+                                @endforeach
 
                             </tbody>
 
@@ -73,9 +70,104 @@
                 </div>
             </div>
 
+            <div class="cart-items-mobile">
+
+                <!-- MOBILE CART -->
+                <div class="mobile-cart ">
+
+                    <!-- IMAGE  -->
+                    <div class="row product-image">
+                        <div class="col-xs-12">
+                            <div class="item-image">
+                                <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TITLE -->
+                    <div class="row product-title">
+                        <div class="col-xs-12">
+                            <h4>Cappuccino</h4>
+                        </div>
+                        <div class="col-xs-9">
+                            <p>Cream, Sugar - , Syrup</p>
+                        </div>
+                        <div class="col-xs-3">
+                            <h5>$30</h5>
+                        </div>
+                    </div>
+
+                    <!-- PRICE -->
+                    <div class="row product-price">
+                        <div class="col-xs-2 ">
+                            <label for="">QTY</label>
+                        </div>
+                        <div class="col-xs-4 no-gutters">
+                            <select name="quantity" id="" class="form-select">
+                                <option>1</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 text-end">
+                            <button type="submit" class="btn remove-item">
+                                <i class="fa fa-pencil mb-1 text-danger"></i>
+                            </button>
+                            <button type="submit" class="btn remove-item">
+                                <i class="fa fa-trash mb-1 text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOBILE CART -->
+                <div class="mobile-cart ">
+
+                    <!-- IMAGE  -->
+                    <div class="row product-image">
+                        <div class="col-xs-12">
+                            <div class="item-image">
+                                <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TITLE -->
+                    <div class="row product-title">
+                        <div class="col-xs-12">
+                            <h4>Cappuccino</h4>
+                        </div>
+                        <div class="col-xs-9">
+                            <p>Cream, Sugar - , Syrup</p>
+                        </div>
+                        <div class="col-xs-3">
+                            <h5>$30</h5>
+                        </div>
+                    </div>
+
+                    <!-- PRICE -->
+                    <div class="row product-price">
+                        <div class="col-xs-2 ">
+                            <label for="">QTY</label>
+                        </div>
+                        <div class="col-xs-4 no-gutters">
+                            <select name="quantity" id="" class="form-select">
+                                <option>1</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 text-end">
+                            <button type="submit" class="btn remove-item">
+                                <i class="fa fa-pencil mb-1 text-danger"></i>
+                            </button>
+                            <button type="submit" class="btn remove-item">
+                                <i class="fa fa-trash mb-1 text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- CART TOTAL -->
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="col cart-totals-left alert alert-danger">
                         Please note that payment will be required on collection from "(vendor name goes here)"
                     </div>
