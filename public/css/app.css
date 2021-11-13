@@ -12887,4 +12887,57 @@ textarea.form-control-lg {
     display: block;
     width: 100%;
   }
+
+  /* MOBILE CART */
+  .mobile-cart {
+    background: white;
+    padding: 10px 10px 16px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px #dfdfe5;
+    display: inline-block !important;
+  }
+  .mobile-cart .no-gutters {
+    padding: 0;
+  }
+  .mobile-cart .item-image {
+    max-height: 150px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .mobile-cart .item-image img {
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 150px;
+    border-radius: 4px;
+  }
+  .mobile-cart .product-title {
+    margin-bottom: 15px;
+  }
+  .mobile-cart .product-title h4, .mobile-cart .product-title .h4 {
+    font-weight: bold;
+  }
+  .mobile-cart .product-title p {
+    margin: 0;
+  }
+  .mobile-cart .product-price {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+  }
+  .mobile-cart .product-price h5, .mobile-cart .product-price .h5 {
+    font-size: 22px;
+  }
+  .mobile-cart .product-price label {
+    font-weight: bold;
+  }
+  .mobile-cart .product-price .remove-item {
+    border: 1px solid #eee;
+    height: 39px;
+    padding: 0 12px !important;
+    margin-right: 3px;
+  }
+  .mobile-cart .product-price .remove-item i {
+    color: #868686 !important;
+  }
 }

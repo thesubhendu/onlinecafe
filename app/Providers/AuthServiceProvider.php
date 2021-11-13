@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('vendor', function (User $user) {
-            return $user->subscribed('subscribed');
+            return $user->subscribed('subscribed') && $user->shop;
         });
 
         Gate::define('visit-backend', function (User $user) {

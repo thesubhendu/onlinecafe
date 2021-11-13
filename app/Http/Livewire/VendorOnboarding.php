@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class VendorOnboarding extends Component
@@ -25,9 +26,9 @@ class VendorOnboarding extends Component
     {
         $authUser = auth()->user();
 
-        if ( ! $authUser->hasRole('vendor')) {
+        if (Gate::denies('subscribed')) {
             $this->step = 'register';
-        } elseif ($authUser->shop && $authUser->shop->is_subscribed) {
+        } elseif ($authUser->shop && Gate::allows('subscribed')) {
             $this->step = 'shop-setup';
         } else {
             $this->step = 'payment';
