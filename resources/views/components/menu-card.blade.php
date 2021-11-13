@@ -4,10 +4,11 @@
 
         <!-- IMAGE with ICON -->
         <div class="image">
+
             @if($product->product_image)
-                <img src="{{asset('/storage/img/'.$product->product_image)}}" class="img-responsive" alt="">
+                <img src="{{asset($product->product_image)}}" class="img-responsive" alt="">
             @else
-                <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
+                <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
             @endif
             <i class="ti-heart"></i>
         </div>

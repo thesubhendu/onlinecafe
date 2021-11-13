@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->decimal('price');
             $table->boolean('is_active')->default(true);
-            $table->string('product_image')->default('default_product.jpg');
+            $table->string('product_image')->nullable();
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('product_categories');
             $table->timestamps();
