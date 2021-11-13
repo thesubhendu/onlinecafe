@@ -25,7 +25,6 @@ class ProductListScreen extends Screen
     public function query(): array
     {
         if (Gate::allows('admin')) {
-
             $products = Product::with('vendor', 'category')->filters()->latest()->paginate(50);
         } else {
             $products = Product::with('vendor', 'category')->where('vendor_id',

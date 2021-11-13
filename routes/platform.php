@@ -118,3 +118,13 @@ Route::screen('product/{product?}', \App\Orchid\Screens\ProductEditScreen::class
 
 Route::screen('products', \App\Orchid\Screens\ProductListScreen::class)
      ->name('platform.product.list');
+
+
+Route::screen('order/{order?}', \App\Orchid\Screens\OrderEditScreen::class)
+     ->name('platform.order.edit');
+
+Route::screen('order-show/{order?}', \App\Orchid\Screens\OrderDetailScreen::class)
+     ->name('platform.order.show');
+
+Route::screen('orders', \App\Orchid\Screens\OrderListScreen::class)
+     ->name('platform.order.list');
