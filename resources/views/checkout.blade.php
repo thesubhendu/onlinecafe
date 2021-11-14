@@ -8,7 +8,7 @@
                         <!-- CHECKOUT FORM -->
                         <div class="row checkout-form">
                             <!-- ORDERED LIST ITEMS -->
-                            <div class="col-md-6 cart-payment orderd-items">
+                            <div class="col-md-6 cart-payment orderd-items mb-5">
                                 <h4 class="title">Ordered Items</h4>
 
                                 <!-- ORDERED LISTS -->
@@ -31,13 +31,13 @@
                                                 <div class="product-details">
                                                     <a href="">{{$item->name}} </a><span><small class="text-mute">{{$item->options->milk}}, sugar - {{$item->options->sugar}}, Syrup - {{$item->options->syrup}}</small></span>
 
-                                                    <p class="quantity">{{$item->qty}}</p>
+                                                    <p class="quantity">( {{$item->qty}} )</p>
                                                 </div>
                                             </div>
 
                                             <!-- ITEM PRICE -->
                                             <div class="col-md-3 col-sm-2 col-xs-3">
-                                                <p class="price"> ${{$item->price}}</p>
+                                                <h4 class="price"> ${{$item->price}}</h4>
                                             </div>
                                         </div>
                                     @endforeach
@@ -60,24 +60,24 @@
                                     <!-- PAYEMENT FINAL -->
                                     <div class="payment-final">
                                         <div class="row cart-totals-row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="cart-totals-title">
                                                     <h4>Subtotal</h4>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 text-right">
+                                            <div class="col-md-6 col-xs-6 text-right">
                                                 <div class="cart-totals-result">
                                                     <h4>$ {{Cart::subtotal()}} </h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row cart-totals-row ">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="cart-totals-title">
                                                     <h4>Tax</h4>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 text-right">
+                                            <div class="col-md-6 col-xs-6 text-right">
                                                 <div class="cart-totals-result">
                                                     <h4>
                                                         $ {{Cart::tax()}}
@@ -86,12 +86,12 @@
                                             </div>
                                         </div>
                                         <div class="row cart-totals-row ">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="cart-totals-title">
-                                                    <h4>Total</h4>
+                                                    <h4><b>Total</b></h4>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 text-right">
+                                            <div class="col-md-6 col-xs-6 text-right">
                                                 <div class="cart-totals-result">
                                                     <h4 class="final-pay"><strong>$ {{Cart::total()}} </strong></h4>
                                                 </div>
@@ -130,7 +130,7 @@
                                                    value="{{$user->mobile}}">
                                         </div>
 
-                                        <h4 class="mb-3">Payment</h4>
+                                        <h4 class="mb-3 mt-4">Payment</h4>
 
                                         <div class="form-check">
                                             <label class="form-check-label">
@@ -160,7 +160,7 @@
                                         <!-- SHIPPING BUTTON -->
                                         <div class="cart-totals-result checkout-btn">
                                             <button type="submit" class="btn btn-secondary "><i
-                                                    class="fas fa-credit-card"></i> Checkout
+                                                    class="fa fa-credit-card"></i> &nbsp; Checkout
                                             </button>
                                         </div>
 
