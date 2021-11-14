@@ -208,10 +208,10 @@
             }
         }
         .product-form {
-            h4{
+            h4 {
                 font-size: 20px;
             }
-            .total-submit{
+            .total-submit {
                 button {
                     display: block;
                     width: 100%;
@@ -235,7 +235,7 @@
             max-height: 150px;
             overflow: hidden;
             margin-bottom: 1rem;
-            display:none;
+            display: none;
             img {
                 object-fit: cover;
                 height: 150px;
@@ -270,5 +270,27 @@
                 }
             }
         }
+    }
+
+    // CHECKOUT FORM
+    .checkout-bg {
+        .term-content {
+            padding: 1rem;
+            .checkout-form {
+                padding-top: 0;
+            }
+        }
+        .cart-payment .coupen input {
+            width: 63% !important;
+        }
+    }
+    .shipping-information {
+        padding: 1rem !important;
+    }
+    .shipping-information .btn {
+        position: fixed;
+        bottom: 5%;
+        left: 3%;
+        width: 94% !important;
     }
 }

@@ -1198,6 +1198,7 @@ section.profile-content-details {
     padding: 50px 0;
     background: #fdfdfd;
     background-size: cover;
+    font-family: "Roboto", sans-serif;
 }
 
 .terms h1 {
@@ -1384,7 +1385,7 @@ section.profile-content-details {
 }
 
 .cart-payment .cart-totals-row {
-    border: none;
+    /* border: none; */
 }
 
 .cart-payment .cart-totals-row h3 {
@@ -1400,14 +1401,17 @@ section.profile-content-details {
 .checkout-bg {
     /* background-attachment: fixed; */
 }
-
+.checkout-bg .checkout-form {
+    padding: 0;
+}
 .cart-totals-result {
     margin-top: 0;
+    text-align: center;
 }
 
 .checkout-form .title {
     margin-bottom: 25px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -1431,10 +1435,14 @@ section.profile-content-details {
     margin: 16px 0;
 }
 
-.shipping-information input {
+.shipping-information .form-group input {
     font-weight: 500;
     font-size: 14px;
     height: 45px;
+}
+.shipping-information .btn {
+    display: block;
+    width: 100%;
 }
 
 .orderd-item-lists .product-details {
@@ -1444,7 +1452,20 @@ section.profile-content-details {
 .orderd-item-lists .product-row {
     padding: 10px 5px;
 }
+.product-row .product-details a {
+    display: block;
+    color: #000;
+}
 
+.product-row .product-details span {
+    font-size: 14px;
+}
+
+.product-row .product-details .quantity {
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+}
 .cart-payment .coupen .btn {
     vertical-align: middle;
     display: inline;
