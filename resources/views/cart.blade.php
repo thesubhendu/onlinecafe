@@ -72,97 +72,64 @@
 
             <div class="cart-items-mobile">
 
-                <!-- MOBILE CART -->
-                <div class="mobile-cart ">
+            @foreach(Cart::content() as $item)
 
-                    <!-- IMAGE  -->
-                    <div class="row product-image">
-                        <div class="col-xs-12">
-                            <div class="item-image">
-                                <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
+                <!-- MOBILE CART -->
+                    <div class="mobile-cart ">
+
+                        <!-- IMAGE  -->
+                        <div class="row product-image">
+                            <div class="col-xs-12">
+                                <div class="item-image">
+                                    <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TITLE -->
+                        <div class="row product-title">
+                            <div class="col-xs-12">
+                                <h4>{{$item->name}}</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                <p>{{$item->options->milk}}, Sugar - {{$item->options->sugar}}, Syrup
+                                    - {{$item->options->syrup}}</p>
+                            </div>
+                            <div class="col-xs-3">
+                                <h5>${{$item->price}} </h5>
+                            </div>
+                        </div>
+
+                        <!-- PRICE -->
+                        <div class="row product-price">
+                            <div class="col-xs-2 ">
+                                <label for="">QTY</label>
+                            </div>
+                            <div class="col-xs-4 no-gutters">
+                                <select name="quantity" id="" class="form-select">
+                                    @foreach([1,2,3,'4',5] as $qty)
+                                        <option
+                                            value="{{$qty}}" {{$qty == $item->qty ? 'selected' : ''}}>{{$qty}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-xs-6 text-end">
+                                {{--                            <button type="submit" class="btn remove-item">--}}
+                                {{--                                <i class="fa fa-pencil mb-1 text-danger"></i>--}}
+                                {{--                            </button>--}}
+
+                                <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn remove-item"><i
+                                            class="fa fa-trash mb-1 text-danger"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
 
-                    <!-- TITLE -->
-                    <div class="row product-title">
-                        <div class="col-xs-12">
-                            <h4>Cappuccino</h4>
-                        </div>
-                        <div class="col-xs-9">
-                            <p>Cream, Sugar - , Syrup</p>
-                        </div>
-                        <div class="col-xs-3">
-                            <h5>$30</h5>
-                        </div>
-                    </div>
+                @endforeach
 
-                    <!-- PRICE -->
-                    <div class="row product-price">
-                        <div class="col-xs-2 ">
-                            <label for="">QTY</label>
-                        </div>
-                        <div class="col-xs-4 no-gutters">
-                            <select name="quantity" id="" class="form-select">
-                                <option>1</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-6 text-end">
-                            <button type="submit" class="btn remove-item">
-                                <i class="fa fa-pencil mb-1 text-danger"></i>
-                            </button>
-                            <button type="submit" class="btn remove-item">
-                                <i class="fa fa-trash mb-1 text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MOBILE CART -->
-                <div class="mobile-cart ">
-
-                    <!-- IMAGE  -->
-                    <div class="row product-image">
-                        <div class="col-xs-12">
-                            <div class="item-image">
-                                <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TITLE -->
-                    <div class="row product-title">
-                        <div class="col-xs-12">
-                            <h4>Cappuccino</h4>
-                        </div>
-                        <div class="col-xs-9">
-                            <p>Cream, Sugar - , Syrup</p>
-                        </div>
-                        <div class="col-xs-3">
-                            <h5>$30</h5>
-                        </div>
-                    </div>
-
-                    <!-- PRICE -->
-                    <div class="row product-price">
-                        <div class="col-xs-2 ">
-                            <label for="">QTY</label>
-                        </div>
-                        <div class="col-xs-4 no-gutters">
-                            <select name="quantity" id="" class="form-select">
-                                <option>1</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-6 text-end">
-                            <button type="submit" class="btn remove-item">
-                                <i class="fa fa-pencil mb-1 text-danger"></i>
-                            </button>
-                            <button type="submit" class="btn remove-item">
-                                <i class="fa fa-trash mb-1 text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- CART TOTAL -->
