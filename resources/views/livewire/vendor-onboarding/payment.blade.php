@@ -1,84 +1,85 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-{{--                <div class="card-header">{{ __('Checkout') }}</div>--}}
-                <div class="card-body">
-                    <div class="container py-3">
-                        <main>
-                            <div class="row g-5">
-                                <div class="col-md-7 col-lg-12">
 
-                                    <h4 class="mb-3">Payment <span class="mr-2"><i
-                                                class="fas fa-credit-card text-muted"></i></span><span class="mr-2"><i
-                                                class="fab fa-cc-visa text-muted"></i></span><span class="mr-2"><i
-                                                class="fab fa-cc-mastercard text-muted"></i></span></h4>
+<section class="registration-steps">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
+                <div class="card payment_form">
+    {{--                <div class="card-header">{{ __('Checkout') }}</div>--}}
+                    <div class="card-body">
+                        <div class="container py-3">
+                            <main>
+                                <div class="row g-5">
+                                    <div class="col-md-7 col-lg-12">
 
-                                    <hr class="my-4">
-                                    <div class="row gy-3 form-group">
-                                        <div class="col-md-12">
+                                        <h4 class="mb-3">Payment <span class="mr-2"><i
+                                                    class="fa fa-credit-card text-muted"></i></span></h4>
 
-
-                                            <form wire:submit.prevent="subscribe"  id="card-form">
+                                        <hr class="my-4">
+                                        <div class="row gy-3 form-group">
+                                            <div class="col-md-12">
 
 
-                                                <div class="form-group">
-                                                    <label for="plan" class="form-label">Select Plan</label>
-                                                    <div class="form-check form-check-inline">
+                                                <form wire:submit.prevent="subscribe"  id="card-form">
 
-                                                        @foreach($availablePlans as $title => $slug)
-                                                            <label class="form-check-label mx-4">
-                                                                <input type="radio" class="form-check-input"
-                                                                       wire:model="plan"
-                                                                       value="{{$slug}}">
-                                                                {{$title}}
-                                                            </label>
-                                                        @endforeach
 
+                                                    <div class="form-group">
+                                                        <label for="plan" class="form-label">Select Plan</label>
+                                                        <div class="form-check form-check-inline">
+
+                                                            @foreach($availablePlans as $title => $slug)
+                                                                <label class="form-check-label mx-4">
+                                                                    <input type="radio" class="form-check-input"
+                                                                        wire:model="plan"
+                                                                        value="{{$slug}}">
+                                                                    {{$title}}
+                                                                </label>
+                                                            @endforeach
+
+                                                        </div>
+                                                        @error('plan') <span
+                                                            class="text-danger">{{ $message }}</span> @enderror
                                                     </div>
-                                                    @error('plan') <span
-                                                        class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
 
 
-                                                <div class="form-group">
-                                                    <label for="card-holder-name" class="form-label">Name on
-                                                        card</label>
-                                                    <input type="text" class="form-control" id="card-holder-name"
-                                                           placeholder="" required>
-                                                    <small class="text-muted">Full name as displayed on card</small>
-                                                    <small class="invalid-feedback">
-                                                        Name on card is required
-                                                    </small>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="card-holder-name" class="form-label">Name on
+                                                            card</label>
+                                                        <input type="text" class="form-control" id="card-holder-name"
+                                                            placeholder="" required>
+                                                        <small class="text-muted">Full name as displayed on card</small>
+                                                        <small class="invalid-feedback">
+                                                            Name on card is required
+                                                        </small>
+                                                    </div>
 
 
-                                                <div class="form-group mt-2">
-                                                    <label for="name">Card Details</label>
-                                                    <div id="card-element"></div>
-                                                    <div id="card-errors" role="alert"></div>
-                                                </div>
+                                                    <div class="form-group mt-2">
+                                                        <label for="name">Enter Your Card Details</label>
+                                                        <div id="card-element"></div>
+                                                        <div id="card-errors" role="alert"></div>
+                                                    </div>
 
 
-                                                <button id="card-button" class="w-100 btn btn-success btn-lg mt-4"
-                                                        type="submit" data-secret="{{ $clientSecret }}">
-                                                    Proceed to Checkout.
-                                                </button>
-                                            </form>
+                                                    <button id="card-button" class="w-100 btn btn-success btn-lg mt-4"
+                                                            type="submit" data-secret="{{ $clientSecret }}">
+                                                        Proceed to Checkout.
+                                                    </button>
+                                                </form>
 
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </main>
+                            </main>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script>
         const stripe = Stripe('{{ config('cashier.key')}}')
