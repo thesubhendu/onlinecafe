@@ -1,66 +1,56 @@
-<x-app-layout>
-    <!-- ORDERED ITEMS TABLE -->
+<div>
+    <x-message type="message"></x-message>
+
     <section class="ordered-food-item ">
         <div class="container">
             <!-- TABLE ITEMS  -->
             <div class="row hidden-xs">
                 <div class="col-md-12">
-                    <h2>{{ Cart::count() }} {{ Str::plural('item', Cart::count())}} in Shopping Cart</h2>
+                    <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
 
                     <div class="table-responsive">
                         <!-- TABLE -->
                         <table class="table">
                             <!-- TABLE HEAD -->
                             <thead>
-                                <tr>
-                                    <th class="item-remove"></th>
-                                    <th class="item-thumbnail">PRODUCT</th>
-                                    <th class="item-name"></th>
-                                    <th class="description"></th>
-                                    <th class="price-box">PRICE</th>
-                                    <th class="item-quantity">QUANTITY</th>
-                                    {{-- <th class="item-subtotal">TOTAL </th>--}}
-
-                                </tr>
+                            <tr>
+                                <th class="item-remove"></th>
+                                <th class="item-thumbnail">PRODUCT</th>
+                                <th class="item-name"></th>
+                                <th class="description"></th>
+                                <th class="price-box">PRICE</th>
+                                <th class="item-quantity">QUANTITY</th>
+                            </tr>
                             </thead>
 
                             <!-- TABLE BODY -->
                             <tbody>
-                                @foreach(Cart::content() as $item)
+                            @foreach($items as $key=>$item)
 
                                 <!-- ITEM ROW -->
                                 <tr class="item-row">
                                     <td class="item-remove ">
-                                        <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
-                                        </form>
+                                        <button type="button" wire:click="removeItem('{{$item['rowId']}}')"
+                                                class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i>
+                                        </button>
                                     </td>
                                     <td class="item-thumbnail">
                                         <img src="{{asset('assets/images/cappuccino.jpg')}}" alt="">
                                     </td>
-                                    <td class="item-name">{{$item->name}}</td>
+                                    <td class="item-name">{{$item['name']}}</td>
                                     <td class="description">
-                                        {{$item->options->milk}}, Sugar - {{$item->options->sugar}}, Syrup
-                                        - {{$item->options->syrup}}
+                                        <x-cart.description :item="$item"/>
                                     </td>
-                                    <td class="price-box"> ${{$item->price}} </td>
+                                    <td class="price-box"> ${{$item['price']}} </td>
                                     <td class="item-quantity">
                                         <div class="control-btn ">
-                                            <select class="form-control form-select" id="cartQuantity">
-
-                                                @foreach([1,2,3,'4',5] as $qty)
-                                                <option value="{{$qty}}" {{$qty == $item->qty ? 'selected' : ''}}>{{$qty}}</option>
-                                                @endforeach
-
-                                            </select>
+                                            <x-cart.update-quantity :item="$item"
+                                                                    :options="$qtyOptions"></x-cart.update-quantity>
                                         </div>
                                     </td>
-                                    {{-- <td class="item-subtotal">$5.0</td>--}}
                                 </tr>
 
-                                @endforeach
+                            @endforeach
 
                             </tbody>
 
@@ -70,13 +60,11 @@
                 </div>
             </div>
 
+            <!-- MOBILE CART-Items -->
             <div class="cart-items-mobile">
-
-            @foreach(Cart::content() as $item)
-
+            @foreach($items as $item)
                 <!-- MOBILE CART -->
                     <div class="mobile-cart ">
-
                         <!-- IMAGE  -->
                         <div class="row product-image">
                             <div class="col-xs-12">
@@ -89,14 +77,14 @@
                         <!-- TITLE -->
                         <div class="row product-title">
                             <div class="col-xs-12">
-                                <h4>{{$item->name}}</h4>
+                                <h4>{{$item['name']}}</h4>
                             </div>
                             <div class="col-xs-9">
-                                <p>{{$item->options->milk}}, Sugar - {{$item->options->sugar}}, Syrup
-                                    - {{$item->options->syrup}}</p>
+                                <x-cart.description :item="$item"/>
+
                             </div>
                             <div class="col-xs-3">
-                                <h5>${{$item->price}} </h5>
+                                <h5>${{$item['price']}} </h5>
                             </div>
                         </div>
 
@@ -106,24 +94,11 @@
                                 <label for="">QTY</label>
                             </div>
                             <div class="col-xs-4 no-gutters">
-                                <select name="quantity" id="" class="form-select">
-                                    @foreach([1,2,3,'4',5] as $qty)
-                                        <option
-                                            value="{{$qty}}" {{$qty == $item->qty ? 'selected' : ''}}>{{$qty}}</option>
-                                    @endforeach
-                                </select>
+                                <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
                             </div>
                             <div class="col-xs-6 text-end">
-                                {{--                            <button type="submit" class="btn remove-item">--}}
-                                {{--                                <i class="fa fa-pencil mb-1 text-danger"></i>--}}
-                                {{--                            </button>--}}
-
-                                <form action="{{ route('cart.remove', $item->rowId) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn remove-item"><i
-                                            class="fa fa-trash mb-1 text-danger"></i></button>
-                                </form>
+                                <button type="button" wire:click="removeItem('{{$item['rowId']}}')"
+                                        class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
                             </div>
                         </div>
                     </div>
@@ -170,7 +145,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="cart-totals-result">
-                                    <h4>${{Cart::subtotal()}}</h4>
+                                    <h4>${{$subtotal}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +159,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="cart-totals-result">
-                                    <h4 class="final-pay">${{Cart::tax()}}</h4>
+                                    <h4 class="final-pay">${{$tax}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +172,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="cart-totals-result">
-                                    <h4 class="final-pay">${{Cart::total()}}</h4>
+                                    <h4 class="final-pay">${{$total}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -223,4 +198,6 @@
 
         </div>
     </section>
-</x-app-layout>
+
+
+</div>
