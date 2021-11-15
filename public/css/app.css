@@ -12940,4 +12940,25 @@ textarea.form-control-lg {
   .mobile-cart .product-price .remove-item i {
     color: #868686 !important;
   }
+
+  .checkout-bg .term-content {
+    padding: 1rem;
+  }
+  .checkout-bg .term-content .checkout-form {
+    padding-top: 0;
+  }
+  .checkout-bg .cart-payment .coupen input {
+    width: 63% !important;
+  }
+
+  .shipping-information {
+    padding: 1rem !important;
+  }
+
+  .shipping-information .btn {
+    position: fixed;
+    bottom: 5%;
+    left: 3%;
+    width: 94% !important;
+  }
 }

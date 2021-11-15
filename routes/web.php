@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function() {
 
 Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/cart', \App\Http\Livewire\ShoppingCart::class)->name('cart');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
 
