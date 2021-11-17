@@ -12961,4 +12961,49 @@ textarea.form-control-lg {
     left: 3%;
     width: 94% !important;
   }
+
+  .order-submitted {
+    padding: 2rem 0 !important;
+  }
+  .order-submitted .jumbotron {
+    padding: 2rem !important;
+  }
+
+  .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {
+    font-size: 14px !important;
+    min-height: 66px !important;
+    padding: 0 10px !important;
+  }
+
+  .bs-wizard > .bs-wizard-step > .bs-wizard-dot {
+    top: 78% !important;
+  }
+
+  .registration-steps .register-form .title {
+    font-size: 22px;
+  }
+  .registration-steps .payment-form .card-body {
+    padding: 1rem 0 !important;
+  }
+  .registration-steps .shop-setup-card {
+    padding: 1rem;
+  }
+  .registration-steps .shop-setup-card .form-part {
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  .registration-steps .shop-setup-card .form-part .day-select .form-control {
+    margin: 5px 0;
+  }
+  .registration-steps .shop-setup-card .form-part .day-select {
+    margin-bottom: 1.8rem !important;
+  }
+  .registration-steps .shop-setup-card .form-part .day-select .btn {
+    width: 100%;
+    font-size: 14px;
+    margin-top: 3px;
+  }
+  .registration-steps .shop-setup-card .form-part .day-select label {
+    font-weight: 500;
+  }
 }

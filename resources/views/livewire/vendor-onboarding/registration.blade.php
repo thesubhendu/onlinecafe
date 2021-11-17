@@ -24,9 +24,9 @@
                 <div class="">
                     <form wire:submit.prevent="register" class="row">
                         <div class="form-group col-lg-6 col-sm-12">
-                            <label for="name" class="form-label"> Business Name</label>
-                            <input type="text" class="form-control" wire:model.lazy="name" placeholder="Business Name">
-                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                            <label for="vendor_name" class="form-label"> Business Name</label>
+                            <input type="text" class="form-control" wire:model.lazy="vendor_name" placeholder="Business Name">
+                            @error('vendor_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                         </div>
                         <div class="form-group col-lg-6 col-sm-12">
@@ -41,16 +41,16 @@
 
                         </div>
                         <div class="form-group col-lg-6 col-sm-12">
-                            <label for="contactName" class="form-label"> Contact First Name</label>
-                            <input type="text" class="form-control" wire:model.lazy="contactName" placeholder="Contact First Name">
-                            @error('contactName') <span class="text-danger">{{ $message }}</span> @enderror
+                            <label for="contact_name" class="form-label"> Contact First Name</label>
+                            <input type="text" class="form-control" wire:model.lazy="contact_name" placeholder="Contact First Name">
+                            @error('contact_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                         </div>
                         <div class="form-group col-lg-6 col-sm-12">
-                            <label for="contactLastName" class="form-label"> Contact Last Name</label>
+                            <label for="contact_lastname" class="form-label"> Contact Last Name</label>
 
-                            <input type="text" class="form-control" wire:model.lazy="contactLastName" placeholder="Contact Last Name">
-                            @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="text" class="form-control" wire:model.lazy="contact_lastname" placeholder="Contact Last Name">
+                            @error('contact_lastname') <span class="text-danger">{{ $message }}</span> @enderror
 
                         </div>
                         <div class="form-group col-lg-6 col-sm-12">

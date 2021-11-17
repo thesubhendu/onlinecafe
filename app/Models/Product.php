@@ -41,6 +41,7 @@ class Product extends Model
 
     public function options()
     {
-        return VendorProductOption::where('category_id', $this->category_id)->get();
+//        return ProductOption::where('category_id', $this->category_id)->get();
+        return VendorProductOption::where('category_id', $this->category_id)->where('vendor_id', $this->vendor_id)->get();
     }
 }
