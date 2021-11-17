@@ -1,2 +1,3 @@
-{{$item['options']['milk']}}, Sugar - {{$item['options']['sugar']}}, Syrup
-- {{$item['options']['sugar']}}
+@foreach($item['options'] as $option)
+    {{$option}} <br>
+@endforeach
