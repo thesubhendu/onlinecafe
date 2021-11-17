@@ -7,7 +7,7 @@
             <!-- INFORMATION -->
             <div
                 class="col-md-4 col-sm-4 col-xs-4 bs-wizard-step {{$step !== 'register' ? 'active' : ''}}">
-                <div class="text-center bs-wizard-stepnum">Register Business ()
+                <div class="text-center bs-wizard-stepnum">Register Business
                 </div>
                 <div class="progress">
                     <div class="progress-bar"></div>
