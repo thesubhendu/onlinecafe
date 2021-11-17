@@ -68,6 +68,10 @@
                                     <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>
                                         &nbsp; User Register</a>
                                 @else
+                                    @if(auth()->user()->shop)
+                                        <a class="dropdown-item" href="{{route('vendor.show', auth()->user()->shop)}}">My Shop</a>
+                                    @endif
+
                                     @can('visit-backend')
                                         <a class="dropdown-item" href="{{url('/admin')}}">Admin Panel</a>
                                     @endcan
