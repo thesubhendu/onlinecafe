@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\orderSubmitted;
 use App\Models\Card;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\Stamp;
 use App\Models\Vendor;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -29,29 +28,6 @@ class OrderController extends Controller
         return view('orders')
             ->with('user', $user->orders)
             ->with('products');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    {
-        $product     = Product::where('id', $id)
-                              ->first();
-        $milkOptions = ['Cream', 'Skimmed', 'cow milk'];
-
-        $sugar = ['', 1, 2, 3, 4, 5];
-        $syrup = ['', 1, 2, 3, 4, 5];
-
-        return view('order')
-            ->with([
-                'product'     => $product,
-                'milkOptions' => $milkOptions,
-                'sugar'       => $sugar,
-                'syrup'       => $syrup,
-            ]);
     }
 
     /**

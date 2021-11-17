@@ -38,4 +38,9 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'category_id');
     }
+
+    public function options()
+    {
+        return VendorProductOption::where('category_id', $this->category_id)->get();
+    }
 }

@@ -14,9 +14,9 @@
                 <form wire:submit.prevent="register">
                     <div class="form-group">
                         <label for="name" class="form-label"> Business Name</label>
-                        <input type="text" class="form-control" wire:model.lazy="name"
+                        <input type="text" class="form-control" wire:model.lazy="vendor_name"
                                placeholder="Business Name">
-                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('vendor_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
                     <div class="form-group">
@@ -33,18 +33,18 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="contactName" class="form-label"> Contact First Name</label>
-                        <input type="text" class="form-control" wire:model.lazy="contactName"
+                        <label for="contact_name" class="form-label"> Contact First Name</label>
+                        <input type="text" class="form-control" wire:model.lazy="contact_name"
                                placeholder="Contact First Name">
-                        @error('contactName') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('contact_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
                     <div class="form-group">
-                        <label for="contactLastName" class="form-label"> Contact Last Name</label>
+                        <label for="contact_lastname" class="form-label"> Contact Last Name</label>
 
-                        <input type="text" class="form-control" wire:model.lazy="contactLastName"
+                        <input type="text" class="form-control" wire:model.lazy="contact_lastname"
                                placeholder="Contact Last Name">
-                        @error('contactLastName') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('contact_lastname') <span class="text-danger">{{ $message }}</span> @enderror
 
                     </div>
                     <div class="form-group">

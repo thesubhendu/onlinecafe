@@ -18,6 +18,7 @@ class CreateVendorProductOptionsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->json('options')->nullable();
             $table->decimal('price', 4, 2);
             $table->foreignId('vendor_id')->constrained('vendors');
             $table->foreignId('category_id')->constrained('product_categories');

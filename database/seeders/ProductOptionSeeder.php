@@ -15,7 +15,7 @@ class ProductOptionSeeder extends Seeder
      */
     public function run()
     {
-        ProductOption::factory()->count(7)->state(['category_id' => ProductCategory::first()->id])->create();
+        ProductOption::factory()->count(3)->state(['category_id' => ProductCategory::first()->id])->create();
 
     }
 }

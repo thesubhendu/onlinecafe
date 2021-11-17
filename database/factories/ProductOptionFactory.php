@@ -16,6 +16,9 @@ class ProductOptionFactory extends Factory
         return [
             'name'  => $this->faker->unique()->word(1),
             'price' => $this->faker->numberBetween(0.25, 5),
+            'options' => $this->faker->randomElements([
+                'pure', 'less pure', 'old', 'great', '1number', 'low grade', 'medium', 'highest',
+            ], 4),
         ];
     }
 }

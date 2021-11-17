@@ -11,4 +11,6 @@ class ProductOption extends Model
 
     protected $fillable = ['name', 'description', 'image', 'price', 'category_id'];
 
+    protected $casts = ['options' => 'array'];
+
 }

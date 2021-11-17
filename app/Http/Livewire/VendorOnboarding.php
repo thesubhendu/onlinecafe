@@ -26,7 +26,7 @@ class VendorOnboarding extends Component
     {
         $authUser = auth()->user();
 
-        if (Gate::denies('subscribed')) {
+        if ( ! $authUser->shop) {
             $this->step = 'register';
         } elseif ($authUser->shop && Gate::allows('subscribed')) {
             $this->step = 'shop-setup';

@@ -118,8 +118,7 @@ class ShopSetup extends Component
         }
 
         foreach ($this->menus->filter(fn($item) => $item->isSelected) as $menu) {
-            $vendor->products()->create([
-                'name'          => $menu->name,
+            $vendor->products()->updateOrCreate(['name' => $menu->name], [
                 'description'   => $menu->description ?? "dummy description",
                 'product_image' => $menu->image,
                 'price'         => $menu->price,
@@ -128,12 +127,12 @@ class ShopSetup extends Component
         }
 
         foreach ($this->options->filter(fn($item) => $item->isSelected) as $option) {
-            $vendor->productOptions()->create([
-                'name'        => $option->name,
+            $vendor->productOptions()->updateOrCreate(['name' => $option->name], [
                 'description' => $option->description,
                 'image'       => $option->image,
                 'price'       => $option->price,
                 'category_id' => $option->category_id,
+                'options'     => $option->options,
             ]);
         }
 
