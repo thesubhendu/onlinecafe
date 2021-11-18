@@ -40,7 +40,7 @@
                                         <select wire:model="cartProduct.options.{{$option->id}}" class="form-select">
                                             <option value="">Select Option</option>
                                             @foreach ($option->options ?? [] as $subOption)
-                                                <option value="{{$option->name}}-{{$subOption}}">{{$subOption}}</option>
+                                                <option value="{{$option->name}}-{{$subOption}}-(+${{$option->price}})">{{$subOption}}</option>
                                             @endforeach
 
                                         </select>

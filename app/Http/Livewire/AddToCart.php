@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use App\Models\VendorProductOption;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
@@ -35,6 +36,16 @@ class AddToCart extends Component
     {
 
         $this->validate();
+
+        if(!empty($this->cartProduct['options'])) {
+
+            $totalAdditionalPrice = collect($this->cartProduct['options'])->map(function($option, $optionId) {
+                                    $optionObject = VendorProductOption::find($optionId);
+                                    return $optionObject->price ?? 0;
+                                })->filter()->sum();
+
+            $this->cartProduct['price'] += $totalAdditionalPrice;
+        }
 
         Cart::add($this->cartProduct)->associate(Product::class);
 

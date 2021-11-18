@@ -26,7 +26,7 @@ class ShoppingCart extends Component
 
     private function refreshCart()
     {
-        $this->items     = Cart::content()->toArray();
+        $this->items     = Cart::content();
         $this->subtotal  = Cart::subtotal();
         $this->tax       = Cart::tax();
         $this->total     = Cart::total();

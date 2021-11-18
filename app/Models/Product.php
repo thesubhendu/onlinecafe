@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Orchid\Attachment\Attachable;
-use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
+use Orchid\Filters\Filterable;
+use Orchid\Attachment\Attachable;
+use Illuminate\Database\Eloquent\Model;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Product extends Model
+class Product extends Model implements Buyable
 {
+
+    use \App\Traits\CanBeBought;
+
     use HasFactory, AsSource, Attachable, Filterable;
 
     protected $fillable = ['name', 'description', 'product_image', 'price', 'category_id', 'vendor_id', 'is_active'];

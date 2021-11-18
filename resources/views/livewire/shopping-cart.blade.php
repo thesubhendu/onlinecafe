@@ -30,18 +30,18 @@
                                 <!-- ITEM ROW -->
                                 <tr class="item-row">
                                     <td class="item-remove ">
-                                        <button type="button" wire:click="removeItem('{{$item['rowId']}}')"
+                                        <button type="button" wire:click="removeItem('{{$item->rowId}}')"
                                                 class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i>
                                         </button>
                                     </td>
                                     <td class="item-thumbnail">
                                         <img src="{{asset('assets/images/cappuccino.jpg')}}" alt="">
                                     </td>
-                                    <td class="item-name">{{$item['name']}}</td>
+                                    <td class="item-name">{{$item->name}}</td>
                                     <td class="description">
                                         <x-cart.description :item="$item"/>
                                     </td>
-                                    <td class="price-box"> ${{$item['price']}} </td>
+                                    <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
                                         <div class="control-btn ">
                                             <x-cart.update-quantity :item="$item"
@@ -77,14 +77,14 @@
                         <!-- TITLE -->
                         <div class="row product-title">
                             <div class="col-xs-12">
-                                <h4>{{$item['name']}}</h4>
+                                <h4>{{$item->name}}</h4>
                             </div>
                             <div class="col-xs-9">
                                 <x-cart.description :item="$item"/>
 
                             </div>
                             <div class="col-xs-3">
-                                <h5>${{$item['price']}} </h5>
+                                <h5>${{$item->price}} </h5>
                             </div>
                         </div>
 
@@ -97,7 +97,7 @@
                                 <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
                             </div>
                             <div class="col-xs-6 text-end">
-                                <button type="button" wire:click="removeItem('{{$item['rowId']}}')"
+                                <button type="button" wire:click="removeItem('{{$item->rowId}}')"
                                         class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
                             </div>
                         </div>

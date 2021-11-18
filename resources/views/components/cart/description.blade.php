@@ -1,3 +1,3 @@
-@foreach($item['options'] as $option)
+@foreach($item->options as $option)
     {{$option}} <br>
 @endforeach
