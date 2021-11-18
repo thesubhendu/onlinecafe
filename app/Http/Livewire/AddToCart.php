@@ -9,12 +9,9 @@ use Livewire\Component;
 class AddToCart extends Component
 {
     public $product;
-    public $milkOptions = ['Cream', 'Skimmed', 'cow milk'];
 
     public $cartProduct;
 
-    public $sugar = ['', 1, 2, 3, 4, 5];
-    public $syrup = ['', 1, 2, 3, 4, 5];
 
     public function render()
     {
@@ -29,13 +26,14 @@ class AddToCart extends Component
             'name'    => $product->name,
             'price'   => $product->price,
             'weight'  => '0',
-            'qty'     => '1',
+            'qty'     => 1,
             'options' => [],
         ];
     }
 
     public function submit()
     {
+
         $this->validate();
 
         Cart::add($this->cartProduct)->associate(Product::class);
@@ -46,21 +44,23 @@ class AddToCart extends Component
     protected function rules()
     {
         $rules = [
-            'cartProduct.quantity' => 'required|numeric',
+            'cartProduct.qty' => 'required|numeric',
         ];
-        foreach ($this->product->options() as $option) {
-            $rules['cartProduct.options.'.$option->id] = 'required';
-        }
+        // foreach ($this->product->options() as $option) {
+        //     $rules['cartProduct.options.'.$option->id] = 'required';
+        // }
 
         return $rules;
     }
 
-    protected function messages()
-    {
-        foreach ($this->product->options() as $option) {
-            $messages['cartProduct.options.'.$option->id.'.required'] = 'Please Select Option';
-        }
+    // protected function messages()
+    // {
+    //     foreach ($this->product->options() as $option) {
+    //         $messages['cartProduct.options.' . $option->id . '.required'] = 'Please Select Option';
+    //     }
 
-        return $messages;
-    }
+    //     return $messages;
+    // }
+
+
 }

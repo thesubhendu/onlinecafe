@@ -24,19 +24,19 @@
                                 </div>
                                 <div class="col-lg-4 mb-3">
                                     <label>Quantity</label>
-                                    <select wire:model.lazy="cartProduct.quantity" id="" class="form-select" required>
+                                    <select wire:model.lazy="cartProduct.qty" id="" class="form-select" required>
                                         @foreach ([0,1,2,3,4,5,6,7,8,9,10] as $option)
                                             <option value="{{$option}}">{{$option}}</option>
                                         @endforeach
                                     </select>
-                                    @error('cartProduct.quantity') <span
+                                    @error('cartProduct.qty') <span
                                         class="text-danger">{{ $message }}</span> @enderror
 
                                 </div>
 
                                 @foreach($product->options() as $index => $option)
                                     <div class="col-lg-4 mb-3">
-                                        <label for="">{{$option->name}}</label>
+                                        <label for="">{{$option->name}} (+ ${{$option->price}})</label>
                                         <select wire:model="cartProduct.options.{{$option->id}}" class="form-select">
                                             <option value="">Select Option</option>
                                             @foreach ($option->options ?? [] as $subOption)
