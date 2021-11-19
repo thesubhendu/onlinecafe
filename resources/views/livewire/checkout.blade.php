@@ -106,7 +106,7 @@
 
                                 <!-- BACK TO SHOP -->
                                 <div class="back-to-shop ">
-                                    <a href="{{route('home')}}"><i class="fa fa-angle-left"></i> &nbsp; Back To
+                                    <a href="{{route('vendor.show', $cartItems->first()->model->vendor_id)}}"><i class="fa fa-angle-left"></i> &nbsp; Back To
                                         Shopping</a>
                                 </div>
 
