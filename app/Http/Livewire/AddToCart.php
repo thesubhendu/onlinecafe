@@ -3,9 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use Livewire\Component;
+use App\Models\ProductOption;
 use App\Models\VendorProductOption;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Livewire\Component;
 
 class AddToCart extends Component
 {
@@ -37,10 +38,18 @@ class AddToCart extends Component
 
         $this->validate();
 
+        //only allowing order from one vendor
+        if($existingItem = Cart::content()->first()) {
+            if($existingItem->model->vendor_id != $this->product->vendor_id) {
+                Cart::destroy();
+                session()->flash('message', 'Previous Item in cart from other vendor cleared');
+            }
+        }
+
         if(!empty($this->cartProduct['options'])) {
 
             $totalAdditionalPrice = collect($this->cartProduct['options'])->map(function($option, $optionId) {
-                                    $optionObject = VendorProductOption::find($optionId);
+                                    $optionObject = ProductOption::find($optionId);
                                     return $optionObject->price ?? 0;
                                 })->filter()->sum();
 
@@ -50,6 +59,8 @@ class AddToCart extends Component
         Cart::add($this->cartProduct)->associate(Product::class);
 
         session()->flash('message', 'Added to cart');
+
+        return redirect()->route('checkout.index');
     }
 
     protected function rules()

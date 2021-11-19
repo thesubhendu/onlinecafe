@@ -8,15 +8,15 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutController extends Controller
 {
-    public function index()
-    {
-        $user = Auth()->user();
-        $cartItems = Cart::content();
+    // public function index()
+    // {
+    //     $user = Auth()->user();
+    //     $cartItems = Cart::content();
 
-        return view('checkout')
-            ->with('user', $user)
-            ->with('cartItems', $cartItems);
-    }
+    //     return view('checkout')
+    //         ->with('user', $user)
+    //         ->with('cartItems', $cartItems);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -27,7 +27,6 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->all());
         $request->validate([
             'vendor_id' => 'required',
         ]);

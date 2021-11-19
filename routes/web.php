@@ -1,29 +1,38 @@
 <?php
 
-use App\Http\Controllers\Account\AccountController;
-use App\Http\Controllers\CardsController;
+use App\Models\Order;
+use App\Models\Product;
+use App\Mail\orderSubmitted;
+use App\Http\Livewire\Checkout;
+use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\VendorOnboarding;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ConfirmOrderController;
-use App\Http\Controllers\FavouritesController;
-use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\CardsController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PhoneVerificationController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FavouritesController;
+use App\Http\Controllers\VendorLikeController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ConfirmOrderController;
+use App\Http\Controllers\VendorRatingController;
+use App\Http\Livewire\VendorOnboarding\ShopSetup;
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\PhoneVerificationController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
-use App\Http\Controllers\VendorController;
-use App\Http\Controllers\VendorLikeController;
-use App\Http\Controllers\VendorRatingController;
-use App\Http\Livewire\VendorOnboarding;
-use App\Http\Livewire\VendorOnboarding\ShopSetup;
-use App\Models\Product;
-use Illuminate\Support\Facades\Route;
 
 Route::get('tinker', function () {
-    $p = Product::first();
 
-    dd($p->options());
+    $order = Order::latest()->first();
+
+    return new orderSubmitted($order, 'lkdsldj');
+    $items = Cart::content();
+
+    dd($items->groupBy(function($item){
+        return $item->model->vendor_id;
+    }));
+    dd($items);
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -67,7 +76,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/order-submitted/{order}',
         \App\Http\Livewire\OrderSubmitted::class)->name('order.submitted'); //status displaying page
 
-    Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/cart/checkout', Checkout::class)->name('checkout.index');
 
     Route::get('/cart', \App\Http\Livewire\ShoppingCart::class)->name('cart');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');

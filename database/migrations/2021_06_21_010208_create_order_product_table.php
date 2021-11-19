@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateOrderProductTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations.2
      *
      * @return void
      */
@@ -23,9 +23,9 @@ class CreateOrderProductTable extends Migration
 
             $table->integer('price');
             $table->integer('quantity');
-            $table->string('milk')->nullable();
-            $table->integer('sugar')->nullable();
-            $table->string('syrup')->nullable();
+
+            $table->json('options')->nullable();
+
             $table->timestamps();
         });
     }
