@@ -21,6 +21,7 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\PhoneVerificationController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
+use App\Http\Livewire\MyOrders;
 
 Route::get('tinker', function () {
 
@@ -69,9 +70,11 @@ Route::middleware('auth')->group(function() {
 
     Route::get('add-to-cart/{product}', \App\Http\Livewire\AddToCart::class)->name('orders.create');
 
+    Route::get('orders', MyOrders::class)->name('order.index');
+
     Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
         'store' => 'order.store',
-    ]);
+    ])->only('store');
 
     Route::get('/order-submitted/{order}',
         \App\Http\Livewire\OrderSubmitted::class)->name('order.submitted'); //status displaying page
