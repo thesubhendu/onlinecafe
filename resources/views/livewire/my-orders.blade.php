@@ -6,6 +6,7 @@
             <thead>
                 <tr>
                     <th scope="col">Order</th>
+                    <th scope="col">Vendor</th>
                     <th scope="col">Image</th>
                     <th scope="col">Product</th>
                     <th scope="col">Total</th>
@@ -18,8 +19,10 @@
                     {{-- <th scope="row">1</th> --}}
                     {{-- <td>{{$order->vendor_id}}</td> --}}
                     <td>Order-{{$order->order_number}} -- {{$order->getFormattedDate('date')}}</td>
+                    <td>{{$order->vendor->shop_name ?? $order->vendor->vendor_name}}</td>
                     @foreach($order->products as $product)
                      <tr>
+                         <td></td>
                          <td></td>
                         <td><img src="{{$product->product_image}}" width="48" height="48"></td>
                         <td>{{$product->name}}

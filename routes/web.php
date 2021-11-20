@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('add-to-cart/{product}', \App\Http\Livewire\AddToCart::class)->name('orders.create');
 
-    Route::get('orders', MyOrders::class)->name('order.index');
+    Route::get('orders', MyOrders::class)->name('orders.index');
 
     Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
         'store' => 'order.store',
