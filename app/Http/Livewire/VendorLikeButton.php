@@ -18,6 +18,8 @@ class VendorLikeButton extends Component
     {
         $this->vendor->toggleFavorite();
 
+        $this->emit('favoriteVendorsUpdated');
+
         session()->flash('message', 'Favourites Updated');
     }
 
