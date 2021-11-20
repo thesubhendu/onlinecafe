@@ -34,7 +34,7 @@ class VendorFactory extends Factory
             'pc'               => $this->faker->postcode,
             'state'            => $this->faker->stateAbbr,
             'is_subscribed'    => 1,
-            'vendor_image'     => 'vendor_default.jpg',
+            'vendor_image'     => '',
             'cardstamps'       => 10,
         ];
     }

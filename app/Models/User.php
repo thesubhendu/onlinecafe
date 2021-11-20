@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +16,7 @@ use Orchid\Platform\Models\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
-    use HasProfilePhoto;
+    use HasProfilePhoto, Favoriteability;
     use Notifiable, Billable;
     use TwoFactorAuthenticatable;
 
@@ -92,11 +93,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders()
     {
         return $this->hasMany(Order::class);
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
     }
 
     public function cards()

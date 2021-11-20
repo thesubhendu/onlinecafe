@@ -75,6 +75,7 @@
                                     @endif
 
                                     <a class="dropdown-item" href="{{route('orders.index')}}">My Orders</a>
+                                    <a class="dropdown-item" href="{{route('user.likes')}}">My Favourite Vendors</a>
 
                                     @can('visit-backend')
                                         <a class="dropdown-item" href="{{url('/admin')}}">Admin Panel</a>

@@ -56,12 +56,10 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
 
 require(__DIR__ . '/partials/_manage-subscriptions.php');
 
-Route::post('/vendor/{vendor}/likes', [VendorLikeController::class, 'store'])->name('vendor.likes');
-Route::delete('/vendor/{vendor}/likes', [VendorLikeController::class, 'destroy']);
 Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->name('vendor.rating')->middleware('auth');
 Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproducts'])->name('vendor.products');
 
-Route::get('/user/favourites', [FavouritesController::class, 'userlikes'])->name('user.likes');
+Route::get('/user/favourites', [FavouritesController::class, 'index'])->name('user.likes');
 Route::get('/confirm/{order}/update',
     [ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
 

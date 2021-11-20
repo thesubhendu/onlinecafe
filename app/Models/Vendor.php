@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\OpeningHours\OpeningHours;
 
 class Vendor extends Model
 {
-    use HasFactory;
+    use HasFactory, Favoriteable;
 
     protected $guarded = ['owner_id'];
     protected $casts = [
         'opening_hours' => 'array',
     ];
-
-    public function likedBy(User $user)
-    {
-        return $this->likes->contains('user_id', $user->id);
-    }
 
     public function user()
     {
@@ -30,10 +26,6 @@ class Vendor extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
 
     public function products()
     {
