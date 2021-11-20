@@ -66,8 +66,8 @@
                                                 </button>
                                         @endif
                                     </div>
-                                    
-                                    
+
+
 
                                 </div>
                             @endforeach
@@ -82,15 +82,22 @@
                                             <input type="checkbox" class="form-check-input"
                                                 wire:model="menus.{{$index}}.isSelected"
                                                 checked>
+
+
                                             <label for=""> {{$menu->name}}</label>
 
                                             $ <input style="display:inline-block" type="text" class="form-control" wire:model="menus.{{$index}}.price"
                                                     placeholder="price">
-                                        </div>
+
+                                        <input type="checkbox" class="form-check-input" wire:model="menus.{{$index}}.is_stamp" checked>
+                                                        Is Stamp?
+                                                    </div>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
+
+
 
                         <div class="menu-option-section form-part">
                             <h2 class="title">Choose your options</h6>

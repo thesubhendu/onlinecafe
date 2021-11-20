@@ -16,7 +16,7 @@ class Product extends Model implements Buyable
 
     use HasFactory, AsSource, Attachable, Filterable;
 
-    protected $fillable = ['name', 'description', 'product_image', 'price', 'category_id', 'vendor_id', 'is_active'];
+    protected $fillable = ['name', 'description', 'product_image', 'price', 'category_id', 'vendor_id', 'is_active', 'is_stamp'];
 
     protected $allowedSorts = [
         'name',

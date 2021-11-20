@@ -14,6 +14,7 @@ class ShopSetup extends Component
 
     protected $rules = [
         'menus.*.isSelected'   => 'boolean',
+        'menus.*.is_stamp'   => 'boolean',
         'menus.*.price'        => 'required',
         'options.*.isSelected' => 'boolean',
         'options.*.price'      => 'required|decimal',
@@ -36,9 +37,11 @@ class ShopSetup extends Component
         $this->initializeOpeningHours();
         $this->menus = AllProduct::all()->map(function ($product) {
             $product->isSelected = true;
+            $product->is_stamp = true;
 
             return $product;
         });
+
 
         $this->options = ProductOption::all()->map(function ($option) {
             $option->isSelected = true;
@@ -123,6 +126,7 @@ class ShopSetup extends Component
                 'product_image' => $menu->image,
                 'price'         => $menu->price,
                 'category_id'   => $menu->category_id,
+                'is_stamp'   => $menu->is_stamp,
             ]);
         }
 
