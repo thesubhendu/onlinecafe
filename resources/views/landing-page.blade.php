@@ -47,14 +47,14 @@
     </section>
 
 
-    <section class="box about-box">
+    <section class="inner-banner-box about-box">
         <div class="color-overlay">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                        <div class="box-capiton">
-                            <h2>Welcome to <em class="text-primary">Laravel Coffee</em></h2>
+                        <div class="box-capiton text-center">
+                            <h1 class="large-text">Welcome to <em class="text-primary">Laravel Coffee</em></h1>
                             <h6>MAKE YOUR COFFEE MEMORABLE</h6>
                         </div>
                     </div>

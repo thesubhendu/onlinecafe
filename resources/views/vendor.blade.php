@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="box-capiton">
-                            <h2>Get more orders with <em class="text-primary">Laravel Coffee</em></h2>
+                            <h1>Get more orders with <em class="text-primary">Laravel Coffee</em></h1>
                             <h5>Connect your restaurant to 950,000+ Aussies on the Hey You app, with over 30 million food and drink orders taken to date.</h5>
                         </div>
                     </div>
