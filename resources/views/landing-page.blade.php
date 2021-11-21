@@ -247,31 +247,7 @@
         </div>
     </section>
 
-    <section class="our-history">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 p-0">
-                    <img src="assets/images/coffeeside.jpg" class="img-responsive" alt="">
-                </div>
-                <div class="col-md-6 p-0">
-                    <div class="hisotry-content">
-                        <h2>OUR HISTORY</h2>
-                        <p>Temple Tree situates in the City of Lakes, Pokhara. It is a boutique hotel where you can have
-                            your ‘me time’ with classy services. The hotel has a suite, deluxe and deluxe family room,
-                            each of which is the expression of stylish comfort. Spend quality time in the well-furnished
-                            room along with modern day amenities. It is one of the beautiful suites in Pokhara and the
-                            first hotel with rooftop swimming pool.
-                            Tree situates in the City of Lakes, Pokhara. It is a boutique hotel where you can have your
-                            ‘me time’ with classy services. The hotel has a suite, deluxe and deluxe family room, each
-                            of which is the expression of stylish comfort. Spend quality time in the well-furnished room
-                            along with modern day amenities. It is one of the beautiful suites in Pokhara and the first
-                            hotel with rooftop swimming pool.</p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  
 
 
 
