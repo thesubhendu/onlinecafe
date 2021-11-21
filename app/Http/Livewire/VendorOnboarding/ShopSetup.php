@@ -24,6 +24,9 @@ class ShopSetup extends Component
         'shop_name',
         'description',
         'opening_hours',
+        'max_stamps',
+        'free_product',
+        'get_free',
     ];
     public $openingHoursOptions = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

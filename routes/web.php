@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Order;
-use App\Models\Product;
 use App\Mail\orderSubmitted;
 use App\Http\Livewire\Checkout;
 use Illuminate\Support\Facades\Route;
@@ -11,8 +10,6 @@ use App\Http\Controllers\CardsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\FavouritesController;
-use App\Http\Controllers\VendorLikeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\VendorRatingController;
@@ -25,9 +22,7 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 
 Route::get('tinker', function () {
-
     $order = Order::latest()->first();
-
     return new orderSubmitted($order, 'lkdsldj');
     $items = Cart::content();
 

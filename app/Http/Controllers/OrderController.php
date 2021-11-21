@@ -23,7 +23,6 @@ class OrderController extends Controller
             'vendor' => 'required',
         ]);
 
-
         $user        = $request->user();
         $vendor_id   = $request->input('vendor');
         $active_card = Card::activeCard($vendor_id);
