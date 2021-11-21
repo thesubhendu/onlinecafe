@@ -60,31 +60,14 @@ class Checkout extends Component
     {
         $this->validate();
 
-        $vendor_id = $this->cartItems->first()->model->vendor_id;
-
-        $order = new Order();
-        $order->order_number = uniqid();
-        $order->user_id      = auth()->id();
-        $order->vendor_id    = $vendor_id;
-        $order->order_total  = Cart::total();
-        $order->save();
-
-        foreach (Cart::content() as $product) {
-            $order->products()->attach($product->id, [
-                'price'    => $product->price,
-                'quantity' => $product->qty,
-                'options'=> json_encode($product->options)
-            ]);
-        }
+        $order = (new Order())->generate($this->cartItems, Cart::total());
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
-
+        //todo: ask if need to send to owner or vendor email
         Mail::to($order->vendor->email)
-        ->send(new orderSubmitted($order, $confirm_url));
+            ->send(new orderSubmitted($order, $confirm_url));
 
         Cart::destroy();
-
-        // session()->flash('message', "Order Submitted");
 
         return redirect()->route('order.submitted', $order);
     }

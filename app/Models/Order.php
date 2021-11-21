@@ -59,4 +59,26 @@ class Order extends Model
 
         return $this;
     }
+
+    public function generate($cartItems, $total)
+    {
+        $vendor_id = $cartItems->first()->model->vendor_id;
+
+        $order = new Order();
+        $order->order_number = uniqid();
+        $order->user_id      = auth()->id();
+        $order->vendor_id    = $vendor_id;
+        $order->order_total  = $total;
+        $order->save();
+
+        foreach ($cartItems as $product) {
+            $order->products()->attach($product->id, [
+                'price'    => $product->price,
+                'quantity' => $product->qty,
+                'options' => json_encode($product->options)
+            ]);
+        }
+
+        return $order;
+    }
 }
