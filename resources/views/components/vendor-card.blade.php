@@ -1,6 +1,6 @@
 <!-- CARD -->
 <div class="col-md-3 col-sm-4">
-    <div class="category-item">
+    <div class="shop-vendors-item">
             <div class="image">
                 <img src="assets/images/cafe.jpeg" class="img-responsive" alt="">
 

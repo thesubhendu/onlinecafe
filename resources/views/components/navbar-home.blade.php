@@ -35,7 +35,7 @@
             </div>
 
             <!-- RIGHT CONTENT -->
-            <div class="offset-4 col-md-6 col-xs-10 text-right xs-left hidden-xs">
+            <div class="offset-4 col-md-6 col-xs-10  navbar-right xs-left hidden-xs">
                 <ul class="cart">
                     <li>
                         <a href="{{ route('register-business.create') }}">Partner with Us</a>
