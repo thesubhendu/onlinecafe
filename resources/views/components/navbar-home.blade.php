@@ -69,13 +69,15 @@
                                         &nbsp; User Register</a>
                                 @else
                                     @if(auth()->user()->shop)
-                                        <a class="dropdown-item" href="{{route('vendor.show', auth()->user()->shop)}}">My Shop</a>
+                                        <a class="dropdown-item" href="{{route('vendor.show', auth()->user()->shop)}}">My
+                                            Shop</a>
 
-                                        @else
+                                    @else
                                     @endif
 
                                     <a class="dropdown-item" href="{{route('orders.index')}}">My Orders</a>
                                     <a class="dropdown-item" href="{{route('user.likes')}}">My Favourite Vendors</a>
+                                    <a class="dropdown-item" href="{{route('cards.index')}}">My Cards</a>
 
                                     @can('visit-backend')
                                         <a class="dropdown-item" href="{{url('/admin')}}">Admin Panel</a>

@@ -56,35 +56,37 @@
                         <div class="opening-hours form-part">
                             <h2 class="title">Shop Opening Hours</h2>
                             @foreach($daysInWeek as $day)
-                            <div class="row mb-3 day-select">
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <input type="checkbox" class="form-check-input"
-                                                wire:model="form.opening_hours.{{$day}}.is_active" checked>
-                                            <label for="inputEmail3">{{$day}}</label>
+                                <div class="row mb-3 day-select">
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <input type="checkbox" class="form-check-input"
+                                                       wire:model="form.opening_hours.{{$day}}.is_active" checked>
+                                                <label for="inputEmail3">{{$day}}</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select class="form-control"
+                                                        wire:model="form.opening_hours.{{$day}}.from">
+                                                    @foreach($openingHoursOptions as $key => $option)
+                                                        <option value="{{$key}}">{{$option}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select class="form-control"
+                                                        wire:model="form.opening_hours.{{$day}}.to">
+                                                    @foreach($openingHoursOptions as $key => $option)
+                                                        <option value="{{$key}}">{{$option}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-1"></div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" wire:model="form.opening_hours.{{$day}}.from">
-                                                @foreach($openingHoursOptions as $option)
-                                                <option>{{$option}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" wire:model="form.opening_hours.{{$day}}.to">
-                                                @foreach($openingHoursOptions as $option)
-                                                <option>{{$option}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-1"></div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    @if($day == 'Monday')
-                                    <button type="button" class="btn btn-primary"
-                                        wire:click.prevent="applyTimesToAllDays">+ Apply times to all
+                                    <div class="col-md-3">
+                                        @if($day == 'Monday')
+                                            <button type="button" class="btn btn-primary"
+                                                    wire:click.prevent="applyTimesToAllDays">+ Apply times to all
                                         days
                                     </button>
                                     @endif

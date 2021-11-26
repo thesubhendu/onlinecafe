@@ -2,18 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Stamp;
-use App\Models\Vendor;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'vendor_id', 'maxStamps', 'is_Active'];
+    protected $fillable = ['user_id', 'vendor_id', 'is_active'];
 
     public function user()
     {
@@ -40,7 +37,7 @@ class Card extends Model
 
         $card = static::where('user_id', Auth::id())
             ->where('vendor_id', $id)
-            ->where('is_Active', true)->first();
+            ->where('is_active', true)->first();
 
         if (! $card) {
             return false;
