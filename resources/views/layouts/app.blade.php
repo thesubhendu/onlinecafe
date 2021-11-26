@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('/assets/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/css/responsive.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/css/responsive.css')}}"> -->
 
 
     @livewireStyles

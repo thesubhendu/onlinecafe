@@ -1797,12 +1797,15 @@ a.change-info {
 .inner-banner-box .box-capiton {
     position: relative;
 }
-.inner-banner-box h2 {
+.inner-banner-box h1 {
     color: #fff;
     /* text-align: center; */
     margin: 10px 0;
     font-weight: bold;
     font-size: 3.5rem;
+}
+.inner-banner .large-text{
+    font-size: 4rem !important;
 }
 .inner-banner-box img {
     margin: auto;

@@ -2,7 +2,7 @@
 
     <!-- IMAGE SLIDER WITH CAPTION -->
     <section>
-        <div id="demo" class="carousel slide" data-ride="carousel">
+        <div id="demo" class="carousel main-carousel slide" data-ride="carousel">
 
             <!-- The slideshow -->
             <div class="carousel-inner">
@@ -25,7 +25,7 @@
     </section>
 
     <!-- COFFEE SHOP VENDER CARD -->
-    <section class="category">
+    <section class="shop-vendors">
         <div class="container">
             <!-- TITLE  -->
             <div class="row">
