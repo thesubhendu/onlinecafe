@@ -3,8 +3,6 @@
     <!-- IMAGE SLIDER WITH CAPTION -->
     <section>
         <div id="demo" class="carousel main-carousel slide" data-ride="carousel">
-
-            <!-- The slideshow -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="assets/images/home-banner.jpg" alt="Los Angeles">
@@ -13,20 +11,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Left and right controls -->
-            <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a> -->
         </div>
     </section>
 
     <!-- COFFEE SHOP VENDER CARD -->
     <section class="shop-vendors">
         <div class="container">
+
             <!-- TITLE  -->
             <div class="row">
                 <div class="col-lg-12 m-0 p-0 mb-5 ">
@@ -46,8 +37,8 @@
         </div>
     </section>
 
-
-    <section class="inner-banner-box about-box">
+    <!-- MAIN LANDING PAGE -->
+    <section class="inner-banner-box landing-banner">
         <div class="color-overlay">
             <div class="container">
                 <div class="row">
@@ -64,7 +55,7 @@
         </div>
     </section>
 
-    <section class="about-us-inner">
+    <section class="welcome-content">
         <div class="container">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -89,7 +80,7 @@
         </div>
     </section>
 
-    <section class="at-hotel">
+    <section class="near-shop">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 m-0 p-0 ">
@@ -158,7 +149,7 @@
         </div>
     </section>
 
-    <section class="ourfacilities">
+    <section class="we-provide">
         <div class="container">
         <div class="row mb-5">
                 <div class="col-lg-12 m-0 p-0 ">

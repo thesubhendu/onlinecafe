@@ -1,6 +1,6 @@
 <!-- MENU CARD -->
 <div class="col-md-3 col-sm-4">
-    <div class="category-item product-item">
+    <div class="vendor-product-item">
 
         <!-- IMAGE with ICON -->
         <div class="image">
@@ -15,7 +15,7 @@
 
         <!-- CONTENT -->
         <div class="content">
-            <h3>{{$product->name}}</h3>
+            <h5>{{$product->name}}</h5>
             <div class="price-and-add">
                 <div class="price"><p><i class="fa fa-dollar"></i> {{$product->price}}</p></div>
                 <div class="add"><a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp; <i
