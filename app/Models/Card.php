@@ -46,14 +46,14 @@ class Card extends Model
         return $card;
     }
 
-    public function create()
+    public function getOrCreateActive($customerId, $vendorId)
     {
-        //
+        return Card::query()->firstOrCreate([
+            'user_id' => $customerId,
+            'vendor_id' => $vendorId,
+            'is_active' => true
+        ]);
     }
 
 
-    public function stampCard()
-    {
-        //
-    }
 }

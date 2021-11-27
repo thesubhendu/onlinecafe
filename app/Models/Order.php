@@ -62,21 +62,18 @@ class Order extends Model
 
     public function generate($cartItems, $total)
     {
-        $vendor_id = $cartItems->first()->model->vendor_id;
+        $vendorId = $cartItems->first()->model->vendor_id;
 
         $order = new Order();
         $order->order_number = uniqid();
         $order->user_id = auth()->id();
-        $order->vendor_id = $vendor_id;
+        $order->vendor_id = $vendorId;
         $order->order_total = $total;
         $order->save();
 
+        $card = (new Card());
 
-        $activeCard = Card::query()->firstOrCreate([
-            'user_id' => auth()->id(),
-            'vendor_id' => $vendor_id,
-            'is_active' => true
-        ]);
+        $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
 
 
         foreach ($cartItems as $product) {
@@ -85,6 +82,10 @@ class Order extends Model
                 'quantity' => $product->qty,
                 'options' => json_encode($product->options)
             ]);
+
+            if ($activeCard->stamps->count == $order->vendor->max_stamps) {
+                $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
+            }
 
             $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
         }
