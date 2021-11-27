@@ -84,6 +84,12 @@ class Order extends Model
             ]);
 
             if ($activeCard->stamps->count == $order->vendor->max_stamps) {
+                //max stamped
+                $activeCard->is_max_stamped = true;
+                $activeCard->is_active = false;
+                $activeCard->save();
+
+                //create another
                 $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
             }
 

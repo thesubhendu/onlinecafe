@@ -119,11 +119,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasVerifiedPhone()
     {
-        return ! is_null($this->phone_verified_at);
+        return !is_null($this->phone_verified_at);
     }
 
     public function routeNotificationForNexmo($notification)
     {
         return $this->mobile;
+    }
+
+    public function earnedRewards()
+    {
+        return Card::query()->where(['user_id' => $this->id, 'is_active' => false, 'is_max_stamped' => false])->get();
     }
 }

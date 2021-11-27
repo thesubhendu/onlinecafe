@@ -19,6 +19,8 @@ class CreateCardsTable extends Migration
             $table->foreignId('vendor_id')->constrained('vendors');
             $table->boolean('is_active')->nullable();
             $table->string('card_logo')->nullable();
+            $table->boolean('is_max_stamped')->default(false);
+            $table->foreignId('transferred_to')->nullable()->constrained('users');
             $table->timestamps();
 
         });
