@@ -20,7 +20,7 @@ class CreateCardsTable extends Migration
             $table->boolean('is_active')->nullable();
             $table->string('card_logo')->nullable();
             $table->boolean('is_max_stamped')->default(false);
-            $table->foreignId('transferred_to')->nullable()->constrained('users');
+            $table->string('receiver_email')->nullable();
             $table->timestamps();
 
         });

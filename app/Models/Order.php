@@ -83,7 +83,7 @@ class Order extends Model
                 'options' => json_encode($product->options)
             ]);
 
-            if ($activeCard->stamps->count == $order->vendor->max_stamps) {
+            if ($activeCard->stamps->count() == $order->vendor->max_stamps) {
                 //max stamped
                 $activeCard->is_max_stamped = true;
                 $activeCard->is_active = false;
