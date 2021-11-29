@@ -14,15 +14,24 @@
                 <div class="vendor-actions">
                     <div class="icon-ratings">
                         <span class="xs-block">
-                            <i class="fa fa-coffee selected"></i>
-                            <i class="fa fa-coffee selected"></i>
-                            <i class="fa fa-coffee selected"></i>
-                            <i class="fa fa-coffee"></i>
-                            <i class="fa fa-coffee"></i>
-                            <span>3.0</span>
+                            @for($i=0; $i < round($vendor->rating()); $i++)
+                                <i class="fa fa-coffee selected"></i>
+                            @endfor
+
+                            @for($i=0; $i< 5 - round($vendor->rating()); $i++)
+                                <i class="fa fa-coffee"></i>
+                            @endfor
+
+                            <span>{{$vendor->rating()}}</span>
                         </span>
                         <a href="" class="xs-block">Add Review</a>
+
                         <span class="xs-block last-update">Last Update: {{$vendor->updated_at->diffForHumans()}}</span>
+                    </div>
+
+                    <div>
+                        <livewire:rating-form :vendor="$vendor"/>
+
                     </div>
                 </div>
             </div>

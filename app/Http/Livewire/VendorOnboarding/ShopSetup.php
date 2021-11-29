@@ -57,43 +57,7 @@ class ShopSetup extends Component
         if ($vendor) {
             $this->form['shop_name']   = $vendor->shop_name;
             $this->form['description'] = $vendor->description;
-        }
-    }
-
-    public function render()
-    {
-        return view('livewire.vendor-onboarding.shop-setup');
-    }
-
-    private function initializeOpeningHours()
-    {
-        foreach ($this->daysInWeek as $day) {
-            $this->form['opening_hours'][$day]['from']      = '';
-            $this->form['opening_hours'][$day]['to']        = '';
-            $this->form['opening_hours'][$day]['is_active'] = true;
-        }
-    }
-
-    protected function makeOpeningHoursOptions()
-    {
-        $baseTime = Carbon::parse('today at 12 AM');
-
-        while ($baseTime->notEqualTo(Carbon::parse('today 11:45 PM'))) {
-            $baseTime                    = $baseTime->addMinutes(15);
-            $this->openingHoursOptions[] = $baseTime->format('h:i A');
-        }
-    }
-
-    public function applyTimesToAllDays()
-    {
-        $referenceTimeFrom = $this->form['opening_hours']['Monday']['from'];
-        $referenceTimeTo   = $this->form['opening_hours']['Monday']['to'];
-
-        foreach ($this->daysInWeek as $day) {
-            if ($day != 'Monday') {
-                $this->form['opening_hours'][$day]['from'] = $referenceTimeFrom;
-                $this->form['opening_hours'][$day]['to']   = $referenceTimeTo;
-            }
+            $this->form['opening_hours'] = $vendor->opening_hours;
         }
     }
 
@@ -117,41 +81,79 @@ class ShopSetup extends Component
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
         ]);
 
-        if ( ! empty($this->logo)) {
-            $fileName             = $this->logo->store('vendor-logos');
+        if (!empty($this->logo)) {
+            $fileName = $this->logo->store('vendor-logos');
             $vendor->vendor_image = $fileName;
             $vendor->save();
         }
 
         foreach ($this->menus->filter(fn($item) => $item->isSelected) as $menu) {
             $vendor->products()->updateOrCreate(['name' => $menu->name], [
-                'description'   => $menu->description ?? "dummy description",
+                'description' => $menu->description ?? "dummy description",
                 'product_image' => $menu->image,
-                'price'         => $menu->price,
-                'category_id'   => $menu->category_id,
-                'is_stamp'   => $menu->is_stamp,
+                'price' => $menu->price,
+                'category_id' => $menu->category_id,
+                'is_stamp' => $menu->is_stamp,
             ]);
         }
 
         foreach ($this->options->filter(fn($item) => $item->isSelected) as $option) {
             $vendor->productOptions()->updateOrCreate(['name' => $option->name], [
                 'description' => $option->description,
-                'image'       => $option->image,
-                'price'       => $option->price,
+                'image' => $option->image,
+                'price' => $option->price,
                 'category_id' => $option->category_id,
-                'options'     => $option->options,
+                'options' => $option->options,
             ]);
         }
 
         return redirect()->route('vendor.show', $vendor->id);
     }
 
+    public function render()
+    {
+        return view('livewire.vendor-onboarding.shop-setup');
+    }
+
+    private function initializeOpeningHours()
+    {
+        foreach ($this->daysInWeek as $day) {
+            $this->form['opening_hours'][$day]['from'] = '';
+            $this->form['opening_hours'][$day]['to'] = '';
+            $this->form['opening_hours'][$day]['is_active'] = true;
+        }
+    }
+
+    protected function makeOpeningHoursOptions()
+    {
+        $baseTime = Carbon::parse('today at 12 AM');
+
+        while ($baseTime->notEqualTo(Carbon::parse('today 11:45 PM'))) {
+            $baseTime = $baseTime->addMinutes(15);
+            $this->openingHoursOptions[$baseTime->format('H:i')] = $baseTime->format('h:i A');
+        }
+
+    }
+
+    public function applyTimesToAllDays()
+    {
+        $referenceTimeFrom = $this->form['opening_hours']['Monday']['from'];
+        $referenceTimeTo = $this->form['opening_hours']['Monday']['to'];
+
+        foreach ($this->daysInWeek as $day) {
+            if ($day != 'Monday') {
+                $this->form['opening_hours'][$day]['from'] = $referenceTimeFrom;
+                $this->form['opening_hours'][$day]['to'] = $referenceTimeTo;
+            }
+        }
+    }
+
     private function formatOpeningHours(array $opening_hours)
     {
         return collect($opening_hours)->map(function ($item, $key) use ($opening_hours) {
-            $formatted         = $opening_hours[$key];
+            $formatted = $opening_hours[$key];
             $formatted['from'] = Carbon::parse($item['from'])->format('H:i');
-            $formatted['to']   = Carbon::parse($item['to'])->format('H:i');
+            $formatted['to'] = Carbon::parse($item['to'])->format('H:i');
 
             return $formatted;
         });

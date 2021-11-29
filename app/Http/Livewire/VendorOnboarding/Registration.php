@@ -55,7 +55,7 @@ class Registration extends Component
             'mobile'           => $vendor->mobile,
             'suburb'           => $vendor->suburb,
             'pc'               => $vendor->pc,
-            'cardstamps'       => $vendor->cardstamps,
+//            'cardstamps'       => $vendor->cardstamps,
             'state'            => $vendor->state,
             'abn'              => $vendor->abn,
             'is_pet_friendly'  => $vendor->is_pet_friendly,

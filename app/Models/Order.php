@@ -62,21 +62,38 @@ class Order extends Model
 
     public function generate($cartItems, $total)
     {
-        $vendor_id = $cartItems->first()->model->vendor_id;
+        $vendorId = $cartItems->first()->model->vendor_id;
 
         $order = new Order();
         $order->order_number = uniqid();
-        $order->user_id      = auth()->id();
-        $order->vendor_id    = $vendor_id;
-        $order->order_total  = $total;
+        $order->user_id = auth()->id();
+        $order->vendor_id = $vendorId;
+        $order->order_total = $total;
         $order->save();
+
+        $card = (new Card());
+
+        $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
+
 
         foreach ($cartItems as $product) {
             $order->products()->attach($product->id, [
-                'price'    => $product->price,
+                'price' => $product->price,
                 'quantity' => $product->qty,
                 'options' => json_encode($product->options)
             ]);
+
+            if ($activeCard->stamps->count() == $order->vendor->max_stamps) {
+                //max stamped
+                $activeCard->is_max_stamped = true;
+                $activeCard->is_active = false;
+                $activeCard->save();
+
+                //create another
+                $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
+            }
+
+            $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
         }
 
         return $order;

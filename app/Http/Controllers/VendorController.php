@@ -23,7 +23,7 @@ class VendorController extends Controller
             if ($range) {
                 $openingInfo = "Open Now. Closes at ".$range->end();
             } else {
-                $openingInfo = "Closed Now. Opens at ".$openingHours->nextOpen($now)->format('l H:i');
+                $openingInfo = "Closed Now. Opens at " . $openingHours->nextOpen($now)->format('l H:i A');
             }
         }
 
