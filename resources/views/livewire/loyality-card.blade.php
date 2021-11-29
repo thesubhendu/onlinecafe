@@ -19,11 +19,11 @@
                             <a href="{{route('vendor.products', $card->vendor_id )}}"
                                class="btn btn-success btn-small float-right">Order</a>
 
-                            @if($card->is_max_stamped)
+{{--                            @if($card->is_max_stamped)--}}
                                 <button class="btn btn-success btn-small"
                                         wire:click="togglePayForwardForm({{$card->id}})">Pay Forward
                                 </button>
-                            @endif
+                            {{--                            @endif--}}
                             @if($showPayForwardForm[$card->id])
                                 <livewire:pay-forward-form :card="$card" :key="$card->id"/>
                             @endif

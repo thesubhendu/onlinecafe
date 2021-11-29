@@ -11,20 +11,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('/assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/css/owl.carousel.min.css')}}">
-    <!-- <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+<!-- <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/responsive.css')}}"> -->
-
+    @laravelPWA
 
     @livewireStyles
     <script src="https://js.stripe.com/v3/"></script>
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script type='text/javascript'>
-        $(document).ready(function(){
-            $(".owl-carousel").owlCarousel();
-        });
-    </script>
+    {{--    <script type='text/javascript'>--}}
+    {{--        $(document).ready(function(){--}}
+    {{--            $(".owl-carousel").owlCarousel();--}}
+    {{--        });--}}
+    {{--    </script>--}}
 
 </head>
 
@@ -32,10 +32,10 @@
 
 <x-navbar-home></x-navbar-home>
 
-    <x-validation-errors></x-validation-errors>
-    <x-message></x-message>
+<x-validation-errors></x-validation-errors>
+<x-message></x-message>
 
-    <!-- Page Content -->
+<!-- Page Content -->
     {{ $slot }}
 
     @stack('modals')

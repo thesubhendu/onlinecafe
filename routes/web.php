@@ -21,6 +21,18 @@ use App\Mail\orderSubmitted;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/offline', function () {
+    return view('vendor.laravelpwa.offline');
+});
+
+Route::get('/main-landing', function () {
+    return view('main-landing');
+});
+
+Route::get('/vendor-landing', function () {
+    return view('vendor-landing');
+});
+
 Route::get('tinker', function () {
     $order = Order::latest()->first();
     return new orderSubmitted($order, 'lkdsldj');

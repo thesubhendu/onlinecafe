@@ -24,6 +24,7 @@
         "nexmo/laravel": "^2.4",
         "orangehill/iseed": "^3.0",
         "orchid/platform": "^10.22",
+        "silviolleite/laravelpwa": "^2.0",
         "sparkeleven/abn-lookup": "^1.0",
         "spatie/opening-hours": "^2.10",
         "symfony/routing": "^5.3"

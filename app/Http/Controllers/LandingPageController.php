@@ -13,8 +13,8 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::inRandomOrder()->where('is_subscribed', '1')
-                         ->get();
+        $vendors = Vendor::where('is_subscribed', '1')
+            ->get();
         return view('landing-page')
             ->with('vendors', $vendors);
     }
