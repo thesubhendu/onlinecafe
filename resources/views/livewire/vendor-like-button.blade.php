@@ -1,9 +1,9 @@
 <div>
     <a href="#" wire:click.prevent="toggleLike">
         @if ($vendor->isFavorited())
-            <i class="ti-heart" style="background-color: green; color:white"></i>
+            <i class="fa fa-coffee" style="background-color: green; color:white"></i>
         @else
-            <i class="ti-heart"></i>
+            <i class="fa fa-coffee"></i>
         @endif
     </a>
 </div>

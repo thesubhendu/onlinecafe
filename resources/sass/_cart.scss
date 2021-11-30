@@ -873,38 +873,49 @@ a.change-info {
         padding: 0;
     }
 }
+
+// PRODUCT CONFIRM PAGE
 .product-confirm {
     font-family: $font_2;
     padding: 50px 0;
     background: #fdfdfd;
     min-height: 100vh;
+    .product-card {
+        background: #fff;
+        box-shadow: 0 2px 3px #eff0f7;
+        border-radius: 8px;
+        .image {
+            max-height: 165px;
+            overflow: hidden;
+            img{
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+        }
+        .content{
+            padding: 1rem;
+            p {
+                min-height: auto;
+                margin: 0;
+                font-weight: bold;
+            }
+        }
+    }
+    .product-form {
+        background: #fff;
+        box-shadow: 0 2px 3px #eff0f7;
+        border-radius: 8px;
+        padding: 20px;
+        .total-submit {
+            margin-top: 30px;
+        }
+        label {
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
 }
-.product-card {
-    background: #fff;
-    box-shadow: 0 2px 3px #eff0f7;
-    border-radius: 8px;
-    .image {
-        max-height: 165px;
-    }
-    p {
-        min-height: auto;
-        margin: 0;
-        font-weight: bold;
-    }
-}
-.product-form {
-    background: #fff;
-    box-shadow: 0 2px 3px #eff0f7;
-    border-radius: 8px;
-    padding: 20px;
-    .total-submit {
-        margin-top: 30px;
-    }
-    label {
-        font-weight: bold;
-        font-size: 15px;
-    }
-}
+
 .mobile-cart {
     display: none;
 }

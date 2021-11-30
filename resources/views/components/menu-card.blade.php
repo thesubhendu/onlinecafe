@@ -19,7 +19,7 @@
             <div class="price-and-add">
                 <div class="price"><p><i class="fa fa-dollar"></i> {{$product->price}}</p></div>
                 <div class="add"><a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp; <i
-                            class="fa fa-shopping-cart"></i></a></div>
+                            class="fa fa-coffee"></i></a></div>
             </div>
 
         </div>
