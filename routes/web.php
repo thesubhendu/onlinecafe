@@ -17,8 +17,6 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
-use App\Mail\orderSubmitted;
-use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/offline', function () {
@@ -34,14 +32,7 @@ Route::get('/vendor-landing', function () {
 });
 
 Route::get('tinker', function () {
-    $order = Order::latest()->first();
-    return new orderSubmitted($order, 'lkdsldj');
-    $items = Cart::content();
 
-    dd($items->groupBy(function ($item) {
-        return $item->model->vendor_id;
-    }));
-    dd($items);
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');

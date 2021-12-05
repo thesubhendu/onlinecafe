@@ -27,6 +27,9 @@ class ShopSetup extends Component
         'max_stamps',
         'free_product',
         'get_free',
+        'address',
+        'lat',
+        'lng',
     ];
     public $openingHoursOptions = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -34,10 +37,13 @@ class ShopSetup extends Component
     public $menus;
     public $options;
 
+    public $listeners = ['markerPositionChanged', 'addressChanged'];
+
     public function mount()
     {
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
+
         $this->menus = AllProduct::all()->map(function ($product) {
             $product->isSelected = true;
             $product->is_stamp = true;
@@ -55,17 +61,21 @@ class ShopSetup extends Component
         $vendor = auth()->user()->shop()->first();
 
         if ($vendor) {
-            $this->form['shop_name']   = $vendor->shop_name;
+            $this->form['shop_name'] = $vendor->shop_name;
             $this->form['description'] = $vendor->description;
-            $this->form['opening_hours'] = $vendor->opening_hours;
+
+            if ($vendor->opening_hours) {
+                $this->form['opening_hours'] = $vendor->opening_hours;
+            }
         }
     }
 
     public function submit()
     {
         $this->validate([
-            'form.shop_name'     => 'required',
+            'form.shop_name' => 'required',
             'form.opening_hours' => 'required',
+            'form.address' => 'required',
         ]);
 
         $vendor = auth()->user()->shop()->first();
@@ -76,9 +86,12 @@ class ShopSetup extends Component
         }
 
         $vendor->update([
-            'shop_name'     => $this->form['shop_name'],
-            'description'   => $this->form['description'] ?? '',
+            'shop_name' => $this->form['shop_name'],
+            'description' => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
+            'address' => $this->form['address'],
+            'lat' => $this->form['lat'],
+            'lng' => $this->form['lng'],
         ]);
 
         if (!empty($this->logo)) {
@@ -157,5 +170,16 @@ class ShopSetup extends Component
 
             return $formatted;
         });
+    }
+
+    public function addressChanged($address)
+    {
+        $this->form['address'] = $address;
+    }
+
+    public function markerPositionChanged($position)
+    {
+        $this->form['lat'] = $position[0];
+        $this->form['lng'] = $position[1];
     }
 }

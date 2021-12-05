@@ -24,6 +24,13 @@
                                 @error('form.description') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label for="form.address" class="form-label">Address</label>
+                                <br>
+                                @error('form.address') <span class="text-danger">{{ $message }}</span> @enderror
+                                <livewire:g-map/>
+                            </div>
+
                             <div class="form-row">
                                 <div class="form-group col">
                                     <label for="form.max_stamps" class="form-label">Buy</label>

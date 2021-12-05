@@ -39,6 +39,10 @@ class CreateVendorsTable extends Migration
             $table->integer('get_free')->nullable();
 
             $table->boolean('is_pet_friendly')->nullable();
+
+            $table->decimal('lat')->nullable();
+            $table->decimal('lng')->nullable();
+
             $table->timestamps();
         });
     }
