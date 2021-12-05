@@ -69,11 +69,7 @@
                         of which is the expression of stylish comfort. Spend quality time in the well-furnished room
                         along with modern day amenities. It is one of the beautiful suites in Pokhara and the first
                         hotel with rooftop swimming pool.</p>
-                    <p>Tree situates in the City of Lakes, Pokhara. It is a boutique hotel where you can have your ‘me
-                        time’ with classy services. The hotel has a suite, deluxe and deluxe family room, each of which
-                        is the expression of stylish comfort. Spend quality time in the well-furnished room along with
-                        modern day amenities. It is one of the beautiful suites in Pokhara and the first hotel with
-                        rooftop swimming pool.</p>
+
                 </div>
                 <div class="col-md-2"></div>
             </div>
@@ -91,67 +87,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="featured-box featured-box-mini">
-                        <div class="cat-img-wrapper">
-                            <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
-                            <img src="assets/images/cafe.jpeg" class="img-responsive" alt="">
-                            <a href="#" class="featured-btn">Greenfelder and Sons</a>
+                @forelse($nearbyShops as $vendor)
+                    <div class="col-lg-4">
+                        <div class="featured-box featured-box-mini">
+                            <div class="cat-img-wrapper">
+                                <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
+                                <img src="assets/images/cafe.jpeg" class="img-responsive" alt="">
+                                <a href="#" class="featured-btn">Greenfelder and Sons</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="featured-box featured-box-mini">
-                        <div class="cat-img-wrapper">
-                            <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
-                            <img src="assets/images/cafe-2.jpeg" class="img-responsive" alt="">
-                            <a href="#" class="featured-btn">Adams, Lehner and Bednar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="featured-box featured-box-mini">
-                        <div class="cat-img-wrapper">
-                            <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
-                            <img src="assets/images/cafe-3.jpeg" class="img-responsive" alt="">
-                            <a href="#" class="featured-btn">Vendor coffee Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="featured-box featured-box-mini">
-                        <div class="cat-img-wrapper">
-                            <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
-                            <img src="assets/images/cafe-4.jpeg" class="img-responsive" alt="">
-                            <a href="#" class="featured-btn">Prosacco-Heller</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="featured-box featured-box-mini">
-                        <div class="cat-img-wrapper">
-                            <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
-                            <img src="assets/images/cafe-5.jpg" class="img-responsive" alt="">
-                            <a href="#" class="featured-btn">Hill PLC </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="featured-box featured-box-mini">
-                        <div class="cat-img-wrapper">
-                            <span class="ribbon"> <span class="ribbon-edge">700 m</span> </span>
-                            <img src="assets/images/cafe-2.jpeg" class="img-responsive" alt="">
-                            <a href="#" class="featured-btn">Webdev coffee Shop </a>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <p>No shops nearby</p>
+                @endforelse
+
             </div>
         </div>
     </section>
 
     <section class="we-provide">
         <div class="container">
-        <div class="row mb-5">
+            <div class="row mb-5">
                 <div class="col-lg-12 m-0 p-0 ">
                     <div class="content-heading text-center">
                         <h3 class="title">Laravel Coffee Provides </h3>
@@ -232,17 +188,11 @@
 
                     </div>
                 </div>
-                
-             
+
+
             </div>
         </div>
     </section>
-
-  
-
-
-
-
 
 
     <!-- CALL TO ACTION -->

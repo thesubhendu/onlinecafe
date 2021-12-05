@@ -77,7 +77,7 @@ class Vendor extends Model
 
             $openingHours = OpeningHours::create($data->toArray());
             $now          = now();
-            $range        = $openingHours->currentOpenRange($now);
+            $range = $openingHours->currentOpenRange($now);
 
             if ($range) {
                 return true;
@@ -86,5 +86,24 @@ class Vendor extends Model
 
             return false;
         }
+    }
+
+
+    public function nearbyShops($lat, $lng, $radius = 3)
+    {
+//        replace 6371000 with 6371 for kilometer and 3956 for miles
+        $nearbyVendors = Vendor::selectRaw("id, vendor_name,shop_name, address, lat, lng,
+                     ( 6371 * acos( cos( radians(?) ) *
+                       cos( radians( lat ) )
+                       * cos( radians( lng ) - radians(?)
+                       ) + sin( radians(?) ) *
+                       sin( radians( lat ) ) )
+                     ) AS distance", [$lat, $lng, $lat])
+            ->having("distance", "<", $radius)
+            ->orderBy("distance", 'asc')
+            ->limit(20)
+            ->get();
+
+        return $nearbyVendors;
     }
 }
