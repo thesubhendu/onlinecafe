@@ -32,6 +32,8 @@ Route::get('/vendor-landing', function () {
 });
 
 Route::get('tinker', function () {
+    dd(geoip());
+//    dd(geoip('51.158.22.211'));
 
 });
 
