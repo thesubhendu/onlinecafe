@@ -1,6 +1,5 @@
 <x-app-layout>
 
-    <!-- IMAGE SLIDER WITH CAPTION -->
     <section>
         <div id="demo" class="carousel main-carousel slide" data-ride="carousel">
             <div class="carousel-inner">

@@ -11,11 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('/assets/css/font-awesome.min.css')}}">
-<!-- <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/css/responsive.css')}}"> -->
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <!-- @laravelPWA -->
 
     @livewireStyles
     <script src="https://js.stripe.com/v3/"></script>
