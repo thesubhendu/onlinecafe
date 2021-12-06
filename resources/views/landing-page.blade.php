@@ -204,15 +204,18 @@
                     <p>061 560884</p>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
-                    <img src="assets/images/mail.png" class="aos-init aos-animate" data-aos="fade-down" data-aos-duration="1000">
+                    <img src="assets/images/mail.png" class="aos-init aos-animate" data-aos="fade-down"
+                         data-aos-duration="1000">
                     <p>info@ourresort.com</p>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
-                    <img src="assets/images/map.png" class="aos-init aos-animate" data-aos="fade-down" data-aos-duration="1500">
+                    <img src="assets/images/map.png" class="aos-init aos-animate" data-aos="fade-down"
+                         data-aos-duration="1500">
                     <p>Lakeside, Pokhara</p>
                 </div>
             </div>
         </div>
     </section>
+    <x-footer></x-footer>
 
 </x-app-layout>
