@@ -1,4 +1,5 @@
 <x-app-layout>
+ 
     <!-- VENDOR BANNER -->
     <section class="banner-inner">
         <div class="container">
@@ -13,35 +14,119 @@
                 </p>
                 <div class="vendor-actions">
                     <div class="icon-ratings">
-                        <span class="xs-block">
-                            @for($i=0; $i < round($vendor->rating()); $i++)
-                                <i class="fa fa-coffee selected"></i>
-                            @endfor
-
-                            @for($i=0; $i< 5 - round($vendor->rating()); $i++)
-                                <i class="fa fa-coffee"></i>
-                            @endfor
-
-                            <span>{{$vendor->rating()}}</span>
-                        </span>
-                        <a href="" class="xs-block">Add Review</a>
-
-                        <span class="xs-block last-update">Last Update: {{$vendor->updated_at->diffForHumans()}}</span>
-                    </div>
-
-                    <div>
-                        <livewire:rating-form :vendor="$vendor"/>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="xs-block">
+                                    @for($i=0; $i < round($vendor->rating()); $i++)
+                                    <i class="fa fa-coffee selected"></i>
+                                    @endfor
+                                    @for($i=0; $i< 5 - round($vendor->rating()); $i++)
+                                        <i class="fa fa-coffee"></i>
+                                    @endfor
+                                    <span><b>{{$vendor->rating()}}</b></span>
+                                </div>
+                                <div class="xs-block last-update">Last Update: {{$vendor->updated_at->diffForHumans()}}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <livewire:rating-form :vendor="$vendor"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
     <!-- VENDER MENU -->
     <section class="vendor-menu">
         <div class="container">
+
+            <!-- TITLE -->
+            <div class="row mb-4">
+                <div class="col-md-12 m-0 p-0 ">
+                    <div class="content-heading">
+                        <h3 class="title">Featured Coffee</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="owl-carousel owl-theme mb-4">
+                <div class="item">
+                    <div class="vendor-product-item">
+                        <div class="image">
+                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
+                        </div>
+                        <div class="content">
+                            <h5>Product Item</h5>
+                            <div class="price-and-add">
+                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
+                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="vendor-product-item">
+                        <div class="image">
+                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
+                        </div>
+                        <div class="content">
+                            <h5>Product Item</h5>
+                            <div class="price-and-add">
+                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
+                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="vendor-product-item">
+                        <div class="image">
+                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
+                        </div>
+                        <div class="content">
+                            <h5>Product Item</h5>
+                            <div class="price-and-add">
+                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
+                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="vendor-product-item">
+                        <div class="image">
+                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
+                        </div>
+                        <div class="content">
+                            <h5>Product Item</h5>
+                            <div class="price-and-add">
+                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
+                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="vendor-product-item">
+                        <div class="image">
+                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
+                        </div>
+                        <div class="content">
+                            <h5>Product Item</h5>
+                            <div class="price-and-add">
+                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
+                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @forelse ($vendor->products->groupBy('category_id') as $products)
             <!-- TITLE -->

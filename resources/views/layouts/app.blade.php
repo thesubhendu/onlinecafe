@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('/assets/css/responsive.css')}}"> -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    @laravelPWA
+    <!-- @laravelPWA -->
 
     @livewireStyles
     <script src="https://js.stripe.com/v3/"></script>
@@ -26,11 +26,6 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    {{--    <script type='text/javascript'>--}}
-    {{--        $(document).ready(function(){--}}
-    {{--            $(".owl-carousel").owlCarousel();--}}
-    {{--        });--}}
-    {{--    </script>--}}
 
 </head>
 
@@ -51,6 +46,24 @@
 @stack('scripts')
 
 
+
+<script>
+   var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items:4,
+        loop:true,
+        margin:10,
+        autoplay:true,
+        autoplayTimeout:2000,
+        autoplayHoverPause:true
+    });
+    $('.play').on('click',function(){
+        owl.trigger('play.owl.autoplay',[1000])
+    })
+    $('.stop').on('click',function(){
+        owl.trigger('stop.owl.autoplay')
+    })
+</script>
 <script>
     $(document).ready(function () {
         $('.owl-carousel').owlCarousel();

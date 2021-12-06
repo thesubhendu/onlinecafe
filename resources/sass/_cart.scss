@@ -1,7 +1,7 @@
 .ordered-food-item {
     background: #fcfcfc;
     padding: 70px 0;
-    font-family: $font_2;
+    font-family: $font;
     .table {
         > thead {
             > tr {
@@ -532,7 +532,7 @@ a.btn.btn-primary.light {
     padding: 50px 0;
     background: #fdfdfd;
     background-size: cover;
-    font-family: $font_2;
+    font-family: $font;
     h1 {
         margin-bottom: 25px;
         font-size: 30px;
@@ -876,9 +876,9 @@ a.change-info {
 
 // PRODUCT CONFIRM PAGE
 .product-confirm {
-    font-family: $font_2;
+    font-family: $font;
     padding: 50px 0;
-    background: #fdfdfd;
+    background: #fafbff;
     min-height: 100vh;
     .product-card {
         background: #fff;
@@ -927,7 +927,7 @@ a.change-info {
     height: 100vh;
     .jumbotron {
         background: #fff;
-        font-family: $font_2;
+        font-family: $font;
         padding: 50px;
         border-radius: 8px;
         box-shadow: 0 2px 3px #eff0f7;
@@ -950,22 +950,22 @@ a.change-info {
     }
 }
 .partners-steps {
-    background: #fdfdfd;
+    background: #fafbff;
     padding: 70px 0 0;
     .bs-wizard {
         margin: 0;
-        font-family: $font_2;
+        font-family: $font;
     }
 }
 .registration-steps {
     background: #fdfdfd;
     padding-bottom: 60px;
-    font-family: $font_2;
+    font-family: $font;
     .register-form {
         background: #fff;
         padding: 30px;
         box-shadow: 0 2px 3px #dfe0e7;
-        font-family: $font_2;
+        font-family: $font;
         margin-top: -1px;
         border-radius: 8px;
         .title {
@@ -982,11 +982,11 @@ a.change-info {
         }
     }
     .alert {
-        font-family: $font_2;
+        font-family: $font;
     }
 }
 .validator {
-    font-family: $font_2;
+    font-family: $font;
     margin: 0 !important;
 }
 .payment_form {

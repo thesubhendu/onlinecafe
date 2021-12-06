@@ -8,7 +8,7 @@
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="box-capiton text-center">
-                            <h1 class="large-text">Welcome to <em class="text-primary">Laravel Coffee</em></h1>
+                            <h1 class="large-text">Welcome to <span class="text-primary">Laravel Coffee</span></h1>
                             <h6>MAKE YOUR COFFEE MEMORABLE</h6>
                         </div>
                     </div>
