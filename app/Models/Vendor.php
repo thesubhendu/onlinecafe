@@ -106,4 +106,9 @@ class Vendor extends Model
 
         return $nearbyVendors;
     }
+
+    public function getNameAttribute()
+    {
+        return $this->shop_name ?? $this->vendor_name;
+    }
 }

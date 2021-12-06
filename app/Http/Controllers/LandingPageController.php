@@ -16,13 +16,6 @@ class LandingPageController extends Controller
         $vendors = Vendor::where('is_subscribed', '1')
             ->get();
 
-        $userLocation = geoip();
-
-        if (empty($userLocation->lat)) {
-            $userLocation = geoip('51.158.22.211'); //put some default location
-        }
-        $nearbyShops = (new Vendor())->nearbyShops($userLocation->lat, $userLocation->lon);
-
-        return view('landing-page', compact('vendors', 'nearbyShops'));
+        return view('landing-page', compact('vendors'));
     }
 }
