@@ -1156,3 +1156,47 @@ section.profile-content-details {
         display: inline;
     }
 }
+
+// FORM 
+.form-body {
+    background: #fafbff !important;
+    .sigin-form {
+        padding: 2rem 1rem;
+        font-size: 14px !important;
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 300px !important;
+            background: $primary !important;
+            border: 1px solid $primary;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 0;
+        }
+        .remember-me{
+            font-weight: normal !important;
+        }
+        .forgot-password{
+            justify-content: space-between;
+            div {
+                display: inline-block;
+                width: 49%;
+                font-size: 12px !important;
+            }
+        }
+        .register-btn{
+            width: 100%;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            padding: 8px 0;
+            border-radius: 300px;
+            display: block;
+        }
+    }
+}
+

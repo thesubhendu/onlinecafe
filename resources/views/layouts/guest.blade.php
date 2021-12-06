@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -16,7 +16,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="bg-light font-sans antialiased">
+    <body class="bg-light font-sans antialiased form-body ">
 
     <x-validation-errors></x-validation-errors>
     <x-message></x-message>

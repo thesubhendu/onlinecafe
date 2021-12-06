@@ -4,7 +4,7 @@
             <x-jet-authentication-card-logo />
         </x-slot>
 
-        <div class="card-body">
+        <div class="card-body sigin-form">
 
             <div class="mb-3">
                 {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}

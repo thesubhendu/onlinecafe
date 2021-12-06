@@ -7,7 +7,7 @@
 
         <x-jet-validation-errors class="mb-3" />
 
-        <div class="card-body">
+        <div class="card-body sigin-form">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -53,7 +53,7 @@
                     <div class="mb-3">
                         <div class="custom-control custom-checkbox">
                             <x-jet-checkbox id="terms" name="terms" />
-                            <label class="custom-control-label" for="terms">
+                            <label class="custom-control-label pl-2" for="terms">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
                                             'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'">'.__('Terms of Service').'</a>',
                                             'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'">'.__('Privacy Policy').'</a>',
@@ -64,15 +64,12 @@
                 @endif
 
                 <div class="mb-0">
-                    <div class="d-flex justify-content-end align-items-baseline">
-                        <a class="text-muted me-3 text-decoration-none" href="{{ route('login') }}">
-                            {{ __('Already registered?') }}
-                        </a>
-
-                        <x-jet-button>
-                            {{ __('Register') }}
-                        </x-jet-button>
-                    </div>
+                    <x-jet-button class="mb-2">
+                        {{ __('Register') }}
+                    </x-jet-button>
+                    <a class="text-muted me-3 text-decoration-none register-btn text-center" href="{{ route('login') }}">
+                        {{ __('Already registered?') }}
+                    </a>
                 </div>
             </form>
         </div>

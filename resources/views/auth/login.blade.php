@@ -1,10 +1,10 @@
-<x-guest-layout>
+<x-guest-layout class="sigin-layout">
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
 
-        <div class="card-body">
+        <div class="card-body sigin-form">
 
             <x-jet-validation-errors class="mb-3 rounded-0" />
 
@@ -16,7 +16,7 @@
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="mb-3">
+                <div class="mb-4">
                     <x-jet-label value="{{ __('Email') }}" />
 
                     <x-jet-input class="{{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
@@ -24,38 +24,37 @@
                     <x-jet-input-error for="email"></x-jet-input-error>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <x-jet-label value="{{ __('Password') }}" />
 
                     <x-jet-input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="password"
                                  name="password" required autocomplete="current-password" />
                     <x-jet-input-error for="password"></x-jet-input-error>
                 </div>
-
-                <div class="mb-3">
+                <div class="row d-flex forgot-password">
                     <div class="custom-control custom-checkbox">
                         <x-jet-checkbox id="remember_me" name="remember" />
-                        <label class="custom-control-label" for="remember_me">
+                        <label class="custom-control-label remember-me" for="remember_me">
                             {{ __('Remember Me') }}
                         </label>
                     </div>
-                </div>
-
-                <div class="mb-0">
-                    <div class="d-flex justify-content-end align-items-baseline">
+                    <div>
                         @if (Route::has('password.request'))
                             <a class="text-muted me-3" href="{{ route('password.request') }}">
-                                {{ __('Forgot your password?') }}
+                                {{ __('Forgot password?') }}
                             </a>
                         @endif
+                    </div>
+                </div>
 
-                        <a class="text-muted me-3" href="{{ route('register') }}">
-                            {{ __('Register') }}
-                        </a>
-
-                        <x-jet-button>
+                <div class="mb-2">
+                    <div class="">
+                        <x-jet-button class="mb-2">
                             {{ __('Log in') }}
                         </x-jet-button>
+                        <a class="text-muted text-center register-btn" href="{{ route('register') }}">
+                            {{ __('Create New Account') }}
+                        </a>
                     </div>
                 </div>
             </form>
