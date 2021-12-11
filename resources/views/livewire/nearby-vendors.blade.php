@@ -42,10 +42,7 @@
 
     function setPosition(position) {
         console.log("Latitude: " + position.coords.latitude + position.coords.longitude);
-
-    @this.lat
-        = position.coords.latitude;
-    @this.lon
-        = position.coords.longitude;
+    @this.position
+        = [position.coords.latitude, position.coords.longitude];
     }
 </script>

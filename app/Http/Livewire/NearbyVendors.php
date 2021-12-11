@@ -8,19 +8,19 @@ use Livewire\Component;
 class NearbyVendors extends Component
 {
 
-    public $nearbyShops;
+    public $nearbyShops = [];
 
-    public $lat;
-    public $lon;
+    public $position = [];
 
     public function mount()
     {
-        $userLocation = geoip();
+//        $userLocation = geoip();
+//        dd($userLocation);
 
-        if (empty($userLocation->lat)) {
-            $userLocation = geoip('51.158.22.211'); //put some default location
-        }
-        $this->nearbyShops = $this->getNearByShops($userLocation->lat, $userLocation->lon);
+//        if (empty($userLocation->lat)) {
+//            $userLocation = geoip('51.158.22.211'); //put some default location
+//        }
+//        $this->nearbyShops = $this->getNearByShops($userLocation->lat, $userLocation->lon);
     }
 
     protected function getNearByShops($lat, $lon)
@@ -28,9 +28,9 @@ class NearbyVendors extends Component
         return (new Vendor())->nearbyShops($lat, $lon);
     }
 
-    public function updatedLat()
+    public function updatedPosition()
     {
-        $this->nearbyShops = $this->getNearByShops($this->lat, $this->lon);
+        $this->nearbyShops = $this->getNearByShops($this->position[0], $this->position[1]);
     }
 
     public function render()

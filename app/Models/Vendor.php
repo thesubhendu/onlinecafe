@@ -89,8 +89,9 @@ class Vendor extends Model
     }
 
 
-    public function nearbyShops($lat, $lng, $radius = 3)
+    public function nearbyShops($lat, $lon, $radius = 10)
     {
+//        dd($lat, $lon);
 //        replace 6371000 with 6371 for kilometer and 3956 for miles
         $nearbyVendors = Vendor::selectRaw("id, vendor_name,shop_name, address, lat, lng,
                      ( 6371 * acos( cos( radians(?) ) *
@@ -98,8 +99,8 @@ class Vendor extends Model
                        * cos( radians( lng ) - radians(?)
                        ) + sin( radians(?) ) *
                        sin( radians( lat ) ) )
-                     ) AS distance", [$lat, $lng, $lat])
-            ->having("distance", "<", $radius)
+                     ) AS distance", [$lat, $lon, $lat])
+            ->having("distance", "<=", $radius)
             ->orderBy("distance", 'asc')
             ->limit(20)
             ->get();

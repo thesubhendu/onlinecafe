@@ -40,8 +40,8 @@ class CreateVendorsTable extends Migration
 
             $table->boolean('is_pet_friendly')->nullable();
 
-            $table->decimal('lat')->nullable();
-            $table->decimal('lng')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
 
             $table->timestamps();
         });

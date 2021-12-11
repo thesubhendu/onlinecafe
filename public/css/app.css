@@ -13752,6 +13752,48 @@ section.profile-content-details {
   display: inline;
 }
 
+.form-body {
+  background: #fafbff !important;
+}
+.form-body .sigin-form {
+  padding: 2rem 1rem;
+  font-size: 14px !important;
+}
+.form-body .sigin-form label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.form-body .sigin-form button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 300px !important;
+  background: #e28936 !important;
+  border: 1px solid #e28936;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 0;
+}
+.form-body .sigin-form .remember-me {
+  font-weight: normal !important;
+}
+.form-body .sigin-form .forgot-password {
+  justify-content: space-between;
+}
+.form-body .sigin-form .forgot-password div {
+  display: inline-block;
+  width: 49%;
+  font-size: 12px !important;
+}
+.form-body .sigin-form .register-btn {
+  width: 100%;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 8px 0;
+  border-radius: 300px;
+  display: block;
+}
+
 .ordered-food-item {
   background: #fcfcfc;
   padding: 70px 0;
