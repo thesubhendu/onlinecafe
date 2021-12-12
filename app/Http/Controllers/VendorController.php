@@ -13,6 +13,8 @@ class VendorController extends Controller
 
         $featuredProducts = $vendor->products->take(8);
 
+        $openingInfo = '';
+
         if ($vendor->opening_hours) {
             $data = collect($vendor->opening_hours)
                 ->filter(fn($val, $key) => $val['is_active'])
