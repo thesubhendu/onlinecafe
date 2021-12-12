@@ -95,9 +95,17 @@ Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('ve
 
 
 Route::view('/comment', 'comment');
-Route::get('vendor-onboarding',
-    VendorOnboarding::class)->name('register-business.create')->middleware('auth');
 
+Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
+    Route::get('/register',
+        VendorOnboarding\Registration::class)->name('register-business.create');
+
+    Route::get('/payment',
+        VendorOnboarding\Payment::class)->name('register-business.payment');
+
+    Route::get('/shop-setup',
+        ShopSetup::class)->name('register-business.shop-setup');
+});
 
 //send mobile verification code
 Route::post('phone-verification/send',

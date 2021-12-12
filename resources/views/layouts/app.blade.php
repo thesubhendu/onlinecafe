@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 
     @livewireStyles
+    @livewireScripts
+
     <script src="https://js.stripe.com/v3/"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -39,33 +41,11 @@
 
 @stack('modals')
 
-@livewireScripts
 
 @stack('scripts')
 
 
+@include('owl-carosel-script')
 
-<script>
-   var owl = $('.owl-carousel');
-    owl.owlCarousel({
-        items:4,
-        loop:true,
-        margin:10,
-        autoplay:true,
-        autoplayTimeout:2000,
-        autoplayHoverPause:true
-    });
-    $('.play').on('click',function(){
-        owl.trigger('play.owl.autoplay',[1000])
-    })
-    $('.stop').on('click',function(){
-        owl.trigger('stop.owl.autoplay')
-    })
-</script>
-<script>
-    $(document).ready(function () {
-        $('.owl-carousel').owlCarousel();
-    });
-</script>
 </body>
 </html>

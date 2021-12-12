@@ -12,10 +12,12 @@ class Payment extends Component
     public $plan;
     public $token;
 
+    public $loader = false;
+
 
     public $availablePlans;
 
-    protected $listeners = ['subscribeToPlan' => 'subscribe'];
+    protected $listeners = ['subscribeToPlan' => 'subscribe', 'showLoader'];
 
     public function mount()
     {
@@ -43,12 +45,20 @@ class Payment extends Component
         //todo Subscribe using webhook instead
 
         auth()->user()->newSubscription('subscribed', $plan->stripe_id)
-                ->create($this->token);
+            ->create($this->token);
 
         $shop = auth()->user()->shop;
         $shop->is_subscribed = true;
         $shop->save();
 
         $this->emitUp('paymentSuccess');
+        $this->loader = false;
+
+        return redirect()->route('register-business.shop-setup');
+    }
+
+    public function showLoader()
+    {
+        $this->loader = true;
     }
 }

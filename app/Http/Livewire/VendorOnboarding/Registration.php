@@ -94,7 +94,9 @@ class Registration extends Component
             auth()->user()->shop->update($this->dataToSave());
             session()->flash('message', 'Vendor Updated');
 
-            return $this->emitUp('vendorRegistered');
+            $this->emitUp('vendorRegistered');
+            return redirect()->route('register-business.payment');
+
         }
         // check if valid business (ABN check)
         $isValid = (new AbnChecker($this->abn))->isValidBusiness();
@@ -116,5 +118,7 @@ class Registration extends Component
         session()->flash('message', 'Vendor Registered');
 
         $this->emitUp('vendorRegistered');
+
+        return redirect()->route('register-business.payment');
     }
 }
