@@ -10,7 +10,6 @@
             @else
                 <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
             @endif
-            {{-- <i class="ti-heart"></i> --}}
         </div>
 
         <!-- CONTENT -->

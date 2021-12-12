@@ -1,5 +1,5 @@
 <x-app-layout>
- 
+
     <!-- VENDOR BANNER -->
     <section class="banner-inner">
         <div class="container">
@@ -51,91 +51,39 @@
             </div>
 
             <div class="owl-carousel owl-theme mb-4">
-                <div class="item">
-                    <div class="vendor-product-item">
-                        <div class="image">
-                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
-                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
-                        </div>
-                        <div class="content">
-                            <h5>Product Item</h5>
-                            <div class="price-and-add">
-                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
-                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
+                @foreach($featuredProducts as $product)
+                    <div class="item">
+                        <div class="vendor-product-item">
+                            <div class="image">
+                                @if($product->product_image)
+                                    <img src="{{asset($product->product_image)}}" class="img-responsive" alt="">
+                                @else
+                                    <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                                @endif
+                                <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
+                            </div>
+                            <div class="content">
+                                <h5>{{$product->name}}</h5>
+                                <div class="price-and-add">
+                                    <div class="price"><p><i class="fa fa-dollar"></i> $ {{$product->price}}</p></div>
+                                    <div class="add"><a href="{{ route('orders.create', $product->id) }}"
+                                                        class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="vendor-product-item">
-                        <div class="image">
-                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
-                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
-                        </div>
-                        <div class="content">
-                            <h5>Product Item</h5>
-                            <div class="price-and-add">
-                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
-                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="vendor-product-item">
-                        <div class="image">
-                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
-                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
-                        </div>
-                        <div class="content">
-                            <h5>Product Item</h5>
-                            <div class="price-and-add">
-                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
-                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="vendor-product-item">
-                        <div class="image">
-                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
-                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
-                        </div>
-                        <div class="content">
-                            <h5>Product Item</h5>
-                            <div class="price-and-add">
-                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
-                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="vendor-product-item">
-                        <div class="image">
-                            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
-                            <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
-                        </div>
-                        <div class="content">
-                            <h5>Product Item</h5>
-                            <div class="price-and-add">
-                                <div class="price"><p><i class="fa fa-dollar"></i> 5</p></div>
-                                <div class="add"><a href="" class="shop-btn"> Add &nbsp; <i class="fa fa-coffee"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
-            @forelse ($vendor->products->groupBy('category_id') as $products)
+        @forelse ($vendor->products->groupBy('category_id') as $products)
             <!-- TITLE -->
-            <div class="row mb-4">
-                <div class="col-md-12 m-0 p-0 ">
-                    <div class="content-heading">
-                        <h3 class="title">{{$products->first()->category->name}}</h3>
+                <div class="row mb-4">
+                    <div class="col-md-12 m-0 p-0 ">
+                        <div class="content-heading">
+                            <h3 class="title">{{$products->first()->category->name}}</h3>
+                        </div>
                     </div>
-                </div>
             </div>
 
             <div class="row  @if($loop->index > 0) mt-4 @endif ">
