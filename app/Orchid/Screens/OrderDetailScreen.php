@@ -2,7 +2,9 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\Order;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
 
 class OrderDetailScreen extends Screen
 {
@@ -16,11 +18,14 @@ class OrderDetailScreen extends Screen
     /**
      * Query data.
      *
+     * @param Order $order
      * @return array
      */
-    public function query(): array
+    public function query(Order $order): array
     {
-        return [];
+        return [
+            'order' => $order
+        ];
     }
 
     /**
@@ -40,6 +45,8 @@ class OrderDetailScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            Layout::view('admin.orders.detail')
+        ];
     }
 }

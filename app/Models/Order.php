@@ -17,7 +17,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'date', 'order_number', 'is_confirmed', 'paymnent_method', 'order_total', 'user_id', 'vendor_id'
+        'date', 'order_number', 'is_confirmed', 'payment_method', 'order_total', 'user_id', 'vendor_id'
     ];
 
     protected $casts = [
