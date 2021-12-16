@@ -67,7 +67,7 @@ class OrderListScreen extends Screen
                 TD::make('Action')->render(function ($order) {
                     return Group::make([
                         Link::make('Show')->route('platform.order.show', $order)->icon('eye'),
-                        Link::make('Edit')->icon('pencil')->route('platform.order.edit', $order),
+//                        Link::make('Edit')->icon('pencil')->route('platform.order.edit', $order),
                     ]);
                 }),
             ]),

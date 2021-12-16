@@ -13,7 +13,7 @@ class OrderDetailScreen extends Screen
      *
      * @var string
      */
-    public $name = 'OrderDetailScreen';
+    public $name = 'Order Detail';
 
     /**
      * Query data.
