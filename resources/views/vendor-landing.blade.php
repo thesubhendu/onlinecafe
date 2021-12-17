@@ -14,7 +14,10 @@
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
-                        <button class="btn btn-primary btn-block btn-lg btn-get-started">Get Started Today</button>
+                        <a href="{{ route('register-business.create') }}">
+                            <button class="btn btn-primary btn-block btn-lg btn-get-started">Get Started Today</button>
+                        </a>
+
                     </div>
                 </div>
             </div>

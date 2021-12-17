@@ -23,13 +23,8 @@ Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
 
-Route::get('/main-landing', function () {
-    return view('main-landing');
-});
-
-Route::get('/vendor-landing', function () {
-    return view('vendor-landing');
-});
+Route::view('/main-landing', 'main-landing')->name('main-landing');
+Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 
 Route::get('tinker', function () {
     dd(geoip());

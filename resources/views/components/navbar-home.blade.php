@@ -38,8 +38,7 @@
             <div class="offset-4 col-md-6 col-xs-10  navbar-right xs-left hidden-xs">
                 <ul class="cart">
                     <li>
-                        <a href="{{ route('register-business.create') }}">Partner with Us</a>
-                        {{-- <a href="{{ route('subscriptions.plans') }}">Partner with Us</a>--}}{{-- todo make vendor landing page --}}
+                        <a href="{{ route('vendor-landing') }}">Partner with Us</a>
                     </li>
                     <li>
                         <a href="{{route('cart')}}">
