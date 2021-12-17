@@ -53,6 +53,7 @@ class DashboardScreen extends Screen
             'totalSales' => $totalSales,
             'salesToday' => $salesToday,
             'customers' => $customers,
+            'likes' => $vendor->favoritesCount ?? 0
         ];
     }
 

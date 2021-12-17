@@ -17,6 +17,10 @@
         <li class="list-group-item">
             Customers: {{$customers}}
         </li>
+
+        <li class="list-group-item">
+            Likes : {{$likes}}
+        </li>
     </ul>
 
 
