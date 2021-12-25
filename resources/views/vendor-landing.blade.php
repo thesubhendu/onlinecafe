@@ -8,7 +8,7 @@
                     <div class="col-md-6">
                         <div class="box-capiton">
                             <h1>Get more orders with <em class="text-primary">Laravel Coffee</em></h1>
-                            <h5>Connect your restaurant to 950,000+ Aussies on the Hey You app, with over 30 million
+                            <h5>Connect your restaurant to 950,000+ Aussies on the My Coffee app, with over 30 million
                                 food and drink orders taken to date.</h5>
                         </div>
                     </div>
@@ -33,7 +33,8 @@
                 <div class="col-md-6 p-0">
                     <div class="features-content">
                         <h2>Grow customer loyalty</h2>
-                        <p>Grow customer loyalty by up to 15% using Hey You’s Artificial Intelligence based personalized
+                        <p>Grow customer loyalty by up to 15% using My Coffee’s Artificial Intelligence based
+                            personalized
                             marketing tools tailored to your customer’s buying habits</p>
                     </div>
                 </div>
@@ -42,7 +43,7 @@
                 <div class="col-md-6 p-0">
                     <div class="features-content">
                         <h2>Google Food Ordering</h2>
-                        <p>Get access to millions of customers through Hey You’s integration with Google Food
+                        <p>Get access to millions of customers through My Coffee’s integration with Google Food
                             Ordering</p>
 
                     </div>
@@ -59,7 +60,7 @@
                     <div class="features-content">
                         <h2>Easily Handle Dine-in, Delivery
                             & Take Away Orders In One Place</h2>
-                        <p>Increase staff productivity by up to 30% by leveraging Hey You’s digital solution for
+                        <p>Increase staff productivity by up to 30% by leveraging My Coffee’s digital solution for
                             take-away, dine-in and self delivery</p>
 
                     </div>
