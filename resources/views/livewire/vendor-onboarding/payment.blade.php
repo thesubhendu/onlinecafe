@@ -39,6 +39,8 @@
                                                                                wire:model="plan"
                                                                                value="{{$slug}}">
                                                                         {{$title}}
+                                                                        ( @if($slug=='monthly') $19.95/month
+                                                                        @elseif($slug=='yearly') $179/year @endif)
                                                                     </label>
                                                                 @endforeach
 
