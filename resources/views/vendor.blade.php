@@ -18,18 +18,21 @@
                             <div class="col-md-6">
                                 <div class="xs-block">
                                     @for($i=0; $i < round($vendor->rating()); $i++)
-                                    <i class="fa fa-coffee selected"></i>
+                                        <i class="fa fa-coffee selected"></i>
                                     @endfor
                                     @for($i=0; $i< 5 - round($vendor->rating()); $i++)
                                         <i class="fa fa-coffee"></i>
                                     @endfor
                                     <span><b>{{$vendor->rating()}}</b></span>
                                 </div>
-                                <div class="xs-block last-update">Last Update: {{$vendor->updated_at->diffForHumans()}}</div>
+                                <div class="xs-block last-update">Last
+                                    Update: {{$vendor->updated_at->diffForHumans()}}</div>
                             </div>
-                            <div class="col-md-6">
-                                <livewire:rating-form :vendor="$vendor"/>
-                            </div>
+                            @auth
+                                <div class="col-md-6">
+                                    <livewire:rating-form :vendor="$vendor"/>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                 </div>

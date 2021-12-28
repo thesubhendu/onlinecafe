@@ -1,6 +1,6 @@
 <section class="favorite-vendor">
     <div class="container">
-        <h3>Favourite Vendors</h3>
+        <h3>Favourite Partners</h3>
         <div class="row mt-3">
             @forelse ($vendors as $vendor)
             <div class="mb-3 col-md-6">

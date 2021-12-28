@@ -25,7 +25,7 @@
                                 <i class="fa fa-phone"></i> 9851016391
                             </li>
                             <li>
-                                <i class="fa fa-envelope"></i> itbridgenp@gmail.com
+                                <i class="fa fa-envelope"></i> support@mycoffees.com.au
                             </li>
                             <li>
 
@@ -35,14 +35,14 @@
                 </div>
                 <div class="col-md-4">
                     <div class="footer-content">
-                        <h2>Opening Hours</h2>
+                        {{--                        <h2>Opening Hours</h2>--}}
                         <ul class="contact-list">
                             <li>
                                 We work from Monday to Friday.
                             </li>
-                            <li>
-                                From 8:00 to 18:00
-                            </li>
+                            {{--                            <li>--}}
+                            {{--                                From 8:00 to 18:00--}}
+                            {{--                            </li>--}}
 
 
                         </ul>

@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 m-0 p-0 mb-5 ">
                     <div class="content-heading text-center">
-                        <h3 class="title">Our Coffeshop Vendors </h3>
+                        <h3 class="title">Our Coffeshop Partners </h3>
                         <img src="assets/images/img-icon-gold.png" alt="">
                     </div>
                 </div>

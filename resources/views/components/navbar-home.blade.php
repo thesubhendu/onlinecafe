@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<!-- FOOTER BOTTOM NAVIGATION -->
+<!-- FOOTER BOTTOM NAVIGATION Mobile -->
 <div class="bottom-bar visible-xs">
     <div class="container">
         <div class="row">
@@ -115,9 +115,9 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ route('register-business.create') }}">
-                    <i class="fa fa-users"></i>
-                    Partner With Us
+                <a href="{{ route('cards.index') }}">
+                    <i class="fa fa-credit-card"></i>
+                    Cards
                 </a>
             </div>
         </div>
