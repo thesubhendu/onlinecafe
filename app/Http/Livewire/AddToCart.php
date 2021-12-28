@@ -3,10 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductOption;
-use App\Models\VendorProductOption;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Livewire\Component;
 
 class AddToCart extends Component
 {
@@ -58,7 +57,6 @@ class AddToCart extends Component
 
         Cart::add($this->cartProduct)->associate(Product::class);
 
-        session()->flash('message', 'Added to cart');
 
         return redirect()->route('checkout.index');
     }
