@@ -103,14 +103,18 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href="">
+                <a href="{{route('cards.index')}}">
                     <i class="fa fa-shopping-cart"></i>
                     Your Cart
+
+                    @if (Cart::count())
+                        <span class="badge">{{ Cart::count() }}</span>
+                    @endif
                 </a>
             </div>
             <div class="col">
-                <a href="">
-                    <i class="fa fa-heart-o"></i>
+                <a href="{{route('user.likes')}}">
+                    <i class="fa fa-coffee"></i>
                     Favourites
                 </a>
             </div>

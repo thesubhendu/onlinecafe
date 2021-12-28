@@ -5,7 +5,6 @@
             <table class="table table-borderless mt-3">
                 <thead>
                     <tr>
-                        <th scope="col">Order</th>
                         <th scope="col">Vendor</th>
                         <th scope="col">Image</th>
                         <th scope="col">Product</th>
@@ -16,9 +15,6 @@
                 <tbody>
                     @forelse($orders as $order)
                     <tr>
-                        {{-- <th scope="row">1</th> --}}
-                        {{-- <td>{{$order->vendor_id}}</td> --}}
-                        <td>Order-{{$order->order_number}} -- {{$order->getFormattedDate('date')}}</td>
                         <td>{{$order->vendor->shop_name ?? $order->vendor->vendor_name}}</td>
                         @foreach($order->products as $product)
                         <td><img src="{{$product->product_image}}" width="48" height="48"></td>

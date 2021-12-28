@@ -32,6 +32,6 @@ class OrderConfirmed extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.order.confirmed');
+        return $this->from('noreply@mycoffees.com.au')->markdown('mail.order.confirmed');
     }
 }
