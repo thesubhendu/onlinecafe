@@ -4,14 +4,17 @@
         <div class="row">
 
             <!-- LOGO -->
-            <div class="col-md-2 col-xs-12 text-right">
+            <div class="col-md-2 col-xs-12 mobile-nav text-right">
                 <div class="middle-header-information">
                     <a class="navbar-brand" href="{{route('home')}}"><img
                             src="{{asset('assets/images/coffee-cup.png')}}">
                         {{ config('app.name', 'LaravelCoffee') }}
                     </a>
                 </div>
-                <div class="dropdown login-dropdown visible-xs">
+                <div class="visible-xs mobile-nav">
+                    <a href="{{ route('vendor-landing') }}" class="partner-with">Partner with Us</a>
+                </div>
+                <div class="dropdown login-dropdown visible-xs mobile-nav">
                     <a data-bs-toggle="dropdown" class="user-thumbnail">
                         <img src="/assets/images/images.jpg" alt="">
                     </a>
@@ -99,7 +102,7 @@
 </div>
 
 <!-- FOOTER BOTTOM NAVIGATION Mobile -->
-<div class="bottom-bar visible-xs">
+<div class="bottom-bar visible-md">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -107,9 +110,10 @@
                     <i class="fa fa-shopping-cart"></i>
                     Your Cart
 
-                    @if (Cart::count())
+                    <!-- @if (Cart::count())
                         <span class="badge">{{ Cart::count() }}</span>
-                    @endif
+                    @endif -->
+                        <span class="badge bg-success">1</span>
                 </a>
             </div>
             <div class="col">

@@ -1,8 +1,48 @@
-@include media-breakpoint-up(sm) {
-    .visible-xs {
-        display: none !important;
+@media screen and (max-width: 992px) {
+    .visible-md {
+        display: block !important;
+    }
+    // BOTTOM BAR
+    .bottom-bar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 100;
+        background: #ffffff;
+        padding: 16px 10px 10px;
+        left: 0;
+        border-top: 1px solid #d0d0d0;
+        text-align: center;
+        .col {
+            margin: 0;
+            padding: 0;
+            border-right: 1px solid #eee;
+            a {
+                display: block;
+                padding: 8px0;
+                text-decoration: none;
+                color: #555;
+                font-family: "Roboto", sans-serif;
+                font-size: 12px;
+                position: relative;
+                i {
+                    display: block;
+                    font-size: 17px;
+                    margin-bottom: 5px;
+                }
+            }
+            &:last-child {
+                border: none;
+            }
+            .badge {
+                position: absolute;
+                top: 0;
+                right: 26%;
+            }
+        }
     }
 }
+
 @include media-breakpoint-down(sm) {
     .hidden-xs {
         display: none !important;
@@ -70,7 +110,22 @@
             padding: 0 !important;
         }
         .navbar-brand {
-            font-size: 1rem;
+            font-size: .9rem;
+        }
+        .mobile-nav {
+            margin: 0 !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .partner-with{
+            font-size: 13px;
+            border: 1px solid;
+            padding: 2px 8px;
+            color: #f4623a;
+            margin-right: 5px;
+            font-weight: 500;
+            border-radius: 300px;
         }
     }
 
@@ -95,40 +150,6 @@
                 width: 34px;
                 border-radius: 50%;
                 border: 2px solid #d2d2d2;
-            }
-        }
-    }
-
-    // BOTTOM BAR
-    .bottom-bar {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 1;
-        background: #ffffff;
-        padding: 4px 10px;
-        left: 0;
-        border-top: 1px solid #d0d0d0;
-        text-align: center;
-        .col {
-            margin: 0;
-            padding: 0;
-            border-right: 1px solid #eee;
-            a {
-                display: block;
-                padding: 8px0;
-                text-decoration: none;
-                color: #555;
-                font-family: "Roboto", sans-serif;
-                font-size: 12px;
-                i {
-                    display: block;
-                    font-size: 17px;
-                    margin-bottom: 5px;
-                }
-            }
-            &:last-child {
-                border: none;
             }
         }
     }
@@ -346,7 +367,8 @@
     }
 
     // MY OARDERS / FAVORITE VENDOR
-    .my-orders, .favorite-vendor{
-        padding : 2rem 1rem !important;
+    .my-orders,
+    .favorite-vendor {
+        padding: 2rem 1rem !important;
     }
 }

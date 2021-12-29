@@ -2,6 +2,10 @@ body {
     font-family: $font;
 }
 
+.visible-xs, .visible-md {
+    display: none  !important;
+}
+
 // BUTTON
 .btn {
     font-family: $font;
@@ -534,7 +538,7 @@ a {
     h1 {
         color: #fff;
         margin: 10px 0;
-        font-weight: 900;
+        font-weight: 800;
         font-size: 4.5rem;
     }
     img {
@@ -586,7 +590,7 @@ a {
             width: 100%;
             font-size: 3rem;
             color: #fff;
-            font-weight: 900;
+            font-weight: 800;
             margin-bottom: 15px;
         }
         p {
@@ -728,7 +732,7 @@ a {
     background-attachment: fixed;
     h2 {
         color: $primary;
-        font-weight: 900;
+        font-weight: 800;
         margin-bottom: 20px;
         font-size: 2.2rem;
     }
@@ -1104,14 +1108,14 @@ section.profile-content-details {
     position: absolute;
 }
 .owl-carousel .owl-prev{
-    left: -15px;
+    left: -10px;
 }
 .owl-carousel .owl-next{
-    right: -15px;
+    right: -10px;
 }
 .owl-carousel .owl-nav span {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background: white !important;
     border-radius: 50%;
     color: $primary !important;
