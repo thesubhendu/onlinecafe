@@ -32,24 +32,27 @@
                                 <div class="vendor-title">
                                     <h4>{{$card->vendor->vendor_name}}</h4>
                                     <p>Buy {{$card->vendor->max_stamps}} coffees get 1 free</p>
-                                </div>                               
+                                </div>
                             </div>
-                            <div class="col-md-5 text-right">
-                                <a href="{{route('vendor.products', $card->vendor_id )}}" class="btn btn-success btn-small float-right">Order</a>
-                                {{-- @if($card->is_max_stamped)--}}
-                                <!-- <button class="btn btn-success btn-small" wire:click="togglePayForwardForm({{$card->id}})">Pay Forward</button> -->
-                                <button type="button" class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#myModal">Pay Forward</button>
-                                {{-- @endif--}}
+                            <div class="col text-right">
+                                @if($card->is_max_stamped)
+                                    <button type="button" class="btn btn-success btn-small" data-bs-toggle="modal"
+                                            data-bs-target="#myModal">Pay Forward
+                                    </button>
+                                @endif
+                                <a href="{{route('vendor.products', $card->vendor_id )}}"
+                                   class="btn btn-success btn-small">Order</a>
 
                                 <!-- The Modal -->
                                 <div class="modal" id="myModal">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Pay Forward Form</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Pay Forward Form</h4>
+                                                <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
+                                            </div>
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                             <livewire:pay-forward-form />

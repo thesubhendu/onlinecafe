@@ -28,9 +28,32 @@
                                 <div class="xs-block last-update">Last
                                     Update: {{$vendor->updated_at->diffForHumans()}}</div>
                             </div>
+
                             @auth
                                 <div class="col-md-6">
-                                    <livewire:rating-form :vendor="$vendor"/>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#sammodal">
+                                        Rate the vendor
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="sammodal" tabindex="-1" aria-labelledby="sammodal"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Rate the vendor</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <livewire:rating-form :vendor="$vendor"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             @endauth
                         </div>

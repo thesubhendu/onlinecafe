@@ -9,6 +9,7 @@ class RatingForm extends Component
 {
     public $vendor;
     public $rating;
+    public $comment = '';
 
     public function mount(Vendor $vendor)
     {
@@ -21,7 +22,7 @@ class RatingForm extends Component
             'rating' => ['required', 'in:1,2,3,4,5']
         ]);
 
-        $this->vendor->rate($this->rating);
+        $this->vendor->rate($this->rating, null, $this->comment);
 
         session()->flash('message', 'Rated Successfully!');
     }

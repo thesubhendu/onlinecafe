@@ -38,7 +38,7 @@ class Vendor extends Model
         return $this->hasMany(VendorProductOption::class);
     }
 
-    public function rate($rating, $user = null)
+    public function rate($rating, $user = null, $comment = null)
     {
         if ($rating > 5 || $rating < 1) {
             throw new \InvalidArgumentException('Rating must be between 1-5.');
@@ -48,9 +48,8 @@ class Vendor extends Model
             ->ratings()
             ->updateOrCreate([
                 'user_id' => $user ? $user->id : auth()->id(),
-            ], compact('rating'));
+            ], compact('rating', 'comment'));
 
-        // $this->ratings()->create(['rating' => $rating]);
     }
 
     public function ratings()
