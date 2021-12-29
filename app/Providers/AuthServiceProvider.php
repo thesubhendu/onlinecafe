@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('vendor', function (User $user) {
-            return $user->subscribed('subscribed') && $user->shop;
+            return $user->shop;
         });
 
         Gate::define('visit-backend', function (User $user) {
@@ -45,9 +45,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('platform.systems.roles');
         });
 
-//        $permissions = ItemPermission::group('backend')
-//                                     ->addPermission('visit-backend', 'Access to admin panel');
-//
-//        $dashboard->registerPermissions($permissions);
+        Gate::define('make-order', function (User $user) {
+            return $user->hasAccess('make-order');
+        });
+
     }
 }
