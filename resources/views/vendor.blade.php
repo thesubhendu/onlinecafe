@@ -90,7 +90,7 @@
                             </div>
                             <div class="content">
                                 <h5>{{$product->name}}</h5>
-                                @can('make-order')
+{{--                                @can('make-order')--}}
                                     <div class="price-and-add">
                                         <div class="price"><p><i class="fa fa-dollar"></i> $ {{$product->price}}</p>
                                         </div>
@@ -99,7 +99,7 @@
                                                     class="fa fa-coffee"></i></a>
                                         </div>
                                     </div>
-                                @endcan
+                                {{--                                @endcan--}}
                             </div>
                         </div>
                     </div>
