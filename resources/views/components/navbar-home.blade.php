@@ -127,6 +127,13 @@
                     Cards
                 </a>
             </div>
+
+            <div class="col">
+                <a href="{{route('orders.index')}}">
+                    <i class="fa fa-first-order"></i>
+                    My Orders
+                </a>
+            </div>
         </div>
     </div>
 </div>
