@@ -22,6 +22,11 @@
                                 <div class="col-lg-12 mb-3">
                                     <h4> Select Options</h4>
                                 </div>
+
+                                <div class="col-lg-2">
+                                    <button wire:click="updateQty('remove')" class="btn btn-success" type="button">-
+                                    </button>
+                                </div>
                                 <div class="col-lg-4 mb-3">
                                     <label>Quantity</label>
                                     <select wire:model.lazy="cartProduct.qty" id="" class="form-select" required>
@@ -31,11 +36,12 @@
                                     </select>
                                     @error('cartProduct.qty') <span
                                         class="text-danger">{{ $message }}</span> @enderror
-
                                 </div>
-
+                                <div class="col-lg-2">
+                                    <button wire:click="updateQty()" class="btn btn-success" type="button">+</button>
+                                </div>
                                 @foreach($product->options() as $index => $option)
-                                    <div class="col-lg-4 mb-3">
+                                    <div class="col-lg-2 mb-3">
                                         <label for="">{{$option->name}} (+ ${{$option->price}})</label>
                                         <select wire:model="cartProduct.options.{{$option->id}}" class="form-select">
                                             <option value="">Select Option</option>
@@ -50,8 +56,7 @@
                                     </div>
                                 @endforeach
 
-
-                                <div class="col-lg-8 mb-3 text-right">
+                                <div class="col-lg-4 mb-3 text-right">
                                     <div class="total-submit">
                                         <button type="submit" class="btn btn-secondary">
                                             Add to Cart &nbsp; <i class="fa fa-shopping-cart"></i>

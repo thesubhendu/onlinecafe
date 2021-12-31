@@ -82,5 +82,19 @@ class AddToCart extends Component
     //     return $messages;
     // }
 
+    public function updateQty($type = 'add')
+    {
+        $currentQty = $this->cartProduct['qty'];
+        if ($type == 'remove') {
+            if ($currentQty == 0) {
+                return;
+            }
+            return $this->cartProduct['qty']--;
+        }
+        if ($currentQty == 10) {
+            return;
+        }
+        $this->cartProduct['qty']++;
+    }
 
 }
