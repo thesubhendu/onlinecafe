@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'mycoffees.com.au',
     'manifest' => [
-        'name' => env('APP_NAME', 'My PWA App'),
-        'short_name' => 'PWA',
+        'name' => 'mycoffees.com.au',
+        'short_name' => 'mycoffees',
         'start_url' => '/',
-        'background_color' => '#ffffff',
-        'theme_color' => '#000000',
-        'display' => 'standalone',
-        'orientation' => 'any',
+        'background_color' => '#000000',
+        'theme_color' => '#28a745',
+        'display' => 'fullScreen',
+        'orientation' => 'portrait',
         'status_bar' => 'black',
         'icons' => [
             '72x72' => [
