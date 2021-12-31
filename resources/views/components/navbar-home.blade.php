@@ -110,10 +110,9 @@
                     <i class="fa fa-shopping-cart"></i>
                     Your Cart
 
-                    <!-- @if (Cart::count())
-                        <span class="badge">{{ Cart::count() }}</span>
-                    @endif -->
-                        <span class="badge bg-success">1</span>
+                    @if (Cart::count())
+                        <span class="badge bg-success">{{ Cart::count() }}</span>
+                    @endif
                 </a>
             </div>
             <div class="col">

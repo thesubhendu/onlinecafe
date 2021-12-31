@@ -19,9 +19,11 @@
                 <div class="price"><p><i class="fa fa-dollar"></i> {{$product->price}}</p></div>
 
                 @can('make-order')
-                    <div class="add"><a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
+                    <div class="add">
+                        <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
                             <i
-                                class="fa fa-coffee"></i></a></div>
+                                class="fa fa-coffee"></i>
+                        </a></div>
                 @endcan
             </div>
 
