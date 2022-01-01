@@ -43,7 +43,7 @@
     }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
     .hidden-xs {
         display: none !important;
     }

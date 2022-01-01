@@ -838,7 +838,7 @@ section.call-to-action {
     }
 }
 
-// BEFORE VENDER REGISTRATION LANDING PAGE / OUR FEATURES 
+// BEFORE VENDER REGISTRATION LANDING PAGE / OUR FEATURES
 section.our-features {
     padding: 70px 0;
     background: url("~/assets/images/bg-wave.svg") left no-repeat #ffffff;
@@ -1161,7 +1161,7 @@ section.profile-content-details {
     }
 }
 
-// FORM 
+// FORM
 .form-body {
     background: #fafbff !important;
     .sigin-form {
@@ -1204,3 +1204,18 @@ section.profile-content-details {
     }
 }
 
+.control-btn {
+    display: flex;
+    margin-top: 8px;
+}
+
+.control-btn .value-button {
+    border: 1px solid #ccc;
+    width: 29px;
+    text-align: center;
+}
+
+.control-btn input#number {
+    width: 59px;
+    text-align: center;
+}
