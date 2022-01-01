@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12 m-0 p-0 ">
                 <div class="content-heading text-center">
-                    <h3 class="title">Near Coffeshop Partners </h3>
+                    <h3 class="title">Partners so close you can smell it </h3>
                     <img src="assets/images/img-icon-gold.png" alt="">
                 </div>
             </div>
