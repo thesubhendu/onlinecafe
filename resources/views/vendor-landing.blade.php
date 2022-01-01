@@ -7,9 +7,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="box-capiton">
-                            <h1>Get more orders with <em class="text-primary">Laravel Coffee</em></h1>
-                            <h5>Connect your restaurant to 950,000+ Aussies on the My Coffee app, with over 30 million
-                                food and drink orders taken to date.</h5>
+                            <h2 class="text-white display-4">mycoffees.com.au is an Australian owned and operated order
+                                a head platform.</h2>
+                            <h5>Created to help Australian small business take advantage of the booming online order
+                                ahead market.
+                                Simple online registration means you could be providing your customers with convenience
+                                and efficiency in 15 mins.</h5>
                         </div>
                     </div>
                     <div class="col-md-2"></div>
@@ -32,19 +35,43 @@
                 </div>
                 <div class="col-md-6 p-0">
                     <div class="features-content">
-                        <h2>Grow customer loyalty</h2>
-                        <p>Grow customer loyalty by up to 15% using My Coffee’s Artificial Intelligence based
-                            personalized
-                            marketing tools tailored to your customer’s buying habits</p>
+                        <h2>Giving you time to get on to running your business.
+                        </h2>
+                        <p>Stats</p>
+                        <ul>
+                            <li>* More than 90% off aussies used their phone to shop Online in 2020*</li>
+                            <li>
+                                * 9.1million australian house holds shopped online in FY2021*
+                            </li>
+
+                            <li>
+                                * Australians spent $50.46 billion online in 2020*
+                            </li>
+                        </ul>
+
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 p-0">
                     <div class="features-content">
-                        <h2>Google Food Ordering</h2>
-                        <p>Get access to millions of customers through My Coffee’s integration with Google Food
-                            Ordering</p>
+                        <h2>Steps to register</h2>
+                        <p>mycoffees.com.au has made it simple for you to sell online.In three simple steps you could be
+                            selling on line in 15mins.
+                        </p>
+
+                        <ol>
+                            <li>
+                                Register your business
+                            </li>
+                            <li>
+                                Select your subscription
+                            </li>
+                            <li>
+                                Set up your shop.
+                            </li>
+                        </ol>
 
                     </div>
                 </div>
@@ -58,10 +85,22 @@
                 </div>
                 <div class="col-md-6 p-0">
                     <div class="features-content">
-                        <h2>Easily Handle Dine-in, Delivery
-                            & Take Away Orders In One Place</h2>
-                        <p>Increase staff productivity by up to 30% by leveraging My Coffee’s digital solution for
-                            take-away, dine-in and self delivery</p>
+                        <h2>Why mycoffees.com.au</h2>
+                        <p>* No lock in contracts makes it simple to sell online.
+                            <br>
+                            * No revenue based commissions means more profit for you <br>
+
+                            * Simple online order head platform is ready to go. <br>
+
+                            * Manage customer loyalty in one place. <br>
+
+                            * Engage with your customers using marketing campaigns for your business in our admin
+                            dashboard <br>
+
+                            * See your top selling products, daly, weekly or monthly sales with our admin dashboard.
+                            <br>
+
+                        </p>
 
                     </div>
                 </div>
