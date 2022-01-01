@@ -21,4 +21,13 @@
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
         @error('rating') <span class="text-danger">{{ $message }}</span> @enderror
     </form>
+    @push('scripts')
+        <script>
+
+            Livewire.on('rated', function () {
+                $('#rating-form-modal .btn-close').click()
+
+            })
+        </script>
+    @endpush
 </div>

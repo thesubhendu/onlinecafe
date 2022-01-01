@@ -15,7 +15,7 @@
                 <div class="vendor-actions">
                     <div class="icon-ratings">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col">
                                 <div class="xs-block">
                                     @for($i=0; $i < round($vendor->rating()); $i++)
                                         <i class="fa fa-coffee selected"></i>
@@ -29,9 +29,8 @@
                                     Update: {{$vendor->updated_at->diffForHumans()}}</div>
                             </div>
 
-                            @auth
-                                <div class="col-md-6">
-
+                            @if(auth()->check() && auth()->id() != $vendor->owner_id)
+                                <div class="col">
                                     <div>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -62,7 +61,7 @@
 
                                     </div>
                                 </div>
-                            @endauth
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -97,7 +96,7 @@
                             </div>
                             <div class="content">
                                 <h5>{{$product->name}}</h5>
-{{--                                @can('make-order')--}}
+                                @if(auth()->check() && auth()->id() != $vendor->owner_id)
                                     <div class="price-and-add">
                                         <div class="price"><p><i class="fa fa-dollar"></i> $ {{$product->price}}</p>
                                         </div>
@@ -106,7 +105,7 @@
                                                     class="fa fa-coffee"></i></a>
                                         </div>
                                     </div>
-                                {{--                                @endcan--}}
+                                @endif
                             </div>
                         </div>
                     </div>
