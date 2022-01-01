@@ -31,7 +31,36 @@
 
                             @auth
                                 <div class="col-md-6">
-                                    {{--                                    <livewire:rating-form :vendor="$vendor"/>--}}
+
+                                    <div>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#rating-form-modal">
+                                            Rate the vendor
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="rating-form-modal"
+                                             aria-labelledby="rating-form-modal"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Rate the
+                                                            vendor</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <livewire:rating-form :vendor="$vendor"/>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             @endauth
                         </div>
