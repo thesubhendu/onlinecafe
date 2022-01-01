@@ -15,7 +15,7 @@
                 <div class="vendor-actions">
                     <div class="icon-ratings">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-6 col-xs-12">
                                 <div class="xs-block">
                                     @for($i=0; $i < round($vendor->rating()); $i++)
                                         <i class="fa fa-coffee selected"></i>
@@ -30,7 +30,7 @@
                             </div>
 
                             @if(auth()->check() && auth()->id() != $vendor->owner_id)
-                                <div class="col">
+                                <div class="col-md-6 col-xs-12">
                                     <div>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
