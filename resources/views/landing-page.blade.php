@@ -1,19 +1,4 @@
 <x-app-layout>
-
-{{--    <section>--}}
-{{--        <div id="demo" class="carousel main-carousel slide" data-ride="carousel">--}}
-{{--            <div class="carousel-inner">--}}
-{{--                <div class="carousel-item active">--}}
-{{--                    <img src="assets/images/home-banner.jpg" alt="Los Angeles">--}}
-{{--                    <div class="carousel-caption">--}}
-{{--                        <h3>Get your <span>50% Discount</span> on Sunday <strong>Coffee</strong></h3>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
-
-
 <!-- MAIN LANDING PAGE -->
     <section class="inner-banner-box landing-banner">
         <div class="color-overlay">
@@ -99,27 +84,6 @@
         </div>
     </section>
 
-
-{{--    <section class="welcome-content">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-2"></div>--}}
-{{--                <div class="col-md-8 text-center">--}}
-{{--                    <h6>WE HEARTLY WELCOME OUR CUSTOMERS ON</h6>--}}
-{{--                    <h2>Laravel Coffee</h2>--}}
-{{--                    <img src="assets/images/img-icon-gold.png" class="mb-4" alt="">--}}
-
-{{--                    <p>Temple Tree situates in the City of Lakes, Pokhara. It is a boutique hotel where you can have--}}
-{{--                        your ‘me time’ with classy services. The hotel has a suite, deluxe and deluxe family room, each--}}
-{{--                        of which is the expression of stylish comfort. Spend quality time in the well-furnished room--}}
-{{--                        along with modern day amenities. It is one of the beautiful suites in Pokhara and the first--}}
-{{--                        hotel with rooftop swimming pool.</p>--}}
-
-{{--                </div>--}}
-{{--                <div class="col-md-2"></div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
 
 <!-- COFFEE SHOP VENDER CARD -->
     <section class="shop-vendors">
