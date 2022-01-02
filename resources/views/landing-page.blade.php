@@ -1,23 +1,29 @@
 <x-app-layout>
-    @guest
-<!-- MAIN LANDING PAGE -->
-    <section class="inner-banner-box landing-banner">
-        <div class="color-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="offset-md-3 col-md-6">
-                        <div class="box-capiton text-center">
-                            <h1 class="large-text">Welcome to <em class="text-primary">Mycoffees</em></h1>
-                            <h6>MAKE YOUR COFFEE MEMORABLE</h6>
+@guest
+    <!-- MAIN LANDING PAGE -->
+        <section class="inner-banner-box landing-banner">
+            <div class="color-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="offset-md-3 col-md-6">
+                            <div class="box-capiton text-center">
+                                <h1 class="large-text">Welcome to <em class="text-primary">Mycoffees</em></h1>
+                                <h6>MAKE YOUR COFFEE MEMORABLE</h6>
+                                <br>
+                                <a href="{{ route('register') }}">
+                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Register Now
+                                    </button>
+                                </a>
+                            </div>
                         </div>
+                        <div class="col-md-3"></div>
                     </div>
-                    <div class="col-md-3"></div>
+
                 </div>
             </div>
-        </div>
-    </section>
-        @endguest
-        @guest
+        </section>
+    @endguest
+    @guest
             <section class="we-provide">
                 <div class="container">
                     <div class="row mb-5">
