@@ -55,7 +55,7 @@
     </div>
     <div class="bottom-footer">
         <div class="container">
-            <small> 2021 © Laravel Coffee . All rights reserved. </small>
+            <small> 2021 © {{config('app.name')}}. All rights reserved. </small>
         </div>
     </div>
 </footer>
