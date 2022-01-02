@@ -1,4 +1,5 @@
 <x-app-layout>
+    @guest
 <!-- MAIN LANDING PAGE -->
     <section class="inner-banner-box landing-banner">
         <div class="color-overlay">
@@ -15,18 +16,18 @@
             </div>
         </div>
     </section>
-
-
-    <section class="we-provide">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-12 m-0 p-0 ">
-                    <div class="content-heading text-center">
-                        <h3 class="title">Key Features </h3>
-                        <img src="assets/images/img-icon-gold.png" alt="">
+        @endguest
+        @guest
+            <section class="we-provide">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-lg-12 m-0 p-0 ">
+                            <div class="content-heading text-center">
+                                <h3 class="title">Key Features </h3>
+                                <img src="assets/images/img-icon-gold.png" alt="">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
             <div class="row no-gutters">
                 <div class="col-md-3 col-xs-12">
                     <div class="icon-box">
@@ -83,7 +84,7 @@
             </div>
         </div>
     </section>
-
+        @endguest
 
 <!-- COFFEE SHOP VENDER CARD -->
     <section class="shop-vendors">
