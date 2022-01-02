@@ -18,6 +18,13 @@
             <div class="price-and-add">
                 <div class="price"><p><i class="fa fa-dollar"></i> {{$product->price}}</p></div>
 
+                @guest
+                    <div class="add">
+                        <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
+                            <i
+                                class="fa fa-coffee"></i>
+                        </a></div>
+                @endguest
                 @if(auth()->check() && auth()->id() != $product->vendor->owner_id)
                     <div class="add">
                         <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;

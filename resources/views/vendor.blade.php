@@ -8,7 +8,8 @@
                 <h2>{{$vendor->shop_name ?? $vendor->vendor_name}}</h2>
                 <p><i class="fa fa-map-marker"></i> {{$vendor->address}}, {{$vendor->suburb}}
                     , {{$vendor->state}}, {{$vendor->pc}}</p>
-                <p><i class="fa fa-envelope"></i> {{$vendor->email}} &nbsp; | &nbsp; <i class="fa fa-phone"></i> {{$vendor->mobile}}</p>
+                <p><i class="fa fa-envelope"></i> {{$vendor->email}} &nbsp; | &nbsp; <i
+                        class="fa fa-phone"></i> {{$vendor->mobile}}</p>
                 <p>
                     {{$openingInfo}}
                 </p>
@@ -96,16 +97,25 @@
                             </div>
                             <div class="content">
                                 <h5>{{$product->name}}</h5>
-                                @if(auth()->check() && auth()->id() != $vendor->owner_id)
-                                    <div class="price-and-add">
-                                        <div class="price"><p><i class="fa fa-dollar"></i> $ {{$product->price}}</p>
-                                        </div>
+                                <div class="price-and-add">
+                                    <div class="price"><p><i class="fa fa-dollar"></i> $ {{$product->price}}</p>
+                                    </div>
+                                    @guest
+                                        <div class="add">
+                                            <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add
+                                                &nbsp;
+                                                <i
+                                                    class="fa fa-coffee"></i>
+                                            </a></div>
+                                    @endguest
+                                    @if(auth()->check() && auth()->id() != $vendor->owner_id)
+
                                         <div class="add"><a href="{{ route('orders.create', $product->id) }}"
                                                             class="shop-btn"> Add &nbsp; <i
                                                     class="fa fa-coffee"></i></a>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -120,16 +130,16 @@
                             <h3 class="title">{{$products->first()->category->name}}</h3>
                         </div>
                     </div>
-            </div>
+                </div>
 
-            <div class="row  @if($loop->index > 0) mt-4 @endif ">
-                @foreach ($products as $product)
-                <x-menu-card :product="$product"></x-menu-card>
-                @endforeach
-            </div>
+                <div class="row  @if($loop->index > 0) mt-4 @endif ">
+                    @foreach ($products as $product)
+                        <x-menu-card :product="$product"></x-menu-card>
+                    @endforeach
+                </div>
 
             @empty
-            <h2>No Products</h2>
+                <h2>No Products</h2>
             @endforelse
 
 
