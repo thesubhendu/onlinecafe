@@ -82,7 +82,7 @@
                                     <a class="dropdown-item" href="{{route('cards.index')}}">My Cards</a>
 
                                     @can('visit-backend')
-                                        <a class="dropdown-item" href="{{url('/admin')}}">Admin Panel</a>
+                                        <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
                                     @endcan
 
                                     <form action="{{ route('logout') }}" method="post">
