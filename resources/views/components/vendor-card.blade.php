@@ -16,13 +16,16 @@
                 <p><i class="fa fa-map-marker"></i> {{$vendor->address}}, {{$vendor->state}}</p>
             </a>
         </div>
+
         <div class="ratings">
+            @for($i=0; $i < $vendor->rating(); $i++)
                 <i class="fa fa-coffee selected"></i>
-                <i class="fa fa-coffee selected"></i>
-                <i class="fa fa-coffee selected"></i>
-                <i class="fa fa-coffee selected"></i>
+            @endfor
+            @for($i=0; $i < (5-$vendor->rating()); $i++)
                 <i class="fa fa-coffee"></i>
-                <span>4.0 </span>
-            </div>
+            @endfor
+
+            <span>{{(int)$vendor->rating()}} </span>
+        </div>
     </div>
 </div>
