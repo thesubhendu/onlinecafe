@@ -61,7 +61,7 @@
                                             <option value="">Select Option</option>
                                             @foreach ($option->options ?? [] as $subOption)
                                                 <option
-                                                    value="{{$option->name}}-{{$subOption}}-(+${{$option->price}})">{{$subOption}}</option>
+                                                    value="{{$option->name}}: {{$subOption}}">{{$subOption}}</option>
                                             @endforeach
 
                                         </select>
