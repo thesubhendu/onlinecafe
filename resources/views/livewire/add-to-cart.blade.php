@@ -1,5 +1,7 @@
 <div>
     <x-message></x-message>
+    <x-message type="error"></x-message>
+
     <section class="product-confirm">
         <div class="container">
             <div class="row ">
