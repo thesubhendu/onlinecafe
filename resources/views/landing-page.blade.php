@@ -7,15 +7,16 @@
                     <div class="row">
                         <div class="offset-md-3 col-md-6">
                             <div class="box-capiton text-center">
-                                <h1 class="large-text text-white display-1">Mycoffees.com.au</h1>
+                                <h2 class="text-white display-2">Mycoffees.com.au</h2>
                                 <p class="text-white">All your favourites in one place</p>
                                 <br>
                                 <a href="{{ route('register') }}">
-                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Register
+                                    <button class="btn btn-primary btn-block btn-get-started">Register
                                     </button>
                                 </a>
+
                                 <a href="{{ route('login') }}">
-                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Already have an
+                                    <button class="btn btn-primary btn-block btn-get-started ">Already have an
                                         Account
                                     </button>
                                 </a>

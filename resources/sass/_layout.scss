@@ -916,9 +916,9 @@ section.our-features {
 }
 
 // <! ------------ PROFILE PAGE //---------------------->
-.profile-banner {
-    background: url('~/assets/images/coffee-bg.png') repeat-x;
-}
+//.profile-banner {
+//    background: url('~/assets/images/coffee-bg.png') repeat-x;
+//}
 .profile-content {
     background: #fff;
     position: relative;
@@ -926,6 +926,7 @@ section.our-features {
     padding: 30px;
     box-shadow: 0 2px 3px #dfdfe5;
     border-radius: 8px;
+
     .user-img {
         img {
             border-radius: 50%;
