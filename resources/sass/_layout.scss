@@ -520,8 +520,9 @@ a {
 
 // INNER BANNERS
 .inner-banner-box {
-    padding: 150px 0;
+    padding: 100px 0;
     position: relative;
+
     &::before {
         content: "";
         position: absolute;
@@ -532,23 +533,33 @@ a {
         bottom: 0;
         height: 100%;
     }
+
     .box-capiton {
         position: relative;
     }
-    h1 {
-        color: #e0dbdb;
-        margin: 10px 0;
-        font-weight: 600;
-        font-size: 4.1rem;
-    }
+
+    //h1 {
+    //    color: #e0dbdb;
+    //    margin: 10px 0;
+    //    font-weight: 600;
+    //    font-size: 4.1rem;
+    //}
+    //h2 {
+    //    color: #e0dbdb;
+    //    margin: 10px 0;
+    //    font-weight: 500;
+    //    font-size: 3rem;
+    //}
     img {
         margin: auto;
         display: block;
     }
-    h6 {
+
+    h6, p {
         color: #5d5d5d;
         font-family: $font;
     }
+
     h5 {
         color: #ffffffe3;
         font-family: $font;

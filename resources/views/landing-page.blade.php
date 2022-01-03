@@ -7,11 +7,16 @@
                     <div class="row">
                         <div class="offset-md-3 col-md-6">
                             <div class="box-capiton text-center">
-                                <h1 class="large-text">Welcome to <em class="text-primary">Mycoffees</em></h1>
-                                <h6>MAKE YOUR COFFEE MEMORABLE</h6>
+                                <h1 class="large-text text-white display-1">Mycoffees.com.au</h1>
+                                <p class="text-white">All your favourites in one place</p>
                                 <br>
                                 <a href="{{ route('register') }}">
-                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Register Now
+                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Register
+                                    </button>
+                                </a>
+                                <a href="{{ route('login') }}">
+                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Already have an
+                                        Account
                                     </button>
                                 </a>
                             </div>
@@ -42,7 +47,7 @@
                             <img src="{{asset('assets/images/queue.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h3>No queues- avoid the queues by ordering a head</h3>
+                            <h3>No queues- avoid the queues by ordering ahead</h3>
                         </div>
 
                     </div>
