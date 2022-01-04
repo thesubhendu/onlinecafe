@@ -7,17 +7,17 @@
                     <div class="row">
                         <div class="offset-md-3 col-md-6">
                             <div class="box-capiton text-center">
-                                <h2 class="text-primary display-1">mycoffees<span
-                                        class="text-white display-6">.com.au</span></h2>
+                                <h1 class="text-primary display-1">mycoffees<span
+                                        class="text-white display-6">.com.au</span></h1>
                                 <p class="h5">All your favourites in one place</p>
                                 <br>
                                 <a href="{{ route('register') }}">
-                                    <button class="btn btn-primary btn-block btn-get-started">Register
+                                    <button class="btn btn-primary btn-block btn-lg btn-get-started">Register
                                     </button>
                                 </a>
 
                                 <a href="{{ route('login') }}">
-                                    <button class="btn btn-outline-light">Already have an
+                                    <button class="btn btn-outline-light btn-lg">Already have an
                                         Account
                                     </button>
                                 </a>
@@ -49,7 +49,7 @@
                             <img src="{{asset('assets/images/queue.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h3>No queues- avoid the queues by ordering ahead</h3>
+                            <h4>No queues- avoid the queues by ordering ahead</h4>
                         </div>
 
                     </div>
@@ -61,9 +61,9 @@
                             <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h3>All your rewards and deals in one spot. No more carrying multiple coffee loyalty cards,
+                            <h4>All your rewards and deals in one spot. No more carrying multiple coffee loyalty cards,
                                 they are all tracked here in one place
-                            </h3>
+                            </h4>
                         </div>
 
                     </div>
@@ -75,7 +75,7 @@
                             <img src="{{asset('assets/images/online-payment.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h3>Go cashless with safe and secure online payments</h3>
+                            <h4>Go cashless with safe and secure online payments</h4>
                         </div>
 
                     </div>
@@ -87,17 +87,17 @@
                             <img src="{{asset('assets/images/donation.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h3> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
-                                might need one.</h3>
+                            <h4> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
+                                might need one.</h4>
                         </div>
 
                     </div>
                 </div>
 
             </div>
-        </div>
-    </section>
-        @endguest
+                </div>
+            </section>
+    @endguest
 
 <!-- COFFEE SHOP VENDER CARD -->
     <section class="shop-vendors">
