@@ -8,7 +8,7 @@
                     <div class="col-md-6">
                         <div class="box-capiton">
                             <h2 class="display-3 text-white">Mycoffees.com.au is an Australian owned and operated order
-                                a head platform.</h2>
+                                ahead platform.</h2>
                             <h5>Created to help Australian small business take advantage of the booming online order
                                 ahead market.
                                 Simple online registration means you could be providing your customers with convenience
@@ -39,13 +39,13 @@
                         </h2>
                         <p>Stats</p>
                         <ul>
-                            <li>* More than 90% off aussies used their phone to shop Online in 2020*</li>
+                            <li> More than 90% off aussies used their phone to shop Online in 2020*</li>
                             <li>
-                                * 9.1million australian house holds shopped online in FY2021*
+                                9.1million australian house holds shopped online in FY2021*
                             </li>
 
                             <li>
-                                * Australians spent $50.46 billion online in 2020*
+                                Australians spent $50.46 billion online in 2020*
                             </li>
                         </ul>
 
@@ -86,18 +86,18 @@
                 <div class="col-md-6 p-0">
                     <div class="features-content">
                         <h2>Why mycoffees.com.au</h2>
-                        <p>* No lock in contracts makes it simple to sell online.
+                        <p> No lock in contracts makes it simple to sell online.
                             <br>
-                            * No revenue based commissions means more profit for you <br>
+                            No revenue based commissions means more profit for you <br>
 
-                            * Simple online order head platform is ready to go. <br>
+                            Simple online order head platform is ready to go. <br>
 
-                            * Manage customer loyalty in one place. <br>
+                            Manage customer loyalty in one place. <br>
 
-                            * Engage with your customers using marketing campaigns for your business in our admin
+                            Engage with your customers using marketing campaigns for your business in our admin
                             dashboard <br>
 
-                            * See your top selling products, daly, weekly or monthly sales with our admin dashboard.
+                            See your top selling products, daly, weekly or monthly sales with our admin dashboard.
                             <br>
 
                         </p>
