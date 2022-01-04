@@ -7,8 +7,9 @@
                     <div class="row">
                         <div class="offset-md-3 col-md-6">
                             <div class="box-capiton text-center">
-                                <h2 class="text-white display-2">Mycoffees.com.au</h2>
-                                <p class="text-white">All your favourites in one place</p>
+                                <h2 class="text-primary display-1">mycoffees<span
+                                        class="text-white display-6">.com.au</span></h2>
+                                <p class="h5">All your favourites in one place</p>
                                 <br>
                                 <a href="{{ route('register') }}">
                                     <button class="btn btn-primary btn-block btn-get-started">Register
@@ -16,7 +17,7 @@
                                 </a>
 
                                 <a href="{{ route('login') }}">
-                                    <button class="btn btn-primary btn-block btn-get-started ">Already have an
+                                    <button class="btn btn-outline-light">Already have an
                                         Account
                                     </button>
                                 </a>
