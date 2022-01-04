@@ -667,37 +667,56 @@ a {
         border-bottom-right-radius: 8px;
         padding-bottom: 8px;
         margin-bottom: 1.2rem;
-        h5 {
-            font-weight: bold;
-            margin: 8px 0 8px;
-        }
-        .price-and-add {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: $font;
-            .shop-btn {
-                border: 2px solid #ccc;
-                display: block;
-                text-align: center;
-                padding: 5px 20px;
-                border-radius: 300px;
-                background: #ffffff;
-                color: #222;
-                font-weight: 500;
-                font-size: 13px;
-                &:hover{
-                    background: $secondary;
-                    color: #fff;
-                    border: 1px solid $secondary;
+        .content {
+            padding: 1rem;
+            display: block;
+            .product-image{
+                width:80px;
+                height:80px;
+                border-radius: 50%;
+                display: inline-flex;
+                vertical-align: top;
+                margin-right: 15px;
+                img{
+                    border-radius: 50%;
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .details{
+                display: inline-flex;
+                vertical-align: top;
+                width: 68%;
+                .price-and-add {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-family: $font;
+                }
+                .shop-btn {
+                    border: 2px solid #ccc;
+                    display: block;
+                    text-align: center;
+                    padding: 5px 20px;
+                    border-radius: 300px;
+                    background: #ffffff;
+                    color: #222;
+                    font-weight: 500;
+                    font-size: 13px;
+                    &:hover{
+                        background: $secondary;
+                        color: #fff;
+                        border: 1px solid $secondary;
+                    }
+                }
+                h5 {
+                    font-weight: bold;
+                    margin: 8px 0 8px;
                 }
             }
         }
     }
-    .vendor-product-item .content {
-        padding: 0 1rem;
-    }
-}
+ }
 
 // <!--- SHOP LANDING PAGE FOR GUEST ----->
 

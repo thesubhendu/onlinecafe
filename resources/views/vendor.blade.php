@@ -124,9 +124,16 @@
             </div>
 
             <div class="row  @if($loop->index > 0) mt-4 @endif ">
-                @foreach ($products as $product)
-                <x-menu-card :product="$product"></x-menu-card>
-                @endforeach
+                <div class="col-md-8">
+                    <div class="row">
+                        @foreach ($products as $product)
+                        <div class="col-md-6">
+                            <x-menu-card :product="$product"></x-menu-card>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
             </div>
 
             @empty
