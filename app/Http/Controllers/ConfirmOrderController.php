@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirmed;
 use App\Models\Order;
+use App\Notifications\OrderConfirmedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,6 +25,7 @@ class ConfirmOrderController extends Controller
         $order->confirm();
         //mail to customer
         Mail::to($order->user->email)->send(new OrderConfirmed($order));
+        $order->user->notify(new OrderConfirmedNotification($order));
 
         return redirect()->route('platform.order.show', $order);
     }

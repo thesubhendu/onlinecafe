@@ -3,6 +3,8 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\URL;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -15,6 +17,7 @@ class OrderDetailScreen extends Screen
      */
     public $name = 'Order Detail';
 
+    private $order;
     /**
      * Query data.
      *
@@ -23,6 +26,7 @@ class OrderDetailScreen extends Screen
      */
     public function query(Order $order): array
     {
+        $this->order = $order;
         return [
             'order' => $order
         ];
@@ -35,7 +39,12 @@ class OrderDetailScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Link::make('Confirm Order')
+                ->canSee(!$this->order->confirmed_at)
+                ->icon('user-following')
+                ->href(URL::signedRoute('confirm_order.confirm', $this->order->id)),
+        ];
     }
 
     /**

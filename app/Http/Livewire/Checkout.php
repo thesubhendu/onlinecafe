@@ -2,22 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Order;
-use Livewire\Component;
 use App\Mail\orderSubmitted;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Order;
+use App\Notifications\NewOrderNotification;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Livewire\Component;
 
 class Checkout extends Component
 {
     public $user;
     public $cartItems;
     public $cartTotal;
-    public $form =[];
+    public $form = [];
 
     protected $rules = [
-        'form.name'=>'required',
+        'form.name' => 'required',
         'form.email'=>'required',
         'form.mobile'=>'required',
     ];
@@ -66,6 +67,9 @@ class Checkout extends Component
         //todo: ask if need to send to owner or vendor email
         Mail::to($order->vendor->email)
             ->send(new orderSubmitted($order, $confirm_url));
+
+//        \App\Events\OrderSubmitted::dispatch($order);
+        $order->vendor->owner->notify(new NewOrderNotification($order));
 
         Cart::destroy();
 
