@@ -43,7 +43,7 @@
     }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
     .hidden-xs {
         display: none !important;
     }
@@ -193,7 +193,7 @@
         .vendor-actions {
             width: 100% !important;
             div {
-                display: block !important;
+                //display: block !important;
                 a {
                     border: 1px solid;
                     padding: 8px;
@@ -203,6 +203,29 @@
                 }
                 .last-update {
                     font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .vendor-menu {
+        .vendor-product-item {
+            .content {
+                .product-image {
+                    width: 23%;
+                    img{
+                        width: 60px;
+                        height: 60px;
+                    }
+                }
+                .details {
+                    width: 75%;
+                    .price-and-add {
+                        p {
+                            font-size: 13px;
+                            text-align: justify;
+                        }
+                    }
                 }
             }
         }
@@ -371,4 +394,6 @@
     .favorite-vendor {
         padding: 2rem 1rem !important;
     }
+
+
 }

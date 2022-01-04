@@ -1,5 +1,7 @@
 <div>
     <x-message></x-message>
+    <x-message type="error"></x-message>
+
     <section class="product-confirm">
         <div class="container">
             <div class="row ">
@@ -19,34 +21,47 @@
                         <form wire:submit.prevent="submit" method="post">
                             @csrf
                             <div class="row extras">
-                                <div class="col-lg-12 mb-3">
+                                <div class="col-lg-12 ">
                                     <h4> Select Options</h4>
                                 </div>
 
-                                <div class="col-lg-2">
-                                    <button wire:click="updateQty('remove')" class="btn btn-success" type="button">-
-                                    </button>
-                                </div>
-                                <div class="col-lg-4 mb-3">
+                                {{--                                <div class="col-lg-2">--}}
+                                {{--                                    <button wire:click="updateQty('remove')" class="btn btn-success" type="button">---}}
+                                {{--                                    </button>--}}
+                                {{--                                </div>--}}
+                                <div class="col-lg-4">
                                     <label>Quantity</label>
-                                    <select wire:model.lazy="cartProduct.qty" id="" class="form-select" required>
-                                        @foreach ([0,1,2,3,4,5,6,7,8,9,10] as $option)
-                                            <option value="{{$option}}">{{$option}}</option>
-                                        @endforeach
-                                    </select>
+                                    {{--                                    <select wire:model.lazy="cartProduct.qty" id="" class="form-select" required>--}}
+                                    {{--                                        @foreach ([0,1,2,3,4,5,6,7,8,9,10] as $option)--}}
+                                    {{--                                            <option value="{{$option}}">{{$option}}</option>--}}
+                                    {{--                                        @endforeach--}}
+                                    {{--                                    </select>--}}
+
+                                    <div class="control-btn ">
+                                        <button type="button" class="value-button decrease"
+                                                wire:click="updateQty('remove')" value="Decrease Value">-
+                                        </button>
+                                        <input type="number" id="number" wire:model="cartProduct.qty"/>
+                                        <button type="button" class="value-button increase" wire:click="updateQty()"
+                                                value="Increase Value">+
+                                        </button>
+                                    </div>
+
                                     @error('cartProduct.qty') <span
                                         class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-lg-2">
-                                    <button wire:click="updateQty()" class="btn btn-success" type="button">+</button>
-                                </div>
+                                {{--                                <div class="col-lg-2">--}}
+                                {{--                                    <button wire:click="updateQty()" class="btn btn-success" type="button">+</button>--}}
+                                {{--                                </div>--}}
+
                                 @foreach($product->options() as $index => $option)
                                     <div class="col-lg-2 mb-3">
                                         <label for="">{{$option->name}} (+ ${{$option->price}})</label>
                                         <select wire:model="cartProduct.options.{{$option->id}}" class="form-select">
                                             <option value="">Select Option</option>
                                             @foreach ($option->options ?? [] as $subOption)
-                                                <option value="{{$option->name}}-{{$subOption}}-(+${{$option->price}})">{{$subOption}}</option>
+                                                <option
+                                                    value="{{$option->name}}: {{$subOption}}">{{$subOption}}</option>
                                             @endforeach
 
                                         </select>

@@ -18,12 +18,13 @@ class ConfirmOrderController extends Controller
      */
     public function confirm(Request $request, Order $order)
     {
-        if ( ! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             abort(403);
         }
         $order->confirm();
         //mail to customer
         Mail::to($order->user->email)->send(new OrderConfirmed($order));
-        dd('order confirmed'); //todo where to redirect vendor?
+
+        return redirect()->route('platform.order.show', $order);
     }
 }

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="box-capiton">
-                            <h2 class="text-white display-4">mycoffees.com.au is an Australian owned and operated order
+                            <h2 class="display-3 text-white">Mycoffees.com.au is an Australian owned and operated order
                                 a head platform.</h2>
                             <h5>Created to help Australian small business take advantage of the booming online order
                                 ahead market.
@@ -108,32 +108,34 @@
         </div>
     </section>
 
-    <section class="get-start-banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3">
+    @include('partnerwithus-cto')
 
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Get Started Today!</h3>
-                            <div class="emaillist">
-                                <form action="#" method="post">
-                                    <input class="form-control" type="email" name="email" placeholder="YOUR EMAIL"
-                                           required="">
-                                    <button type="submit" name="submit" class="btn-newsletter">Subscribe now</button>
-                                </form>
+    {{--    <section class="get-start-banner">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="row">--}}
+    {{--                <div class="col-md-10 col-md-offset-1">--}}
+    {{--                    <div class="row">--}}
+    {{--                        <div class="col-md-3 col-sm-3">--}}
 
-                                <span class="es_subscription_message success"
-                                      id="es_subscription_message_1565425856"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{--                        </div>--}}
+    {{--                        <div class="col-md-9">--}}
+    {{--                            <h3>Get Started Today!</h3>--}}
+    {{--                            <div class="emaillist">--}}
+    {{--                                <form action="#" method="post">--}}
+    {{--                                    <input class="form-control" type="email" name="email" placeholder="YOUR EMAIL"--}}
+    {{--                                           required="">--}}
+    {{--                                    <button type="submit" name="submit" class="btn-newsletter">Subscribe now</button>--}}
+    {{--                                </form>--}}
+
+    {{--                                <span class="es_subscription_message success"--}}
+    {{--                                      id="es_subscription_message_1565425856"></span>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
 
     <x-footer></x-footer>
 

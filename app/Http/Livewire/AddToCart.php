@@ -34,14 +34,18 @@ class AddToCart extends Component
 
     public function submit()
     {
+        if (auth()->id() == $this->product->vendor->owner_id) {
+            session()->flash('error', 'You cannot order from your own shop');
+            return;
+        }
 
         $this->validate();
 
         //only allowing order from one vendor
-        if($existingItem = Cart::content()->first()) {
-            if($existingItem->model->vendor_id != $this->product->vendor_id) {
+        if ($existingItem = Cart::content()->first()) {
+            if ($existingItem->model->vendor_id != $this->product->vendor_id) {
                 Cart::destroy();
-                session()->flash('message', 'Previous Item in cart from other vendor cleared');
+//                session()->flash('message', 'Previous Item in cart from other vendor cleared');
             }
         }
 

@@ -25,6 +25,7 @@ class RatingForm extends Component
         $this->vendor->rate($this->rating, null, $this->comment);
 
         session()->flash('message', 'Rated Successfully!');
+        $this->emit('rated');
     }
 
     public function render()

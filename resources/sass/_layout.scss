@@ -520,8 +520,9 @@ a {
 
 // INNER BANNERS
 .inner-banner-box {
-    padding: 150px 0;
+    padding: 100px 0;
     position: relative;
+
     &::before {
         content: "";
         position: absolute;
@@ -532,29 +533,43 @@ a {
         bottom: 0;
         height: 100%;
     }
+
     .box-capiton {
         position: relative;
     }
-    h1 {
-        color: #fff;
-        margin: 10px 0;
-        font-weight: 800;
-        font-size: 4.5rem;
+
+    .display-1 {
+        font-weight: 500;
     }
+
+    //h1 {
+    //    color: #e0dbdb;
+    //    margin: 10px 0;
+    //    font-weight: 600;
+    //    font-size: 4.1rem;
+    //}
+    //h2 {
+    //    color: #e0dbdb;
+    //    margin: 10px 0;
+    //    font-weight: 500;
+    //    font-size: 3rem;
+    //}
     img {
         margin: auto;
         display: block;
     }
-    h6 {
+
+    h6, p {
         color: #5d5d5d;
         font-family: $font;
     }
+
     h5 {
         color: #ffffffe3;
         font-family: $font;
         margin-top: 25px;
         line-height: 28px;
-        font-weight: lighter;
+        font-weight: 300;
     }
 }
 .inner-banner {
@@ -671,36 +686,43 @@ a {
             padding: 1rem;
             display: block;
             .product-image{
-                width:80px;
-                height:80px;
-                border-radius: 50%;
-                display: inline-flex;
+                width: 20%;
                 vertical-align: top;
-                margin-right: 15px;
+                display: inline-block;
+                margin: 0;
                 img{
                     border-radius: 50%;
-                    width:100%;
-                    height:100%;
+                    width: 70px;
+                    height: 70px;
+                    object-fit: cover;
+                    display: block;
+                    margin-top: 10px;
                 }
             }
             .details{
-                display: inline-flex;
                 vertical-align: top;
-                width: 68%;
+                width: 79%;
+                display: inline-block;
                 .price-and-add {
-                    display: flex;
                     align-items: center;
                     justify-content: space-between;
                     font-family: $font;
+                    p {
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+                .menu-card-footer{
+                    padding-top: 10px;
                 }
                 .shop-btn {
-                    border: 2px solid #ccc;
+                    border: 2px solid #c3681324;
                     display: block;
                     text-align: center;
                     padding: 5px 20px;
                     border-radius: 300px;
                     background: #ffffff;
-                    color: #222;
+                    color: #c36813;
                     font-weight: 500;
                     font-size: 13px;
                     &:hover{
@@ -736,10 +758,10 @@ a {
         h5 {
             color: #e5e5e5;
             font-family: $font;
-            font-weight: lighter;
-            margin-top: 40px;
-            font-size: 1.5rem;
-            line-height: 32px;
+            margin-top: -6px;
+        }
+        .btn {
+            font-size: 14px;
         }
     }
 }
@@ -812,12 +834,18 @@ a {
         border-radius: 8px;
         margin-bottom: 20px;
         text-align: center;
+        min-height: 214px;
         h3 {
-            font-size: 1.3rem;
-            margin-top: 1rem;
+            font-size: 15px;
+            margin-top: 19px;
+            line-height: 21px;
+            font-weight: 600;
         }
         .icon-image {
             text-align: center;
+            img{
+                width: 50px;
+            }
         }
     }
 }
@@ -857,7 +885,7 @@ section.call-to-action {
     }
 }
 
-// BEFORE VENDER REGISTRATION LANDING PAGE / OUR FEATURES 
+// BEFORE VENDER REGISTRATION LANDING PAGE / OUR FEATURES
 section.our-features {
     padding: 70px 0;
     background: url("~/assets/images/bg-wave.svg") left no-repeat #ffffff;
@@ -920,9 +948,9 @@ section.our-features {
 }
 
 // <! ------------ PROFILE PAGE //---------------------->
-.profile-banner {
-    background: url('~/assets/images/coffee-bg.png') repeat-x;
-}
+//.profile-banner {
+//    background: url('~/assets/images/coffee-bg.png') repeat-x;
+//}
 .profile-content {
     background: #fff;
     position: relative;
@@ -930,6 +958,7 @@ section.our-features {
     padding: 30px;
     box-shadow: 0 2px 3px #dfdfe5;
     border-radius: 8px;
+
     .user-img {
         img {
             border-radius: 50%;
@@ -1180,7 +1209,7 @@ section.profile-content-details {
     }
 }
 
-// FORM 
+// FORM
 .form-body {
     background: #fafbff !important;
     .sigin-form {
@@ -1223,3 +1252,18 @@ section.profile-content-details {
     }
 }
 
+.control-btn {
+    display: flex;
+    margin-top: 8px;
+}
+
+.control-btn .value-button {
+    border: 1px solid #ccc;
+    width: 29px;
+    text-align: center;
+}
+
+.control-btn input#number {
+    width: 59px;
+    text-align: center;
+}

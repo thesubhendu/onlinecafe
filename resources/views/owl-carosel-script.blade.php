@@ -1,7 +1,7 @@
 <script>
     var owl = $('.owl-carousel');
     owl.owlCarousel({
-        items: 4,
+        items: 2,
         loop: true,
         margin: 10,
         autoplay: false,
@@ -13,11 +13,11 @@
                 nav: true
             },
             600: {
-                items: 3,
+                items: 1,
                 nav: false
         },
         1000:{
-            items:4,
+            items:2,
             nav:true,
             loop:false
         }

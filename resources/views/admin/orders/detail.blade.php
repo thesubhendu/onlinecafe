@@ -37,7 +37,9 @@
                     {{$product->pivot->price}}
                 </td>
                 <td>
-                    {{$product->pivot->options}}
+                    @foreach (json_decode($product->pivot->options, true) as $key => $value )
+                        {{$value}} <br>
+                    @endforeach
                 </td>
             @endforeach
         </tr>
