@@ -6,6 +6,8 @@ body {
     display: none  !important;
 }
 
+
+
 // BUTTON
 .btn {
     font-family: $font;
@@ -450,7 +452,7 @@ a {
                 font-family: $font;
                 font-size: 14px;
                 color: #7d7d7d;
-                min-height: 42px;
+                font-weight: 500;
             }
         }
         .image {
@@ -507,13 +509,32 @@ a {
                 text-decoration: none;
                 h3 {
                     text-decoration: none;
-                    color: $primary;
+                    // color: $primary;
                 }
-                .ti-heart {
-                    color: #fff;
-                    background: $secondary;
-                }
+                // .ti-heart {
+                //     color: #fff;
+                //     background: $secondary;
+                // }
             }
+        }
+        .service-item{
+            white-space: nowrap;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+        }
+        .service-badge{
+            background: #e7e7e7eb;
+            padding: 5px 10px;
+            border-radius: 300px;
+            color: black;
+            font-size: 13px;
+            margin-right: 2px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: 600;
         }
     }
 }
@@ -856,7 +877,8 @@ section.call-to-action {
     text-align: center;
     background-position: -229px 0px;
     background-attachment: fixed;
-    background: url("~/assets/images/bg-wave.svg") left no-repeat $extra;
+    // background: url("~/assets/images/bg-wave.svg") left no-repeat $extra;
+    background: $extra;
     img {
         width: 45px;
         margin-bottom: 12px;

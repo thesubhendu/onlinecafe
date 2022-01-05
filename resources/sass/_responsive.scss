@@ -208,6 +208,7 @@
         }
     }
 
+    // VENDOR MENU
     .vendor-menu {
         .vendor-product-item {
             .content {
@@ -395,5 +396,21 @@
         padding: 2rem 1rem !important;
     }
 
+    // CALL TO ACTION
+    .call-to-action{
+        background: #371a1a !important;
+    }
 
+    // BADGE
+    .shop-vendors {
+        .shop-vendors-item {
+            .service-badge {
+                margin-right: 0px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 330px) {
+ 
 }
