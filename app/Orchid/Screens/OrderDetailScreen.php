@@ -3,10 +3,11 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Order;
-use Illuminate\Support\Facades\URL;
-use Orchid\Screen\Actions\Link;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class OrderDetailScreen extends Screen
 {
@@ -40,11 +41,25 @@ class OrderDetailScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('Confirm Order')
+            Button::make('Confirm Order')
                 ->canSee(!$this->order->confirmed_at)
                 ->icon('user-following')
-                ->href(URL::signedRoute('confirm_order.confirm', $this->order->id)),
+                ->method('confirmOrder')
+
         ];
+    }
+
+    public function confirmOrder(Request $request)
+    {
+        $order = Order::find($request->order);
+
+        if ($order->confirmed_at) {
+            Toast::info("Order already confirmed!");
+        } else {
+            $order->confirm();
+            Toast::success("Order Confirmed!");
+        }
+
     }
 
     /**

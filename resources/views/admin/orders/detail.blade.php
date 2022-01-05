@@ -9,7 +9,11 @@
                 Ordered By: {{$order->user->name}}
             </div>
             <div class="col-sm">
-                Created At : {{$order->created_at->toDateTimeString()}}
+                Created At : {{$order->created_at->diffForHumans()}}
+            </div>
+
+            <div class="col-sm">
+                Confirmed At : {{$order->confirmed_at->diffForHumans()}}
             </div>
         </div>
     </div>

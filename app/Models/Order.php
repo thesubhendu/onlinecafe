@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Mail\OrderConfirmed;
+use App\Notifications\OrderConfirmedNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -25,6 +28,8 @@ class Order extends Model
         'updated_at' => 'datetime:d-m-Y',
         'date' => 'datetime:d-m-Y'
     ];
+
+    protected $dates = ['confirmed_at'];
 
     public function getFormattedDate()
     {
@@ -56,6 +61,9 @@ class Order extends Model
         $this->confirmed_at = now();
         $this->confirmed_by = auth()->id();
         $this->save();
+
+        Mail::to($this->user->email)->send(new OrderConfirmed($this));
+        $this->user->notify(new OrderConfirmedNotification($this));
 
         return $this;
     }

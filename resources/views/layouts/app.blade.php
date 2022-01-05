@@ -58,14 +58,17 @@
         //listening notification
         Echo.private('App.Models.User.' + '{{auth()->id()}}')
             .notification((notification) => {
-                console.log(notification);
-                window.Swal.fire({
+                let options = {
                     title: notification.title,
                     toast: true,
                     position: 'top-right',
                     text: notification.text,
-                    confirmButtonText: 'Ok'
-                })
+                };
+
+                if (notification.action) {
+                    options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
+                }
+                window.Swal.fire(options)
             });
     </script>
 @endauth

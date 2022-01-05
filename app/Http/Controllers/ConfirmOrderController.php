@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\OrderConfirmed;
 use App\Models\Order;
-use App\Notifications\OrderConfirmedNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class ConfirmOrderController extends Controller
 {
@@ -22,10 +19,10 @@ class ConfirmOrderController extends Controller
         if (!$request->hasValidSignature()) {
             abort(403);
         }
+        if ($order->confirmed_at) {
+            return redirect()->route('platform.order.show', $order);
+        }
         $order->confirm();
-        //mail to customer
-        Mail::to($order->user->email)->send(new OrderConfirmed($order));
-        $order->user->notify(new OrderConfirmedNotification($order));
 
         return redirect()->route('platform.order.show', $order);
     }
