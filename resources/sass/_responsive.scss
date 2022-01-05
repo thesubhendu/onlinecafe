@@ -41,6 +41,17 @@
             }
         }
     }
+    .icon-ratings {
+        .col {
+            display: block;
+            width: 100% !important;
+            flex: 100%;
+            margin-bottom: 8px;
+            .shop-rating {
+                width: 100%;
+            }
+        }
+    }
 }
 
 @include media-breakpoint-down(md) {
@@ -406,6 +417,19 @@
         .shop-vendors-item {
             .service-badge {
                 margin-right: 0px;
+            }
+        }
+    }
+
+    .banner-inner {
+        .like-btn {
+            i {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                border-top-left-radius: 6px;
+                border-bottom-left-radius: 6px;
+                top: 85%;
             }
         }
     }
