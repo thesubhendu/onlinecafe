@@ -33,7 +33,7 @@
     @guest
             <section class="we-provide">
                 <div class="container">
-                    <div class="row mb-5">
+                    <div class="row mb2">
                         <div class="col-lg-12 m-0 p-0 ">
                             <div class="content-heading text-center">
                                 <h3 class="title">Key Features </h3>
