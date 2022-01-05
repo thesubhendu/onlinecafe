@@ -86,38 +86,7 @@
             <div class="owl-carousel owl-theme mb-4">
                 @foreach($featuredProducts as $product)
                     <div class="item">
-                        <div class="vendor-product-item">
-                            <div class="image">
-                                @if($product->product_image)
-                                    <img src="{{asset($product->product_image)}}" class="img-responsive" alt="">
-                                @else
-                                    <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
-                                @endif
-                                <span class="ribbon"> <span class="ribbon-edge">Featured</span> </span>
-                            </div>
-                            <div class="content">
-                                <h5>{{$product->name}}</h5>
-                                <div class="price-and-add">
-                                    <div class="price"><p><i class="fa fa-dollar"></i> $ {{$product->price}}</p>
-                                    </div>
-                                    @guest
-                                        <div class="add">
-                                            <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add
-                                                &nbsp;
-                                                <i
-                                                    class="fa fa-coffee"></i>
-                                            </a></div>
-                                    @endguest
-                                    @if(auth()->check() && auth()->id() != $vendor->owner_id)
-
-                                        <div class="add"><a href="{{ route('orders.create', $product->id) }}"
-                                                            class="shop-btn"> Add &nbsp; <i
-                                                    class="fa fa-coffee"></i></a>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+                        <x-menu-card :product="$product"></x-menu-card>
                     </div>
                 @endforeach
             </div>
@@ -134,7 +103,9 @@
 
                 <div class="row  @if($loop->index > 0) mt-4 @endif ">
                     @foreach ($products as $product)
+                        <div class="col-md-6">
                         <x-menu-card :product="$product"></x-menu-card>
+                        </div>
                     @endforeach
                 </div>
 
