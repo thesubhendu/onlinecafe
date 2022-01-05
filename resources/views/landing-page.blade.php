@@ -126,8 +126,9 @@
 
     <livewire:nearby-vendors/>
 
-
- @include('partnerwithus-cto')
+    @cannot('vendor')
+        @include('partnerwithus-cto')
+    @endcannot
     <x-footer></x-footer>
 
 </x-app-layout>
