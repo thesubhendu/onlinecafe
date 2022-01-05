@@ -33,7 +33,7 @@
     @guest
             <section class="we-provide">
                 <div class="container">
-                    <div class="row mb-5">
+                    <div class="row mb2">
                         <div class="col-lg-12 m-0 p-0 ">
                             <div class="content-heading text-center">
                                 <h3 class="title">Key Features </h3>
@@ -41,54 +41,55 @@
                             </div>
                         </div>
                     </div>
-            <div class="row no-gutters">
-                <div class="col-md-3 col-xs-12">
-                    <div class="icon-box">
+                    <div class="row no-gutters">
+                        <div class="col-md-3 col-xs-12">
+                            <div class="icon-box">
+                                <h4>No queues</h4>
+                                <div class="icon-image">
+                                    <img src="{{asset('assets/images/queue.png')}}" alt="">
+                                </div>
+                                <div class="icon-title">
+                                    <h3>Avoid the queues by ordering ahead</h3>
+                                </div>
 
-                        <div class="icon-image">
-                            <img src="{{asset('assets/images/queue.png')}}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <div class="icon-box">
+                                <h4>Rewards and deals</h4>
+                                <div class="icon-image">
+                                    <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
+                        </div>
+                                <div class="icon-title">
+                                    <h3>All your rewards and deals in one spot. No more carrying multiple coffee loyalty
+                                        cards,
+                                        they are all tracked here in one place
+                                    </h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <div class="icon-box">
+                                <h4>Go cashless</h4>
+                                <div class="icon-image">
+                                    <img src="{{asset('assets/images/online-payment.png')}}" alt="">
+                                </div>
+                                <div class="icon-title">
+                                    <h3>Go cashless with safe and secure online payments</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <div class="icon-box">
+                                <h4>Feel Good</h4>
+                                <div class="icon-image">
+                                    <img src="{{asset('assets/images/donation.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h4>No queues- avoid the queues by ordering ahead</h4>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-12">
-                    <div class="icon-box">
-
-                        <div class="icon-image">
-                            <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
-                        </div>
-                        <div class="icon-title">
-                            <h4>All your rewards and deals in one spot. No more carrying multiple coffee loyalty cards,
-                                they are all tracked here in one place
-                            </h4>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-12">
-                    <div class="icon-box">
-
-                        <div class="icon-image">
-                            <img src="{{asset('assets/images/online-payment.png')}}" alt="">
-                        </div>
-                        <div class="icon-title">
-                            <h4>Go cashless with safe and secure online payments</h4>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-12">
-                    <div class="icon-box">
-
-                        <div class="icon-image">
-                            <img src="{{asset('assets/images/donation.png')}}" alt="">
-                        </div>
-                        <div class="icon-title">
-                            <h4> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
-                                might need one.</h4>
+                            <h3> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
+                                might need one.</h3>
                         </div>
 
                     </div>

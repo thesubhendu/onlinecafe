@@ -208,6 +208,30 @@
         }
     }
 
+    // VENDOR MENU
+    .vendor-menu {
+        .vendor-product-item {
+            .content {
+                .product-image {
+                    width: 23%;
+                    img{
+                        width: 60px;
+                        height: 60px;
+                    }
+                }
+                .details {
+                    width: 75%;
+                    .price-and-add {
+                        p {
+                            font-size: 13px;
+                            text-align: justify;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // CART
     .ordered-food-item {
         font-family: "Roboto", sans-serif;
@@ -371,4 +395,22 @@
     .favorite-vendor {
         padding: 2rem 1rem !important;
     }
+
+    // CALL TO ACTION
+    .call-to-action{
+        background: #371a1a !important;
+    }
+
+    // BADGE
+    .shop-vendors {
+        .shop-vendors-item {
+            .service-badge {
+                margin-right: 0px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 330px) {
+ 
 }
