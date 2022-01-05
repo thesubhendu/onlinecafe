@@ -49,7 +49,7 @@
                             <img src="{{asset('assets/images/queue.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h4>No queues- avoid the queues by ordering ahead</h4>
+                            <h3>No queues- avoid the queues by ordering ahead</h3>
                         </div>
 
                     </div>
@@ -61,9 +61,9 @@
                             <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h4>All your rewards and deals in one spot. No more carrying multiple coffee loyalty cards,
+                            <h3>All your rewards and deals in one spot. No more carrying multiple coffee loyalty cards,
                                 they are all tracked here in one place
-                            </h4>
+                            </h3>
                         </div>
 
                     </div>
@@ -75,7 +75,7 @@
                             <img src="{{asset('assets/images/online-payment.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h4>Go cashless with safe and secure online payments</h4>
+                            <h3>Go cashless with safe and secure online payments</h3>
                         </div>
 
                     </div>
@@ -87,8 +87,8 @@
                             <img src="{{asset('assets/images/donation.png')}}" alt="">
                         </div>
                         <div class="icon-title">
-                            <h4> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
-                                might need one.</h4>
+                            <h3> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
+                                might need one.</h3>
                         </div>
 
                     </div>
