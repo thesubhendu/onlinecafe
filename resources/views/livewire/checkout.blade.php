@@ -3,19 +3,19 @@
    <p class="h4">Submitting Order Please wait...</p>
 </div>
 <!-- CHECKOUT FORM / TABLE -->
-<section class="terms checkout-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="term-content">
-                    <!-- CHECKOUT FORM -->
-                    <div class="row checkout-form">
-                        <!-- ORDERED LIST ITEMS -->
-                        <div class="col-md-6 cart-payment orderd-items mb-5">
-                            <h4 class="title">Ordered Items</h4>
+    <section class="terms checkout-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="term-content">
+                        <!-- CHECKOUT FORM -->
+                        <div class="row checkout-form">
+                            <!-- ORDERED LIST ITEMS -->
+                            <div class="col-md-6 cart-payment orderd-items mb-5">
+                                <h4 class="title">Ordered Item(s)</h4>
 
-                            <!-- ORDERED LISTS -->
-                            <div class="orderd-item-lists">
+                                <!-- ORDERED LISTS -->
+                                <div class="orderd-item-lists">
 
                                 @foreach($cartItems as $item )
                                 <!-- PRODUCT ROW -->
