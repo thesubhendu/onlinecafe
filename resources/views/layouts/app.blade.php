@@ -25,9 +25,7 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -43,10 +41,36 @@
 @stack('modals')
 
 
+<!-- Scripts -->
+<script src="{{ mix('js/app.js') }}"></script>
+
 @stack('scripts')
 
 
 @include('owl-carosel-script')
 
+@auth
+    <script>
+        window.Laravel = @json([
+                'userId' => auth()->id()
+        ]);
+
+        //listening notification
+        Echo.private('App.Models.User.' + '{{auth()->id()}}')
+            .notification((notification) => {
+                let options = {
+                    title: notification.title,
+                    toast: true,
+                    position: 'top-right',
+                    text: notification.text,
+                };
+
+                if (notification.action) {
+                    options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
+                }
+                window.Swal.fire(options)
+            });
+    </script>
+@endauth
 </body>
 </html>

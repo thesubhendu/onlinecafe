@@ -26,6 +26,8 @@
         "orangehill/iseed": "^3.0",
         "orchid/platform": "^10.22",
         "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "^7.0",
+        "realrashid/sweet-alert": "^4.1",
         "silviolleite/laravelpwa": "^2.0",
         "sparkeleven/abn-lookup": "^1.0",
         "spatie/opening-hours": "^2.10",

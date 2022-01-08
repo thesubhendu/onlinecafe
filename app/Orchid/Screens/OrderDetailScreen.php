@@ -3,8 +3,11 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Order;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class OrderDetailScreen extends Screen
 {
@@ -15,6 +18,7 @@ class OrderDetailScreen extends Screen
      */
     public $name = 'Order Detail';
 
+    private $order;
     /**
      * Query data.
      *
@@ -23,6 +27,7 @@ class OrderDetailScreen extends Screen
      */
     public function query(Order $order): array
     {
+        $this->order = $order;
         return [
             'order' => $order
         ];
@@ -35,7 +40,26 @@ class OrderDetailScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Button::make('Confirm Order')
+                ->canSee(!$this->order->confirmed_at)
+                ->icon('user-following')
+                ->method('confirmOrder')
+
+        ];
+    }
+
+    public function confirmOrder(Request $request)
+    {
+        $order = Order::find($request->order);
+
+        if ($order->confirmed_at) {
+            Toast::info("Order already confirmed!");
+        } else {
+            $order->confirm();
+            Toast::success("Order Confirmed!");
+        }
+
     }
 
     /**
