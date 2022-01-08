@@ -55,7 +55,7 @@ require(__DIR__ . '/partials/_manage-subscriptions.php');
 Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->name('vendor.rating')->middleware('auth');
 Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproducts'])->name('vendor.products');
 
-Route::get('/user/favourites', FavoriteVendors::class)->name('user.likes');
+Route::get('/user/favourites', FavoriteVendors::class)->name('user.likes')->middleware('auth');
 Route::get('/confirm/{order}/update',
     [ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
 
