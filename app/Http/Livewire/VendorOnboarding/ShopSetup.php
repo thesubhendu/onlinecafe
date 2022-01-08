@@ -63,6 +63,10 @@ class ShopSetup extends Component
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
             $this->form['description'] = $vendor->description;
+            $this->form['address'] = $vendor->address;
+            $this->form['max_stamps'] = $vendor->max_stamps;
+            $this->form['free_product'] = $vendor->free_product;
+            $this->form['get_free'] = $vendor->get_free;
 
             if ($vendor->opening_hours) {
                 $this->form['opening_hours'] = $vendor->opening_hours;
