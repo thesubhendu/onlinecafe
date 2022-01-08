@@ -17,7 +17,15 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+Route::get('tinker', function () {
+
+    Mail::to('gbbhatt2006@gmail.com')->send(new \App\Mail\JustTestMail());
+
+    return 'mail send';
+});
 
 Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
