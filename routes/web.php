@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('tinker', function () {
 
-    Mail::to('gbbhatt2006@gmail.com')->send(new \App\Mail\JustTestMail());
+    Mail::to('coffeeshoporders0@gmail.com')->send(new \App\Mail\JustTestMail());
 
-    return 'mail send';
+    return 'mail send to coffee shop order';
 });
 
 Route::get('/offline', function () {
