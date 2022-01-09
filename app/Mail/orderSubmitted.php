@@ -32,6 +32,6 @@ class orderSubmitted extends Mailable
      */
     public function build()
     {
-        return $this->from('order@mycoffee.com.au')->markdown('mail.order.submitted');
+        return $this->from('orders@mycoffees.com.au')->markdown('mail.order.submitted');
     }
 }
