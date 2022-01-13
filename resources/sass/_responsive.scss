@@ -226,12 +226,12 @@
                 .product-image {
                     width: 23%;
                     img{
-                        width: 60px;
-                        height: 60px;
+                        margin-top: 0px;
                     }
                 }
                 .details {
                     width: 75%;
+                    padding-left: 12px;
                     .price-and-add {
                         p {
                             font-size: 13px;
