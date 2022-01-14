@@ -16,23 +16,26 @@
                 <div class="vendor-actions">
                     <div class="icon-ratings">
                         <div class="row">
-                            <div class="col-md-6 col-xs-12">
-                                <div class="xs-block">
-                                    @for($i=0; $i < round($vendor->rating()); $i++)
-                                        <i class="fa fa-coffee selected"></i>
-                                    @endfor
-                                    @for($i=0; $i< 5 - round($vendor->rating()); $i++)
-                                        <i class="fa fa-coffee"></i>
-                                    @endfor
-                                    <span><b>{{$vendor->rating()}}</b></span>
+                            <div class="col">
+                                <div class="shop-rating">
+                                    <div class="xs-block">
+                                        @for($i=0; $i < round($vendor->rating()); $i++)
+                                            <i class="fa fa-coffee selected"></i>
+                                        @endfor
+                                        @for($i=0; $i< 5 - round($vendor->rating()); $i++)
+                                            <i class="fa fa-coffee"></i>
+                                        @endfor
+                                        <span><b>{{$vendor->rating()}}</b></span>
+                                    </div>
+                                    <div class="xs-block last-update">Last
+                                        Update: {{$vendor->updated_at->diffForHumans()}}
+                                    </div>
                                 </div>
-                                <div class="xs-block last-update">Last
-                                    Update: {{$vendor->updated_at->diffForHumans()}}</div>
                             </div>
 
                             @if(auth()->check() && auth()->id() != $vendor->owner_id)
-                                <div class="col-md-6 col-xs-12">
-                                    <div>
+                                <div class="col">
+                                    <div class="rate-btn">
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#rating-form-modal">
@@ -66,6 +69,11 @@
                         </div>
                     </div>
                 </div>
+                @auth
+                <span class="like-btn">
+                <livewire:vendor-like-button :vendor="$vendor"/>
+                </span>
+                @endauth
             </div>
         </div>
     </section>
