@@ -3,15 +3,15 @@
     <div class="content">
         <div class="product-image">
             @if($product->product_image)
-            <img src="{{asset($product->product_image)}}" class="img-responsive" alt="">
+                <img src="{{asset($product->product_image)}}" class="img-responsive" alt="">
             @else
-            <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
+                <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
             @endif
         </div>
         <div class="details">
             <h5>{{$product->name}}</h5>
             <div class="price-and-add">
-                <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p> -->
+                <p>{{$product->description}}</p>
                 <div class="row menu-card-footer">
                     <div class="col-6">
                         <div class="price">
@@ -20,8 +20,8 @@
                     </div>
                     <div class="col-6">
                         @guest
-                        <div class="add">
-                            <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
+                            <div class="add">
+                                <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
                                 <i class="fa fa-coffee"></i>
                             </a>
                         </div>
