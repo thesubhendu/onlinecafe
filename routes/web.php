@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
+Route::get('/order-submitted', function () {
+    return view('email.order-submitted');
+});
 
 Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
