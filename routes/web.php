@@ -17,22 +17,13 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-Route::get('tinker', function () {
-
-    Mail::to('coffeeshoporders0@gmail.com')->send(new \App\Mail\JustTestMail());
-
-    return 'mail send to coffee shop order';
-});
 
 Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
-Route::get('/order-submitted', function () {
-    return view('email.order-submitted');
-});
+
 
 Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');

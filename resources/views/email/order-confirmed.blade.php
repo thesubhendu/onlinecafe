@@ -1,11 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"> <!-- utf-8 works for most cases -->
     <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
-    <title>Seasons Greetings from Stability</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+    <title>mycoffees</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
     <style type="text/css">
         html,
         body {
@@ -144,53 +145,61 @@
                     </tr>
                     <tr>
                         <td>
-                            <h4 class="username">Hi Glen Allen</h4>
-                            <p>Thank you for your order! It has been processed and sent to Fin Fresh Seafood Cafe.</p>
+                            <h4 class="username">Hi {{$order->user->name}}</h4>
+                            <p>Thank you for your order! It has been processed </p>
                             <div class="order-table">
                                 <h5>Ordered Item</h5>
                                 <div class="item-row order-header">
                                     <div class="item-heading">Description</div>
                                     <div class="item-heading">Qty</div>
                                     <div class="item-heading">Price</div>
+                                    <div class="item-heading">Options</div>
                                 </div>
-                                <div class="item-row">
-                                    <div>Cold Coffee</div>
-                                    <div>2</div>
-                                    <div>15$</div>
-                                </div>
-                                <div class="item-row">
-                                    <div>Cold Coffee</div>
-                                    <div>2</div>
-                                    <div>15$</div>
-                                </div>
+
+                                @foreach($order->products as $product)
+                                    <div class="item-row">
+                                        <div> {{$product->name}}</div>
+                                        <div>{{ $product->pivot->quantity}}</div>
+                                        <div>$ {{$product->pivot->price}}</div>
+                                        <div>
+                                            @foreach (json_decode($product->pivot->options, true) as $key => $value )
+                                                {{$value}}
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                @endforeach
+
+
                                 <div class="item-row">
                                     <div class="item-heading">Total</div>
                                     <div class="item-heading"></div>
-                                    <div class="item-heading">$30</div>
+                                    <div class="item-heading">$ {{$order->order_total}}</div>
                                 </div>
                             </div>
                             <div class="order-table">
                                 <h4>Transactions:</h4>
-                                <li>Store Name: <span class="text-default"> Fin Fresh Seafood Cafe</span></li>
-                                <li>Order Time & Date: <span class="text-default">December 15 11:17 AM</span></li>
+                                <li>Store Name: <span class="text-default">{{$order->vendor->shop_name}}</span></li>
+                                <li>Order Time & Date: <span
+                                        class="text-default">{{$order->created_at->format("F j, Y, g:i a")}}</span></li>
                                 <li>Order Type: <span class="text-default">Pickup</span></li>
-                                <li>Payment: <span class="text-default">Credit Card</span></li>
+                                {{--                                <li>Payment: <span class="text-default">Credit Card</span></li>--}}
                             </div>
                             <div class="order-table">
                                 <h4>Your Information:</h4>
-                                <li>Name: Glen Allen</li>
-                                <li>Phone Number: 0437223665 </li>
-                                <li>Email : <a href="">glena072@gmail.com</a></li>
+                                <li>Name: {{$order->user->name}}</li>
+                                <li>Phone Number: {{$order->user->phone}} </li>
+                                <li>Email : <a href="mailto:{{$order->user->email}}">{{$order->user->email}}</a></li>
                             </div>
                             <div class="order-table">
                                 <h4>Store Information:</h4>
-                                <li>Store: Fin Fresh Seafood Cafe</li>
-                                <li>Phone Number: 07 3880 0945 </li>
-                                <li>Address : 109 Landsborough Ave, SCARBOROUGH</li>
+                                <li>Store: {{$order->vendor->shop_name}}</li>
+                                <li>Phone Number: {{$order->vendor->phone}} </li>
+                                <li>Address : {{$order->vendor->address}}</li>
                             </div>
                             <div class="thank-you">
                                 <h4>Thank You!</h4>
-                                <p>Thank you for your choosing us. If you want to shop more <a href="#">click here</a></p>
+                                <p>Let us know your feedback</p>
                             </div>
                         </td>
                     </tr>
