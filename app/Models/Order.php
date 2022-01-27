@@ -91,19 +91,20 @@ class Order extends Model
                 'options' => json_encode($product->options)
             ]);
 
-            if ($activeCard->stamps->count() == $order->vendor->max_stamps) {
-                //max stamped
-                $activeCard->is_max_stamped = true;
-                $activeCard->is_active = false;
-                $activeCard->save();
-
-                //create another
-                $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
-            }
-
             for ($i = 0; $i < $product->qty; $i++) {
                 $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+
+                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
+                    //max stamped
+                    $activeCard->is_max_stamped = true;
+                    $activeCard->is_active = false;
+                    $activeCard->save();
+
+                    //create another
+                    $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
+                }
             }
+
         }
 
         return $order;
