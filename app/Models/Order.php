@@ -101,7 +101,9 @@ class Order extends Model
                 $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
             }
 
-            $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+            for ($i = 0; $i < $product->qty; $i++) {
+                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+            }
         }
 
         return $order;
