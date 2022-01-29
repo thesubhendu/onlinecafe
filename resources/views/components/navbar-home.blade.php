@@ -25,11 +25,17 @@
                             <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i> &nbsp; User
                                 Register</a>
                         @else
+
+                            @can('visit-backend')
+                                <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
+                            @endcan
+
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> logout</i>
+                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> Logout</i>
                                 </button>
                             </form>
+
                         @endguest
 
                     </div>
