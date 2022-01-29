@@ -28,6 +28,9 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
+            Menu::make('Back to Website')
+                ->icon('monitor')
+                ->route('home'),
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
