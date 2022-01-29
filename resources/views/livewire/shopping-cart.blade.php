@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col cart-totals-left alert alert-danger">
-                        Please note that payment will be required on collection from "(vendor name goes here)"
+                        Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
                     </div>
                 </div>
                 <div class="col-md-4"></div>
