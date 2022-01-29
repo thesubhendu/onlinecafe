@@ -2,8 +2,8 @@
     <x-breadcrumb></x-breadcrumb>
     <x-steps step="payment"></x-steps>
 
-    <section class="registration-steps">
 
+    <section class="registration-steps">
 
         <div class="container">
             <div class="row justify-content-center ">
@@ -11,7 +11,9 @@
                     <div class="card payment_form">
                         <div class="card-body">
                             @if($loader)
-                                <p>Processing Payment Please Wait!</p>
+                                <div class="loader-container">
+                                    <div class="loader text-center"></div>
+                                </div>
                             @endif
                             <div class="container py-3">
                                 <main>
