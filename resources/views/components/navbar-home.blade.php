@@ -112,7 +112,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href="{{route('cards.index')}}">
+                <a href="{{route('cart')}}">
                     <i class="fa fa-shopping-cart"></i>
                     Your Cart
 
