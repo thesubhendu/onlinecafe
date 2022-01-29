@@ -33,7 +33,9 @@
                 <i class="fa fa-coffee"></i>
             @endfor
 
+        @if($vendor->rating())
             <span>{{(int)$vendor->rating()}} </span>
+                @endif
         </div>
     </div>
 </div>
