@@ -1,7 +1,7 @@
 <x-guest-layout class="sigin-layout">
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <h3 class="text-center">Login</h3>
         </x-slot>
 
         <div class="card-body sigin-form">

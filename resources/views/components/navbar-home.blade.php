@@ -14,6 +14,8 @@
                 <div class="visible-xs mobile-nav">
                     <a href="{{ route('vendor-landing') }}" class="partner-with">Partner with Us</a>
                 </div>
+
+{{--                MOBILE Dropdown--}}
                 <div class="dropdown login-dropdown visible-xs mobile-nav">
                     <a data-bs-toggle="dropdown" class="user-thumbnail">
                         <img src="/assets/images/images.jpg" alt="">
@@ -29,12 +31,16 @@
                             @can('visit-backend')
                                 <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
                             @endcan
-
+                            <a class="dropdown-item"  href="{{route('orders.index')}}">
+                                My Orders
+                            </a>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> Logout</i>
                                 </button>
                             </form>
+
+
 
                         @endguest
 
@@ -63,6 +69,8 @@
                             <i class="ti-user"></i>
                         </a>
                     </li>
+
+{{--                    DESKTOP dropdown--}}
                     <li class="register">
                         <div class="dropdown login-dropdown">
                             <a data-bs-toggle="dropdown">
@@ -147,12 +155,7 @@
                     </a>
                 </div>
 
-                <div class="col">
-                    <a href="{{route('orders.index')}}">
-                        <i class="fa fa-first-order"></i>
-                        My Orders
-                    </a>
-                </div>
+
             @endguest
 
 
