@@ -92,7 +92,7 @@
                                     @endif
 
                                     <a class="dropdown-item" href="{{route('orders.index')}}">My Orders</a>
-                                    <a class="dropdown-item" href="{{route('user.likes')}}">My Favourite Vendors</a>
+                                    <a class="dropdown-item" href="{{route('user.likes')}}">My Cafes</a>
                                     <a class="dropdown-item" href="{{route('cards.index')}}">My Cards</a>
 
                                     @can('visit-backend')
@@ -132,26 +132,27 @@
                 </div>
 
             @else
-                <div class="col">
-                    <a href="{{route('cart')}}">
-                        <i class="fa fa-shopping-cart"></i>
-                        Your Cart
+                @if (Cart::count())
+                    <div class="col">
+                        <a href="{{route('cart')}}">
+                            <i class="fa fa-shopping-cart"></i>
+                            Your Cart
 
-                        @if (Cart::count())
-                            <span class="badge bg-success">{{ Cart::count() }}</span>
-                        @endif
-                    </a>
-                </div>
+                                <span class="badge bg-success">{{ Cart::count() }}</span>
+                        </a>
+                    </div>
+                @endif
+
                 <div class="col">
                     <a href="{{route('user.likes')}}">
                         <i class="fa fa-coffee"></i>
-                        Favourites
+                        My cafes
                     </a>
                 </div>
                 <div class="col">
                     <a href="{{ route('cards.index') }}">
                         <i class="fa fa-credit-card"></i>
-                        Cards
+                        My cards
                     </a>
                 </div>
 
