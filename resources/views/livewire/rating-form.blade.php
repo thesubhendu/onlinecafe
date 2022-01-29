@@ -21,6 +21,23 @@
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
         @error('rating') <span class="text-danger">{{ $message }}</span> @enderror
     </form>
+
+    <div class="mt-3">
+        <h5>Comments</h5>
+
+        <ul>
+            @forelse($vendor->ratings as $rating)
+                <li>
+                    user: {{$rating->author->name}} <br>
+                    rating: {{$rating->rating}} <br>
+                    Comment: {{$rating->comment}}
+                </li>
+            @empty
+                <li>No Comments yet</li>
+            @endforelse
+        </ul>
+    </div>
+
     @push('scripts')
         <script>
 
