@@ -22,11 +22,29 @@
                                     <input class="form-control" type="text" wire:model.lazy="form.shop_name">
                                     @error('form.shop_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+
+                                <div class="form-group col-lg-6 col-sm-12">
+                                    <label for="email" class="form-label"> Email</label>
+                                    <input type="email" class="form-control" wire:model.lazy="form.shop_email"
+                                           placeholder="Email">
+                                    @error('shop_email') <span class="text-danger">{{ $message }}</span> @enderror
+
+                                </div>
+
+                                <div class="form-group col-lg-6 col-sm-12 mb-5">
+                                    <label for="mobile" class="form-label"> Mobile</label>
+                                    <input type="text" class="form-control" wire:model.lazy="form.shop_mobile"
+                                           placeholder="Phone No ">
+                                    @error('shop_mobile') <span class="text-danger">{{ $message }}</span> @enderror
+
+                                </div>
+
                                 <div class="form-group">
                                     <label for="form.description" class="form-label">Description</label>
                                     <textarea class="form-control" wire:model.lazy="form.description"> </textarea>
                                     @error('form.description') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+
 
                                 <div class="form-group">
                                     <label for="form.address" class="form-label">Address</label>

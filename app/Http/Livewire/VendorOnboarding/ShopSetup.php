@@ -22,6 +22,8 @@ class ShopSetup extends Component
     public $logo;
     public $form = [
         'shop_name',
+        'shop_email',
+        'shop_mobile',
         'description',
         'opening_hours',
         'max_stamps',
@@ -62,6 +64,8 @@ class ShopSetup extends Component
 
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
+            $this->form['shop_email'] = $vendor->shop_email;
+            $this->form['shop_mobile'] = $vendor->shop_mobile;
             $this->form['description'] = $vendor->description;
             $this->form['address'] = $vendor->address;
             $this->form['max_stamps'] = $vendor->max_stamps;
@@ -78,6 +82,8 @@ class ShopSetup extends Component
     {
         $this->validate([
             'form.shop_name' => 'required',
+            'form.shop_email' => 'email|required|unique:vendors,shop_email',
+            'form.shop_mobile' => 'digits:10|required|unique:vendors,shop_mobile',
             'form.opening_hours' => 'required',
             'form.address' => 'required',
         ]);
