@@ -69,9 +69,11 @@
                     </div>
                 </div>
                 @auth
-                <span class="like-btn">
-                <livewire:vendor-like-button :vendor="$vendor"/>
-                </span>
+
+{{--            todo Sudesh -> design issue on mobile, show it in top banner as button instead of floating icon--}}
+{{--                <span class="like-btn">--}}
+{{--                <livewire:vendor-like-button :vendor="$vendor"/>--}}
+{{--                </span>--}}
                 @endauth
             </div>
         </div>
