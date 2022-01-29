@@ -111,35 +111,51 @@
 <div class="bottom-bar visible-md">
     <div class="container">
         <div class="row">
-            <div class="col">
-                <a href="{{route('cart')}}">
-                    <i class="fa fa-shopping-cart"></i>
-                    Your Cart
+            @guest
+                <div class="col">
+                    <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp;
+                         Login</a>
 
-                    @if (Cart::count())
-                        <span class="badge bg-success">{{ Cart::count() }}</span>
-                    @endif
-                </a>
-            </div>
-            <div class="col">
-                <a href="{{route('user.likes')}}">
-                    <i class="fa fa-coffee"></i>
-                    Favourites
-                </a>
-            </div>
-            <div class="col">
-                <a href="{{ route('cards.index') }}">
-                    <i class="fa fa-credit-card"></i>
-                    Cards
-                </a>
-            </div>
+                </div>
 
-            <div class="col">
-                <a href="{{route('orders.index')}}">
-                    <i class="fa fa-first-order"></i>
-                    My Orders
-                </a>
-            </div>
+                <div class="col">
+                    <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>
+                        &nbsp;  Register</a>
+                </div>
+
+            @else
+                <div class="col">
+                    <a href="{{route('cart')}}">
+                        <i class="fa fa-shopping-cart"></i>
+                        Your Cart
+
+                        @if (Cart::count())
+                            <span class="badge bg-success">{{ Cart::count() }}</span>
+                        @endif
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="{{route('user.likes')}}">
+                        <i class="fa fa-coffee"></i>
+                        Favourites
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="{{ route('cards.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        Cards
+                    </a>
+                </div>
+
+                <div class="col">
+                    <a href="{{route('orders.index')}}">
+                        <i class="fa fa-first-order"></i>
+                        My Orders
+                    </a>
+                </div>
+            @endguest
+
+
         </div>
     </div>
 </div>
