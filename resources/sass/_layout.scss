@@ -2,11 +2,10 @@ body {
     font-family: $font;
 }
 
-.visible-xs, .visible-md {
-    display: none  !important;
+.visible-xs,
+.visible-md {
+    display: none !important;
 }
-
-
 
 // BUTTON
 .btn {
@@ -38,7 +37,7 @@ button {
     color: #fff;
     color: #fff;
 }
-.btn-action{
+.btn-action {
     background: $secondary;
     color: #fff;
 }
@@ -342,7 +341,9 @@ a {
                 padding: 0 !important;
             }
         }
-        .dropdown-item, .dropdown-item:hover, .dropdown-item:focus {
+        .dropdown-item,
+        .dropdown-item:hover,
+        .dropdown-item:focus {
             color: #484848 !important;
             border-bottom: 1px solid #d7d7d7;
             padding: 3px 12px !important;
@@ -352,7 +353,8 @@ a {
                 border: none;
             }
         }
-        .dropdown-item.active, .dropdown-item:active {
+        .dropdown-item.active,
+        .dropdown-item:active {
             background-color: #e9ecef !important;
         }
     }
@@ -463,7 +465,7 @@ a {
                 border-top-left-radius: 8px;
                 border-top-right-radius: 8px;
             }
-            .fa-coffee{
+            .fa-coffee {
                 width: 40px;
                 height: 40px;
                 background: #151618a1;
@@ -517,15 +519,15 @@ a {
                 // }
             }
         }
-        .service-item{
+        .service-item {
             white-space: nowrap;
             overflow: hidden;
             text-transform: uppercase;
-            letter-spacing: .5px;
+            letter-spacing: 0.5px;
             font-weight: 600 !important;
             font-size: 13px !important;
         }
-        .service-badge{
+        .service-badge {
             background: #e7e7e7eb;
             padding: 5px 10px;
             border-radius: 300px;
@@ -580,7 +582,8 @@ a {
         display: block;
     }
 
-    h6, p {
+    h6,
+    p {
         color: #5d5d5d;
         font-family: $font;
     }
@@ -655,7 +658,7 @@ a {
         }
         i {
             color: #a9a9a9;
-             margin-right: 8px;
+            margin-right: 8px;
         }
         i.selected {
             color: $primary;
@@ -695,32 +698,31 @@ a {
                     font-size: 14px;
                 }
             }
-            .last-update{
+            .last-update {
                 font-size: 12px;
                 color: #d3d3d3;
                 font-weight: 500;
             }
         }
     }
-    .like-btn i {
-        width: 65px;
-        height: 60px;
-        line-height: 60px;
-        border-top-left-radius: 8px;
-        position: fixed;
-        right: -2px;
-        border-bottom-left-radius: 8px;
-        border: 2px solid;
-        z-index: 1000;
-    }
-    .like-btn{
-        .normal{
+    .like-btn {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        .normal {
             border-color: #e3e3e9;
-            background:#fff;
+            background: #fff;
             color: #999;
         }
-        .liked{
-            border-color: $primary
+        .liked {
+            border-color: $primary;
+        }
+        i {
+            height: 58px !important;
+            line-height: 58px !important;
+            border-radius: 8px;
+            margin-left: 5px;
+            width: 50px;
         }
     }
 }
@@ -737,12 +739,12 @@ a {
         .content {
             padding: 1rem;
             display: block;
-            .product-image{
+            .product-image {
                 width: 20%;
                 vertical-align: top;
                 display: inline-block;
                 margin: 0;
-                img{
+                img {
                     border-radius: 8px;
                     width: 100%;
                     height: 85px;
@@ -751,7 +753,7 @@ a {
                     margin-top: 10px;
                 }
             }
-            .details{
+            .details {
                 vertical-align: top;
                 width: 79%;
                 display: inline-block;
@@ -765,7 +767,7 @@ a {
                         font-weight: 500;
                     }
                 }
-                .menu-card-footer{
+                .menu-card-footer {
                     padding-top: 10px;
                 }
                 .shop-btn {
@@ -778,7 +780,7 @@ a {
                     color: #c36813;
                     font-weight: 500;
                     font-size: 13px;
-                    &:hover{
+                    &:hover {
                         background: $secondary;
                         color: #fff;
                         border: 1px solid $secondary;
@@ -791,7 +793,7 @@ a {
             }
         }
     }
- }
+}
 
 // <!--- SHOP LANDING PAGE FOR GUEST ----->
 
@@ -822,7 +824,7 @@ a {
 // LANDING PAGE / WELCOME CONTENT
 .welcome-content {
     padding: 80px 0;
-    background: url('~/assets/images/bg-wave.svg') left no-repeat #ffffff;
+    background: url("~/assets/images/bg-wave.svg") left no-repeat #ffffff;
     background-attachment: fixed;
     h2 {
         color: $primary;
@@ -838,7 +840,7 @@ a {
 // LANDING PAGE / NEAR SHOP
 .near-shop {
     padding: 70px 0;
-    background: url('~/assets/images/bg-wave.svg') left no-repeat #fcfcfc;
+    background: url("~/assets/images/bg-wave.svg") left no-repeat #fcfcfc;
     background-attachment: fixed;
     .featured-box-mini {
         margin-top: 25px;
@@ -878,7 +880,7 @@ a {
 // LANDING PAGE / WE PROVIDE
 .we-provide {
     padding-top: 50px;
-    background: url('~/assets/images/bg-wave.svg') left no-repeat #fff;
+    background: url("~/assets/images/bg-wave.svg") left no-repeat #fff;
     background-attachment: fixed;
 
     .icon-box {
@@ -897,7 +899,7 @@ a {
         }
         .icon-image {
             text-align: center;
-            img{
+            img {
                 width: 50px;
             }
         }
@@ -922,13 +924,11 @@ section.call-to-action {
     }
 }
 
-
 // <! ------------ VENDOR REGISTRATION BEGORE LANDING PAGE //---------------------->
-
 
 // BEFORE VENDER REGISTRATION LANDING PAGE / BANNER
 .vendor-before {
-    background: url('~/assets/images/people.jpg') no-repeat;
+    background: url("~/assets/images/people.jpg") no-repeat;
     background-position: 50% 24%;
     .btn-get-started {
         display: block;
@@ -974,7 +974,7 @@ section.our-features {
 }
 
 // BEFORE VENDER REGISTRATION LANDING PAGE / GET STARTED BANNER
-.get-start-banner{
+.get-start-banner {
     background: url("~/assets/images/bg-wave.svg") left no-repeat $extra;
     padding: 40px 0;
     text-align: center;
@@ -982,7 +982,7 @@ section.our-features {
     h3 {
         margin-bottom: 2rem;
     }
-    input{
+    input {
         display: inline-block;
         border-radius: 0;
         min-height: 50px;
@@ -1080,20 +1080,21 @@ section.profile-content-details {
 }
 
 // MY OARDERS / FAVORITE VENDOR
-.my-orders, .favorite-vendor{
-    padding : 60px 0;
+.my-orders,
+.favorite-vendor {
+    padding: 60px 0;
     background: #fafbff;
     min-height: 100vh;
-    h3{
+    h3 {
         font-weight: bold;
     }
 }
-.my-orders{
-    table{
+.my-orders {
+    table {
         background: #fff;
     }
 }
-.favorite-vendor{
+.favorite-vendor {
     background: #fafbff;
     min-height: 100vh;
     .product-image {
@@ -1111,7 +1112,6 @@ section.profile-content-details {
     }
 }
 
-
 // FOOTER
 .footer {
     background: #c36813;
@@ -1124,7 +1124,7 @@ section.profile-content-details {
         font-family: $font;
         text-transform: uppercase;
         letter-spacing: 1px;
-        font-weight:bold;
+        font-weight: bold;
     }
     a {
         color: #fff;
@@ -1207,13 +1207,14 @@ section.profile-content-details {
     opacity: 0;
     opacity: 1;
 }
-.owl-carousel .owl-prev, .owl-carousel .owl-next{
+.owl-carousel .owl-prev,
+.owl-carousel .owl-next {
     position: absolute;
 }
-.owl-carousel .owl-prev{
+.owl-carousel .owl-prev {
     left: -10px;
 }
-.owl-carousel .owl-next{
+.owl-carousel .owl-next {
     right: -10px;
 }
 .owl-carousel .owl-nav span {
@@ -1228,14 +1229,13 @@ section.profile-content-details {
     border: 3px solid $primary;
 }
 
-
 // MY COFFEES
-.my-coffees{
-    background:  #fafbff;
+.my-coffees {
+    background: #fafbff;
     padding: 60px 0;
     height: 100vh;
-    .vendor-logo{
-        display: inline-block
+    .vendor-logo {
+        display: inline-block;
     }
     .vendor-title {
         display: inline-block;
@@ -1249,17 +1249,17 @@ section.profile-content-details {
 }
 
 // PAY FORWARD FORM
-.pay-forward-form{
-    label{
+.pay-forward-form {
+    label {
         display: block;
         font-weight: 500;
         margin-bottom: 10px;
     }
-    input{
+    input {
         display: inline-block;
-        width:80%;
+        width: 80%;
     }
-    .btn{
+    .btn {
         display: inline;
     }
 }
@@ -1285,10 +1285,10 @@ section.profile-content-details {
             font-weight: bold;
             padding: 8px 0;
         }
-        .remember-me{
+        .remember-me {
             font-weight: normal !important;
         }
-        .forgot-password{
+        .forgot-password {
             justify-content: space-between;
             div {
                 display: inline-block;
@@ -1296,7 +1296,7 @@ section.profile-content-details {
                 font-size: 12px !important;
             }
         }
-        .register-btn{
+        .register-btn {
             width: 100%;
             font-weight: bold;
             border: 1px solid #ccc;
@@ -1321,4 +1321,42 @@ section.profile-content-details {
 .control-btn input#number {
     width: 59px;
     text-align: center;
+}
+
+// COMMENTS
+.comment-section {
+    text-align: left;
+    h5 {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .comments {
+        padding: 0;
+        list-style: none;
+        margin: 0;
+        li {
+            border: 1px solid #eee;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            .user-name {
+                color: #6b6b6b;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .rating {
+                color: $primary;
+                float: right;
+                font-weight: bold;
+                font-size: 12px;
+                i{
+                    color: $primary;
+                }
+            }
+            .comment {
+                font-size: 14px;
+            }
+        }
+    }
 }

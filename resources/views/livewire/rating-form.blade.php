@@ -22,18 +22,18 @@
         @error('rating') <span class="text-danger">{{ $message }}</span> @enderror
     </form>
 
-    <div class="mt-3">
-        <h5>Comments</h5>
+    <div class="mt-3 comment-section">
+        <h5>Comments (1) </h5>
 
-        <ul>
+        <ul class="comments">
             @forelse($vendor->ratings as $rating)
-                <li>
-                    user: {{$rating->author->name}} <br>
-                    rating: {{$rating->rating}} <br>
-                    Comment: {{$rating->comment}}
+                <li class="comment-list">
+                   <span class="user-name"> <i class="fa fa-user"></i> {{$rating->author->name}} </span>
+                   <span class="rating">{{$rating->rating}} <i class="fa fa-coffee"></i> </span>
+                    <div class="comment">{{$rating->comment}}</div>
                 </li>
             @empty
-                <li>No Comments yet</li>
+                <li class="no-comment">No Comments yet</li>
             @endforelse
         </ul>
     </div>

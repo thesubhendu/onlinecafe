@@ -1,5 +1,5 @@
 <div>
-    <a href="#" wire:click.prevent="toggleLike">
+    <a href="#" wire:click.prevent="toggleLike" class="like-btn">
         @if ($vendor->isFavorited())
             <i class="fa fa-coffee liked" style="background-color: #e28936; color:white"></i>
         @else
