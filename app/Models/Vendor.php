@@ -14,6 +14,7 @@ class Vendor extends Model
     protected $guarded = ['owner_id'];
     protected $casts = [
         'opening_hours' => 'array',
+        'services' => 'array',
     ];
 
     public function user()

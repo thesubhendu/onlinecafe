@@ -35,6 +35,7 @@ class CreateVendorsTable extends Migration
             $table->string('shop_name', 60)->nullable();
             $table->text('description')->nullable();
             $table->json('opening_hours')->nullable();
+            $table->json('services')->nullable();
 
             $table->integer('max_stamps')->nullable();
             $table->string('free_product')->nullable();

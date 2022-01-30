@@ -172,6 +172,18 @@
                                     </div>
                             </div>
 
+                            <section class="mb-4">
+                                <h2 class="title">Services</h2>
+                                <div class="row">
+                                    @foreach ($services as $index => $service)
+                                        <div class="col">
+                                            <input type="checkbox" class="form-check-input" wire:model="form.services.{{$service}}" >
+                                            <label for="">{{$service}}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </section>
+
                             <button type="submit" class="btn btn-success mt-2 px-5">Setup</button>
                         </form>
                     </div>

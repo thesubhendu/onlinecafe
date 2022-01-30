@@ -32,12 +32,15 @@ class ShopSetup extends Component
         'address',
         'lat',
         'lng',
+        'services'
     ];
     public $openingHoursOptions = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     public $menus;
     public $options;
+
+    public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
 
     public $listeners = ['markerPositionChanged', 'addressChanged'];
 
@@ -68,12 +71,19 @@ class ShopSetup extends Component
             $this->form['shop_mobile'] = $vendor->shop_mobile;
             $this->form['description'] = $vendor->description;
             $this->form['address'] = $vendor->address;
+            $this->form['lat'] = $vendor->lat;
+            $this->form['lng'] = $vendor->lng;
             $this->form['max_stamps'] = $vendor->max_stamps;
             $this->form['free_product'] = $vendor->free_product;
             $this->form['get_free'] = $vendor->get_free;
 
             if ($vendor->opening_hours) {
                 $this->form['opening_hours'] = $vendor->opening_hours;
+                $services = [];
+                foreach ($vendor->services as $s) {
+                    $services[$s] = true;
+                }
+                $this->form['services'] = $services;
             }
         }
     }
@@ -100,8 +110,9 @@ class ShopSetup extends Component
             'description' => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
             'address' => $this->form['address'],
-            'lat' => $this->form['lat'],
+            'lat' => $this->form['lat'] ,
             'lng' => $this->form['lng'],
+            'services'=> collect($this->form['services'])->filter(fn($val, $key) => $val)->keys()->toArray()
         ]);
 
         if (!empty($this->logo)) {
