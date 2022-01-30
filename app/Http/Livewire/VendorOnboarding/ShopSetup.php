@@ -41,9 +41,18 @@ class ShopSetup extends Component
     public $options;
 
     public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
+    public $newService;
 
     public $listeners = ['markerPositionChanged', 'addressChanged'];
 
+    public function addService()
+    {
+        if(!$this->newService){
+            return ;
+        }
+        array_push($this->services, $this->newService);
+        $this->newService = '';
+    }
     public function mount()
     {
         $this->makeOpeningHoursOptions();
@@ -82,6 +91,9 @@ class ShopSetup extends Component
                 $services = [];
                 foreach ($vendor->services as $s) {
                     $services[$s] = true;
+                    if(!in_array($s,$this->services)){
+                        $this->services[] = $s;
+                    }
                 }
                 $this->form['services'] = $services;
             }
@@ -92,8 +104,8 @@ class ShopSetup extends Component
     {
         $this->validate([
             'form.shop_name' => 'required',
-            'form.shop_email' => 'email|required|unique:vendors,shop_email',
-            'form.shop_mobile' => 'digits:10|required|unique:vendors,shop_mobile',
+            'form.shop_email' => 'email|required',
+            'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.address' => 'required',
         ]);
@@ -107,6 +119,8 @@ class ShopSetup extends Component
 
         $vendor->update([
             'shop_name' => $this->form['shop_name'],
+            'shop_email' => $this->form['shop_email'],
+            'shop_mobile' => $this->form['shop_mobile'],
             'description' => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
             'address' => $this->form['address'],

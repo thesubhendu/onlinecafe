@@ -27,7 +27,7 @@
                                     <label for="email" class="form-label"> Email</label>
                                     <input type="email" class="form-control" wire:model.lazy="form.shop_email"
                                            placeholder="Email">
-                                    @error('shop_email') <span class="text-danger">{{ $message }}</span> @enderror
+                                    @error('form.shop_email') <span class="text-danger">{{ $message }}</span> @enderror
 
                                 </div>
 
@@ -35,7 +35,7 @@
                                     <label for="mobile" class="form-label"> Mobile</label>
                                     <input type="text" class="form-control" wire:model.lazy="form.shop_mobile"
                                            placeholder="Phone No ">
-                                    @error('shop_mobile') <span class="text-danger">{{ $message }}</span> @enderror
+                                    @error('form.shop_mobile') <span class="text-danger">{{ $message }}</span> @enderror
 
                                 </div>
 
@@ -181,6 +181,13 @@
                                             <label for="">{{$service}}</label>
                                         </div>
                                     @endforeach
+                                      <div class="col">
+                                          <input type="text" class="form-control" placeholder="add new service" wire:model="newService">
+                                      </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-primary btn-sm" wire:click="addService">Add</button>
+
+                                    </div>
                                 </div>
                             </section>
 
