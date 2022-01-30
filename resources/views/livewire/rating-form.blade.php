@@ -23,7 +23,7 @@
     </form>
 
     <div class="mt-3 comment-section">
-        <h5>Comments (1) </h5>
+        <h5>Reviews ({{$vendor->ratings->count()}}) </h5>
 
         <ul class="comments">
             @forelse($vendor->ratings as $rating)

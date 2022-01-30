@@ -7,7 +7,7 @@
             <div class="row text-center banner-content">
                 <h2>{{$vendor->shop_name ?? $vendor->vendor_name}}
 
-                
+
                 </h2>
                 <p><i class="fa fa-map-marker"></i> {{$vendor->address}}, {{$vendor->suburb}}
                     , {{$vendor->state}}, {{$vendor->pc}}</p>
@@ -66,7 +66,9 @@
                                         </div>
 
                                     </div>
-                                    <livewire:vendor-like-button :vendor="$vendor"/>
+                                    <span title="Like the vendor">
+                                         <livewire:vendor-like-button :vendor="$vendor" />
+                                    </span>
                                 </div>
                             @endif
 
