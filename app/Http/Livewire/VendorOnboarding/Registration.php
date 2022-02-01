@@ -21,7 +21,6 @@ class Registration extends Component
     public $state;
     public $cardstamps;
     public $agreement;
-    public $is_pet_friendly;
 
     protected $shop;
 
@@ -58,7 +57,6 @@ class Registration extends Component
 //            'cardstamps'       => $vendor->cardstamps,
             'state'            => $vendor->state,
             'abn'              => $vendor->abn,
-            'is_pet_friendly'  => $vendor->is_pet_friendly,
         ];
     }
 
@@ -74,7 +72,6 @@ class Registration extends Component
             'suburb'           => 'required',
             'pc'               => 'required',
             'agreement'        => 'required',
-            'is_pet_friendly'  => 'required',
         ];
 
         if ( ! auth()->user()->shop) {

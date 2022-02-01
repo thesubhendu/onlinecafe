@@ -98,17 +98,7 @@
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-lg-2 col-sm-12 mb-3">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" wire:model="is_pet_friendly"
-                                                   checked> &nbsp;
-                                            Is Pet Friendly
-                                        </label>
 
-                                        @error('is_pet_friendly') <span
-                                            class="text-danger">{{ $message }}</span> @enderror
-
-                                    </div>
                                     <div class="col-lg-3 col-sm-12 mb-4">
                                         <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox"
                                                wire:model="agreement">
