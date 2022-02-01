@@ -21,8 +21,8 @@ class CreateVendorsTable extends Migration
             $table->string('contact_lastname');
             $table->string('email')->unique();
             $table->string('mobile')->unique();
-            $table->string('shop_email')->unique();
-            $table->string('shop_mobile')->unique();
+            $table->string('shop_email')->unique()->nullable();
+            $table->string('shop_mobile')->unique()->nullable();
             $table->string('address');
             $table->string('suburb')->nullable();
             $table->string('pc');
