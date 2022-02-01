@@ -20,6 +20,7 @@
 
     <x-validation-errors></x-validation-errors>
     <x-message></x-message>
+    <x-navbar-home></x-navbar-home>
 
     {{ $slot }}
     </body>
