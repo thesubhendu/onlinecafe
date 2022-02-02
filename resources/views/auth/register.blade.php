@@ -68,7 +68,7 @@
                     <x-jet-button class="mb-2">
                         {{ __('Register') }}
                     </x-jet-button>
-                    <a class="text-muted me-3 text-decoration-none register-btn text-center" href="{{ route('login') }}">
+                    <a class="me-3 register-btn text-center" href="{{ route('login') }}">
                         {{ __('Already registered?') }}
                     </a>
                 </div>

@@ -52,7 +52,7 @@
                         <x-jet-button class="mb-2">
                             {{ __('Log in') }}
                         </x-jet-button>
-                        <a class=" text-center register-btn text-primary" href="{{ route('register') }}">
+                        <a class=" text-center register-btn " href="{{ route('register') }}">
                             {{ __('Create New Account') }}
                         </a>
                     </div>
