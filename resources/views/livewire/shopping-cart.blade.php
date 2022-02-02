@@ -106,6 +106,7 @@
                 @endforeach
 
             </div>
+        @if($items->first())
 
             <!-- CART TOTAL -->
             <div class="row">
@@ -195,7 +196,7 @@
 
                 </div>
             </div>
-
+        @endif
         </div>
     </section>
 

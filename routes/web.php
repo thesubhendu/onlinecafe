@@ -4,10 +4,8 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PhoneVerificationController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RedeemFreeCoffeeController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\VendorController;
@@ -71,9 +69,6 @@ Route::middleware('auth')->group(function() {
 
     Route::get('orders', MyOrders::class)->name('orders.index');
 
-    Route::resource('/orders', OrderController::class, ['except' => 'create'])->names([
-        'store' => 'order.store',
-    ])->only('store');
 
     Route::get('/order-submitted/{order}',
         \App\Http\Livewire\OrderSubmitted::class)->name('order.submitted'); //status displaying page
