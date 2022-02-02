@@ -96,12 +96,20 @@ class Registration extends Component
 
         }
         // check if valid business (ABN check)
-        $isValid = (new AbnChecker($this->abn))->isValidBusiness();
+        $abnService = (new AbnChecker($this->abn));
+
+        $isValid = $abnService->isValidBusiness();
 
         if ( ! $isValid) {
             session()->flash('error', "Not Valid ABN. Please enter correct ABN/ASIC and try again");
 
             return response()->json(['error' => 'Not Valid ABN'], 422);
+        }
+        $isValidBusinessName = $abnService->isValidBusinessName($this->vendor_name);
+
+        if ( ! $isValidBusinessName) {
+            session()->flash('error', "Invalid Business Name. Please enter correct Business Name and try again");
+            return response()->json(['error' => 'Invalid Business Name'], 422);
         }
 
         $authUser = auth()->user();
