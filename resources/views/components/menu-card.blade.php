@@ -19,30 +19,17 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        @guest
-                            <div class="add">
-                                <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
-                                <i class="fa fa-coffee"></i>
-                            </a>
-                        </div>
-                        @endguest
-                        @if(auth()->check() && auth()->id() != $product->vendor->owner_id)
+                        @can('make-order')
                         <div class="add">
                             <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
                                 <i class="fa fa-coffee"></i>
                             </a>
                         </div>
-                        @endif
+                        @endcan
                     </div>
                 </div>
             </div>
-            {{-- @can('make-order')--}}
-            <!-- <div class="add">
-                <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
-                    <i class="fa fa-coffee"></i>
-                </a>
-            </div> -->
-            {{-- @endcan--}}
+
         </div>
     </div>
 </div>

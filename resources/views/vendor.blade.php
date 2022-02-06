@@ -35,7 +35,7 @@
                                 </div>
                             </div>
 
-                            @if(auth()->check() && auth()->id() != $vendor->owner_id)
+                            @can('make-order')
                                 <div class="col">
                                     <div class="rate-btn">
                                         <!-- Button trigger modal -->
@@ -70,18 +70,12 @@
                                          <livewire:vendor-like-button :vendor="$vendor" />
                                     </span>
                                 </div>
-                            @endif
+                            @endcan
 
                         </div>
                     </div>
                 </div>
-                @auth
 
-{{--            todo Sudesh -> design issue on mobile, show it in top banner as button instead of floating icon--}}
-{{--                <span class="like-btn">--}}
-{{--                <livewire:vendor-like-button :vendor="$vendor"/>--}}
-{{--                </span>--}}
-                @endauth
             </div>
         </div>
     </section>

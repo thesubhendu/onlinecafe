@@ -46,7 +46,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('make-order', function (User $user) {
-            return $user->hasAccess('make-order');
+            return  !$user->shop;
         });
 
     }
