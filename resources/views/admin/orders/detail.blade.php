@@ -12,9 +12,11 @@
                 Created At : {{$order->created_at->diffForHumans()}}
             </div>
 
-            <div class="col-sm">
-                Confirmed At : {{$order->confirmed_at->diffForHumans()}}
-            </div>
+            @if(!empty($order->confirmed_at))
+                <div class="col-sm">
+                    Confirmed At : {{$order->confirmed_at->diffForHumans()}}
+                </div>
+            @endif
         </div>
     </div>
 

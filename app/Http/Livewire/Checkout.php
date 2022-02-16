@@ -65,7 +65,7 @@ class Checkout extends Component
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
         //todo: ask if need to send to owner or vendor email
-        Mail::to($order->vendor->email)
+        Mail::to($order->vendor->shop_email ?? $order->vendor->email)
             ->send(new orderSubmitted($order, $confirm_url));
 
 //        \App\Events\OrderSubmitted::dispatch($order);
