@@ -40,17 +40,50 @@ class AbnChecker
             return false;
         }
     }
-    public function isValidBusinessName($businessName) : bool
+    public function isValidBusinessName($enteredName) : bool
     {
         try {
-            $actualBusinessName = $this->abnResponse['businessName']['organisationName'];
+            $organisationName = $this->abnResponse['businessName']['organisationName'] ?? null;
 
-            if(strtolower(trim($actualBusinessName)) != strtolower(trim($businessName))) {
-                return false;
+            if ($organisationName && $this->isMatching($organisationName, $enteredName)) {
+                return true;
             }
-            return true;
+
+            $mainName = $this->abnResponse['mainName']['organisationName'] ?? null;
+
+            if ($mainName && $this->isMatching($mainName, $enteredName)) {
+                return true;
+            }
+
+            $legalName = $this->abnResponse['legalName'] ?? null;
+
+            if ($legalName) {
+                $firstName = $legalName['givenName'];
+                $middleName = $legalName['otherGivenName'];
+                $lastName = $legalName['familyName'];
+                $soleBusinessName = $firstName;
+                if ($middleName) {
+                    $soleBusinessName .= ' ' . $middleName;
+                }
+                $soleBusinessName .= ' ' . $lastName;
+
+                if ($this->isMatching($soleBusinessName, $enteredName)) {
+                    return true;
+                }
+            }
+            return false;
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+
+    protected function isMatching(string $actualName, string $enteredName): bool
+    {
+        if(strtolower(trim($actualName)) == strtolower(trim($enteredName))) {
+            return true;
+        }
+
+        return false;
     }
 }
