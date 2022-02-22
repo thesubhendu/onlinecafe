@@ -45,10 +45,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('platform.systems.roles');
         });
 
-        Gate::define('make-order', function (?User $user) {
-            if(!$user) {
-                return true;
-            }
+        Gate::define('make-order', function (User $user) {
             return  !$user->shop;
         });
 

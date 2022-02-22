@@ -21,54 +21,50 @@
                             <div class="col">
                                 <div class="shop-rating">
                                     <div class="xs-block">
-                                        @for($i=0; $i < round($vendor->rating()); $i++)
-                                            <i class="fa fa-coffee selected"></i>
-                                        @endfor
-                                        @for($i=0; $i< 5 - round($vendor->rating()); $i++)
-                                            <i class="fa fa-coffee"></i>
-                                        @endfor
-                                        <span><b>{{$vendor->rating()}}</b></span>
+                                        @can('make-order')
+                                            <livewire:rating-star :vendor="$vendor"/>
+                                        @endcan
+
+                                        @cannot('make-order')
+                                                @for($i=0; $i < round($vendor->rating()); $i++)
+                                                    <i class="fa fa-coffee selected"></i>
+                                                @endfor
+                                                @for($i=0; $i< 5 - round($vendor->rating()); $i++)
+                                                    <i class="fa fa-coffee"></i>
+                                                @endfor
+                                                <span><b>{{$vendor->rating()}}</b></span>
+
+                                            @endcannot
                                     </div>
                                     <div class="xs-block last-update">Last
                                         Update: {{$vendor->updated_at->diffForHumans()}}
                                     </div>
                                 </div>
+                                @can('make-order')
+                                    <span title="Like cafe" >
+                                             <livewire:vendor-like-button :vendor="$vendor" />
+                                    </span>
+                                @endcan
                             </div>
 
                             @can('make-order')
-                                <div class="col">
-                                    <div class="rate-btn">
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#rating-form-modal">
-                                            Rate Cafe
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="rating-form-modal"
-                                             aria-labelledby="rating-form-modal"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Rate the
-                                                            vendor</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <livewire:rating-form :vendor="$vendor"/>
-
-                                                    </div>
-
-                                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="rating-form-modal"
+                                     aria-labelledby="rating-form-modal"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Rate the
+                                                    vendor</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                             </div>
-                                        </div>
-
+                                            <div class="modal-body">
+                                                <livewire:rating-form :vendor="$vendor"/>
+                                            </div>
                                     </div>
-                                    <span title="Like cafe">
-                                         <livewire:vendor-like-button :vendor="$vendor" />
-                                    </span>
+
                                 </div>
                             @endcan
 
@@ -131,3 +127,12 @@
     <x-footer></x-footer>
 
 </x-app-layout>
+
+    <script>
+        Livewire.on('ratingSet', id => {
+            var myModal = new bootstrap.Modal(document.getElementById('rating-form-modal'), {
+                keyboard: false
+            })
+            myModal.toggle()
+        })
+    </script>

@@ -8,7 +8,6 @@ use Livewire\Component;
 class RatingForm extends Component
 {
     public $vendor;
-    public $rating;
     public $comment = '';
 
     public function mount(Vendor $vendor)
@@ -18,11 +17,9 @@ class RatingForm extends Component
 
     public function submit()
     {
-        $this->validate([
-            'rating' => ['required', 'in:1,2,3,4,5']
-        ]);
+        $currentRating = $this->vendor->ratings()->where(['user_id' => auth()->id()])->first();
 
-        $this->vendor->rate($this->rating, null, $this->comment);
+        $this->vendor->rate($currentRating->rating, null, $this->comment);
 
         session()->flash('message', 'Rated Successfully!');
         $this->emit('rated');
