@@ -41,7 +41,7 @@
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#rating-form-modal">
-                                            Rate the vendor
+                                            Rate Cafe
                                         </button>
 
                                         <!-- Modal -->
@@ -66,7 +66,7 @@
                                         </div>
 
                                     </div>
-                                    <span title="Like the vendor">
+                                    <span title="Like cafe">
                                          <livewire:vendor-like-button :vendor="$vendor" />
                                     </span>
                                 </div>

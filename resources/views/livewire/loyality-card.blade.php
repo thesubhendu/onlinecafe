@@ -15,7 +15,7 @@
         <div class="row mb-4">
             <div class="col-md-12 m-0 p-0 ">
                 <div class="content-heading">
-                    <h3 class="title">My Cards</h3>
+                    <h3 class="title">My loyalty</h3>
                 </div>
             </div>
         </div>
