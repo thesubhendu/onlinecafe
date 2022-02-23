@@ -17,7 +17,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-9 mb-2">
-                                        <h5 class="card-title">{{ $vendor->vendor_name }}</h5>
+                                        <h5 class="card-title">{{ $vendor->name }}</h5>
                                         <p class="card-text"><small class="text-muted">Last
                                             updated {{$vendor->updated_at->diffForHumans()}}</small>
                                         </p>

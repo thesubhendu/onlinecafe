@@ -5,7 +5,7 @@
         <div class="container">
             <!-- VENDER DETAILS -->
             <div class="row text-center banner-content">
-                <h2>{{$vendor->shop_name ?? $vendor->vendor_name}}
+                <h2>{{$vendor->name}}
 
 
                 </h2>
