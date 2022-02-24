@@ -99,8 +99,10 @@
                 const stripe = Stripe('{{ config('cashier.key')}}')
 
                 const elements = stripe.elements()
-                const cardElement = elements.create('card')
 
+                const cardElement = elements.create('card', {
+                    hidePostalCode: true,
+                })
                 cardElement.mount('#card-element')
 
                 const form = document.getElementById('card-form')
