@@ -12,56 +12,35 @@ use Livewire\Component;
 
 class Checkout extends Component
 {
+    public $items;
+    public $itemCount;
+    public $subtotal;
+    public $total;
+    public $tax;
+
     public $user;
-    public $cartItems;
-    public $cartTotal;
-    public $form = [];
 
-    protected $rules = [
-        'form.name' => 'required',
-        'form.email'=>'required',
-        'form.mobile'=>'required',
-    ];
-
-    public function render()
-    {
-        return view('livewire.checkout');
-    }
-
-    public function hydrate()
-    {
-        $this->cartItems = Cart::content();
-    }
+    public $qtyOptions;
 
     public function mount()
     {
+        $this->refreshCart();
         $this->fill([
             'user'=> auth()->user(),
             'cartItems'=> Cart::content(),
-            'form'=> [
-                'name'=> auth()->user()->name,
-                'email'=> auth()->user()->email,
-                'mobile'=> auth()->user()->mobile,
-            ]
+
         ]);
-
-        $this->calculateTotal();
-    }
-
-    public function calculateTotal()
-    {
-        $this->cartTotal = [
-            'total' => Cart::total(),
-            'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal(),
-        ];
+        $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
     public function submit()
     {
-        $this->validate();
+        if(empty($this->items)) {
+            session()->flash('message', 'Empty Cart');
+            return back();
+        }
 
-        $order = (new Order())->generate($this->cartItems, Cart::total());
+        $order = (new Order())->generate($this->items, Cart::total());
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
         //todo: ask if need to send to owner or vendor email
@@ -75,5 +54,35 @@ class Checkout extends Component
 
         return redirect()->route('order.submitted', $order);
     }
+    public function hydrate()
+    {
+        $this->items = Cart::content();
+    }
+    private function refreshCart()
+    {
+        $this->items     = Cart::content();
+        $this->subtotal  = Cart::subtotal();
+        $this->tax       = Cart::tax();
+        $this->total     = Cart::total();
+        $this->itemCount = Cart::count();
+    }
 
+    public function render()
+    {
+        return view('livewire.checkout')->layout('layouts.app');
+    }
+
+    public function updateQty($value, $rowId)
+    {
+        Cart::update($rowId, $value);
+        $this->refreshCart();
+    }
+
+    public function removeItem($id)
+    {
+        Cart::remove($id);
+        $this->refreshCart();
+
+        session()->flash("message", "Item has been removed");
+    }
 }

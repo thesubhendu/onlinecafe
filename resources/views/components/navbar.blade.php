@@ -24,7 +24,7 @@
             @endguest
             @auth
                 <li class="nav-item nav-right">
-                    <a class="nav-link p-3" href="{{ route('cart')}}" class="text-sm text-gray-700 underline">
+                    <a class="nav-link p-3" href="{{ route('checkout.index')}}" class="text-sm text-gray-700 underline">
                         <i class="fas fa-shopping-cart"></i>@if (Cart::instance('default')->count() > 0)<span
                             class="badge bg-light text-dark"> {{Cart::instance('default')->count()}}</span>@endif
                     </a>

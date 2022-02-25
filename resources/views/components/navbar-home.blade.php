@@ -56,7 +56,7 @@
                         <a href="{{ route('vendor-landing') }}">Partner with Us</a>
                     </li>
                     <li>
-                        <a href="{{route('cart')}}">
+                        <a href="{{route('checkout.index')}}">
                             <i class="ti-shopping-cart"></i>
                             @if (Cart::count())
                                 <span class="badge">{{ Cart::count() }}</span>
@@ -134,7 +134,7 @@
             @else
                 @if (Cart::count())
                     <div class="col">
-                        <a href="{{route('cart')}}">
+                        <a href="{{route('checkout.index')}}">
                             <i class="fa fa-shopping-cart"></i>
                             Your Cart
 

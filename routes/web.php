@@ -75,7 +75,6 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/cart/checkout', Checkout::class)->name('checkout.index');
 
-    Route::get('/cart', \App\Http\Livewire\ShoppingCart::class)->name('cart');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 });
 

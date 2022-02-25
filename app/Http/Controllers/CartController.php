@@ -39,7 +39,7 @@ class CartController extends Controller
             ->associate(Product::class);
 
 
-        return redirect()->route('cart')
+        return redirect()->route('checkout.index')
             ->with('product')
             ->with('success_message', 'Item added to your cart');
     }
