@@ -185,9 +185,9 @@
                                 <div class="col-md-12">
                                     <div class="cart-totals-result">
 
-                                        <button wire:click="submit" class="btn btn-secondary mt-25">
+                                        <a wire:click="submit" class="btn btn-secondary mt-25">
                                             CHECKOUT
-                                        </button>
+                                        </a>
                                         <a
                                             href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
                                             class="btn btn-default d-block">
