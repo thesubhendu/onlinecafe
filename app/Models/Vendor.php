@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use BeyondCode\Vouchers\Traits\HasVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Spatie\OpeningHours\OpeningHours;
 
 class Vendor extends Model
 {
-    use HasFactory, Favoriteable;
+    use HasFactory, Favoriteable, HasVouchers;
 
     protected $guarded = ['owner_id'];
     protected $casts = [
