@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use App\Models\ProductOption;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class AddToCart extends Component
@@ -34,7 +35,9 @@ class AddToCart extends Component
 
     public function submit()
     {
-        if (auth()->id() == $this->product->vendor->owner_id) {
+        $dealId = session('deal-'.$this->product->vendor_id) ?? null;
+
+        if ((auth()->id() == $this->product->vendor->owner_id) && empty($dealId)) {
             session()->flash('error', 'You cannot order from your own shop');
             return;
         }
@@ -61,6 +64,10 @@ class AddToCart extends Component
 
         Cart::add($this->cartProduct)->associate(Product::class);
 
+
+        if(Gate::allows('vendor') && $dealId) {
+            return redirect()->route('save-deal', $dealId);
+        }
 
         return redirect()->route('checkout.index');
     }

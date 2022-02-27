@@ -3,14 +3,10 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Deal;
-use App\Models\Product;
 use App\Orchid\Layouts\DealListLayout;
-use App\Orchid\Layouts\ProductListLayout;
 use Illuminate\Support\Facades\Gate;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
-use Orchid\Screen\TD;
 
 class DealListScreen extends Screen
 {
@@ -47,5 +43,12 @@ class DealListScreen extends Screen
         return [
             DealListLayout::class
         ];
+    }
+
+
+    public function addProduct($vendor, $deal)
+    {
+        session(['deal-'.$vendor => $deal]);
+        return redirect()->route('vendor.show', ['vendor'=> $vendor,'deal'=>$deal]);
     }
 }

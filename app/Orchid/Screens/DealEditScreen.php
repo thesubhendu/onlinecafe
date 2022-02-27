@@ -5,8 +5,8 @@ namespace App\Orchid\Screens;
 use App\Models\Deal;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\CheckBox;
+use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Relation;
@@ -47,9 +47,9 @@ class DealEditScreen extends EditScreen
     {
         $fields = [
             Input::make('deal.title')->required()
-                ->title('Title')
-                ->placeholder(),
-
+                ->title('Title'),
+            DateTimer::make('deal.expires_at')
+                ->title('Expires At'),
             CheckBox::make('deal.status')->value(0)->title('Is Active')->sendTrueOrFalse(),
             Picture::make('deal.image')
                 ->targetRelativeUrl()
@@ -60,7 +60,7 @@ class DealEditScreen extends EditScreen
                 ->title('Vendor')
                 ->fromModel(Vendor::class, 'vendor_name')->required();
         }else{
-            $fields[] = Input::make('deal.vendor_id')->hidden(true)->value(auth()->id());
+            $fields[] = Input::make('deal.vendor_id')->hidden(true)->value(auth()->user()->shop->id);
         }
 
         return [

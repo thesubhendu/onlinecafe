@@ -49,5 +49,9 @@ class AuthServiceProvider extends ServiceProvider
             return  !$user->shop;
         });
 
+        Gate::define('can-create-deal', function (User $user) {
+            return  Gate::allows('vendor') && request()->get('deal');
+        });
+
     }
 }

@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\DashboardScreen;
-use App\Orchid\Screens\Examples\ExampleCardsScreen;
-use App\Orchid\Screens\Examples\ExampleChartsScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsScreen;
-use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
-use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -110,6 +103,9 @@ Route::screen('order/{order?}', \App\Orchid\Screens\OrderEditScreen::class)
 
 Route::screen('order-show/{order?}', \App\Orchid\Screens\OrderDetailScreen::class)
      ->name('platform.order.show');
+
+Route::screen('deal-show/{deal?}', \App\Orchid\Screens\DealDetailScreen::class)
+     ->name('platform.deal.show');
 
 Route::screen('orders', \App\Orchid\Screens\OrderListScreen::class)
      ->name('platform.order.list');
