@@ -37,15 +37,7 @@
                                     {{--                                        @endforeach--}}
                                     {{--                                    </select>--}}
 
-                                    <div class="control-btn ">
-                                        <button type="button" class="value-button decrease"
-                                                wire:click="updateQty('remove')" value="Decrease Value">-
-                                        </button>
-                                        <input type="number" id="number" wire:model="cartProduct.qty"/>
-                                        <button type="button" class="value-button increase" wire:click="updateQty()"
-                                                value="Increase Value">+
-                                        </button>
-                                    </div>
+                                    
 
                                     @error('cartProduct.qty') <span
                                         class="text-danger">{{ $message }}</span> @enderror

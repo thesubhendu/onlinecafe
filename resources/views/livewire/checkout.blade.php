@@ -45,9 +45,16 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        <div class="control-btn ">
+                                        <!-- <div class="control-btn ">
                                             <x-cart.update-quantity :item="$item"
                                                                     :options="$qtyOptions"></x-cart.update-quantity>
+                                        </div> -->
+
+                                        <!-- Quantity Control -->
+                                        <div class="control-btn ">
+                                            <button type="button" class="value-button decrease" value="Decrease Value">-</button>
+                                            <input type="number" id="number" value="1" />
+                                            <button type="button" class="value-button increase" value="Increase Value">+</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -85,20 +92,26 @@
                                 <x-cart.description :item="$item"/>
 
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-3 text-end">
                                 <h5>${{$item->price}} </h5>
                             </div>
                         </div>
 
                         <!-- PRICE -->
                         <div class="row product-price">
-                            <div class="col-xs-2 ">
+                            <div class="col-xs-2 qty-label">
                                 <label for="">QTY</label>
                             </div>
-                            <div class="col-xs-4 no-gutters">
-                                <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
+                            <div class="col-xs-7 no-gutters">
+                                <!-- <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity> -->
+                                <!-- Quantity Control -->
+                                <div class="control-btn ">
+                                    <button type="button" class="value-button decrease" value="Decrease Value">-</button>
+                                    <input type="number" id="number" value="1" />
+                                    <button type="button" class="value-button increase" value="Increase Value">+</button>
+                                </div>
                             </div>
-                            <div class="col-xs-6 text-end">
+                            <div class="col-xs-3 text-end">
                                 <button type="button" wire:click="removeItem('{{$item->rowId}}')"
                                         class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
                             </div>

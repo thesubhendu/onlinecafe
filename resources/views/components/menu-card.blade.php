@@ -13,12 +13,12 @@
             <div class="price-and-add">
                 <p>{{$product->description}}</p>
                 <div class="row menu-card-footer">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="price">
                             <p><i class="fa fa-dollar"></i> {{$product->price}}</p>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-8">
                         @can('make-order')
                         <div class="add">
                             <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;

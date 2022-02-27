@@ -1315,13 +1315,22 @@ section.profile-content-details {
 
 .control-btn .value-button {
     border: 1px solid #ccc;
-    width: 29px;
     text-align: center;
+    padding: 0;
+    height: auto;
+    line-height: 0;
+    width: 40px;
+    border-radius: 50%;
 }
 
 .control-btn input#number {
-    width: 59px;
+    width: 80px;
     text-align: center;
+    height: 40px;
+    margin: 0 5px;
+    border-radius: 300px;
+    background: #fff;
+    border: 1px solid #ccc;
 }
 
 // COMMENTS
@@ -1358,6 +1367,20 @@ section.profile-content-details {
             .comment {
                 font-size: 14px;
             }
+        }
+    }
+}
+
+
+// MOBILE CART
+.mobile-cart{
+    width: 100%;
+    .qty-label{
+        text-align: center;
+        label{
+            font-size: 14px;
+            text-align: center;
+            margin-top: 16px;
         }
     }
 }
