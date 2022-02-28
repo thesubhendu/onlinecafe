@@ -1319,14 +1319,15 @@ section.profile-content-details {
     padding: 0;
     height: auto;
     line-height: 0;
-    width: 40px;
+    width: 45px !important;
+    height: 45px !important;
     border-radius: 50%;
 }
 
 .control-btn input#number {
     width: 80px;
     text-align: center;
-    height: 40px;
+    height: 45px;
     margin: 0 5px;
     border-radius: 300px;
     background: #fff;
