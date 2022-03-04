@@ -39,10 +39,20 @@ class ProductListLayout extends Table
             TD::make('created_at', 'Created'),
             TD::make("Action")
               ->render(function ($product) {
-                  return Group::make([
+                  $links = [
 //                      Link::make('Show')->route('platform.product.show', $product),
                       Link::make('Edit')->icon('pencil')->route('platform.product.edit', $product),
-                  ]);
+                      Link::make('Add')->icon('pencil')->route('platform.product.edit', $product),
+
+                  ];
+
+                  if(request('deal')) {
+                      $links[] =Link::make('Add to Deal')
+                          ->icon('plus')
+                          ->route('platform.deal.addProduct',[request('deal'), $product]);
+                  }
+
+                  return Group::make($links);
               }),
         ];
     }

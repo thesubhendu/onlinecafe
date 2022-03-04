@@ -3,8 +3,11 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Deal;
+use App\Models\DealProduct;
+use App\Orchid\Layouts\DealDetailTable;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
 
 class DealDetailScreen extends Screen
 {
@@ -21,21 +24,41 @@ class DealDetailScreen extends Screen
     {
         $this->deal = $deal;
         return [
-            'deal' => $deal
+            'deal' => $deal,
+            'total' => $deal->products->reduce(fn($carry,$product) => $carry + ($product->pivot->price*$product->pivot->quantity)),
         ];
     }
 
 
+
     public function commandBar(): array
     {
-        return [];
+        return [
+            Button::make('Update Detail')
+                ->icon('pencil')
+                ->method('updateDetail'),
+        ];
     }
 
+    public function updateDetail(Deal $deal, Request $request)
+    {
+        $productIds = $deal->products->pluck('id')->toArray();
+        $optionsArray = DealProduct::where('deal_id', $deal->id)->pluck('options','product_id')->toArray();
+        $deal->products()->detach($productIds);
+
+        foreach ($request['quantity'] as $productId => $quantity){
+            $deal->products()->attach($productId, [
+                'price' => $request->price[$productId],
+                'quantity' => $quantity,
+                'options' => $optionsArray[$productId]
+            ]);
+        }
+    }
 
     public function layout(): array
     {
         return [
-            Layout::view('admin.orders.deal-detail')
+            DealDetailTable::class,
         ];
     }
 }

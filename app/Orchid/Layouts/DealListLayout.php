@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Layouts;
 
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Table;
@@ -26,10 +25,7 @@ class DealListLayout extends Table
                     return Group::make([
                         Link::make('Edit')->icon('pencil')->route('platform.deal.edit', $deal),
                         Link::make('View')->icon('eye')->route('platform.deal.show', $deal),
-                        Button::make('Add Product')
-                            ->method('addProduct')
-                            ->icon('plus')
-                            ->parameters(['vendor'=> $deal->vendor_id,'deal'=>$deal->id])
+                        Link::make('Add Product')->icon('plus')->route('platform.product.list', ['deal'=>$deal->id]),
                     ]);
                 }),
         ];

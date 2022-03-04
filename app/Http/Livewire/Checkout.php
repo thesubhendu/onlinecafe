@@ -43,7 +43,7 @@ class Checkout extends Component
         $order = (new Order())->generate($this->items, Cart::total());
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
-        //todo: ask if need to send to owner or vendor email
+
         Mail::to($order->vendor->shop_email ?? $order->vendor->email)
             ->send(new orderSubmitted($order, $confirm_url));
 
@@ -54,6 +54,7 @@ class Checkout extends Component
 
         return redirect()->route('order.submitted', $order);
     }
+
     public function hydrate()
     {
         $this->items = Cart::content();

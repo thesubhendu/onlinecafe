@@ -103,7 +103,6 @@ class ProductEditScreen extends Screen
                         ->title('Category')
                         ->fromModel(ProductCategory::class, 'name'),
 
-
             ]),
         ];
     }
@@ -128,9 +127,7 @@ class ProductEditScreen extends Screen
     public function remove(Product $product)
     {
         $product->delete();
-
         Alert::info('You have successfully deleted the product.');
-
         return redirect()->route('platform.product.list');
     }
 }
