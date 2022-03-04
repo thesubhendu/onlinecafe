@@ -42,7 +42,7 @@ class ProductListLayout extends Table
                   $links = [
 //                      Link::make('Show')->route('platform.product.show', $product),
                       Link::make('Edit')->icon('pencil')->route('platform.product.edit', $product),
-                      Link::make('Add')->icon('pencil')->route('platform.product.edit', $product),
+                      Link::make('Add')->icon('plus')->route('platform.product.edit', $product),
 
                   ];
 

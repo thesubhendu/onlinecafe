@@ -7,6 +7,7 @@ use App\Models\DealProduct;
 use App\Orchid\Layouts\DealDetailTable;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
 class DealDetailScreen extends Screen
@@ -19,12 +20,15 @@ class DealDetailScreen extends Screen
     public $name = 'Deal Detail';
 
     private $deal;
+    private $hasProducts;
 
     public function query(Deal $deal): array
     {
         $this->deal = $deal;
+        $this->hasProducts = (boolean)$deal->products->count();
         return [
             'deal' => $deal,
+            'hasProducts' => $this->hasProducts,
             'total' => $deal->products->reduce(fn($carry,$product) => $carry + ($product->pivot->price*$product->pivot->quantity)),
         ];
     }
@@ -34,9 +38,12 @@ class DealDetailScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make('Update Detail')
+            Button::make('Update')
                 ->icon('pencil')
+                ->canSee($this->hasProducts)
                 ->method('updateDetail'),
+            Link::make('Add Product')->icon('plus')->route('platform.product.list', ['deal'=>$this->deal->id]),
+
         ];
     }
 
@@ -60,5 +67,12 @@ class DealDetailScreen extends Screen
         return [
             DealDetailTable::class,
         ];
+    }
+
+    public function removeProduct($dealId,$productId)
+    {
+        $deal = Deal::find($dealId);
+
+        $deal->products()->detach($productId);
     }
 }

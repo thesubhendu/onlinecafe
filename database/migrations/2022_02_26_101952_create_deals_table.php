@@ -19,6 +19,7 @@ class CreateDealsTable extends Migration
             $table->foreignId('vendor_id')->constrained('vendors');
             $table->string('image')->nullable();
             $table->boolean('status')->default(false);
+            $table->decimal('total')->nullable();
             $table->json('data')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();

@@ -74,7 +74,7 @@ class AddProductToDealScreen extends Screen
 
         Alert::info('You have successfully added product to deal.');
 
-        return redirect()->route('platform.deal.list');
+        return redirect()->route('platform.deal.show', $deal);
     }
 
     public function remove(Product $product)

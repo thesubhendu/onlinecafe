@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Layouts;
 
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -27,6 +29,12 @@ class DealDetailTable extends Table
                 }
                 return $options? json_encode($options): "";
             }),
+            TD::make("Action")
+                ->render(function ($product) {
+                    return Group::make([
+                        Button::make('Delete')->method('removeProduct')->parameters(['dealId'=>$product->pivot->deal_id,'productId'=> $product->id])->icon('trash'),
+                    ]);
+                }),
         ];
     }
 
@@ -35,10 +43,12 @@ class DealDetailTable extends Table
         return [
             TD::make('total')
                 ->align(TD::ALIGN_RIGHT)
+                ->canSee($this->query->get('hasProducts'))
                 ->colspan(1)->render(fn($p) => "Total: $"),
 
             TD::make('total')
                 ->align(TD::ALIGN_RIGHT)
+                ->canSee($this->query->get('hasProducts'))
                 ->colspan(2)->render(fn($p) => Input::make('total')->value($this->query->get('total'))),
 
         ];
