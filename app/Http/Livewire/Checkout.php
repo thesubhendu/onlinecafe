@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Mail\orderSubmitted;
+use App\Models\Deal;
 use App\Models\Order;
 use App\Notifications\NewOrderNotification;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -22,14 +23,25 @@ class Checkout extends Component
 
     public $qtyOptions;
 
+    public $deal;
+
     public function mount()
     {
+        if(request('deal')) {
+            Cart::destroy();
+            $deal = Deal::find(request('deal'));
+            if($deal->isActive()){
+                $this->deal = $deal;
+                $deal->addToCart();
+            }
+        }
+
         $this->refreshCart();
         $this->fill([
             'user'=> auth()->user(),
             'cartItems'=> Cart::content(),
-
         ]);
+
         $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 

@@ -9,6 +9,9 @@
             <div class="row hidden-xs">
                 <div class="col-md-12">
                     <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
+                    @if($deal)
+                        <span>({{$deal->title}})</span>
+                    @endif
 
                     <div class="table-responsive">
                         <!-- TABLE -->
@@ -45,10 +48,14 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        <div class="control-btn ">
-                                            <x-cart.update-quantity :item="$item"
-                                                                    :options="$qtyOptions"></x-cart.update-quantity>
-                                        </div>
+                                        @if($deal)
+                                            <span>{{$item->qty}}</span>
+                                        @else
+                                            <div class="control-btn ">
+                                                <x-cart.update-quantity :item="$item"
+                                                                        :options="$qtyOptions"></x-cart.update-quantity>
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
 
@@ -95,8 +102,13 @@
                             <div class="col-xs-2 ">
                                 <label for="">QTY</label>
                             </div>
+
                             <div class="col-xs-4 no-gutters">
-                                <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
+                                @if($deal)
+                                    <span>{{$item->qty}}</span>
+                                @else
+                                    <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
+                                @endif
                             </div>
                             <div class="col-xs-6 text-end">
                                 <button type="button" wire:click="removeItem('{{$item->rowId}}')"

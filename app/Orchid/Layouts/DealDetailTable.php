@@ -47,9 +47,9 @@ class DealDetailTable extends Table
                 ->colspan(1)->render(fn($p) => "Total: $"),
 
             TD::make('total')
-                ->align(TD::ALIGN_RIGHT)
+                ->align(TD::ALIGN_LEFT)
                 ->canSee($this->query->get('hasProducts'))
-                ->colspan(2)->render(fn($p) => Input::make('total')->value($this->query->get('total'))),
+                ->colspan(2)->render(fn($p) =>  $this->query->get('total')),
 
         ];
     }

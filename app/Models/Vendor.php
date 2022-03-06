@@ -113,4 +113,10 @@ class Vendor extends Model
     {
         return $this->shop_name ?? $this->vendor_name;
     }
+
+    public function deals()
+    {
+        return $this->hasMany(Deal::class);
+    }
+
 }

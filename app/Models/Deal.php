@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ class Deal extends Model
 {
     use HasFactory, Filterable, AsSource;
 
+    protected $dates = ['expires_at'];
     protected $guarded = [];
     public function products()
     {
@@ -36,5 +38,38 @@ class Deal extends Model
         });
 
         return $this;
+    }
+
+    public function addToCart()
+    {
+        if(!$this->isActive()) {
+            return false;
+        }
+
+        $dealProducts = $this->products;
+
+        foreach ($dealProducts as $product) {
+            $cartProduct = [
+                'id'      => $product->id,
+                'name'    => $product->name,
+                'price'   => $product->pivot->price,
+                'weight'  => '0',
+                'qty'     => $product->pivot->quantity,
+                'options' => json_decode($product->pivot->options ?? [], true),
+            ];
+
+            Cart::add($cartProduct)->associate(Product::class);
+        }
+
+    }
+
+    public function isActive()
+    {
+        return $this->status && $this->expires_at->greaterThanOrEqualTo(now());
+    }
+
+    public function scopeActive($query)
+    {
+        $query->where('status', '1')->whereDate('expires_at','>=',now());
     }
 }
