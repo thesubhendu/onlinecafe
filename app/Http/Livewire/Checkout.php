@@ -85,8 +85,16 @@ class Checkout extends Component
         return view('livewire.checkout')->layout('layouts.app');
     }
 
-    public function updateQty($value, $rowId)
+    public function updateQty($rowId,$value,$action='add')
     {
+        if($action == 'remove') {
+            $value--;
+        }else{
+            $value ++;
+        }
+        if($value < 1) {
+            return;
+        }
         Cart::update($rowId, $value);
         $this->refreshCart();
     }

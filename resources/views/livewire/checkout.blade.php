@@ -56,17 +56,8 @@
                                                                         :options="$qtyOptions"></x-cart.update-quantity>
                                             </div>
                                         @endif
-                                        <!-- <div class="control-btn ">
-                                            <x-cart.update-quantity :item="$item"
-                                                                    :options="$qtyOptions"></x-cart.update-quantity>
-                                        </div> -->
 
-                                        <!-- Quantity Control -->
-                                        <div class="control-btn ">
-                                            <button type="button" class="value-button decrease" value="Decrease Value">-</button>
-                                            <input type="number" id="number" value="1" />
-                                            <button type="button" class="value-button increase" value="Increase Value">+</button>
-                                        </div>
+
                                     </td>
                                 </tr>
 
