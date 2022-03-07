@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "alexpechkarev/google-maps": "^8.0",
+        "beyondcode/laravel-vouchers": "^2.0",
         "bumbummen99/shoppingcart": "^4.0",
         "christiankuri/laravel-favorite": "^1.4",
         "fideloper/proxy": "^4.4",

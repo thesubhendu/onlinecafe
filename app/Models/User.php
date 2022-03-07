@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use BeyondCode\Vouchers\Traits\CanRedeemVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -16,7 +18,7 @@ use Orchid\Platform\Models\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
-    use HasProfilePhoto, Favoriteability;
+    use HasProfilePhoto, Favoriteability, CanRedeemVouchers;
     use Notifiable, Billable;
     use TwoFactorAuthenticatable;
 
@@ -130,5 +132,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function earnedRewards()
     {
         return Card::query()->where(['user_id' => $this->id, 'is_active' => false, 'is_max_stamped' => false])->get();
+    }
+
+    public function isVendor()
+    {
+        return  Gate::allows('vendor');
+    }
+
+    public function isAdmin()
+    {
+        return  Gate::allows('admin');
     }
 }

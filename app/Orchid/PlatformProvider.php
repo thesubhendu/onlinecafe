@@ -17,9 +17,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
-        $dashboard->registerResource('scripts', asset('js/app.js'));
         $dashboard->registerResource('scripts', asset('js/dashboard.js'));
-        // ...
     }
 
     /**
@@ -54,6 +52,10 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Order Management')
                 ->icon('monitor')
                 ->route('platform.order.list'),
+
+            Menu::make('Deal Management')
+                ->icon('monitor')
+                ->route('platform.deal.list'),
 
         ];
     }

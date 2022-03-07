@@ -1,17 +1,12 @@
 <div>
-<div wire:loading.delay.longest>
-   <p class="h4">Submitting Order Please wait...</p>
-</div>
+
 
     <section class="ordered-food-item ">
         <div class="container">
             <!-- TABLE ITEMS  -->
             <div class="row hidden-xs">
                 <div class="col-md-12">
-                    <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
-                    @if($deal)
-                        <span>({{$deal->title}})</span>
-                    @endif
+                    <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart (deal)</h2>
 
                     <div class="table-responsive">
                         <!-- TABLE -->
@@ -48,24 +43,9 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        @if($deal)
-                                            <span>{{$item->qty}}</span>
-                                        @else
-                                            <div class="control-btn ">
-                                                <x-cart.update-quantity :item="$item"
-                                                                        :options="$qtyOptions"></x-cart.update-quantity>
-                                            </div>
-                                        @endif
-                                        <!-- <div class="control-btn ">
+                                        <div class="control-btn ">
                                             <x-cart.update-quantity :item="$item"
                                                                     :options="$qtyOptions"></x-cart.update-quantity>
-                                        </div> -->
-
-                                        <!-- Quantity Control -->
-                                        <div class="control-btn ">
-                                            <button type="button" class="value-button decrease" value="Decrease Value">-</button>
-                                            <input type="number" id="number" value="1" />
-                                            <button type="button" class="value-button increase" value="Increase Value">+</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -103,32 +83,20 @@
                                 <x-cart.description :item="$item"/>
 
                             </div>
-                            <div class="col-xs-3 text-end">
+                            <div class="col-xs-3">
                                 <h5>${{$item->price}} </h5>
                             </div>
                         </div>
 
                         <!-- PRICE -->
                         <div class="row product-price">
-                            <div class="col-xs-2 qty-label">
+                            <div class="col-xs-2 ">
                                 <label for="">QTY</label>
                             </div>
-
-                            <div class="col-xs-7 no-gutters">
-                                @if($deal)
-                                    <span>{{$item->qty}}</span>
-                                @else
-                                    <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
-
-{{--                                    <!-- Quantity Control -->--}}
-{{--                                    <div class="control-btn ">--}}
-{{--                                        <button type="button" class="value-button decrease" value="Decrease Value">-</button>--}}
-{{--                                        <input type="number" id="number" value="1" />--}}
-{{--                                        <button type="button" class="value-button increase" value="Increase Value">+</button>--}}
-{{--                                    </div>   --}}
-                                @endif
+                            <div class="col-xs-4 no-gutters">
+                                <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
                             </div>
-                            <div class="col-xs-3 text-end">
+                            <div class="col-xs-6 text-end">
                                 <button type="button" wire:click="removeItem('{{$item->rowId}}')"
                                         class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
                             </div>
@@ -142,11 +110,7 @@
 
             <!-- CART TOTAL -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col cart-totals-left alert alert-danger">
-                            Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
-                        </div>
-                    </div>
+
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <div class="coupen">
@@ -205,7 +169,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="cart-totals-result">
-                                        <h4 class="final-pay">${{$total}}</h4>
+                                        <input class="form-control final-pay" type="text" wire:model.lazy="total">
                                     </div>
                                 </div>
                             </div>
@@ -216,12 +180,12 @@
                                     <div class="cart-totals-result">
 
                                         <a wire:click="submit" class="btn btn-secondary mt-25">
-                                            CHECKOUT
+                                            Save Deal
                                         </a>
                                         <a
                                             href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
                                             class="btn btn-default d-block">
-                                            Back to Shopping
+                                            Back to Shop
                                         </a>
                                     </div>
                                 </div>

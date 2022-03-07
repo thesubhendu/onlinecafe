@@ -20,11 +20,19 @@
                     </div>
                     <div class="col-8">
                         @can('make-order')
-                        <div class="add">
-                            <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
-                                <i class="fa fa-coffee"></i>
-                            </a>
-                        </div>
+                            <div class="add">
+                                <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
+                                    <i class="fa fa-coffee"></i>
+                                </a>
+                            </div>
+                        @endcan
+
+                        @can('can-create-deal')
+                            <div class="add">
+                                <a href="{{ route('orders.create', $product->id).'?deal='.request('deal') }}" class="shop-btn"> Add to Deal &nbsp;
+                                    <i class="fa fa-coffee"></i>
+                                </a>
+                            </div>
                         @endcan
                     </div>
                 </div>

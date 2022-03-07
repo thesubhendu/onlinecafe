@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76a419b9c41da82129028fa08468c657",
+    "content-hash": "3df353b592fe5514ce849777205385ee",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -240,6 +240,71 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.4"
             },
             "time": "2021-06-18T13:26:35+00:00"
+        },
+        {
+            "name": "beyondcode/laravel-vouchers",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beyondcode/laravel-vouchers.git",
+                "reference": "5c0a2fd49b7c55c048076edd7813973cc1c49339"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beyondcode/laravel-vouchers/zipball/5c0a2fd49b7c55c048076edd7813973cc1c49339",
+                "reference": "5c0a2fd49b7c55c048076edd7813973cc1c49339",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^8.0",
+                "illuminate/database": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BeyondCode\\Vouchers\\VouchersServiceProvider"
+                    ],
+                    "aliases": {
+                        "Vouchers": "BeyondCode\\Vouchers\\Facades\\Vouchers"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeyondCode\\Vouchers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "marcel@beyondco.de",
+                    "homepage": "https://beyondcode.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Allow users to redeem vouchers that are bound to models..",
+            "homepage": "https://github.com/beyondcode/laravel-vouchers",
+            "keywords": [
+                "beyondcode",
+                "laravel-vouchers"
+            ],
+            "support": {
+                "issues": "https://github.com/beyondcode/laravel-vouchers/issues",
+                "source": "https://github.com/beyondcode/laravel-vouchers/tree/2.0.0"
+            },
+            "time": "2021-04-12T21:25:40+00:00"
         },
         {
             "name": "brick/math",

@@ -25,26 +25,15 @@
                                     <h4> Select Options</h4>
                                 </div>
 
-                                {{--                                <div class="col-lg-2">--}}
-                                {{--                                    <button wire:click="updateQty('remove')" class="btn btn-success" type="button">---}}
-                                {{--                                    </button>--}}
-                                {{--                                </div>--}}
                                 <div class="col-lg-4">
                                     <label>Quantity</label>
-                                    {{--                                    <select wire:model.lazy="cartProduct.qty" id="" class="form-select" required>--}}
-                                    {{--                                        @foreach ([0,1,2,3,4,5,6,7,8,9,10] as $option)--}}
-                                    {{--                                            <option value="{{$option}}">{{$option}}</option>--}}
-                                    {{--                                        @endforeach--}}
-                                    {{--                                    </select>--}}
 
                                     
 
                                     @error('cartProduct.qty') <span
                                         class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-                                {{--                                <div class="col-lg-2">--}}
-                                {{--                                    <button wire:click="updateQty()" class="btn btn-success" type="button">+</button>--}}
-                                {{--                                </div>--}}
+
 
                                 @foreach($product->options() as $index => $option)
                                     <div class="col-lg-2 mb-3">

@@ -15,7 +15,7 @@
                     <div class="card shop-setup-card">
                         <form wire:submit.prevent="submit">
 
-                            <div class="form-part">
+                            <div >
                                 <h2 class="title">Shop setup</h2>
                                 <div class="form-group">
                                     <label for="form.shop_name" class="form-label"> Shop name</label>
@@ -53,7 +53,7 @@
                                     <livewire:g-map/>
                                 </div>
 
-                                <div class="form-row">
+                                <div class="form-row row">
                                     <div class="form-group col">
                                         <label for="form.max_stamps" class="form-label">Buy</label>
                                         <input class="form-control" type="number" wire:model.lazy="form.max_stamps">

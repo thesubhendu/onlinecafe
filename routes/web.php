@@ -15,6 +15,7 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
+use App\Services\AbnChecker;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,7 +57,8 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
 require(__DIR__ . '/partials/_manage-subscriptions.php');
 
 Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->name('vendor.rating')->middleware('auth');
-Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproducts'])->name('vendor.products');
+
+Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorproducts'])->name('vendor.products')->middleware('can:vendor');
 
 Route::get('/user/favourites', FavoriteVendors::class)->name('user.likes')->middleware('auth');
 Route::get('/confirm/{order}/update',
@@ -87,6 +89,7 @@ Route::middleware('auth')->group(function() {
 Route::get('/cards', \App\Http\Livewire\LoyalityCard::class)->name('cards.index')->middleware('auth');
 Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
 
+Route::get('save-deal/{deal}', \App\Http\Livewire\SaveDeal::class)->name('save-deal');
 
 Route::view('/comment', 'comment');
 

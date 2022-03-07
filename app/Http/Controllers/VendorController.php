@@ -31,7 +31,9 @@ class VendorController extends Controller
             }
         }
 
-        return view('vendor', compact('vendor', 'openingInfo', 'featuredProducts'));
+        $deals = $vendor->deals()->active()->get();
+
+        return view('vendor', compact('vendor', 'openingInfo', 'featuredProducts','deals'));
 
     }
 

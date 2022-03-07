@@ -2,16 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Mail\orderSubmitted;
 use App\Models\Deal;
-use App\Models\Order;
-use App\Notifications\NewOrderNotification;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
-class Checkout extends Component
+class SaveDeal extends Component
 {
     public $items;
     public $itemCount;
@@ -19,52 +14,38 @@ class Checkout extends Component
     public $total;
     public $tax;
 
-    public $user;
-
     public $qtyOptions;
 
     public $deal;
 
-    public function mount()
+    public function mount(Deal $deal, $edit=null)
     {
-        if(request('deal')) {
-            Cart::destroy();
-            $deal = Deal::find(request('deal'));
-            if($deal->isActive()){
-                $this->deal = $deal;
-                $deal->addToCart();
-            }
-        }
+        $this->deal = $deal;
 
         $this->refreshCart();
-        $this->fill([
-            'user'=> auth()->user(),
-            'cartItems'=> Cart::content(),
-        ]);
 
         $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
+    public function render()
+    {
+        return view('livewire.save-deal')->layout('layouts.app');
+    }
+
     public function submit()
     {
+        //authorize
         if(empty($this->items)) {
             session()->flash('message', 'Empty Cart');
             return back();
         }
 
-        $order = (new Order())->generate($this->items, Cart::total());
-
-        $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
-
-        Mail::to($order->vendor->shop_email ?? $order->vendor->email)
-            ->send(new orderSubmitted($order, $confirm_url));
-
-//        \App\Events\OrderSubmitted::dispatch($order);
-        $order->vendor->owner->notify(new NewOrderNotification($order));
+        $deal = $this->deal->generate($this->items, $this->total);
 
         Cart::destroy();
+        session()->remove('deal-'.$this->deal->vendor_id);
 
-        return redirect()->route('order.submitted', $order);
+        return redirect()->route('platform.deal.list');
     }
 
     public function hydrate()
@@ -80,10 +61,6 @@ class Checkout extends Component
         $this->itemCount = Cart::count();
     }
 
-    public function render()
-    {
-        return view('livewire.checkout')->layout('layouts.app');
-    }
 
     public function updateQty($value, $rowId)
     {
