@@ -61,7 +61,7 @@ class Vendor extends Model
 
     public function rating()
     {
-        return $this->ratings->avg('rating') > 5 ? 5 : $this->ratings->avg('rating');
+        return $this->ratings->avg('rating') > 5 ? 5 : (int)$this->ratings->avg('rating');
     }
 
     public function owner()
