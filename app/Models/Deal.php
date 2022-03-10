@@ -70,6 +70,6 @@ class Deal extends Model
 
     public function scopeActive($query)
     {
-        $query->where('status', '1')->whereDate('expires_at','>=',now());
+        $query->where('status', '1')->where('expires_at','>=',now());
     }
 }
