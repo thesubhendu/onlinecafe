@@ -21,11 +21,11 @@
                             <div class="col">
                                 <div class="shop-rating">
                                     <div class="xs-block">
-                                        @can('make-order')
+                                        @can('make-order', $vendor)
                                             <livewire:rating-star :vendor="$vendor"/>
                                         @endcan
 
-                                        @cannot('make-order')
+                                        @cannot('make-order', $vendor)
                                                 @for($i=0; $i < round($vendor->rating()); $i++)
                                                     <i class="fa fa-coffee selected"></i>
                                                 @endfor
@@ -34,20 +34,20 @@
                                                 @endfor
                                                 <span><b>{{$vendor->rating()}}</b></span>
 
-                                            @endcannot
+                                        @endcannot
                                     </div>
                                     <div class="xs-block last-update">Last
                                         Update: {{$vendor->updated_at->diffForHumans()}}
                                     </div>
                                 </div>
-                                @can('make-order')
+                                @can('make-order', $vendor)
                                     <span title="Like cafe" >
                                              <livewire:vendor-like-button :vendor="$vendor" />
                                     </span>
                                 @endcan
                             </div>
 
-                            @can('make-order')
+                            @can('make-order', $vendor)
                                 <!-- Modal -->
                                 <div class="modal fade" id="rating-form-modal"
                                      aria-labelledby="rating-form-modal"

@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="col-8">
-                        @can('make-order')
+                        @can('make-order', $product->vendor)
                             <div class="add">
                                 <a href="{{ route('orders.create', $product->id) }}" class="shop-btn"> Add &nbsp;
                                     <i class="fa fa-coffee"></i>

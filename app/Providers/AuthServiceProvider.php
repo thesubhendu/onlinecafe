@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\Vendor;
 use App\Policies\SubscriptionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -45,8 +46,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('platform.systems.roles');
         });
 
-        Gate::define('make-order', function (User $user) {
-            return  !$user->shop;
+        Gate::define('make-order', function (User $user, Vendor $vendor) {
+             return  !$user->shop && $vendor->is_open ;
         });
 
         Gate::define('can-create-deal', function (User $user) {
