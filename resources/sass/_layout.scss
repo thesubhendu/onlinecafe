@@ -769,10 +769,13 @@ a {
                 }
                 .menu-card-footer {
                     padding-top: 10px;
+                    .price-column{
+                        padding-right: 0;
+                    }
                 }
                 .shop-btn {
                     border: 2px solid #c3681324;
-                    display: block;
+                    // display: block;
                     text-align: center;
                     padding: 5px 20px;
                     border-radius: 300px;
