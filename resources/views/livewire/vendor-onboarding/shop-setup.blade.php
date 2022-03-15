@@ -189,6 +189,10 @@
 
                                     </div>
                                 </div>
+
+                                @error('form.services')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </section>
 
                             <button type="submit" class="btn btn-success mt-2 px-5">Setup</button>

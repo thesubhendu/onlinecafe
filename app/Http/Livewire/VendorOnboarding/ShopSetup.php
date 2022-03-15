@@ -107,7 +107,7 @@ class ShopSetup extends Component
             'form.shop_email' => 'email|required',
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
-            'form.address' => 'required',
+            'form.services' => 'required',
         ]);
 
         $vendor = auth()->user()->shop()->first();
@@ -180,7 +180,6 @@ class ShopSetup extends Component
             $baseTime = $baseTime->addMinutes(15);
             $this->openingHoursOptions[$baseTime->format('H:i')] = $baseTime->format('h:i A');
         }
-
     }
 
     public function applyTimesToAllDays()
