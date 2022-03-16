@@ -93,7 +93,7 @@
 
                                     <a class="dropdown-item" href="{{route('orders.index')}}">My Orders</a>
                                     <a class="dropdown-item" href="{{route('user.likes')}}">My Cafes</a>
-                                    <a class="dropdown-item" href="{{route('cards.index')}}">My Cards</a>
+                                    <a class="dropdown-item" href="{{route('cards.index')}}">My Loyality</a>
 
                                     @can('visit-backend')
                                         <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
@@ -152,7 +152,7 @@
                 <div class="col">
                     <a href="{{ route('cards.index') }}">
                         <i class="fa fa-credit-card"></i>
-                        My cards
+                        My Loyality
                     </a>
                 </div>
 

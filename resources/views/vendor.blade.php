@@ -21,11 +21,11 @@
                             <div class="col">
                                 <div class="shop-rating">
                                     <div class="xs-block">
-                                        @can('make-order', $vendor)
+                                        @can('make-rating')
                                             <livewire:rating-star :vendor="$vendor"/>
                                         @endcan
 
-                                        @cannot('make-order', $vendor)
+                                        @cannot('make-rating')
                                                 @for($i=0; $i < round($vendor->rating()); $i++)
                                                     <i class="fa fa-coffee selected"></i>
                                                 @endfor
@@ -40,14 +40,14 @@
                                         Update: {{$vendor->updated_at->diffForHumans()}}
                                     </div>
                                 </div>
-                                @can('make-order', $vendor)
+                                @can('make-rating')
                                     <span title="Like cafe" >
                                              <livewire:vendor-like-button :vendor="$vendor" />
                                     </span>
                                 @endcan
                             </div>
 
-                            @can('make-order', $vendor)
+                            @can('make-rating')
                                 <!-- Modal -->
                                 <div class="modal fade" id="rating-form-modal"
                                      aria-labelledby="rating-form-modal"
