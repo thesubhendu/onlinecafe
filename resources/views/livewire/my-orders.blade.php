@@ -17,22 +17,25 @@
                     <tr>
                         <td>{{$order->vendor->shop_name ?? $order->vendor->vendor_name}}</td>
                         @foreach($order->products as $product)
-                        <td><img src="{{$product->product_image}}" width="48" height="48"></td>
-                        <td>{{$product->name}}
-                            <div>
-                                <small class="text-muted">
-                                    {{$product->pivot->options}}
-                                </small>
-                            </div>
-                        </td>
-                        <td>${{$product->price}}</td>
-                        <td><a href="{{ route('orders.create', $product) }}" class="btn btn-success btn-sm"><i class="fa fa-cart-plus"></i></a>
-                        </td>
+                            <td><img src="{{$product->product_image}}" width="48" height="48"></td>
+                            <td>{{$product->name}}
+                                <div>
+                                    <small class="text-muted">
+                                        {{$product->pivot->options}}
+                                    </small>
+                                </div>
+                            </td>
+                            <td>${{$product->price}}</td>
+                            <td><a href="{{ route('orders.create', $product) }}" class="btn btn-success btn-sm"><i class="fa fa-cart-plus"></i></a>
+                            </td>
+                        @endforeach
                     </tr>
 
-                    @endForEach
-                    </tr>
+
+            <td> {{$orders->links()}}</td>
+
                     @empty
+
 
                     <p class="mb-">It's strange, you havent ordered any coffee yet!</P>
                     @endforelse

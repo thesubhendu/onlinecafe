@@ -3,19 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class MyOrders extends Component
 {
-    public $orders;
-
-    public function mount()
-    {
-        $this->orders = auth()->user()->orders()->latest()->get();
-
-    }
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        return view('livewire.my-orders');
+        return view('livewire.my-orders', ['orders'=> auth()->user()->orders()->latest()->paginate(10)]);
     }
 }
