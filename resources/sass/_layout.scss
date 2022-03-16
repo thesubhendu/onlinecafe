@@ -404,7 +404,7 @@ a {
         position: relative;
         color: #000000;
         line-height: 24px;
-        font-size: 30px;
+        font-size: 1.6rem;
         font-weight: 800;
         display: block;
         &:before {
@@ -435,7 +435,7 @@ a {
 // HOME SHOP VENDORS
 .shop-vendors {
     padding: 60px 0;
-    background: url("~/assets/images/bg-wave.svg") left no-repeat #fafbff;
+    background: #fcfcfc;
     .shop-vendors-item {
         background: #fff;
         box-shadow: 0 2px 3px #dfdfe5;
@@ -446,7 +446,7 @@ a {
         .content {
             padding: 16px;
             h3 {
-                font-size: 20px;
+                font-size: 1.2rem;
                 font-weight: bold;
                 color: #151618;
             }
@@ -728,14 +728,12 @@ a {
 }
 .vendor-menu {
     padding: 60px 0;
-    background: #fafbff;
+    background: #fcfcfc;
     .vendor-product-item {
         background: #fff;
         box-shadow: 0 2px 3px #dfdfe5;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        padding-bottom: 8px;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1rem;
+        border-radius: 16px;
         .content {
             padding: 1rem;
             display: block;
@@ -843,7 +841,7 @@ a {
 // LANDING PAGE / NEAR SHOP
 .near-shop {
     padding: 70px 0;
-    background: url("~/assets/images/bg-wave.svg") left no-repeat #fcfcfc;
+    background: #fcfcfc;
     background-attachment: fixed;
     .featured-box-mini {
         margin-top: 25px;
@@ -883,22 +881,29 @@ a {
 // LANDING PAGE / WE PROVIDE
 .we-provide {
     padding-top: 50px;
-    background: url("~/assets/images/bg-wave.svg") left no-repeat #fff;
+    background:#fcfcfc;
     background-attachment: fixed;
 
+    .headline-row{
+        margin-bottom: 2rem;
+    }
     .icon-box {
-        box-shadow: 0 2px 3px #dfdfe5;
+        box-shadow: 0 2px 3px #e4e4e4;
         background: #fff;
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 16px;
         margin-bottom: 20px;
         text-align: center;
-        min-height: 214px;
-        h3 {
-            font-size: 15px;
-            margin-top: 19px;
-            line-height: 21px;
-            font-weight: 600;
+        min-height: 230px;
+        h4 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        p{
+            margin: 0;
+            font-size: .875rem;
+            color: #555;
         }
         .icon-image {
             text-align: center;
@@ -907,6 +912,7 @@ a {
             }
         }
     }
+
 }
 
 // LANDING PAGE / CALL TO ACTION
@@ -916,13 +922,17 @@ section.call-to-action {
     background-position: -229px 0px;
     background-attachment: fixed;
     // background: url("~/assets/images/bg-wave.svg") left no-repeat $extra;
-    background: $extra;
+    background: #fbeee3;
     img {
         width: 45px;
         margin-bottom: 12px;
     }
+    h2{
+        color: #000;
+        font-weight: bold;
+    }
     p {
-        color: #ffffff;
+        color: #555;
         font-style: italic;
     }
 }
@@ -1086,7 +1096,7 @@ section.profile-content-details {
 .my-orders,
 .favorite-vendor {
     padding: 60px 0;
-    background: #fafbff;
+    background: #fcfcfc;
     min-height: 100vh;
     h3 {
         font-weight: bold;
@@ -1098,7 +1108,7 @@ section.profile-content-details {
     }
 }
 .favorite-vendor {
-    background: #fafbff;
+    background: #fcfcfc;
     min-height: 100vh;
     .product-image {
         position: relative;
@@ -1117,7 +1127,7 @@ section.profile-content-details {
 
 // FOOTER
 .footer {
-    background: #c36813;
+    background: #57524e;
     background-size: cover;
     background-position: 50% 8%;
     h2 {
@@ -1176,7 +1186,7 @@ section.profile-content-details {
         }
         text-align: center;
         padding: 10px 0;
-        border-top: 1px solid #df7f26;
+        border-top: 1px solid #5f5f5f;
     }
     .footer-top {
         padding: 70px 0;
@@ -1234,7 +1244,7 @@ section.profile-content-details {
 
 // MY COFFEES
 .my-coffees {
-    background: #fafbff;
+    background: #fcfcfc;
     padding: 60px 0;
     height: 100vh;
     .vendor-logo {
@@ -1269,7 +1279,7 @@ section.profile-content-details {
 
 // FORM
 .form-body {
-    background: #fafbff !important;
+    background: #fcfcfc !important;
     .sigin-form {
         padding: 2rem 1rem;
         font-size: 14px !important;
