@@ -47,7 +47,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('make-order', function (User $user, Vendor $vendor) {
-             return  !$user->shop && $vendor->is_open ;
+             return  !$user->shop  ;
+//             return  !$user->shop && $vendor->is_open ; todo uncomment it in production
         });
 
         Gate::define('make-rating', function (User $user) {
