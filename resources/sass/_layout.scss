@@ -93,6 +93,23 @@ button {
     }
 }
 
+// CARD
+.app-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    box-shadow: 0 2px 3px #dfdfe5;
+    border-radius: 16px;
+    .app-card-body{
+        flex: 1 1 auto;
+        padding: 1.5rem 1rem;
+    }
+}
+
 // INPUT
 input {
     font-family: $font;
@@ -887,33 +904,41 @@ a {
     .headline-row{
         margin-bottom: 2rem;
     }
-    .icon-box {
-        box-shadow: 0 2px 3px #e4e4e4;
-        background: #fff;
-        padding: 20px;
-        border-radius: 16px;
-        margin-bottom: 20px;
+}
+
+// ICON BOX
+.icon-box {
+    box-shadow: 0 2px 3px #e4e4e4;
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    min-height: 230px;
+    h4 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 20px 0 10px 0;
+    }
+    p{
+        margin: 0;
+        font-size: .875rem;
+        color: #555;
+    }
+    .icon-image {
         text-align: center;
-        min-height: 230px;
-        h4 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 20px 0 10px 0;
-        }
-        p{
-            margin: 0;
-            font-size: .875rem;
-            color: #555;
-        }
-        .icon-image {
-            text-align: center;
-            img {
-                width: 50px;
-            }
+        img {
+            width: 50px;
         }
     }
-
+    .action-btn{
+        margin-top: 1rem;
+        font-size: .875rem;
+        padding: 8px 30px;
+        border-radius: 300px;
+    }
 }
+
 
 // LANDING PAGE / CALL TO ACTION
 section.call-to-action {
@@ -1397,4 +1422,9 @@ section.profile-content-details {
             margin-top: 16px;
         }
     }
+}
+
+// DEALS
+.deals-row{
+    margin-bottom: 3rem;
 }
