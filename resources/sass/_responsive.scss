@@ -224,20 +224,21 @@
         .vendor-product-item {
             .content {
                 .product-image {
-                    width: 45%;
+                    width: 38%;
                     img{
                         margin-top: 0px;
                     }
                 }
                 .details {
-                    width: 52%;
+                    width: 60%;
                     padding-left: 12px;
                     h5{
-                        font-size: 1rem;
+                        font-size: .9rem;
+                        font-weight: bold;
                     }
                     .price-and-add {
                         p {
-                            font-size: 13px;
+                            font-size: 12px;
                             color: #888;
                             line-height: 18px;
                         }
@@ -247,6 +248,9 @@
                             font-size: 12px;
                             font-weight: bold;
                         }
+                    }
+                    .shop-btn {
+                        padding: 5px;
                     }
                 }
             }

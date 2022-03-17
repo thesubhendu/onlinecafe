@@ -33,7 +33,7 @@
     @guest
             <section class="we-provide">
                 <div class="container">
-                    <div class="row mb2">
+                    <div class="row headline-row">
                         <div class="col-lg-12 m-0 p-0 ">
                             <div class="content-heading text-center">
                                 <h3 class="title">Key Features </h3>
@@ -44,58 +44,54 @@
                     <div class="row no-gutters">
                         <div class="col-md-3 col-xs-12">
                             <div class="icon-box">
-                                <h4>No queues</h4>
                                 <div class="icon-image">
                                     <img src="{{asset('assets/images/queue.png')}}" alt="">
                                 </div>
+                                <h4>No queues</h4>
                                 <div class="icon-title">
-                                    <h3>Avoid the queues by ordering ahead</h3>
+                                    <p>Avoid the queues by ordering ahead</p>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-md-3 col-xs-12">
                             <div class="icon-box">
-                                <h4>Rewards and deals</h4>
                                 <div class="icon-image">
                                     <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
-                        </div>
+                                </div>
+                                <h4>Rewards and deals</h4>
                                 <div class="icon-title">
-                                    <h3>All your rewards and deals in one spot. No more carrying multiple coffee loyalty
+                                    <p>All your rewards and deals in one spot. No more carrying multiple coffee loyalty
                                         cards,
                                         they are all tracked here in one place
-                                    </h3>
+                                    </p>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-md-3 col-xs-12">
                             <div class="icon-box">
-                                <h4>Go cashless</h4>
                                 <div class="icon-image">
                                     <img src="{{asset('assets/images/online-payment.png')}}" alt="">
                                 </div>
+                                <h4>Go cashless</h4>
                                 <div class="icon-title">
-                                    <h3>Go cashless with safe and secure online payments</h3>
+                                    <p>Go cashless with safe and secure online payments</p>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-md-3 col-xs-12">
                             <div class="icon-box">
-                                <h4>Feel Good</h4>
                                 <div class="icon-image">
                                     <img src="{{asset('assets/images/donation.png')}}" alt="">
+                                </div>
+                                <h4>Feel Good</h4>
+                                <div class="icon-title">
+                                    <p> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
+                                        might need one.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="icon-title">
-                            <h3> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
-                                might need one.</h3>
-                        </div>
-
                     </div>
-                </div>
-
-            </div>
                 </div>
             </section>
     @endguest

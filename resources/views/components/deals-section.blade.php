@@ -1,4 +1,5 @@
 <!-- TITLE -->
+@if($deals)
 <div class="row mb-4">
     <div class="col-md-12 m-0 p-0 ">
         <div class="content-heading">
@@ -6,19 +7,24 @@
         </div>
     </div>
 </div>
+@endif
 
-<div class="row mb-4 ">
+<div class="row deals-row ">
     @foreach ($deals as $deal)
-        <div class="col-md-4 col-sm-12 text-center">
+    <div class="col-md-4 col-sm-12 text-center icon-box">
+        <div class="icon-image">
             @if($deal->image)
-                <img src="{{asset($deal->image)}}" alt="">
+            <img src="{{asset($deal->image)}}" alt="">
             @else
-                <img src="{{asset('/assets/images/donation.png')}}" alt="">
+            <img src="{{asset('/assets/images/donation.png')}}" alt="">
             @endif
-
-            <h3>{{$deal->title}}</h3>
-            <p>Expires at: {{$deal->expires_at->diffForHumans()}}</p>
-            <a href="{{route('checkout.index',['deal'=> $deal->id])}}" class="btn btn-primary">Add Deal</a>
         </div>
-    @endforeach
+
+        <h4>{{$deal->title}}</h4>
+        <div class="icon-title">
+            <p>Expires at: {{$deal->expires_at->diffForHumans()}}</p>
+        </div>
+        <a href="{{route('checkout.index',['deal'=> $deal->id])}}" class="btn btn-primary action-btn">Add Deal</a>
+    </div>
 </div>
+@endforeach
