@@ -120,13 +120,13 @@ class Vendor extends Model
 
     public function getDistanceFromCustomer($customerLocation)
     {
-        $latFrom = $customerLocation['lat'] ?? null;
-        $lngFrom = $customerLocation['lng'] ?? null;
+        $latFrom = $customerLocation->lat ;
+        $lngFrom = $customerLocation->lon ;
 
         $latTo = $this->lat;
         $lngTo = $this->lng;
 
-        return (new GeoLocationService())->haversineGreatCircleDistance($latFrom,$lngFrom, $latTo,$lngTo);
+        return round((new GeoLocationService())->haversineGreatCircleDistance($latFrom,$lngFrom, $latTo,$lngTo));
     }
 
 }

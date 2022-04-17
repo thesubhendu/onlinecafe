@@ -12,7 +12,7 @@
         <div class="content">
             <a href="{{route('vendor.show', $vendor)}}">
                 <h3>{{$vendor->shop_name ?? $vendor->vendor_name}}</h3>
-{{--                <p><i class="fa fa-map-marker"></i> {{$vendor->getDistanceFromCustomer()}} </p>--}}
+                <p><i class="fa fa-map-marker"></i> {{$vendor->getDistanceFromCustomer(geoip()->getLocation('202.51.88.165'))}} km</p>
                 <p class="service-item">
                     @foreach($vendor->services ?? [] as $service)
                         <span>{{$service}}</span> &nbsp;
