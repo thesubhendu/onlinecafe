@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\GeoLocationService;
 use BeyondCode\Vouchers\Traits\HasVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,7 +33,6 @@ class Vendor extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
-        // $this->products()->create(['' => $product]); refer to rating function below
     }
 
     public function productOptions()
@@ -92,7 +92,6 @@ class Vendor extends Model
 
     public function nearbyShops($lat, $lon, $radius = 10)
     {
-//        dd($lat, $lon);
 //        replace 6371000 with 6371 for kilometer and 3956 for miles
         $nearbyVendors = Vendor::selectRaw("id, vendor_name,shop_name, address, lat, lng,
                      ( 6371 * acos( cos( radians(?) ) *
@@ -117,6 +116,17 @@ class Vendor extends Model
     public function deals()
     {
         return $this->hasMany(Deal::class);
+    }
+
+    public function getDistanceFromCustomer($customerLocation)
+    {
+        $latFrom = $customerLocation['lat'] ?? null;
+        $lngFrom = $customerLocation['lng'] ?? null;
+
+        $latTo = $this->lat;
+        $lngTo = $this->lng;
+
+        return (new GeoLocationService())->haversineGreatCircleDistance($latFrom,$lngFrom, $latTo,$lngTo);
     }
 
 }

@@ -27,14 +27,9 @@ Route::get('/offline', function () {
 Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 
-//Route::get('tinker', function () {
-//
-//    $vendor = \App\Models\User::find(4);
-//    $vendor->notify(new \App\Notifications\NewOrderNotification(Order::first()));
-////    \App\Events\OrderConfirmed::dispatch(Order::find(10));
-//    dd('order confirmed notifi');
-//
-//});
+Route::get('tinker', function () {
+    dd(geoip());
+});
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
