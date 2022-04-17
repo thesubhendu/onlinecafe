@@ -28,7 +28,8 @@ Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 
 Route::get('tinker', function () {
-    dd(geoip());
+    dd(geoip()->getLocation());
+    dd(geoip()->getLocation('27.974.399.65'));
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
