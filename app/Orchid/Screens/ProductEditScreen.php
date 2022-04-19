@@ -77,33 +77,42 @@ class ProductEditScreen extends Screen
      */
     public function layout(): array
     {
+        $fields = [
+            Input::make('product.name')
+                ->title('Name')
+                ->placeholder('Attractive but mysterious Name'),
+
+            TextArea::make('product.description')
+                ->title('Description')
+                ->rows(3)
+                ->maxlength(200)
+                ->placeholder('Brief description for preview'),
+
+            Input::make('product.price')->title('Price'),
+            CheckBox::make('product.is_active')->value(1)->title('Is Active')->sendTrueOrFalse(),
+            Input::make('product.product_image')->type('file')
+                ->title('Upload Product Image')
+            ,
+
+
+        ];
+
+
+        if(auth()->user()->isAdmin()) {
+            $fields[] = Relation::make('product.vendor_id')
+                ->title('Vendor')
+                ->fromModel(Vendor::class, 'vendor_name');
+
+            $fields[] = Relation::make('product.category_id')
+                ->title('Category')
+                ->fromModel(ProductCategory::class, 'name');
+        }else{
+            $fields[] = Input::make('product.vendor_id')->hidden(true)->value(auth()->user()->shop->id);
+            $fields[] = Input::make('product.category_id')->hidden(true)->value(1);
+        }
+
         return [
-            Layout::rows([
-                Input::make('product.name')
-                     ->title('Name')
-                     ->placeholder('Attractive but mysterious Name'),
-
-                TextArea::make('product.description')
-                        ->title('Description')
-                        ->rows(3)
-                        ->maxlength(200)
-                        ->placeholder('Brief description for preview'),
-
-                Input::make('product.price')->title('Price'),
-                CheckBox::make('product.is_active')->value(1)->title('Is Active')->sendTrueOrFalse(),
-                Picture::make('product.product_image')
-                       ->title('Large web banner image, generally in the front and center')
-                       ->targetRelativeUrl()
-                ,
-                Relation::make('product.vendor_id')
-                        ->title('Vendor')
-                        ->fromModel(Vendor::class, 'vendor_name'),
-
-                Relation::make('product.category_id')
-                        ->title('Category')
-                        ->fromModel(ProductCategory::class, 'name'),
-
-            ]),
+            Layout::rows($fields),
         ];
     }
 
@@ -112,6 +121,13 @@ class ProductEditScreen extends Screen
         $data = $request->get('product');
 
         $product->fill($data)->save();
+
+        $pimage = $request->all()['product']['product_image'] ?? null;
+
+        if(!empty($pimage)){
+            $product->product_image = $pimage->store('product-images');
+            $product->save();
+        }
 
         Alert::info('You have successfully created an product.');
 

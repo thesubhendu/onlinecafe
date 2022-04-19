@@ -38,6 +38,13 @@ class DealEditScreen extends EditScreen
     {
         $data = $request->get($this->getModelKey());
         $model->fill($data)->save();
+
+        $uploadedImage = $request->all()['deal']['image'] ?? null;
+
+        if(!empty($uploadedImage)){
+            $model->image = $uploadedImage->store('deal-images');
+            $model->save();
+        }
         Alert::info('Successfully Created');
 
         return redirect()->route('platform.'.$this->getModelKey().'.list');
@@ -51,8 +58,9 @@ class DealEditScreen extends EditScreen
             DateTimer::make('deal.expires_at')
                 ->title('Expires At'),
             CheckBox::make('deal.status')->value(0)->title('Is Active')->sendTrueOrFalse(),
-            Picture::make('deal.image')
-                ->targetRelativeUrl()
+            Input::make('deal.image')->type('file')
+                ->title('Upload Image')
+            ,
         ];
 
         if(auth()->user()->isAdmin()) {
