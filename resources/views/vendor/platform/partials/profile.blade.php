@@ -1,5 +1,6 @@
 <div class="d-flex m-0 align-items-center p-3">
     <div class="dropdown w-75">
+
         <a href="#" class="nav-link p-0 d-flex align-items-center" data-bs-toggle="dropdown">
             @if($image = Auth::user()->presenter()->image())
                 <span class="thumb-sm avatar me-3">
@@ -60,5 +61,7 @@
         </div>
     </div>
 
-    <x-orchid-notification/>
+    <div class="d-none d-md-block ">
+        <x-orchid-notification/>
+    </div>
 </div>

@@ -14,6 +14,9 @@
                     <span class="ms-2">@yield('title')</span>
                 </a>
 
+                <div  class="d-xs-block d-md-none " style="margin-right: 20px !important;">
+                    <x-orchid-notification/>
+                </div>
                 <a class="header-brand order-last" href="{{route('platform.index')}}">
                     @includeFirst([config('platform.template.header'), 'platform::header'])
                 </a>

@@ -7,7 +7,7 @@
        data-notification-method="post"
        data-notification-interval="{{ config('platform.notifications.interval') }}"
     >
-        <x-orchid-icon path="bell"/>
+        <x-orchid-icon width="2em" height="1.5em" path="bell"/>
 
         <template id="notification-circle">
             <x-orchid-icon path="circle" width="0.5em" height="0.5em" />
