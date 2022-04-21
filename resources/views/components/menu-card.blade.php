@@ -3,7 +3,7 @@
     <div class="content">
         <div class="product-image">
             @if($product->product_image)
-                <img src="{{asset($product->product_image)}}" class="img-responsive" alt="">
+                <img src="{{asset("storage/".$product->product_image)}}" class="img-responsive" alt="">
             @else
                 <img src="{{asset('assets/images/cafe-2.jpeg')}}" class="img-responsive" alt="">
             @endif

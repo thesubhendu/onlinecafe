@@ -12,9 +12,9 @@
 <div class="row deals-row ">
     @foreach ($deals as $deal)
     <div class="col-md-4 col-sm-12 text-center icon-box">
-        <div class="icon-image">
+        <div class="icon-imaged">
             @if($deal->image)
-            <img src="{{asset($deal->image)}}" alt="">
+            <img width="300px"  src="{{asset("storage/".$deal->image)}}" alt="">
             @else
             <img src="{{asset('/assets/images/donation.png')}}" alt="">
             @endif
