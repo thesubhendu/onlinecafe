@@ -30,6 +30,10 @@ window.addEventListener("load", function () {
                         text: notification.text,
                     };
 
+                    let badge = document.querySelector('.badge');
+                    let count = badge.textContent;
+                    badge.innerHTML = count++;
+
                     if (notification.action) {
                         options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
                     }
