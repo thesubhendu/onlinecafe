@@ -27,6 +27,7 @@ window.addEventListener("load", function () {
                         title: notification.title,
                         toast: true,
                         position: 'top-right',
+                        timer:4000,
                         text: notification.text,
                     };
 
