@@ -48,7 +48,7 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        @if($deal)
+                                        @if($deal || $item->price == 0 )
                                             <span>{{$item->qty}}</span>
                                         @else
                                             <div class="control-btn ">

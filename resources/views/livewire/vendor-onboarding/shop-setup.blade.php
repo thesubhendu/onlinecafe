@@ -60,9 +60,15 @@
                                         @error('form.max_stamps') <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+
                                     <div class="form-group col">
-                                        <label for="form.free_product" class="form-label">Free Product</label>
-                                        <input class="form-control" type="text" wire:model.lazy="form.free_product">
+                                        <label for="form.free_product" class="form-label">Select Free Product</label>
+                                        <select class="form-control" wire:model="form.free_product" wire:change="freeProductChange">
+                                            <option value selected>Select Option</option>
+                                            @foreach($vendorProducts as $key => $option)
+                                                <option value="{{$option->id}}">{{$option->name}}</option>
+                                            @endforeach
+                                        </select>
                                         @error('form.free_product') <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

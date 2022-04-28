@@ -26,6 +26,7 @@ class LoyalityCard extends Component
     public function fetchCards()
     {
         $user = auth()->user();
+
         return Card::query()->with('vendor', 'stamps')
             ->where(['user_id' => $user->id, 'receiver_email' => null])
             ->orWhere('receiver_email', $user->email)
@@ -34,7 +35,7 @@ class LoyalityCard extends Component
 
     public function togglePayForwardForm($cardId)
     {
-        $this->showPayForwardForm[$cardId] = !$this->showPayForwardForm[$cardId];
+        $this->showPayForwardForm[$cardId] = ! $this->showPayForwardForm[$cardId];
     }
 
     public function render()
@@ -44,8 +45,7 @@ class LoyalityCard extends Component
 
     public function giftTransferred($card)
     {
-
         $this->cards = $this->fetchCards();
-
     }
+
 }

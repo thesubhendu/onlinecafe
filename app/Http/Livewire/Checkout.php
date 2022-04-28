@@ -3,8 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Mail\orderSubmitted;
+use App\Models\Card;
 use App\Models\Deal;
 use App\Models\Order;
+use App\Models\Product;
 use App\Notifications\NewOrderNotification;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Mail;
@@ -35,6 +37,7 @@ class Checkout extends Component
                 $deal->addToCart();
             }
         }
+        $this->claimFreeProduct();
 
         $this->refreshCart();
         $this->fill([
@@ -105,5 +108,28 @@ class Checkout extends Component
         $this->refreshCart();
 
         session()->flash("message", "Item has been removed");
+    }
+
+    private function claimFreeProduct(): void
+    {
+        if (request('claim_loyalty_card')) {
+
+            $claimCard = Card::find(request('claim_loyalty_card'));
+            $freeProduct = $claimCard->vendor->freeProduct ?? null;
+
+            if ($freeProduct) {
+                $cartProduct = [
+                    'id'      => $freeProduct->id,
+                    'name'    => $freeProduct->name,
+                    'price'   => 0,
+                    'weight'  => '0',
+                    'qty'     => $claimCard->vendor->get_free,
+                    'options' => [],
+                ];
+
+                Cart::destroy();
+                Cart::add($cartProduct)->associate(Product::class);
+            }
+        }
     }
 }

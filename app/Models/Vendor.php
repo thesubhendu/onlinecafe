@@ -7,6 +7,8 @@ use BeyondCode\Vouchers\Traits\HasVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\OpeningHours\OpeningHours;
 
 class Vendor extends Model
@@ -33,6 +35,11 @@ class Vendor extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function freeProduct(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'free_product','id');
     }
 
     public function productOptions()
