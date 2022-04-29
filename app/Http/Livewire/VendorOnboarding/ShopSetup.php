@@ -35,6 +35,7 @@ class ShopSetup extends Component
         'services'
     ];
     public $openingHoursOptions = [];
+    public $vendorProducts = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     public $menus;
@@ -97,6 +98,8 @@ class ShopSetup extends Component
                 }
                 $this->form['services'] = $services;
             }
+
+            $this->vendorProducts = $vendor->products->sortBy('name');
         }
     }
 
@@ -108,6 +111,7 @@ class ShopSetup extends Component
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.services' => 'required',
+            'form.get_free' => 'required_with:form.free_product|numeric|gt:0|nullable'
         ]);
 
         $vendor = auth()->user()->shop()->first();
@@ -120,6 +124,8 @@ class ShopSetup extends Component
         $vendor->update([
             'shop_name' => $this->form['shop_name'],
             'shop_email' => $this->form['shop_email'],
+            'free_product' => $this->form['free_product'] === '' ? null : $this->form['free_product'],
+            'get_free' => $this->form['get_free'],
             'shop_mobile' => $this->form['shop_mobile'],
             'description' => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
@@ -215,5 +221,13 @@ class ShopSetup extends Component
     {
         $this->form['lat'] = $position[0];
         $this->form['lng'] = $position[1];
+    }
+
+    public function freeProductChange(): void
+    {
+        if($this->form['free_product'] === '')
+        {
+            $this->form['get_free'] = null;
+        }
     }
 }

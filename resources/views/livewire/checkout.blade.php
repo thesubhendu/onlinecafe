@@ -48,7 +48,7 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        @if($deal)
+                                        @if($deal || $item->price == 0 )
                                             <span>{{$item->qty}}</span>
                                         @else
                                             <div class="control-btn ">
@@ -206,7 +206,7 @@
                                 <div class="col-md-12">
                                     <div class="cart-totals-result">
 
-                                        <a wire:click="submit" class="btn btn-secondary mt-25">
+                                        <a wire:click="submit({{$loyaltyCardId}})" class="btn btn-secondary mt-25">
                                             CHECKOUT
                                         </a>
                                         <a

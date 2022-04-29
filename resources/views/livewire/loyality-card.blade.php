@@ -26,9 +26,11 @@
                     <div class="card-logo card-header">
                         <div class="row">
                             <div class="col-md-7">
-                                <div class="vendor-logo">
-                                    <img src="storage/img/vendor/{{$card->card_logo}}">
-                                </div>
+                                @if($card->card_logo)
+                                    <div class="vendor-logo">
+                                        <img src="{{asset('storage/img/'.$card->card_logo)}}">
+                                    </div>
+                                @endif
                                 <div class="vendor-title">
                                     <h4>{{$card->vendor->vendor_name}}</h4>
                                     <p>Buy {{$card->vendor->max_stamps}} coffees get 1 free</p>
@@ -39,6 +41,9 @@
                                     <button type="button" class="btn btn-success btn-small" data-bs-toggle="modal"
                                             data-bs-target="#myModal">Pay Forward
                                     </button>
+                                    @if(!$card->loyalty_claimed)
+                                        <a href="{{route('checkout.index',['claim_loyalty_card'=> $card->id])}}" class="btn btn-primary action-btn">Claim</a>
+                                    @endif
                                 @endif
                                 <a href="{{route('vendor.products', $card->vendor_id )}}"
                                    class="btn btn-success btn-small">Order</a>
@@ -69,11 +74,11 @@
                                 <div class="d-flex">
                                     <div>
                                         @foreach ($card->stamps as $stamp)
-                                        <img src="storage/img/stamp48x48.png" width="48" height="48" alt="stamp">
+                                        <img src="{{asset('storage/img/stamp48x48.png')}}" width="48" height="48" alt="stamp">
                                         @endforeach
 
                                         @for ($i = 0; $i < ($card->vendor->max_stamps - $card->stamps->count()); $i++)
-                                            <img src="storage/img/nostamp48x48.png" width="48" height="48" alt="nostamp">
+                                            <img src="{{asset('storage/img/nostamp48x48.png')}}" width="48" height="48" alt="nostamp">
                                             @endfor
                                     </div>
                                 </div>

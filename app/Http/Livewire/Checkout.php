@@ -3,8 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Mail\orderSubmitted;
+use App\Models\Card;
 use App\Models\Deal;
 use App\Models\Order;
+use App\Models\Product;
 use App\Notifications\NewOrderNotification;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Mail;
@@ -24,6 +26,7 @@ class Checkout extends Component
     public $qtyOptions;
 
     public $deal;
+    public $loyaltyCardId;
 
     public function mount()
     {
@@ -35,6 +38,7 @@ class Checkout extends Component
                 $deal->addToCart();
             }
         }
+        $this->claimFreeProduct();
 
         $this->refreshCart();
         $this->fill([
@@ -45,7 +49,7 @@ class Checkout extends Component
         $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
-    public function submit()
+    public function submit($loyaltyCardId = null)
     {
         if(empty($this->items)) {
             session()->flash('message', 'Empty Cart');
@@ -61,6 +65,10 @@ class Checkout extends Component
 
 //        \App\Events\OrderSubmitted::dispatch($order);
         $order->vendor->owner->notify(new NewOrderNotification($order));
+
+        if($loyaltyCardId) {
+            Card::where('id', $loyaltyCardId)->update(['loyalty_claimed' => 1, 'is_active' => 0]);
+        }
 
         Cart::destroy();
 
@@ -105,5 +113,30 @@ class Checkout extends Component
         $this->refreshCart();
 
         session()->flash("message", "Item has been removed");
+    }
+
+    private function claimFreeProduct(): void
+    {
+        if (request('claim_loyalty_card')) {
+
+            $claimCard = Card::find(request('claim_loyalty_card'));
+            $freeProduct = $claimCard->vendor->freeProduct ?? null;
+
+            if ($freeProduct) {
+                $cartProduct = [
+                    'id'      => $freeProduct->id,
+                    'name'    => $freeProduct->name,
+                    'price'   => 0,
+                    'weight'  => '0',
+                    'qty'     => $claimCard->vendor->get_free,
+                    'options' => [],
+                ];
+
+                $this->loyaltyCardId = $claimCard->id;
+
+                Cart::destroy();
+                Cart::add($cartProduct)->associate(Product::class);
+            }
+        }
     }
 }
