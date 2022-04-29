@@ -41,7 +41,9 @@
                                     <button type="button" class="btn btn-success btn-small" data-bs-toggle="modal"
                                             data-bs-target="#myModal">Pay Forward
                                     </button>
-                                    <a href="{{route('checkout.index',['claim_loyalty_card'=> $card->id])}}" class="btn btn-primary action-btn">Claim</a>
+                                    @if(!$card->loyalty_claimed)
+                                        <a href="{{route('checkout.index',['claim_loyalty_card'=> $card->id])}}" class="btn btn-primary action-btn">Claim</a>
+                                    @endif
                                 @endif
                                 <a href="{{route('vendor.products', $card->vendor_id )}}"
                                    class="btn btn-success btn-small">Order</a>

@@ -26,6 +26,7 @@ class Checkout extends Component
     public $qtyOptions;
 
     public $deal;
+    public $loyaltyCardId;
 
     public function mount()
     {
@@ -48,7 +49,7 @@ class Checkout extends Component
         $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
-    public function submit()
+    public function submit($loyaltyCardId = null)
     {
         if(empty($this->items)) {
             session()->flash('message', 'Empty Cart');
@@ -64,6 +65,10 @@ class Checkout extends Component
 
 //        \App\Events\OrderSubmitted::dispatch($order);
         $order->vendor->owner->notify(new NewOrderNotification($order));
+
+        if($loyaltyCardId) {
+            Card::where('id', $loyaltyCardId)->update(['loyalty_claimed' => 1, 'is_active' => 0]);
+        }
 
         Cart::destroy();
 
@@ -126,6 +131,8 @@ class Checkout extends Component
                     'qty'     => $claimCard->vendor->get_free,
                     'options' => [],
                 ];
+
+                $this->loyaltyCardId = $claimCard->id;
 
                 Cart::destroy();
                 Cart::add($cartProduct)->associate(Product::class);
