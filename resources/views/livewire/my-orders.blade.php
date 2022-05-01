@@ -14,19 +14,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($orders as $order)
+                @forelse($orderProducts as $orderProduct)
                     <tr>
-                        <td>{{$order->vendor->shop_name ?? $order->vendor->vendor_name}}</td>
-
-                        @foreach($order->products as $product)
-                            @if($product->product_image)
-                                <td><img src="{{$product->product_image}}" width="48" height="48"></td>
+                        <td>{{$orderProduct->order->vendor->shop_name ?? $orderProduct->order->vendor->name}}</td>
+                            @if($orderProduct->product->product_image)
+                                <td><img src="{{$orderProduct->product->product_image}}" width="48" height="48"></td>
                             @else
                                 <td><img src="{{asset('assets/images/cold-coffee.jpg')}}" width="48" height="48"></td>
                             @endif
-                            <td>{{$product->name}}</td>
+                            <td>{{$orderProduct->product->name}}</td>
                             <td>
-                                <?php $productOption = json_decode($product->pivot->options, true);?>
+                                <?php $productOption = json_decode($orderProduct->options, true);?>
                                 <ul>
                                     @foreach($productOption as $option)
                                         <li>
@@ -37,17 +35,16 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>${{$product->price}}</td>
+                            <td>${{$orderProduct->product->price}}</td>
                             <td>
-                                <a href="{{ route('orders.create', $product) }}" class="btn btn-success btn-sm"><i
+                                <a href="{{ route('orders.create', $orderProduct->product) }}" class="btn btn-success btn-sm"><i
                                         class="fa fa-cart-plus"></i></a>
                             </td>
-                        @endforeach
                     </tr>
-                    <td> {{$orders->links()}}</td>
                 @empty
                     <p class="mb-">It's strange, you haven't ordered any coffee yet!</P>
                 @endforelse
+                <tr><td>{{$orderProducts->links() }}</td></tr>
                 </tbody>
             </table>
         </div><!-- /.row -->
