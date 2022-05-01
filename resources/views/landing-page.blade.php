@@ -31,69 +31,69 @@
         </section>
     @endguest
     @guest
-            <section class="we-provide">
-                <div class="container">
-                    <div class="row headline-row">
-                        <div class="col-lg-12 m-0 p-0 ">
-                            <div class="content-heading text-center">
-                                <h3 class="title">Key Features </h3>
-                                <img src="assets/images/img-icon-gold.png" alt="">
+        <section class="we-provide">
+            <div class="container">
+                <div class="row headline-row">
+                    <div class="col-lg-12 m-0 p-0 ">
+                        <div class="content-heading text-center">
+                            <h3 class="title">Key Features </h3>
+                            <img src="assets/images/img-icon-gold.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-md-3 col-xs-12">
+                        <div class="icon-box">
+                            <div class="icon-image">
+                                <img src="{{asset('assets/images/queue.png')}}" alt="">
+                            </div>
+                            <h4>No queues</h4>
+                            <div class="icon-title">
+                                <p>Avoid the queues by ordering ahead</p>
                             </div>
                         </div>
                     </div>
-                    <div class="row no-gutters">
-                        <div class="col-md-3 col-xs-12">
-                            <div class="icon-box">
-                                <div class="icon-image">
-                                    <img src="{{asset('assets/images/queue.png')}}" alt="">
-                                </div>
-                                <h4>No queues</h4>
-                                <div class="icon-title">
-                                    <p>Avoid the queues by ordering ahead</p>
-                                </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="icon-box">
+                            <div class="icon-image">
+                                <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
+                            </div>
+                            <h4>Rewards and deals</h4>
+                            <div class="icon-title">
+                                <p>All your rewards and deals in one spot. No more carrying multiple coffee loyalty
+                                    cards,
+                                    they are all tracked here in one place
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-3 col-xs-12">
-                            <div class="icon-box">
-                                <div class="icon-image">
-                                    <img src="{{asset('assets/images/trophy-bw.png')}}" alt="">
-                                </div>
-                                <h4>Rewards and deals</h4>
-                                <div class="icon-title">
-                                    <p>All your rewards and deals in one spot. No more carrying multiple coffee loyalty
-                                        cards,
-                                        they are all tracked here in one place
-                                    </p>
-                                </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="icon-box">
+                            <div class="icon-image">
+                                <img src="{{asset('assets/images/online-payment.png')}}" alt="">
+                            </div>
+                            <h4>Go cashless</h4>
+                            <div class="icon-title">
+                                <p>Go cashless with safe and secure online payments</p>
                             </div>
                         </div>
-                        <div class="col-md-3 col-xs-12">
-                            <div class="icon-box">
-                                <div class="icon-image">
-                                    <img src="{{asset('assets/images/online-payment.png')}}" alt="">
-                                </div>
-                                <h4>Go cashless</h4>
-                                <div class="icon-title">
-                                    <p>Go cashless with safe and secure online payments</p>
-                                </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="icon-box">
+                            <div class="icon-image">
+                                <img src="{{asset('assets/images/donation.png')}}" alt="">
                             </div>
-                        </div>
-                        <div class="col-md-3 col-xs-12">
-                            <div class="icon-box">
-                                <div class="icon-image">
-                                    <img src="{{asset('assets/images/donation.png')}}" alt="">
-                                </div>
-                                <h4>Feel Good</h4>
-                                <div class="icon-title">
-                                    <p> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
-                                        might need one.
-                                    </p>
-                                </div>
+                            <h4>Feel Good</h4>
+                            <div class="icon-title">
+                                <p> Feel good with a pay it forward scheme.Pay your reward coffees forward to someone yu
+                                    might need one.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
     @endguest
 
 <!-- COFFEE SHOP VENDER CARD -->
@@ -113,7 +113,9 @@
             <!-- VENDER CARDS -->
             <div class="row">
                 @foreach ($vendors as $vendor)
-                    <x-vendor-card :vendor="$vendor"></x-vendor-card>
+                    <div class="col-md-4 col-sm-6">
+                        <x-vendor-card :vendor="$vendor"></x-vendor-card>
+                    </div>
                 @endforeach
             </div>
         </div>
