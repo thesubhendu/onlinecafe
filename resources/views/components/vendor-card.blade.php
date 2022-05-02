@@ -6,23 +6,19 @@
         @auth
             <livewire:vendor-like-button :vendor="$vendor" :key="$vendor->id" class="favorite-icon" />
         @endauth
+        </div>
+        <div class="content">
+            <a href="{{route('vendor.show', $vendor)}}">
+                <h3>{{$vendor->shop_name ?? $vendor->vendor_name}}</h3>
+                <p><i class="fa fa-map-marker"></i> {{$vendor->getDistanceFromCustomer(geoip()->getLocation())}} km</p>
+                <p class="service-item">
+                    @foreach($vendor->services ?? [] as $service)
+                        <span>{{$service}}</span> &nbsp;
+                    @endforeach
+                     </p>
 
-    </div>
-    <div class="content">
-        <a href="{{route('vendor.show', $vendor)}}">
-            <h3>{{$vendor->shop_name ?? $vendor->vendor_name}}</h3>
-            <p>
-                <i class="fa fa-map-marker"></i> {{$vendor->getDistanceFromCustomer(geoip()->getLocation('202.51.88.165'))}}
-                km</p>
-            <p class="service-item">
-                @foreach($vendor->services ?? [] as $service)
-                    <span>{{$service}}</span> &nbsp;
-                @endforeach
-            </p>
-
-
-        </a>
-    </div>
+            </a>
+        </div>
 
     <div class="ratings">
         @for($i=0; $i < $vendor->rating(); $i++)
