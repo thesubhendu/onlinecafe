@@ -19,17 +19,33 @@
 
             </a>
         </div>
-
     <div class="ratings">
-        @for($i=0; $i < $vendor->rating(); $i++)
-            <i class="fa fa-coffee selected"></i>
-        @endfor
-        @for($i=0; $i < (5-$vendor->rating()); $i++)
-            <i class="fa fa-coffee"></i>
-        @endfor
+        <div class="d-flex justify-content-between mb-3">
+            <div class ="p-2">
+                @for($i=0; $i < $vendor->rating(); $i++)
+                    <i class="fa fa-coffee selected"></i>
+                @endfor
+                @for($i=0; $i < (5-$vendor->rating()); $i++)
+                    <i class="fa fa-coffee"></i>
+                @endfor
 
-        @if($vendor->rating())
-            <span>{{(int)$vendor->rating()}} </span>
-        @endif
+                @if($vendor->rating())
+                    <span>{{(int)$vendor->rating()}} </span>
+                @endif
+                @if(request()->is('user/favourites'))
+                    <p class="card-text"><small class="text-muted">Last
+                            updated {{$vendor->updated_at->diffForHumans()}}</small>
+                    </p>
+                @endif
+
+            </div>
+            <div class ="p-2" >
+                @if(request()->is('user/favourites'))
+                    <a href="{{route( 'vendor.products', $vendor )}}"
+                       class="btn btn-action px-3 mr-3">Order</a>
+                @endif
+            </div>
+
+        </div>
     </div>
 </div>
