@@ -40,6 +40,8 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles'),
 
+
+
             Menu::make('Update Shop Info')
                 ->icon('monitor')
                 ->route('manage-shop')
@@ -57,6 +59,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('monitor')
                 ->route('platform.deal.list'),
 
+            Menu::make(__('Manage Product Size'))
+                ->icon('monitor')
+                ->route('platform.product-sizes.list')
+                ->permission('platform.systems.roles'),
         ];
     }
 

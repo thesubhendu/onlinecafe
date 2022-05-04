@@ -119,3 +119,7 @@ Route::screen('deal/{deal?}', \App\Orchid\Screens\DealEditScreen::class)
 
 Route::screen('deal-add-product/{product}/{deal}', \App\Orchid\Screens\AddProductToDealScreen::class)
      ->name('platform.deal.addProduct');
+
+Route::screen('product-sizes', \App\Orchid\Screens\ProductSizeListScreen::class)->name('platform.product-sizes.list');
+Route::screen('product-size/{productSize?}', \App\Orchid\Screens\ProductSizeEditScreen::class)
+    ->name('platform.product-size.edit');

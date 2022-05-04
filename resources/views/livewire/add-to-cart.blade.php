@@ -11,8 +11,28 @@
                             <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
                         </div>
                         <div class="content">
-                            <h4>{{$product->name}}</h4>
-                            <p>${{$product->price}}</p>
+                            <div class="d-flex mb-3 ">
+                                <div class="p-1">
+                                    <h4>{{$product->name}}</h4>
+                                    <p>${{$product->price}}</p>
+                                </div>
+                                <div class="p-2"></div>
+                                <div class="p-1 mr-4">
+                                    <label>Quantity</label>
+                                    <div class="control-btn ">
+                                        <button type="button" class="value-button decrease"
+                                                wire:click="updateQty('remove')" value="Decrease Value">-
+                                        </button>
+                                        <input type="number" id="number" wire:model="cartProduct.qty"/>
+                                        <button type="button" class="value-button increase" wire:click="updateQty()"
+                                                value="Increase Value">+
+                                        </button>
+                                    </div>
+
+                                    @error('cartProduct.qty') <span
+                                        class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
