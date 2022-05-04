@@ -50,12 +50,12 @@ class ProductSizeEditScreen extends EditScreen
     {
         $data = $request->get('productSize');
         $model->fill($data)->save();
-
-        ProductSize::where('id', '!=', $model->id)
-            ->update([
-                'base_size' => ! $request->get('productSize')['base_size'],
-            ]);
-
+        if ($request->get('productSize')['base_size']) {
+            ProductSize::where('id', '!=', $model->id)
+                ->update([
+                    'base_size' => 0,
+                ]);
+        }
 
         Alert::info('Successfully Created');
 
