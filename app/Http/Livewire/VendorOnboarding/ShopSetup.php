@@ -4,6 +4,8 @@ namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Models\AllProduct;
 use App\Models\ProductOption;
+use App\Models\ProductSize;
+use App\Models\VendorProductSize;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -18,6 +20,7 @@ class ShopSetup extends Component
         'menus.*.price'        => 'required',
         'options.*.isSelected' => 'boolean',
         'options.*.price'      => 'required|decimal',
+        'productSizes.*.price'      => 'required|decimal',
     ];
     public $logo;
     public $form = [
@@ -40,6 +43,7 @@ class ShopSetup extends Component
 
     public $menus;
     public $options;
+    public $productSizes;
 
     public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
     public $newService;
@@ -71,6 +75,24 @@ class ShopSetup extends Component
             $option->isSelected = true;
 
             return $option;
+        });
+
+        $vendorProductSizesPrice = VendorProductSize::where('vendor_id', auth()->user()->shop->id)->pluck( 'price','product_size_id');
+
+        $this->productSizes = ProductSize::all()->map(function ($size) use($vendorProductSizesPrice) {
+            if(isset($vendorProductSizesPrice[$size->id]))
+            {
+                $size->price = $vendorProductSizesPrice[$size->id];
+
+                return $size;
+            }
+            if($size->base_size){
+                $size->price = 0;
+            } else {
+                $size->price = 1;
+            }
+
+            return $size;
         });
 
         $vendor = auth()->user()->shop()->first();
@@ -111,7 +133,7 @@ class ShopSetup extends Component
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.services' => 'required',
-            'form.get_free' => 'required_with:form.free_product|numeric|gt:0|nullable'
+            'form.get_free' => 'required_with:form.free_product|numeric|gt:0|nullable',
         ]);
 
         $vendor = auth()->user()->shop()->first();
@@ -160,6 +182,12 @@ class ShopSetup extends Component
                 'options' => $option->options,
             ]);
         }
+
+        $this->productSizes->map(function ($size) use($vendor){
+            $vendor->productSizes()->updateOrCreate(['product_size_id' => $size->id, 'vendor_id' => $vendor->id], [
+                'price' => $size->price
+            ]);
+        });
 
         return redirect()->route('vendor.show', $vendor->id);
     }

@@ -18,6 +18,7 @@ class CreateProductSizesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->boolean('base_size')->default(0);
+            $table->foreignId('category_id')->references('id')->on('product_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

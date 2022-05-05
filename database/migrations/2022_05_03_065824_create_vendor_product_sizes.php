@@ -18,7 +18,6 @@ class CreateVendorProductSizes extends Migration
             $table->foreignId('product_size_id')->references('id')->on('product_sizes')->onDelete('cascade');
             $table->decimal('price', 4, 2);
             $table->foreignId('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
-            $table->foreignId('category_id')->references('id')->on('product_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

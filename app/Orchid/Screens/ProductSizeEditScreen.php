@@ -2,10 +2,12 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\ProductCategory;
 use App\Models\ProductSize;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
@@ -38,6 +40,11 @@ class ProductSizeEditScreen extends EditScreen
                 ->title('Name'),
             Input::make('productSize.slug')->required()
                 ->title('Slug'),
+            Relation::make('productSize.category_id')
+                ->title('Category')
+                ->fromModel(ProductCategory::class, 'name')
+                ->value(1)
+                ->required(),
             CheckBox::make('productSize.base_size')->value(0)->title('Base Size')->sendTrueOrFalse(),
         ];
 

@@ -23,6 +23,9 @@ class ProductSizeListLayout extends Table
             TD::make('Base Size')->render(function ($size) {
                 return $size->base_size ? "True" : "False";
             }),
+            TD::make('category')->render(function ($size) {
+                return $size->category->name;
+            }),
             TD::make("Action")
                 ->render(function ($size) {
                     return Group::make([

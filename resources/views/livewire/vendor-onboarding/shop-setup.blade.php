@@ -172,11 +172,33 @@
                                                              step='any' placeholder="price"
                                                              wire:model="options.{{$index}}.price">
                                                 </div>
+
                                             </div>
                                         @endforeach
 
                                     </div>
                             </div>
+                            @if($productSizes->count())
+                                <div class="menu-option-section form-part">
+                                    <h2 class="title">Set Price for Sizes</h6>
+                                        <div class="row">
+                                            @foreach ($productSizes as $index=>$size)
+                                                @if(!$size->base_size)
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{$size->name}} ({{$size->slug}})</label>
+                                                            $ <input min="0" style="display:inline-block" class="form-control"
+                                                                     type="number"
+                                                                     step='any' placeholder="price"
+                                                                     wire:model="productSizes.{{$index}}.price">
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                </div>
+                                @endif
 
                             <section class="mb-4">
                                 <h2 class="title">Services</h2>

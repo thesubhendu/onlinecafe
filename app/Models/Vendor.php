@@ -8,6 +8,7 @@ use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\OpeningHours\OpeningHours;
 
@@ -45,6 +46,11 @@ class Vendor extends Model
     public function productOptions()
     {
         return $this->hasMany(VendorProductOption::class);
+    }
+
+    public function productSizes(): HasMany
+    {
+        return $this->hasMany(VendorProductSize::class);
     }
 
     public function rate($rating, $user = null, $comment = null)

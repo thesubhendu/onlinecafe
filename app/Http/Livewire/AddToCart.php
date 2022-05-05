@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use App\Models\ProductOption;
+use App\Models\VendorProductSize;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -13,6 +14,7 @@ class AddToCart extends Component
     public $product;
 
     public $cartProduct;
+    public $vendorProductSizes;
 
 
     public function render()
@@ -31,6 +33,9 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
+        $this->vendorProductSizes = VendorProductSize::where('vendor_id', $this->product->vendor_id)
+            ->with('productSize', 'productSize.category')
+            ->get();
     }
 
     public function submit()

@@ -46,20 +46,15 @@
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <label>Quantity</label>
-
-                                    <div class="control-btn ">
-                                        <button type="button" class="value-button decrease"
-                                                wire:click="updateQty('remove')" value="Decrease Value">-
-                                        </button>
-                                        <input type="number" id="number" wire:model="cartProduct.qty"/>
-                                        <button type="button" class="value-button increase" wire:click="updateQty()"
-                                                value="Increase Value">+
-                                        </button>
-                                    </div>
-
-                                    @error('cartProduct.qty') <span
-                                        class="text-danger">{{ $message }}</span> @enderror
+                                    <label>Size:  </label>
+                                    @foreach($vendorProductSizes as $index => $size)
+                                        <label for="">{{$size->productSize->slug}}</label>
+                                        @if($size->productSize->base_size)
+                                            <input type="radio" name="form.size_price" value="{{$size->price}}" checked wire:change="updateQty('remove')">
+                                        @else
+                                            <input type="radio" name="form.size_price" value="{{$size->price}}">
+                                        @endif
+                                    @endforeach
                                 </div>
 
 
