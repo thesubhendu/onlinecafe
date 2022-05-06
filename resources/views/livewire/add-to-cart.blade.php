@@ -14,7 +14,7 @@
                             <div class="d-flex mb-3 ">
                                 <div class="p-1">
                                     <h4>{{$product->name}}</h4>
-                                    <p>${{$product->price}}</p>
+                                    <p>${{$cartProduct['price']}}</p>
                                 </div>
                                 <div class="p-2"></div>
                                 <div class="p-1 mr-4">
@@ -41,23 +41,22 @@
                         <form wire:submit.prevent="submit" method="post">
                             @csrf
                             <div class="row extras">
-                                <div class="col-lg-12 ">
-                                    <h4> Select Options</h4>
-                                </div>
-
                                 <div class="col-lg-4">
                                     <label>Size:  </label>
                                     @foreach($vendorProductSizes as $index => $size)
                                         <label for="">{{$size->productSize->slug}}</label>
                                         @if($size->productSize->base_size)
-                                            <input type="radio" name="form.size_price" value="{{$size->price}}" checked wire:change="updateQty('remove')">
+                                            <input type="radio" name="selectSize" value="{{$size->price}}" checked wire:change="updateProductSizePrice({{$product->price}}, {{$size}})">
                                         @else
-                                            <input type="radio" name="form.size_price" value="{{$size->price}}">
+                                            <input type="radio" name="selectSize" value="{{$size->price}}" wire:change="updateProductSizePrice({{$product->price}},{{$size}})">
                                         @endif
                                     @endforeach
                                 </div>
+                                <div class="col-lg-8"></div>
 
-
+                                <div class="col-lg-12 ">
+                                    <h4> Select Options</h4>
+                                </div>
                                 @foreach($product->options() as $index => $option)
                                     <div class="col-lg-2 mb-3">
                                         <label for="">{{$option->name}} (+ ${{$option->price}})</label>
@@ -71,7 +70,6 @@
                                         </select>
                                         @error('cartProduct.options.'.$option->id) <span
                                             class="text-danger">{{ $message }}</span> @enderror
-
                                     </div>
                                 @endforeach
 
