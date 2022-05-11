@@ -4,9 +4,6 @@ namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Models\AllProduct;
 use App\Models\ProductOption;
-use App\Models\ProductPrice;
-use App\Models\ProductSize;
-use App\Models\VendorProductSize;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -21,11 +18,8 @@ class ShopSetup extends Component
         'menus.*.price'        => 'required',
         'options.*.isSelected' => 'boolean',
         'options.*.price'      => 'required|decimal',
-        'productSizes.*.price'      => 'required|decimal',
         'productPrice.*.*.size'=> 'required|string',
-        'productPrice.*.*.price'=> 'required|decimal',
     ];
-
     public $logo;
     public $form = [
         'shop_name',
@@ -47,10 +41,10 @@ class ShopSetup extends Component
 
     public $menus;
     public $options;
-    public $productSizes;
 
     public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
     public $newService;
+    public $sizes;
 
     public $listeners = ['markerPositionChanged', 'addressChanged'];
 
@@ -66,36 +60,24 @@ class ShopSetup extends Component
     {
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
-        $vendor = auth()->user()->shop()->first();
 
+        $vendor = auth()->user()->shop()->first();
+        $this->sizes = config('sizes');
         $vendorProducts = $vendor->products()->with('productPrices')->get();
 
         $this->menus = AllProduct::all()->map(function ($product)  use($vendorProducts) {
             $product->isSelected = true;
             $product->is_stamp = true;
-            $product->size = [];
             $saveProduct = $vendorProducts->where('name', $product->name)->first();
-
             if($saveProduct)
             {
                 $saveProduct->productPrices()->each(function ($productPrice) use($product) {
                     $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
                 });
-
             }
-            return $product;
-        });
 
-        $this->productSizess = AllProduct::all()->map(function ($product) {
-//            ProductSize::all()->map(function ($size) use ($product) {
-//                $product->size[$size->id] = 0.00;
-//            });
-//            $product->isSelected = true;
-//            $product->is_stamp = true;
-//            $product->size = [];
             return $product;
         });
-//        dd($this->productSizess);
 
 
         $this->options = ProductOption::all()->map(function ($option) {
@@ -103,30 +85,6 @@ class ShopSetup extends Component
 
             return $option;
         });
-
-        $vendorProductSizesPrice = VendorProductSize::where('vendor_id', auth()->user()->shop->id)->pluck( 'price','product_size_id');
-
-
-        $this->productSizes = ProductSize::all()->map(function ($size) use($vendorProductSizesPrice) {
-            if(isset($vendorProductSizesPrice[$size->id]))
-            {
-                $size->price = $vendorProductSizesPrice[$size->id];
-
-                return $size;
-            }
-            if($size->base_size){
-                $size->price = 0;
-            } else {
-                $size->price = 1;
-            }
-
-            return $size;
-        });
-
-        $this->sizes = config('sizes');
-
-
-
 
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
@@ -164,9 +122,9 @@ class ShopSetup extends Component
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.services' => 'required',
-            'form.get_free' => 'required_with:form.free_product|numeric|gt:0|nullable',
+            'form.get_free' => 'required_with:form.free_product|numeric|gt:0|nullable'
         ]);
-//dd($this->productPrice);
+
         $vendor = auth()->user()->shop()->first();
 
         if (empty($vendor)) {
@@ -196,11 +154,11 @@ class ShopSetup extends Component
 
         foreach ($this->menus->filter(fn($item) => $item->isSelected) as $menu) {
             $product = $vendor->products()->updateOrCreate(['name' => $menu->name], [
-                'description'   => $menu->description ?? "dummy description",
+                'description' => $menu->description ?? "dummy description",
                 'product_image' => $menu->image,
-                'price'         => $menu->price,
-                'category_id'   => $menu->category_id,
-                'is_stamp'      => $menu->is_stamp,
+                'price' => $menu->price,
+                'category_id' => $menu->category_id,
+                'is_stamp' => $menu->is_stamp,
             ]);
 
             if (isset($this->productPrice[$menu->id])) {
@@ -213,7 +171,6 @@ class ShopSetup extends Component
             }
         }
 
-
         foreach ($this->options->filter(fn($item) => $item->isSelected) as $option) {
             $vendor->productOptions()->updateOrCreate(['name' => $option->name], [
                 'description' => $option->description,
@@ -223,12 +180,6 @@ class ShopSetup extends Component
                 'options' => $option->options,
             ]);
         }
-
-        $this->productSizes->map(function ($size) use($vendor){
-            $vendor->productSizes()->updateOrCreate(['product_size_id' => $size->id, 'vendor_id' => $vendor->id], [
-                'price' => $size->price
-            ]);
-        });
 
         return redirect()->route('vendor.show', $vendor->id);
     }
