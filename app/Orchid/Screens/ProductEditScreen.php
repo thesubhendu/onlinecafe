@@ -106,6 +106,10 @@ class ProductEditScreen extends Screen
             $fields[] = Relation::make('product.category_id')
                 ->title('Category')
                 ->fromModel(ProductCategory::class, 'name');
+            $fields[] =  CheckBox::make('product.is_all_sizes_available')
+                ->value(1)
+                ->title('All Sizes Available')
+                ->sendTrueOrFalse();
         }else{
             $fields[] = Input::make('product.vendor_id')->hidden(true)->value(auth()->user()->shop->id);
             $fields[] = Input::make('product.category_id')->hidden(true)->value(1);

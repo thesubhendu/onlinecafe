@@ -33,11 +33,18 @@ class AddToCart extends Component
             'weight'  => '0',
             'qty'     => 1,
             'options' => [],
-            'size'    => null
         ];
+
         $this->vendorProductSizes = VendorProductSize::where('vendor_id', $this->product->vendor_id)
             ->with('productSize', 'productSize.category')
             ->get();
+        $base_size = $this->vendorProductSizes->where('productSize.base_size', true)->first();
+
+        if($this->vendorProductSizes->where('productSize.base_size', true))
+        {
+            $this->selectSize = $base_size->price;
+        }
+
     }
 
     public function submit()
@@ -60,8 +67,8 @@ class AddToCart extends Component
         }
 
         if(!empty($this->cartProduct['options'])) {
-
             $totalAdditionalPrice = collect($this->cartProduct['options'])->map(function($option, $optionId) {
+//                dd($option, $optionId);
                                     $optionObject = ProductOption::find($optionId);
                                     return $optionObject->price ?? 0;
                                 })->filter()->sum();
@@ -71,7 +78,6 @@ class AddToCart extends Component
         if($this->selectSize){
             $this->cartProduct['options'][] =  "size: $this->selectSize" ;
         }
-
         Cart::add($this->cartProduct)->associate(Product::class);
 
 

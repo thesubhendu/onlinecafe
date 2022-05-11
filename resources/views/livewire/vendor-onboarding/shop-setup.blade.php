@@ -146,10 +146,31 @@
 
                                                 $ <input style="display:inline-block" type="number" class="form-control"
                                                          wire:model="menus.{{$index}}.price" placeholder="price">
-
                                                 <input type="checkbox" class="form-check-input"
                                                        wire:model="menus.{{$index}}.is_stamp" checked>
                                                 Is Stamp?
+                                                @if($menu->is_all_sizes_available)
+                                                    <div class="row" style="margin: 0 -5px 1.1rem -5px">
+
+                                                        @foreach($sizes as $key => $size)
+                                                            <div class="col-md-2">
+                                                                <div>
+                                                                    <label class="input-sizer">
+                                                                        <label class="input-sign-icon hy-text-title-2">{{$size}}</label>
+                                                                        <span class="hy-text-title-2"> $</span>
+                                                                        <input
+                                                                            wire:model.lazy="productPrice.{{$menu->id}}.{{$size}}"
+                                                                            type="number"
+                                                                            value="{{$productPrice[$menu->id][$size] ?? 0}}"
+                                                                        />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                @endif
+
                                             </div>
                                         </div>
                                     @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Screen\AsSource;
 use Orchid\Filters\Filterable;
 use Orchid\Attachment\Attachable;
@@ -16,7 +17,7 @@ class Product extends Model implements Buyable
 
     use HasFactory, AsSource, Attachable, Filterable;
 
-    protected $fillable = ['name', 'description', 'product_image', 'price', 'category_id', 'vendor_id', 'is_active', 'is_stamp'];
+    protected $fillable = ['name', 'description', 'product_image', 'price', 'category_id', 'vendor_id', 'is_active', 'is_stamp', 'is_all_sizes_available'];
 
     protected $allowedSorts = [
         'name',
@@ -48,4 +49,10 @@ class Product extends Model implements Buyable
 //        return ProductOption::where('category_id', $this->category_id)->get();
         return VendorProductOption::where('category_id', $this->category_id)->where('vendor_id', $this->vendor_id)->get();
     }
+
+    public function productPrices(): HasMany
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
 }
