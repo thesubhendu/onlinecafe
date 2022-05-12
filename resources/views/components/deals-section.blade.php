@@ -1,5 +1,5 @@
 <!-- TITLE -->
-@if($deals)
+@if(!$deals->isEmpty())
 <div class="row mb-4">
     <div class="col-md-12 m-0 p-0 ">
         <div class="content-heading">
@@ -7,7 +7,6 @@
         </div>
     </div>
 </div>
-@endif
 
 <div class="row deals-row ">
     @foreach ($deals as $deal)
@@ -28,3 +27,4 @@
     </div>
 </div>
 @endforeach
+@endif
