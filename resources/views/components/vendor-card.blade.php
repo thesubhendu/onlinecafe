@@ -20,8 +20,8 @@
             </a>
         </div>
     <div class="ratings">
-        <div class="d-flex justify-content-between mb-3">
-            <div class ="p-2">
+        <div class="d-flex justify-content-between">
+            <div>
                 @for($i=0; $i < $vendor->rating(); $i++)
                     <i class="fa fa-coffee selected"></i>
                 @endfor
