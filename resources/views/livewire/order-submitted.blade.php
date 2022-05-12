@@ -19,7 +19,7 @@
                          style="width: 75%"></div>
                 </div>
 ``
-                <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt="" width="200"  >
+                    <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt="" width="200"  >
 
             </div>
         </div><!-- /.container -->
