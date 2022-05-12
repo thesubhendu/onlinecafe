@@ -18,7 +18,7 @@
                     <tr>
                         <td>{{$orderProduct->order->vendor->shop_name ?? $orderProduct->order->vendor->name}}</td>
                             @if($orderProduct->product->product_image)
-                                <td><img src="{{$orderProduct->product->product_image}}" width="48" height="48"></td>
+                                <td><img src="{{asset('storage/'.$orderProduct->product->product_image)}}" width="48" height="48"></td>
                             @else
                                 <td><img src="{{asset('assets/images/cold-coffee.jpg')}}" width="48" height="48"></td>
                             @endif
