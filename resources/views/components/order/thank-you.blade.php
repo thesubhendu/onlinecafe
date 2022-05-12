@@ -25,7 +25,9 @@
             <p>has been confirmed by the venue</strong> payment will be required on pickup</p>
             <hr>
 
-            <p class="lead">
+            <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt="" width="200"  >
+
+            <p class="lead mt-4">
                 <a class="btn btn-success btn-sm" href="/" role="button">Back to homepage</a>
             </p>
             <!-- <p>
