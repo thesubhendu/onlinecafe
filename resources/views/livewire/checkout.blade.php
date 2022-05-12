@@ -6,7 +6,7 @@
     <section class="ordered-food-item ">
         <div class="container">
             <!-- TABLE ITEMS  -->
-            <div class="row hidden-xs">
+            <div class="row">
                 <div class="col-md-12">
                     <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
                     @if($deal)
