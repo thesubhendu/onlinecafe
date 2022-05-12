@@ -141,6 +141,7 @@ class ShopSetup extends Component
             'free_product' => $this->form['free_product'] === '' ? null : $this->form['free_product'],
             'get_free' => $this->form['get_free'],
             'shop_mobile' => $this->form['shop_mobile'],
+            'max_stamps' => $this->form['max_stamps'],
             'description' => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
             'address' => $this->form['address'],

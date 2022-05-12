@@ -1,7 +1,8 @@
 <x-app-layout>
     <main role="main" class="container py-4 mb-5 border-0">
         <x-deals-section :deals="$deals"></x-deals-section>
-        <hr>
+
+        <h3>All Products</h3>
         <div class="mx-auto">
             <section class="vendor-menu">
                 <div class="container">

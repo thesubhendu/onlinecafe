@@ -51,7 +51,6 @@
                                         @endif
                                         <a href="{{route('vendor.products', $card->vendor_id )}}"
                                            class="btn btn-success btn-small">Order</a>
-
                                         <!-- The Modal -->
                                         <div class="modal" id="myModal">
                                             <div class="modal-dialog">
