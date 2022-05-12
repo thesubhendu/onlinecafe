@@ -144,31 +144,34 @@
 
                                                 <label for=""> {{$menu->name}}</label>
 
-                                                $ <input style="display:inline-block" type="number" class="form-control"
+                                                $ <input style="display:inline-block" type="hidden" class="form-control"
                                                          wire:model="menus.{{$index}}.price" placeholder="price">
 
-                                                <input type="checkbox" class="form-check-input"
-                                                       wire:model="menus.{{$index}}.is_stamp" checked>
-                                                Is Stamp?
+
                                                 @if($menu->is_all_sizes_available)
+                                                    <br/>
+                                                    <br/>
                                                     <div class="row">
                                                         @foreach($sizes as $key => $size)
-                                                            <div class="col-md-2">
-                                                                <div>
-                                                                    <label class="input-sizer">
-                                                                        <label class="input-sign-icon hy-text-title-2">{{$size}}</label>
-                                                                        <span class="hy-text-title-2"> $</span>
-                                                                        <input
-                                                                            wire:model.lazy="productPrice.{{$menu->id}}.{{$size}}"
-                                                                            type="number"
-                                                                            value="{{$productPrice[$menu->id][$size] ?? 0}}"
-                                                                        />
-                                                                    </label>
-                                                                </div>
+                                                            <div class="col-md-4">
+                                                                <label class="input-sizer">
+                                                                    <label class="input">{{$size}}</label>
+                                                                    <span> $</span>
+                                                                    <input
+                                                                        wire:model.lazy="productPrice.{{$menu->id}}.{{$size}}"
+                                                                        type="number"
+                                                                        class="form-control"
+                                                                        value="{{$productPrice[$menu->id][$size] ?? 0}}"
+                                                                        required
+                                                                    />
+                                                                </label>
                                                             </div>
                                                         @endforeach
                                                     </div>
                                                 @endif
+                                                <input type="checkbox" class="form-check-input"
+                                                       wire:model="menus.{{$index}}.is_stamp" checked>
+                                                Is Stamp?
                                             </div>
                                         </div>
                                     @endforeach

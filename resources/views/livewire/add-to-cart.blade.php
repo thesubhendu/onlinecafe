@@ -41,24 +41,18 @@
                     <div class="col-lg-9">
                         <div class="product-form">
                             <div class="row extras">
-                                <div class="col-lg-3">
-                                    <h4> Size</h4>
-                                    @foreach($vendorProductSizes as $index => $size)
-                                        @if($size->productSize->base_size)
+                                @if($product->is_all_sizes_available && count($product->productPrices))
+                                    <div class="col-lg-3">
+                                        <h4> Size</h4>
+                                        @foreach($product->productPrices as $index => $productPrice)
                                             <label>
-                                                <input type="radio" name="selectSize" value="{{$size->productSize->name}}" checked
-                                                       wire:change="updateProductSizePrice({{$product->price}}, {{$size}})">
-                                                {{$size->productSize->slug}}
+                                                <input type="radio" name="productPrice" value="{{$productPrice->size}}"
+                                                       wire:change="updateProductPrice({{$productPrice}})">
+                                                {{$productPrice->size}}
                                             </label>
-                                        @else
-                                            <label>
-                                                <input type="radio" name="selectSize" value="{{$size->productSize->name}}"
-                                                       wire:change="updateProductSizePrice({{$product->price}},{{$size}})">
-                                                {{$size->productSize->slug}}
-                                            </label>
-                                        @endif
-                                    @endforeach
-                                </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <div class="col-lg-9">
                                     <h4> Select Options</h4>
                                     <div class="row">

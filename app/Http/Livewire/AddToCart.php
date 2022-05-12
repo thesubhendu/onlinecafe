@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use App\Models\ProductOption;
-use App\Models\VendorProductSize;
+use App\Models\ProductPrice;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -14,8 +14,6 @@ class AddToCart extends Component
     public $product;
 
     public $cartProduct;
-    public $vendorProductSizes;
-    public $selectSize;
 
 
     public function render()
@@ -25,7 +23,7 @@ class AddToCart extends Component
 
     public function mount(Product $product)
     {
-        $this->product     = $product;
+        $this->product     = $product->load('productPrices');
         $this->cartProduct = [
             'id'      => $product->id,
             'name'    => $product->name,
@@ -34,17 +32,6 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
-
-        $this->vendorProductSizes = VendorProductSize::where('vendor_id', $this->product->vendor_id)
-            ->with('productSize', 'productSize.category')
-            ->get();
-        $base_size = $this->vendorProductSizes->where('productSize.base_size', true)->first();
-
-        if($this->vendorProductSizes->where('productSize.base_size', true))
-        {
-            $this->selectSize = $base_size->price;
-        }
-
     }
 
     public function submit()
@@ -67,8 +54,8 @@ class AddToCart extends Component
         }
 
         if(!empty($this->cartProduct['options'])) {
+
             $totalAdditionalPrice = collect($this->cartProduct['options'])->map(function($option, $optionId) {
-//                dd($option, $optionId);
                                     $optionObject = ProductOption::find($optionId);
                                     return $optionObject->price ?? 0;
                                 })->filter()->sum();
@@ -124,10 +111,10 @@ class AddToCart extends Component
         $this->cartProduct['qty']++;
     }
 
-    public function updateProductSizePrice(int $productPrice, VendorProductSize $size): void
+    public function updateProductPrice( ProductPrice $productPrice): void
     {
-        $this->cartProduct['price'] = number_format(($productPrice + $size->price), 2);
-        $this->selectSize = $size->productSize->slug;
+        $this->cartProduct['price'] = number_format(($productPrice->price), 2);
+        $this->selectSize = $productPrice->size;
     }
 
 }

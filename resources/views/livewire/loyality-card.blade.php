@@ -34,7 +34,7 @@
                                         @endif
                                         <div class="vendor-title">
                                             <h4>{{$card->vendor->shop_name ?? $card->vendor->vendor_name}}</h4>
-                                            <p>Buy {{$card->vendor->max_stamps}} coffees get {{$card->vendor->get_free ?? 1}}
+                                            <p>Buy {{$card->vendor->max_stamps ?? 10}} coffees get {{$card->vendor->get_free ?? 1}}
                                                 free</p>
                                         </div>
                                     </div>

@@ -18,7 +18,6 @@ class ShopSetup extends Component
         'menus.*.price'        => 'required',
         'options.*.isSelected' => 'boolean',
         'options.*.price'      => 'required|decimal',
-        'productPrice.*.*.size'=> 'required|string',
     ];
     public $logo;
     public $form = [
@@ -69,11 +68,15 @@ class ShopSetup extends Component
             $product->isSelected = true;
             $product->is_stamp = true;
             $saveProduct = $vendorProducts->where('name', $product->name)->first();
-            if($saveProduct)
+            if($saveProduct && count($saveProduct->productPrices))
             {
                 $saveProduct->productPrices()->each(function ($productPrice) use($product) {
                     $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
                 });
+            } else {
+                foreach($this->sizes as $size){
+                    $this->productPrice[$product->id][$size] = $product->price;
+                }
             }
 
             return $product;
@@ -163,7 +166,11 @@ class ShopSetup extends Component
 
             if (isset($this->productPrice[$menu->id])) {
                 foreach ($this->productPrice[$menu->id] as $key => $price) {
-                    $product->productPrices()->updateOrCreate(['product_id' => $product->id, 'size' => $key],
+                    $product->productPrices()->updateOrCreate(
+                        [
+                            'product_id' => $product->id,
+                            'size' => $key
+                        ],
                         [
                             'price' => $price,
                         ]);
