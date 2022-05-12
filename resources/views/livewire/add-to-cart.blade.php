@@ -15,7 +15,7 @@
                             <div class="content">
                                 <div class="d-flex mb-3 ">
                                     <div class="p-1">
-                                        <h4>{{$product->name}}</h4>
+                                        <h5>{{$product->name}}</h5>
                                         <p>${{$cartProduct['price']}}</p>
                                     </div>
                                     <div class="p-2"></div>
@@ -47,10 +47,13 @@
                                         @foreach($product->productPrices as $index => $productPrice)
                                             <label>
                                                 <input type="radio" name="productPrice" value="{{$productPrice->size}}"
+                                                       wire:model.lazy="selectSize"
                                                        wire:change="updateProductPrice({{$productPrice}})">
                                                 {{$productPrice->size}}
                                             </label>
                                         @endforeach
+                                        <br/>
+                                        <br/>
                                     </div>
                                 @endif
                                 <div class="col-lg-9">

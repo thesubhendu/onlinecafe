@@ -14,6 +14,11 @@ class AddToCart extends Component
     public $product;
 
     public $cartProduct;
+    /**
+     * @var mixed
+     */
+    public $selectSize;
+
 
 
     public function render()
@@ -32,6 +37,7 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
+        $this->selectSize = '';
     }
 
     public function submit()
@@ -62,9 +68,11 @@ class AddToCart extends Component
 
             $this->cartProduct['price'] += $totalAdditionalPrice;
         }
+
         if($this->selectSize){
             $this->cartProduct['options'][] =  "size: $this->selectSize" ;
         }
+
         Cart::add($this->cartProduct)->associate(Product::class);
 
 
@@ -114,7 +122,6 @@ class AddToCart extends Component
     public function updateProductPrice( ProductPrice $productPrice): void
     {
         $this->cartProduct['price'] = number_format(($productPrice->price), 2);
-        $this->selectSize = $productPrice->size;
     }
 
 }

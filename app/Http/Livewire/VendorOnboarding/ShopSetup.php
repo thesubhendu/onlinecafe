@@ -4,6 +4,7 @@ namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Models\AllProduct;
 use App\Models\ProductOption;
+use App\Models\Vendor;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -60,24 +61,13 @@ class ShopSetup extends Component
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
 
-        $vendor = auth()->user()->shop()->first();
+        $vendor = auth()->user()->shop()->with('products', 'products.productPrices')->first();
         $this->sizes = config('sizes');
-        $vendorProducts = $vendor->products()->with('productPrices')->get();
 
-        $this->menus = AllProduct::all()->map(function ($product)  use($vendorProducts) {
+        $this->menus = AllProduct::all()->map(function ($product)  use($vendor) {
             $product->isSelected = true;
             $product->is_stamp = true;
-            $saveProduct = $vendorProducts->where('name', $product->name)->first();
-            if($saveProduct && count($saveProduct->productPrices))
-            {
-                $saveProduct->productPrices()->each(function ($productPrice) use($product) {
-                    $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
-                });
-            } else {
-                foreach($this->sizes as $size){
-                    $this->productPrice[$product->id][$size] = $product->price;
-                }
-            }
+            $this->setupInitialProductSizesPrice($product, $vendor);
 
             return $product;
         });
@@ -256,6 +246,20 @@ class ShopSetup extends Component
         if($this->form['free_product'] === '')
         {
             $this->form['get_free'] = null;
+        }
+    }
+
+    private function setupInitialProductSizesPrice(AllProduct $product, Vendor $vendor = null): void
+    {
+        $savedProduct = $vendor ? $vendor->products->where('name', $product->name)->first() : null;
+        if ($savedProduct && count($savedProduct->productPrices)) {
+            $savedProduct->productPrices->each(function ($productPrice) use ($product) {
+                $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
+            });
+        } else {
+            foreach ($this->sizes as $size) {
+                $this->productPrice[$product->id][$size] = $product->price;
+            }
         }
     }
 }

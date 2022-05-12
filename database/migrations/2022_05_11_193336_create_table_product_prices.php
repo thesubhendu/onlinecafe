@@ -17,7 +17,7 @@ class CreateTableProductPrices extends Migration
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('size');
-            $table->decimal('price', 4, 2);
+            $table->decimal('price', 5, 2);
             $table->timestamps();
         });
     }
