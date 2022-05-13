@@ -37,7 +37,11 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
-        $this->selectSize = '';
+        if($this->product->productPrices){
+            $this->selectSize = 'M';
+            $this->cartProduct['price'] = $this->product->productPrices()->where('size', 'M')->first()->price ?? $product->price;
+        }
+
     }
 
     public function submit()
