@@ -147,7 +147,7 @@ class ProductEditScreen extends Screen
             foreach ($data['productPrices'] as $key=> $productPrice)
             {
                 $product->productPrices()->updateOrCreate(
-                    ['size' => $key],
+                    ['size' => $key,'product_id' => $product->id],
                     ['price' => $productPrice]
                 );
             }
