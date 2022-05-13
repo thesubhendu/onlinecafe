@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'S', 'M', 'L', 'XL',
+    'Small' => 'S', 'Medium' => 'M', 'Large' => 'L', 'Extra Large' => 'XL',
 ];
