@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AllProduct;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vendor;
@@ -36,9 +37,7 @@ class UsersTableSeeder extends Seeder
         User::factory()->create(['name' => 'Customer', 'email' => 'customer@cafe.np']); //customer
 
         $vendor1 = User::factory()->has(
-            Vendor::factory()->has(
-                Product::factory()->count(10)
-            )
+            Vendor::factory()
                   ->state(function (array $attributes) {
                       return ['vendor_name' => "Webdevmatics Pvt Ltd", 'shop_name' => 'Webdev coffee Shop'];
                   })
@@ -48,10 +47,9 @@ class UsersTableSeeder extends Seeder
             'mobile' => 9779809333221,
         ]);
 
+
         $vendor2 = User::factory()->has(
-            Vendor::factory()->has(
-                Product::factory()->count(3)
-            )
+            Vendor::factory()
                   ->state(function (array $attributes) {
                       return ['vendor_name' => "Vendor Pvt Ltd", 'shop_name' => 'Vendor coffee Shop'];
                   })
@@ -60,6 +58,19 @@ class UsersTableSeeder extends Seeder
             'email'  => 'vendor@cafe.np',
             'mobile' => 9779809333222,
         ]);
+
+        foreach(AllProduct::all() as $product)
+        {
+            $data = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'category_id' => $product->category_id,
+                'is_stamp' => 1,
+                'description' => ''
+            ];
+            $vendor1->shop()->first()->products()->create($data);
+            $vendor2->shop()->first()->products()->create($data);
+        }
 
         $vendor1->addRole($vendorRole);
         $vendor2->addRole($vendorRole);

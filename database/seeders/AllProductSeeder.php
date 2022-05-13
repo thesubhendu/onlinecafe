@@ -15,6 +15,16 @@ class AllProductSeeder extends Seeder
      */
     public function run()
     {
-        AllProduct::factory()->count(10)->state(['category_id' => ProductCategory::first()->id])->create();
+        AllProduct::factory()->tea()->create([ 'name' => 'English Breakfast' ]);
+        AllProduct::factory()->tea()->create([ 'name' => 'Camoline' ]);
+        AllProduct::factory()->tea()->create([ 'name' => 'Green Tea' ]);
+        AllProduct::factory()->tea()->create([ 'name' => 'Earl Grey' ]);
+        AllProduct::factory()->tea()->create([ 'name' => 'Peppermint' ]);
+        AllProduct::factory()->tea()->create([ 'name' => 'Jasmine' ]);
+        AllProduct::factory()->tea()->create([ 'name' => 'Chai Tea' ]);
+
+        AllProduct::factory()->coffee()->create([ 'name' => 'House Blend' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Single Origin' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Decaf' ]);
     }
 }
