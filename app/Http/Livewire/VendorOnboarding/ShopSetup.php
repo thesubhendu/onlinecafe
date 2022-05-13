@@ -4,6 +4,7 @@ namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Models\AllProduct;
 use App\Models\ProductOption;
+use App\Models\Vendor;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,7 +12,7 @@ use Livewire\WithFileUploads;
 class ShopSetup extends Component
 {
     use WithFileUploads;
-
+    public  $productPrice;
     protected $rules = [
         'menus.*.isSelected'   => 'boolean',
         'menus.*.is_stamp'   => 'boolean',
@@ -43,6 +44,7 @@ class ShopSetup extends Component
 
     public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
     public $newService;
+    public $sizes;
 
     public $listeners = ['markerPositionChanged', 'addressChanged'];
 
@@ -59,9 +61,13 @@ class ShopSetup extends Component
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
 
-        $this->menus = AllProduct::all()->map(function ($product) {
+        $vendor = auth()->user()->shop()->with('products', 'products.productPrices')->first();
+        $this->sizes = config('sizes');
+
+        $this->menus = AllProduct::all()->map(function ($product)  use($vendor) {
             $product->isSelected = true;
             $product->is_stamp = true;
+            $this->setupInitialProductSizesPrice($product, $vendor);
 
             return $product;
         });
@@ -72,8 +78,6 @@ class ShopSetup extends Component
 
             return $option;
         });
-
-        $vendor = auth()->user()->shop()->first();
 
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
@@ -143,13 +147,26 @@ class ShopSetup extends Component
         }
 
         foreach ($this->menus->filter(fn($item) => $item->isSelected) as $menu) {
-            $vendor->products()->updateOrCreate(['name' => $menu->name], [
+            $product = $vendor->products()->updateOrCreate(['name' => $menu->name], [
                 'description' => $menu->description ?? "dummy description",
                 'product_image' => $menu->image,
                 'price' => $menu->price,
                 'category_id' => $menu->category_id,
                 'is_stamp' => $menu->is_stamp,
             ]);
+
+            if (isset($this->productPrice[$menu->id])) {
+                foreach ($this->productPrice[$menu->id] as $key => $price) {
+                    $product->productPrices()->updateOrCreate(
+                        [
+                            'product_id' => $product->id,
+                            'size' => $key
+                        ],
+                        [
+                            'price' => $price,
+                        ]);
+                }
+            }
         }
 
         foreach ($this->options->filter(fn($item) => $item->isSelected) as $option) {
@@ -229,6 +246,20 @@ class ShopSetup extends Component
         if($this->form['free_product'] === '')
         {
             $this->form['get_free'] = null;
+        }
+    }
+
+    private function setupInitialProductSizesPrice(AllProduct $product, Vendor $vendor = null): void
+    {
+        $savedProduct = $vendor ? $vendor->products->where('name', $product->name)->first() : null;
+        if ($savedProduct && count($savedProduct->productPrices)) {
+            $savedProduct->productPrices->each(function ($productPrice) use ($product) {
+                $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
+            });
+        } else {
+            foreach ($this->sizes as $size) {
+                $this->productPrice[$product->id][$size] = $product->price;
+            }
         }
     }
 }

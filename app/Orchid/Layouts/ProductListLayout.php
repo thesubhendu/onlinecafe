@@ -36,6 +36,8 @@ class ProductListLayout extends Table
             TD::make('vendor')->render(fn($product) => $product->vendor->vendor_name),
             TD::make('is_active', 'Is Active')->render(fn($p) => $p->is_active ? "Active" : "Inactive"),
             TD::make('category_id', 'Category')->render(fn($p) => $p->category->name),
+            TD::make('is_all_sizes_available', 'All Sizes Available')
+                ->render(fn($p) => $p->is_all_sizes_available ? "Yes" : "No"),
             TD::make('created_at', 'Created'),
             TD::make("Action")
               ->render(function ($product) {

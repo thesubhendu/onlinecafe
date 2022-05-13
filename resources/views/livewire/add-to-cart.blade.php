@@ -4,47 +4,63 @@
 
     <section class="product-confirm">
         <div class="container">
-            <div class="row ">
-                <div class="col-lg-3 mb-3">
-                    <div class="product-card">
-                        <div class="image">
-                            <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
-                        </div>
-                        <div class="content">
-                            <h4>{{$product->name}}</h4>
-                            <p>${{$product->price}}</p>
+            <form wire:submit.prevent="submit" method="post">
+                @csrf
+                <div class="row ">
+                    <div class="col-lg-3 mb-3">
+                        <div class="product-card">
+                            <div class="image">
+                                <img src="{{asset('assets/images/cappuccino.jpg')}}" class="img-responsive" alt="">
+                            </div>
+                            <div class="content">
+                                <div class="d-flex mb-3 ">
+                                    <div class="p-1">
+                                        <h5>{{$product->name}}</h5>
+                                        <p>${{$cartProduct['price']}}</p>
+                                    </div>
+                                    <div class="p-2"></div>
+                                    <div class="p-1 mr-4">
+                                        <label>Quantity</label>
+                                        <div class="control-btn ">
+                                            <button type="button" class="value-button decrease"
+                                                    wire:click="updateQty('remove')" value="Decrease Value">-
+                                            </button>
+                                            <input type="number" id="number" wire:model="cartProduct.qty"/>
+                                            <button type="button" class="value-button increase" wire:click="updateQty()"
+                                                    value="Increase Value">+
+                                            </button>
+                                        </div>
+
+                                        @error('cartProduct.qty') <span
+                                            class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="product-form">
-                        <form wire:submit.prevent="submit" method="post">
-                            @csrf
+                    <div class="col-lg-9">
+                        <div class="product-form">
                             <div class="row extras">
-                                <div class="col-lg-12 ">
-                                    <h4> Select Options</h4>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <label>Quantity</label>
-
-                                    <div class="control-btn ">
-                                        <button type="button" class="value-button decrease"
-                                                wire:click="updateQty('remove')" value="Decrease Value">-
-                                        </button>
-                                        <input type="number" id="number" wire:model="cartProduct.qty"/>
-                                        <button type="button" class="value-button increase" wire:click="updateQty()"
-                                                value="Increase Value">+
-                                        </button>
+                                @if($product->is_all_sizes_available && count($product->productPrices))
+                                    <div class="col-lg-3">
+                                        <h4> Size</h4>
+                                        @foreach($product->productPrices as $index => $productPrice)
+                                            <label>
+                                                <input type="radio" name="productPrice" value="{{$productPrice->size}}"
+                                                       wire:model.lazy="selectSize"
+                                                       wire:change="updateProductPrice({{$productPrice}})">
+                                                {{$productPrice->size}}
+                                            </label>
+                                        @endforeach
+                                        <br/>
+                                        <br/>
                                     </div>
-
-                                    @error('cartProduct.qty') <span
-                                        class="text-danger">{{ $message }}</span> @enderror
-                                </div>
-
-
+                                @endif
+                                <div class="col-lg-9">
+                                    <h4> Select Options</h4>
+                                    <div class="row">
                                 @foreach($product->options() as $index => $option)
-                                    <div class="col-lg-2 mb-3">
+                                    <div class="col-lg-4 mb-3">
                                         <label for="">{{$option->name}} (+ ${{$option->price}})</label>
                                         <select wire:model="cartProduct.options.{{$option->id}}" class="form-select">
                                             <option value="">Select Option</option>
@@ -56,11 +72,11 @@
                                         </select>
                                         @error('cartProduct.options.'.$option->id) <span
                                             class="text-danger">{{ $message }}</span> @enderror
-
                                     </div>
                                 @endforeach
-
-                                <div class="col-lg-4 mb-3 text-right">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-3 text-right">
                                     <div class="total-submit">
                                         <button type="submit" class="btn btn-secondary">
                                             Add to Cart &nbsp; <i class="fa fa-shopping-cart"></i>
@@ -68,11 +84,11 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </section>
 

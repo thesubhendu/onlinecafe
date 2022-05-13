@@ -27,6 +27,8 @@ class ProductEditScreen extends Screen
 
     public bool $exists = false;
 
+    public $product;
+
     /**
      * Query data.
      *
@@ -34,6 +36,7 @@ class ProductEditScreen extends Screen
      */
     public function query(Product $product): array
     {
+        $this->product = $product->load('productPrices');
         $this->exists = $product->exists;
 
         if ($this->exists) {
@@ -41,7 +44,7 @@ class ProductEditScreen extends Screen
         }
 
         return [
-            'product' => $product,
+            'product' => $this->product,
         ];
     }
 
@@ -77,6 +80,7 @@ class ProductEditScreen extends Screen
      */
     public function layout(): array
     {
+        $sizes = config('sizes');
         $fields = [
             Input::make('product.name')
                 ->title('Name')
@@ -88,14 +92,31 @@ class ProductEditScreen extends Screen
                 ->maxlength(200)
                 ->placeholder('Brief description for preview'),
 
-            Input::make('product.price')->title('Price'),
-            CheckBox::make('product.is_active')->value(1)->title('Is Active')->sendTrueOrFalse(),
-            Input::make('product.product_image')->type('file')
-                ->title('Upload Product Image')
-            ,
-
-
+            Input::make('product.price')->title('Price')->required(),
         ];
+        $sizeInputs = [];
+        foreach($sizes as $key => $size)
+        {
+            $sizeInputs[] = Input::make('product.productPrices.'.$size)
+                ->type('number')
+                ->title($key.'('.$size .  ') size price')
+                ->value($this->product->productPrices()->where('size', $size)->first()->price ?? $this->product->price)
+                ->required();
+        }
+
+        if ($sizeInputs)
+        {
+            $fields =  array_merge($fields, $sizeInputs);
+        }
+
+        $fields[] =  CheckBox::make('product.is_all_sizes_available')
+            ->value(1)
+            ->title('All Sizes Available')
+            ->sendTrueOrFalse();
+        $fields[]=CheckBox::make('product.is_active')->value(1)
+            ->title('Is Active')->sendTrueOrFalse();
+        $fields[]=Input::make('product.product_image')->type('file')
+            ->title('Upload Product Image');
 
 
         if(auth()->user()->isAdmin()) {
@@ -119,8 +140,18 @@ class ProductEditScreen extends Screen
     public function createOrUpdate(Product $product, Request $request)
     {
         $data = $request->get('product');
-
         $product->fill($data)->save();
+
+        if($data['productPrices'])
+        {
+            foreach ($data['productPrices'] as $key=> $productPrice)
+            {
+                $product->productPrices()->updateOrCreate(
+                    ['size' => $key,'product_id' => $product->id],
+                    ['price' => $productPrice]
+                );
+            }
+        }
 
         $pimage = $request->all()['product']['product_image'] ?? null;
 

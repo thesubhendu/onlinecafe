@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use App\Models\ProductOption;
+use App\Models\ProductPrice;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -13,6 +14,11 @@ class AddToCart extends Component
     public $product;
 
     public $cartProduct;
+    /**
+     * @var mixed
+     */
+    public $selectSize;
+
 
 
     public function render()
@@ -22,7 +28,7 @@ class AddToCart extends Component
 
     public function mount(Product $product)
     {
-        $this->product     = $product;
+        $this->product     = $product->load('productPrices');
         $this->cartProduct = [
             'id'      => $product->id,
             'name'    => $product->name,
@@ -31,6 +37,11 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
+        if($this->product->productPrices){
+            $this->selectSize = 'M';
+            $this->cartProduct['price'] = $this->product->productPrices()->where('size', 'M')->first()->price ?? $product->price;
+        }
+
     }
 
     public function submit()
@@ -60,6 +71,10 @@ class AddToCart extends Component
                                 })->filter()->sum();
 
             $this->cartProduct['price'] += $totalAdditionalPrice;
+        }
+
+        if($this->selectSize){
+            $this->cartProduct['options'][] =  "size: $this->selectSize" ;
         }
 
         Cart::add($this->cartProduct)->associate(Product::class);
@@ -106,6 +121,11 @@ class AddToCart extends Component
             return;
         }
         $this->cartProduct['qty']++;
+    }
+
+    public function updateProductPrice( ProductPrice $productPrice): void
+    {
+        $this->cartProduct['price'] = number_format(($productPrice->price), 2);
     }
 
 }

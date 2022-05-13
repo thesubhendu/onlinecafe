@@ -144,12 +144,32 @@
 
                                                 <label for=""> {{$menu->name}}</label>
 
-                                                $ <input style="display:inline-block" type="number" class="form-control"
+                                                $ <input style="display:inline-block" type="hidden" class="form-control"
                                                          wire:model="menus.{{$index}}.price" placeholder="price">
-
+                                                <br/>
                                                 <input type="checkbox" class="form-check-input"
                                                        wire:model="menus.{{$index}}.is_stamp" checked>
                                                 Is Stamp?
+                                                @if($menu->is_all_sizes_available)
+                                                    <br/>
+                                                    <br/>
+                                                    <div class="form-group form-inline row">
+                                                        @foreach($sizes as $key => $size)
+                                                            <div class="col-sm-3">
+                                                                <label>{{$size}} $</label>
+                                                                <input
+                                                                    wire:model.lazy="productPrice.{{$menu->id}}.{{$size}}"
+                                                                    type="number"
+                                                                    class="form-control"
+                                                                    value="{{$productPrice[$menu->id][$size] ?? 0}}"
+                                                                    required
+                                                                />
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                <br/>
+
                                             </div>
                                         </div>
                                     @endforeach
