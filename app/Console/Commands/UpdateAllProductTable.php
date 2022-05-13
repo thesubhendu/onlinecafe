@@ -48,6 +48,5 @@ class UpdateAllProductTable extends Command
         Artisan::call('db:seed', ['class' => AllProductSeeder::class]);
 
         $this->info('"All products table successfully updated');
-//        echo "All products table successfully updated" ;
     }
 }
