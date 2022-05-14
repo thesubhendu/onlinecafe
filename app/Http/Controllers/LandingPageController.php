@@ -13,7 +13,8 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::with('ratings')->where('is_subscribed', '1')
+        $vendors = Vendor::with('ratings')
+            ->subscribed()
             ->get();
 
         return view('landing-page', compact('vendors'));

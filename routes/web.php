@@ -94,10 +94,10 @@ Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
         VendorOnboarding\Registration::class)->name('register-business.create');
 
     Route::get('/payment',
-        VendorOnboarding\Payment::class)->name('register-business.payment');
+        VendorOnboarding\Payment::class)->name('register-business.payment')->middleware('can:vendor');
 
     Route::get('/shop-setup',
-        ShopSetup::class)->name('register-business.shop-setup');
+        ShopSetup::class)->name('register-business.shop-setup')->middleware('can:subscribed');
 });
 
 //send mobile verification code

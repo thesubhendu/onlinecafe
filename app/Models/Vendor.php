@@ -100,7 +100,7 @@ class Vendor extends Model
     public function nearbyShops($lat, $lon, $radius = 10)
     {
 //        replace 6371000 with 6371 for kilometer and 3956 for miles
-        $nearbyVendors = Vendor::selectRaw("id, vendor_name,shop_name, address, lat, lng,
+        $nearbyVendors = Vendor::subscribed()->selectRaw("id, vendor_name,shop_name, address, lat, lng,
                      ( 6371 * acos( cos( radians(?) ) *
                        cos( radians( lat ) )
                        * cos( radians( lng ) - radians(?)
@@ -136,4 +136,8 @@ class Vendor extends Model
         return round((new GeoLocationService())->haversineGreatCircleDistance($latFrom,$lngFrom, $latTo,$lngTo));
     }
 
+    public function scopeSubscribed($query)
+    {
+        return $query->where('is_subscribed', '1');
+    }
 }

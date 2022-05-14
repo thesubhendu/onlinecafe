@@ -28,8 +28,7 @@
                                                 <div class="col-md-12">
 
 
-                                                    <form wire:submit.prevent="subscribe" id="card-form">
-
+                                                    <form  id="card-form">
 
                                                         <div class="form-group">
                                                             <label for="plan" class="form-label">Select Plan</label>
@@ -38,7 +37,8 @@
                                                                 @foreach($availablePlans as $title => $slug)
                                                                     <label class="form-check-label mx-4">
                                                                         <input type="radio" class="form-check-input"
-                                                                               wire:model="plan"
+                                                                               name="plan"
+                                                                               {{$slug=='monthly' ? 'checked': ''}}
                                                                                value="{{$slug}}">
                                                                         {{$title}}
                                                                         ( @if($slug=='monthly') $19.95/month
@@ -109,12 +109,14 @@
 
                 const cardHolderName = document.getElementById('card-holder-name')
                 const cardButton = document.getElementById('card-button')
+                const errorDiv = document.getElementById('card-errors')
                 const clientSecret = cardButton.dataset.secret
+
 
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault()
+                    let plan = document.querySelector('input[name="plan"]:checked').value;
                     cardButton.disabled = true
-                    Livewire.emit('showLoader')
 
                     const {setupIntent, error} = await stripe.confirmCardSetup(clientSecret, {
                             payment_method: {
@@ -127,12 +129,13 @@
                     )
                     if (error) {
                         cardButton.disabled = false
+
                     } else {
 
                     @this.token
                         = setupIntent.payment_method;
 
-                        Livewire.emit('subscribeToPlan');
+                        Livewire.emit('subscribeToPlan',plan);
                     }
                 })
             </script>

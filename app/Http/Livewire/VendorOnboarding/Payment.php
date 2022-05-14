@@ -9,7 +9,6 @@ class Payment extends Component
 {
     public $clientSecret;
 
-    public $plan;
     public $token;
 
     public $loader = false;
@@ -24,7 +23,6 @@ class Payment extends Component
         $this->availablePlans = cache()->remember('plans', 3600, function () {
             return Plan::pluck('slug', 'title')->all();
         });
-        $this->plan           = 'monthly';
         $this->clientSecret   = auth()->user()->createSetupIntent()->client_secret;
     }
     public function render()
@@ -32,14 +30,13 @@ class Payment extends Component
         return view('livewire.vendor-onboarding.payment');
     }
 
-    public function subscribe()
+    public function subscribe($plan)
     {
         $this->validate([
             'token' => 'required',
-            'plan' => 'required|exists:plans,slug'
         ]);
 
-        $plan = Plan::where('slug', $this->plan)
+        $plan = Plan::where('slug', $plan)
                     ->first();
 
         //todo Subscribe using webhook instead
@@ -57,8 +54,12 @@ class Payment extends Component
         return redirect()->route('register-business.shop-setup');
     }
 
-    public function showLoader()
+    public function showLoader($show=true)
     {
-        $this->loader = true;
+        if($show) {
+            $this->loader = true;
+        }else{
+            $this->loader = false;
+        }
     }
 }
