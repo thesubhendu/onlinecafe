@@ -16,16 +16,43 @@
             </div>
             <h1 class="display-3">Thank You!</h1>
             <p class="lead"><strong>Your Order  </p>
-            {{-- @foreach($order->products as $product)
-            <p class="card-text">{{$product->pivot->quantity}} x {{$product->name}}</p>
-            <span class="card-text text-muted">{{$product->pivot->milk}}, Suagrs - {{$product->pivot->sugar}}, Syrup - {{$product->pivot->syrup}}</span>
-            <p class="card-text">Total: ${{$product->pivot->price}}</p>
-            @endforeach --}}
-            {{-- <p>has been confirmed by the venue {{$vendor->vendor_name}}</strong> payment will be required on pickup</p> --}}
-            <p>has been confirmed by the venue</strong> payment will be required on pickup</p>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Total Price</th>
+                    <th>Additions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    @foreach($order->products as $product)
+                        <td>
+                            {{$product->name}}
+                        </td>
+                        <td>{{ $product->pivot->quantity}}</td>
+                        <td>
+                            {{$product->pivot->price}}
+                        </td>
+                        <td>
+                            @foreach (json_decode($product->pivot->options, true) as $key => $value )
+                                {{$value}} <br>
+                            @endforeach
+                        </td>
+                    @endforeach
+                </tr>
+                </tbody>
+            </table>
+
+            <p>has been confirmed by the venue {{$order->vendor->vendor_name}}</strong> payment will be required on pickup</p>
             <hr>
 
-            <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt="" width="200"  >
+            <div class="avatar">
+                <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt=""  >
+
+            </div>
 
             <p class="lead mt-4">
                 <a class="btn btn-success btn-sm" href="/" role="button">Back to homepage</a>

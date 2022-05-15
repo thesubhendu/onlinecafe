@@ -1,6 +1,6 @@
 <div wire:poll role="main" class="">
     @if($order->confirmed_at)
-        <x-order.thank-you></x-order.thank-you>
+        <x-order.thank-you :order="$order"></x-order.thank-you>
     @else
     <div class="order-submitted">
         <div class="container">
@@ -19,7 +19,9 @@
                          style="width: 75%"></div>
                 </div>
 ``
-                    <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt="" width="200"  >
+                <div class="avatar">
+                    <img src="{{asset('assets/images/thanks/girl-standing-1.png')}}" alt="">
+                </div>
 
             </div>
         </div><!-- /.container -->
@@ -27,3 +29,15 @@
     @endif
 </div>
 
+
+<style>
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .avatar {
+        height: 250px;
+        width: 150px;
+        margin: 0 auto;
+    }
+</style>
