@@ -15,16 +15,23 @@ class AllProductSeeder extends Seeder
      */
     public function run()
     {
-        AllProduct::factory()->tea()->create([ 'name' => 'English Breakfast' ]);
-        AllProduct::factory()->tea()->create([ 'name' => 'Camoline' ]);
-        AllProduct::factory()->tea()->create([ 'name' => 'Green Tea' ]);
-        AllProduct::factory()->tea()->create([ 'name' => 'Earl Grey' ]);
-        AllProduct::factory()->tea()->create([ 'name' => 'Peppermint' ]);
-        AllProduct::factory()->tea()->create([ 'name' => 'Jasmine' ]);
-        AllProduct::factory()->tea()->create([ 'name' => 'Chai Tea' ]);
+        // Coffee
+        AllProduct::factory()->coffee()->create([ 'name' => 'Cappuccino' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Espresso' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Flat White' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Ristretto' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Latte' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Chai Latte' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Long Black' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Macchito' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Piccolo' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Long Macchiato' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Babycino' ]);
+        AllProduct::factory()->coffee()->create([ 'name' => 'Pupacino' ]);
 
-        AllProduct::factory()->coffee()->create([ 'name' => 'House Blend' ]);
-        AllProduct::factory()->coffee()->create([ 'name' => 'Single Origin' ]);
-        AllProduct::factory()->coffee()->create([ 'name' => 'Decaf' ]);
+        // Tea
+        AllProduct::factory()->hotChocolateAndTea()->create([ 'name' => 'Hot Chocolate' ]);
+        AllProduct::factory()->hotChocolateAndTea()->create([ 'name' => 'Mocha' ]);
+        AllProduct::factory()->hotChocolateAndTea()->create([ 'name' => 'Tea' ]);
     }
 }

@@ -15,6 +15,6 @@ class ProductCategorySeeder extends Seeder
     public function run()
     {
         ProductCategory::factory()->create(['name' => 'Coffee', 'slug' => 'coffee']);
-        ProductCategory::factory()->create(['name' => 'Tea', 'slug' => 'tea']);
+        ProductCategory::factory()->create(['name' => 'Hot Chocolate & Tea', 'slug' => 'hot chocolate & tea']);
     }
 }

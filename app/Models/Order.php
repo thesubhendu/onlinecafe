@@ -94,20 +94,23 @@ class Order extends Model
                 'options' => json_encode($product->options)
             ]);
 
-            for ($i = 0; $i < $product->qty; $i++) {
-                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+            // if product price is 0 then it is claimed product so no need to add stamps
+            if($product->price != 0)
+            {
+                for ($i = 0; $i < $product->qty; $i++) {
+                    $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
 
-                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
-                    //max stamped
-                    $activeCard->is_max_stamped = true;
-                    $activeCard->is_active = false;
-                    $activeCard->save();
+                    if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
+                        //max stamped
+                        $activeCard->is_max_stamped = true;
+                        $activeCard->is_active = false;
+                        $activeCard->save();
 
-                    //create another
-                    $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
+                        //create another
+                        $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
+                    }
                 }
             }
-
         }
 
         return $order;

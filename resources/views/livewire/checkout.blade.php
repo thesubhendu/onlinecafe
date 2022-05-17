@@ -6,7 +6,7 @@
     <section class="ordered-food-item ">
         <div class="container">
             <!-- TABLE ITEMS  -->
-            <div class="row">
+            <div class="row hidden-xs">
                 <div class="col-md-12">
                     <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
                     @if($deal)
@@ -73,7 +73,7 @@
 
             <!-- MOBILE CART-Items -->
             <div class="cart-items-mobile">
-            @foreach($items as $item)
+                @forelse($items as $item)
                 <!-- MOBILE CART -->
                     <div class="mobile-cart ">
                         <!-- IMAGE  -->
@@ -125,9 +125,9 @@
                             </div>
                         </div>
                     </div>
-
-                @endforeach
-
+                @empty
+                        <h2 class="mobile-cart">{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
+                @endforelse
             </div>
         @if($items->first())
 

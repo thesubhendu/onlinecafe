@@ -2,9 +2,6 @@
 
 namespace App\Http\Livewire\VendorOnboarding;
 
-use App\Models\AllProduct;
-use App\Models\ProductOption;
-use App\Models\Vendor;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -12,14 +9,7 @@ use Livewire\WithFileUploads;
 class ShopSetup extends Component
 {
     use WithFileUploads;
-    public  $productPrice;
-    protected $rules = [
-        'menus.*.isSelected'   => 'boolean',
-        'menus.*.is_stamp'   => 'boolean',
-        'menus.*.price'        => 'required',
-        'options.*.isSelected' => 'boolean',
-        'options.*.price'      => 'required|decimal',
-    ];
+
     public $logo;
     public $form = [
         'shop_name',
@@ -36,17 +26,12 @@ class ShopSetup extends Component
         'services'
     ];
     public $openingHoursOptions = [];
-    public $vendorProducts = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-    public $menus;
-    public $options;
-
     public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
     public $newService;
-    public $sizes;
-
     public $listeners = ['markerPositionChanged', 'addressChanged'];
+    public $vendorProducts;
+    public $vendorProductsExists;
 
     public function addService()
     {
@@ -61,23 +46,9 @@ class ShopSetup extends Component
         $this->makeOpeningHoursOptions();
         $this->initializeOpeningHours();
 
-        $vendor = auth()->user()->shop()->with('products', 'products.productPrices')->first();
-        $this->sizes = config('sizes');
-
-        $this->menus = AllProduct::all()->map(function ($product)  use($vendor) {
-            $product->isSelected = true;
-            $product->is_stamp = true;
-            $this->setupInitialProductSizesPrice($product, $vendor);
-
-            return $product;
-        });
-
-
-        $this->options = ProductOption::all()->map(function ($option) {
-            $option->isSelected = true;
-
-            return $option;
-        });
+        $vendor = auth()->user()->shop()->with('products')->first();
+        $this->vendorProductsExists = $vendor->products()->exists();
+        $this->vendorProducts = $vendor->products;
 
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
@@ -87,9 +58,12 @@ class ShopSetup extends Component
             $this->form['address'] = $vendor->address;
             $this->form['lat'] = $vendor->lat;
             $this->form['lng'] = $vendor->lng;
-            $this->form['max_stamps'] = $vendor->max_stamps;
-            $this->form['free_product'] = $vendor->free_product;
-            $this->form['get_free'] = $vendor->get_free;
+            if($this->vendorProductsExists)
+            {
+                $this->form['max_stamps'] = $vendor->max_stamps;
+                $this->form['free_product'] = $vendor->free_product;
+                $this->form['get_free'] = $vendor->get_free;
+            }
 
             if ($vendor->opening_hours) {
                 $this->form['opening_hours'] = $vendor->opening_hours;
@@ -103,7 +77,6 @@ class ShopSetup extends Component
                 $this->form['services'] = $services;
             }
 
-            $this->vendorProducts = $vendor->products->sortBy('name');
         }
     }
 
@@ -115,7 +88,6 @@ class ShopSetup extends Component
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.services' => 'required',
-            'form.get_free' => 'required_with:form.free_product|numeric|gt:0|nullable'
         ]);
 
         $vendor = auth()->user()->shop()->first();
@@ -125,20 +97,26 @@ class ShopSetup extends Component
             return redirect()->route('register-business.create');
         }
 
-        $vendor->update([
+        $formData = [
             'shop_name' => $this->form['shop_name'],
             'shop_email' => $this->form['shop_email'],
-            'free_product' => $this->form['free_product'] === '' ? null : $this->form['free_product'],
-            'get_free' => $this->form['get_free'],
             'shop_mobile' => $this->form['shop_mobile'],
-            'max_stamps' => $this->form['max_stamps'],
             'description' => $this->form['description'] ?? '',
             'opening_hours' => $this->formatOpeningHours($this->form['opening_hours']),
             'address' => $this->form['address'],
             'lat' => $this->form['lat'] ,
             'lng' => $this->form['lng'],
             'services'=> collect($this->form['services'])->filter(fn($val, $key) => $val)->keys()->toArray()
-        ]);
+        ];
+        if($this->vendorProductsExists)
+        {
+            $formData['free_product'] = $this->form['free_product'] === '' ? null : $this->form['free_product'];
+            $formData['get_free'] = $this->form['get_free'];
+            $formData['max_stamps'] =  $this->form['max_stamps'];
+        }
+
+        $vendor->update($formData);
+
 
         if (!empty($this->logo)) {
             $fileName = $this->logo->store('vendor-logos');
@@ -146,40 +124,12 @@ class ShopSetup extends Component
             $vendor->save();
         }
 
-        foreach ($this->menus->filter(fn($item) => $item->isSelected) as $menu) {
-            $product = $vendor->products()->updateOrCreate(['name' => $menu->name], [
-                'description' => $menu->description ?? "dummy description",
-                'product_image' => $menu->image,
-                'price' => $menu->price,
-                'category_id' => $menu->category_id,
-                'is_stamp' => $menu->is_stamp,
-            ]);
-
-            if (isset($this->productPrice[$menu->id])) {
-                foreach ($this->productPrice[$menu->id] as $key => $price) {
-                    $product->productPrices()->updateOrCreate(
-                        [
-                            'product_id' => $product->id,
-                            'size' => $key
-                        ],
-                        [
-                            'price' => $price,
-                        ]);
-                }
-            }
+        if($this->vendorProductsExists)
+        {
+            return redirect()->route('vendor.show', $vendor->id);
         }
 
-        foreach ($this->options->filter(fn($item) => $item->isSelected) as $option) {
-            $vendor->productOptions()->updateOrCreate(['name' => $option->name], [
-                'description' => $option->description,
-                'image' => $option->image,
-                'price' => $option->price,
-                'category_id' => $option->category_id,
-                'options' => $option->options,
-            ]);
-        }
-
-        return redirect()->route('vendor.show', $vendor->id);
+        return redirect()->route('register-business.menu-products-setup');
     }
 
     public function render()
@@ -246,20 +196,6 @@ class ShopSetup extends Component
         if($this->form['free_product'] === '')
         {
             $this->form['get_free'] = null;
-        }
-    }
-
-    private function setupInitialProductSizesPrice(AllProduct $product, Vendor $vendor = null): void
-    {
-        $savedProduct = $vendor ? $vendor->products->where('name', $product->name)->first() : null;
-        if ($savedProduct && count($savedProduct->productPrices)) {
-            $savedProduct->productPrices->each(function ($productPrice) use ($product) {
-                $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
-            });
-        } else {
-            foreach ($this->sizes as $size) {
-                $this->productPrice[$product->id][$size] = $product->price;
-            }
         }
     }
 }

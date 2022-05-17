@@ -3,8 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use App\Models\ProductOption;
-use App\Models\ProductPrice;
+use App\Models\VendorProductOption;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -18,6 +17,8 @@ class AddToCart extends Component
      * @var mixed
      */
     public $selectSize;
+
+    public $vendorOptionsExist;
 
 
 
@@ -37,10 +38,11 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
-        if($this->product->productPrices){
-            $this->selectSize = 'M';
-            $this->cartProduct['price'] = $this->product->productPrices()->where('size', 'M')->first()->price ?? $product->price;
+        if($this->product->productPrices->count()){
+            $this->selectSize = 'S';
+            $this->cartProduct['price'] = $this->product->productPrices()->where('size', 'S')->first()->price ?? $product->price;
         }
+        $this->vendorOptionsExist = VendorProductOption::where('vendor_id', $product->vendor_id)->count();
 
     }
 
@@ -64,18 +66,19 @@ class AddToCart extends Component
         }
 
         if(!empty($this->cartProduct['options'])) {
-
-            $totalAdditionalPrice = collect($this->cartProduct['options'])->map(function($option, $optionId) {
-                                    $optionObject = ProductOption::find($optionId);
-                                    return $optionObject->price ?? 0;
-                                })->filter()->sum();
-
-            $this->cartProduct['price'] += $totalAdditionalPrice;
+            collect($this->cartProduct['options'])->map(function ($option, $optionTypeId) {
+                $option = json_decode($option, false);
+                // Recreate cart Product options
+                $this->cartProduct['options'][$optionTypeId] =
+                    $this->product->optionTypes()->where('id', $optionTypeId)->first()->name . ': ' . $option->name;
+            });
         }
 
         if($this->selectSize){
-            $this->cartProduct['options'][] =  "size: $this->selectSize" ;
+            $this->cartProduct['options'][] =  "Size: $this->selectSize" ;
         }
+
+        $this->selectSize = 'S';
 
         Cart::add($this->cartProduct)->associate(Product::class);
 
@@ -123,9 +126,21 @@ class AddToCart extends Component
         $this->cartProduct['qty']++;
     }
 
-    public function updateProductPrice( ProductPrice $productPrice): void
+    public function updateProductPrice(): void
     {
-        $this->cartProduct['price'] = number_format(($productPrice->price), 2);
+        $totalOptionPrice = collect($this->cartProduct['options'])->map(function ($option) {
+            $option = json_decode($option, false);
+
+            return $option->price ?? 0;
+        })->filter()->sum();
+
+        $price = $this->product->price;
+        if($this->selectSize)
+        {
+            $price = $this->product->productPrices()->where('size', $this->selectSize)->first()->price;
+        }
+
+        $this->cartProduct['price'] = number_format(($price + $totalOptionPrice), 2);
     }
 
 }
