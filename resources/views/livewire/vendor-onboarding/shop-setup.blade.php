@@ -52,34 +52,6 @@
                                     @error('form.address') <span class="text-danger">{{ $message }}</span> @enderror
                                     <livewire:g-map/>
                                 </div>
-
-                                <div class="form-row row">
-                                    <div class="form-group col">
-                                        <label for="form.max_stamps" class="form-label">Buy</label>
-                                        <input class="form-control" type="number" wire:model.lazy="form.max_stamps">
-                                        @error('form.max_stamps') <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col">
-                                        <label for="form.free_product" class="form-label">Select Free Product</label>
-                                        <select class="form-control" wire:model="form.free_product" wire:change="freeProductChange">
-                                            <option value selected>Select Option</option>
-                                            @foreach($vendorProducts as $key => $option)
-                                                <option value="{{$option->id}}">{{$option->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('form.free_product') <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col">
-                                        <label for="form.get_free" class="form-label">To Get Free</label>
-                                        <input class="form-control" type="number" wire:model.lazy="form.get_free">
-                                        @error('form.get_free') <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="form-group">
@@ -132,72 +104,6 @@
                                 @endforeach
                             </div>
 
-                            <div class="menu-section form-part">
-                                <h2 class="title">Choose your menus</h2>
-                                <div class="row">
-                                    @foreach ($menus as $index=>$menu)
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="checkbox" class="form-check-input"
-                                                       wire:model="menus.{{$index}}.isSelected" checked>
-
-
-                                                <label for=""> {{$menu->name}}</label>
-
-                                                $ <input style="display:inline-block" type="hidden" class="form-control"
-                                                         wire:model="menus.{{$index}}.price" placeholder="price">
-                                                <br/>
-                                                <input type="checkbox" class="form-check-input"
-                                                       wire:model="menus.{{$index}}.is_stamp" checked>
-                                                Is Stamp?
-                                                @if($menu->is_all_sizes_available)
-                                                    <br/>
-                                                    <br/>
-                                                    <div class="form-group form-inline row">
-                                                        @foreach($sizes as $key => $size)
-                                                            <div class="col-sm-3">
-                                                                <label>{{$size}} $</label>
-                                                                <input
-                                                                    wire:model.lazy="productPrice.{{$menu->id}}.{{$size}}"
-                                                                    type="number"
-                                                                    class="form-control"
-                                                                    value="{{$productPrice[$menu->id][$size] ?? 0}}"
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
-                                                <br/>
-
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-
-                            <div class="menu-option-section form-part">
-                                <h2 class="title">Choose your options</h6>
-                                    <div class="row">
-                                        @foreach ($options as $index=>$menu)
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input type="checkbox" class="form-check-input"
-                                                           wire:model="options.{{$index}}.isSelected" checked>
-                                                    <label for="">{{$menu->name}}</label>
-                                                    $ <input style="display:inline-block" class="form-control"
-                                                             type="number"
-                                                             step='any' placeholder="price"
-                                                             wire:model="options.{{$index}}.price">
-                                                </div>
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                            </div>
-
                             <section class="mb-4">
                                 <h2 class="title">Services</h2>
                                 <div class="row">
@@ -221,7 +127,42 @@
                                 @enderror
                             </section>
 
-                            <button type="submit" class="btn btn-success mt-2 px-5">Setup</button>
+                            @if($this->vendorProductsExists)
+                                <section>
+                                    <h4 class="title">
+                                        Set Loyalty Product
+                                    </h4>
+                                    <div class="form-row row">
+                                        <div class="form-group col-md-4">
+                                            <label for="form.max_stamps" class="form-label">Buy</label>
+                                            <input class="form-control" type="number" wire:model.lazy="form.max_stamps" required>
+                                            @error('form.max_stamps') <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="form.free_product" class="form-label">Select Free Product</label>
+                                            <select class="form-control" wire:model="form.free_product" required>
+                                                <option value selected>Select Option</option>
+                                                @foreach($vendorProducts as $key => $product)
+                                                    <option value="{{$product->id}}">{{$product->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('form.free_product') <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="form.get_free" class="form-label">To Get Free</label>
+                                            <input class="form-control" type="number" wire:model.lazy="form.get_free" required>
+                                            @error('form.get_free') <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </section>
+                            @endif
+
+                            <button type="submit" class="btn btn-success mt-2 px-5">{{$vendorProductsExists ? 'Submit' : 'Continue'}}</button>
                         </form>
                     </div>
                 </div>

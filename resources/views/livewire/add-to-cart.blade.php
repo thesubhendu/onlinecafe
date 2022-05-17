@@ -41,39 +41,55 @@
                     <div class="col-lg-9">
                         <div class="product-form">
                             <div class="row extras">
-                                @if($product->is_all_sizes_available && count($product->productPrices))
-                                    <div class="col-lg-3">
-                                        <h4> Size</h4>
-                                        @foreach($product->productPrices as $index => $productPrice)
-                                            <label>
-                                                <input type="radio" name="productPrice" value="{{$productPrice->size}}"
-                                                       wire:model.lazy="selectSize"
-                                                       wire:change="updateProductPrice({{$productPrice}})">
-                                                {{$productPrice->size}}
-                                            </label>
-                                        @endforeach
-                                        <br/>
-                                        <br/>
-                                    </div>
-                                @endif
-                                <div class="col-lg-9">
-                                    <h4> Select Options</h4>
-                                    <div class="row">
-                                @foreach($product->options() as $index => $option)
-                                    <div class="col-lg-4 mb-3">
-                                        <label for="">{{$option->name}} (+ ${{$option->price}})</label>
-                                        <select wire:model="cartProduct.options.{{$option->id}}" class="form-select">
-                                            <option value="">Select Option</option>
-                                            @foreach ($option->options ?? [] as $subOption)
-                                                <option
-                                                    value="{{$option->name}}: {{$subOption}}">{{$subOption}}</option>
-                                            @endforeach
 
-                                        </select>
-                                        @error('cartProduct.options.'.$option->id) <span
-                                            class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                @endforeach
+                                <div class="col-lg-9">
+                                    @if($vendorOptionsExist)
+                                        <h4> Select Options</h4>
+                                    @endif
+                                    <div class="row">
+                                        @if($product->is_all_sizes_available && count($product->productPrices))
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="">Size</label>
+                                                @foreach($product->productPrices as $index => $productPrice)
+                                                    <div class="form-check">
+                                                        <input type="radio" id="productPrice-{{$index}}"
+                                                               value="{{$productPrice->size}}"
+                                                               class="form-check-input"
+                                                               wire:model.lazy="selectSize"
+                                                               wire:change="updateProductPrice()">
+                                                        <label for="productPrice-{{$index}}" class="form-check-label">
+                                                            @if($productPrice->size === 'S')
+                                                                {{$productPrice->size }}
+                                                            @else
+                                                                {{$productPrice->size}} +${{ number_format(($productPrice->price- $product->price), 2) }}
+                                                            @endif
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                        @foreach($product->optionTypes() as $index => $optionType)
+                                            @if($optionType->vendorProductOptions->count())
+                                                <div class="col-lg-4 mb-3">
+                                                    <label for="">{{$optionType->name}}</label>
+                                                    @foreach($optionType->vendorProductOptions as $key => $option)
+                                                        <div class="form-check">
+                                                            <input wire:model.lazy="cartProduct.options.{{$optionType->id}}"
+                                                                   class="form-check-input" type="radio"
+                                                                   id="product-{{$index}}-{{$key}}"
+                                                                   value="{{$option}}"
+                                                                   wire:change="updateProductPrice()"
+                                                            >
+                                                            <label class="form-check-label" for="product-{{$index}}-{{$key}}">
+                                                                {{$option->name}} +${{ $option->price}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                    @error('cartProduct.options.'.$optionType->id) <span
+                                                        class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-lg-12 mb-3 text-right">

@@ -43,18 +43,15 @@ class AddProductToDealScreen extends Screen
             Input::make('product.price')->title('Price'),
             Input::make('product.qty')->title('Quantity'),
         ];
-
-
-        foreach ($this->product->options() ?? [] as $option) {
+        foreach ($this->product->optionTypes() ?? [] as $optionType) {
             $optionOptions = ["" => "Select"];
-            foreach ($option->options ?? [] as $opt) {
-                $optionOptions[$option->name.':'.$opt] = $opt;
+            foreach ($optionType->vendorProductOptions ?? [] as $opt) {
+                $optionOptions[$optionType->name.':'.$opt->name] = $opt->name. "(+". $opt->price .")";
             }
 
-            $fields[] = Select::make('productoptions.'.$option->id)
+            $fields[] = Select::make('productoptions.'.$optionType->id)
                 ->options($optionOptions)
-                ->title($option->name. "(+". $option->price .")");
-
+                ->title($optionType->name);
         }
 
         return [
@@ -65,11 +62,10 @@ class AddProductToDealScreen extends Screen
     public function addToDeal(Deal $deal, Product $product, Request $request)
     {
         $data = $request->get('product');
-
         $deal->products()->attach($product->id,[
             'price' => $data['price'],
             'quantity' => $data['qty'],
-            'options' => json_encode($request->get('productoptions') ?? [])
+            'options' => json_encode(array_filter($request->get('productoptions')) ?? [])
         ]);
 
         Alert::info('You have successfully added product to deal.');

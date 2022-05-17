@@ -98,6 +98,10 @@ Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
 
     Route::get('/shop-setup',
         ShopSetup::class)->name('register-business.shop-setup')->middleware('can:subscribed');
+    Route::get('/menu-products-setup',
+        VendorOnboarding\MenuProductsSetup::class)->name('register-business.menu-products-setup')->middleware('can:vendor');
+    Route::get('/menu-prices-setup',
+        VendorOnboarding\MenuPricesSetup::class)->name('register-business.menu-prices-setup')->middleware('can:vendor');
 });
 
 //send mobile verification code

@@ -50,9 +50,25 @@ class Product extends Model implements Buyable
         return VendorProductOption::where('category_id', $this->category_id)->where('vendor_id', $this->vendor_id)->get();
     }
 
+    public function optionTypes()
+    {
+        return OptionType::where('category_id', $this->category_id)
+            ->whereHas('vendorProductOptions')
+            ->with(['vendorProductOptions' =>  function($query){
+                return $query->where('vendor_id', $this->vendor_id)->orderBy('name');
+            }])
+            ->orderBy('name')
+            ->get();
+    }
+
     public function productPrices(): HasMany
     {
         return $this->hasMany(ProductPrice::class);
     }
+
+//    public function stamps(): HasMany
+//    {
+//        return $this->hasMany(Stamp::class);
+//    }
 
 }

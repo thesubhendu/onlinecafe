@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class VendorProductOption extends Model implements Buyable
 {
@@ -29,6 +30,11 @@ class VendorProductOption extends Model implements Buyable
     public function getBuyableWeight($options = null)
     {
         return '0';
+    }
+
+    public function optionType(): BelongsTo
+    {
+        return $this->belongsTo(OptionType::class, 'option_type_id', 'id');
     }
 
 }
