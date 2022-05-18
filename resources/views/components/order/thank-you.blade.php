@@ -46,7 +46,7 @@
                 </tbody>
             </table>
 
-            <p>has been confirmed by the venue {{$order->vendor->vendor_name}}</strong> payment will be required on pickup</p>
+            <p>has been confirmed by the venue {{$order->vendor->name}}</strong> payment will be required on pickup</p>
             <hr>
 
             <div class="avatar">
