@@ -10,11 +10,10 @@
                 <div class="col-md-8">
                     <div class="card payment_form">
                         <div class="card-body">
-                            @if($loader)
-                                <div class="loader-container">
-                                    <div class="loader text-center"></div>
-                                </div>
-                            @endif
+                            <div id="card-errors" class="alert">
+
+                            </div>
+
                             <div class="container py-3">
                                 <main>
                                     <div class="row g-5">
@@ -69,7 +68,6 @@
                                                         <div class="form-group mt-2">
                                                             <label for="name">Enter Your Card Details</label>
                                                             <div id="card-element"></div>
-                                                            <div id="card-errors" role="alert"></div>
                                                         </div>
 
 
@@ -78,6 +76,8 @@
                                                                 type="submit" data-secret="{{ $clientSecret }}">
                                                             Proceed to Checkout.
                                                         </button>
+
+
                                                     </form>
 
 
@@ -116,7 +116,9 @@
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault()
                     let plan = document.querySelector('input[name="plan"]:checked').value;
+
                     cardButton.disabled = true
+                    cardButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing Payment...';
 
                     const {setupIntent, error} = await stripe.confirmCardSetup(clientSecret, {
                             payment_method: {
@@ -128,9 +130,16 @@
                         }
                     )
                     if (error) {
+                        console.log('error is stringpe', error);
+                        errorDiv.classList.add('alert-danger')
+                        errorDiv.innerText = error.message;
+
                         cardButton.disabled = false
+                        cardButton.innerHTML = "Proceed To Checkout"
 
                     } else {
+                        errorDiv.innerText = "";
+                        errorDiv.classList.remove('alert-danger');
 
                     @this.token
                         = setupIntent.payment_method;
