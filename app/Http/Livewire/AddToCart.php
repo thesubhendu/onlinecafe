@@ -38,12 +38,9 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
-        if($this->product->productPrices->count()){
-            $this->selectSize = 'S';
-            $this->cartProduct['price'] = $this->product->productPrices()->where('size', 'S')->first()->price ?? $product->price;
-        }
-        $this->vendorOptionsExist = VendorProductOption::where('vendor_id', $product->vendor_id)->count();
 
+        $this->vendorOptionsExist = VendorProductOption::where('vendor_id', $product->vendor_id)->count();
+        $this->setDefaultOption();
     }
 
     public function submit()
@@ -66,11 +63,10 @@ class AddToCart extends Component
         }
 
         if(!empty($this->cartProduct['options'])) {
-            collect($this->cartProduct['options'])->map(function ($option, $optionTypeId) {
-                $option = json_decode($option, false);
+            collect($this->cartProduct['options'])->map(function ($optionName, $optionTypeId) {
                 // Recreate cart Product options
                 $this->cartProduct['options'][$optionTypeId] =
-                    $this->product->optionTypes()->where('id', $optionTypeId)->first()->name . ': ' . $option->name;
+                    $this->product->optionTypes()->where('id', $optionTypeId)->first()->name . ': ' . $optionName;
             });
         }
 
@@ -128,19 +124,44 @@ class AddToCart extends Component
 
     public function updateProductPrice(): void
     {
-        $totalOptionPrice = collect($this->cartProduct['options'])->map(function ($option) {
-            $option = json_decode($option, false);
-
-            return $option->price ?? 0;
-        })->filter()->sum();
+        $totalOptionPrice = $this->getTotalOptionsPrice($this->cartProduct['options']);
 
         $price = $this->product->price;
         if($this->selectSize)
         {
             $price = $this->product->productPrices()->where('size', $this->selectSize)->first()->price;
         }
+        $this->cartProduct['price'] = $price + $totalOptionPrice;
+    }
 
-        $this->cartProduct['price'] = number_format(($price + $totalOptionPrice), 2);
+    private function setDefaultOption(): void
+    {
+        if($this->product->productPrices->count()){
+            $this->selectSize = 'S';
+            $this->cartProduct['price'] = $this->product->productPrices()->where('size', 'S')->first()->price ?? $this->product->price;
+        }
+        $defaultOptionType = [
+            'Coffee Type' => 'House Blend',
+            'Milk' => 'Full Cream',
+            'Sugar' => 'No Sugar',
+            'Syrups' => 'No thanks'
+        ];
+        $this->product->optionTypes()->each( function($optionType) use ($defaultOptionType) {
+            if(array_key_exists($optionType->name, $defaultOptionType))
+            {
+                $this->cartProduct['options'][$optionType->id] = $defaultOptionType[$optionType->name];
+            }
+        });
+        $totalOptionsPrice = $this->getTotalOptionsPrice($this->cartProduct['options']);
+        $this->cartProduct['price'] += $totalOptionsPrice;
+    }
+
+    public function getTotalOptionsPrice($options)
+    {
+        return $this->product->vendor
+            ->productOptions()
+            ->whereIn('name', $options)
+            ->sum('price');
     }
 
 }

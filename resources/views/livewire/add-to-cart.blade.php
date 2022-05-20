@@ -16,7 +16,7 @@
                                 <div class="d-flex mb-3 ">
                                     <div class="p-1">
                                         <h5>{{$product->name}}</h5>
-                                        <p>${{$cartProduct['price']}}</p>
+                                        <p>${{number_format($cartProduct['price'], 2)}}</p>
                                     </div>
                                     <div class="p-2"></div>
                                     <div class="p-1 mr-4">
@@ -77,7 +77,7 @@
                                                             <input wire:model.lazy="cartProduct.options.{{$optionType->id}}"
                                                                    class="form-check-input" type="radio"
                                                                    id="product-{{$index}}-{{$key}}"
-                                                                   value="{{$option}}"
+                                                                   value="{{$option->name}}"
                                                                    wire:change="updateProductPrice()"
                                                             >
                                                             <label class="form-check-label" for="product-{{$index}}-{{$key}}">

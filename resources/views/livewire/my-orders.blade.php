@@ -35,7 +35,7 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>${{$orderProduct->product->price}}</td>
+                            <td>${{$orderProduct->price}}</td>
                             <td>
                                 <a href="{{ route('orders.create', $orderProduct->product) }}" class="btn btn-success btn-sm"><i
                                         class="fa fa-cart-plus"></i></a>
