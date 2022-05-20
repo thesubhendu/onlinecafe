@@ -97,7 +97,7 @@ Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
         VendorOnboarding\Payment::class)->name('register-business.payment')->middleware('can:vendor');
 
     Route::get('/shop-setup',
-        ShopSetup::class)->name('register-business.shop-setup')->middleware('can:subscribed');
+        ShopSetup::class)->name('register-business.shop-setup')->middleware('subscribed');
     Route::get('/menu-products-setup',
         VendorOnboarding\MenuProductsSetup::class)->name('register-business.menu-products-setup')->middleware('can:vendor');
     Route::get('/menu-prices-setup',
@@ -119,4 +119,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/manage-shop', ShopSetup::class)->middleware('auth')->name('manage-shop');
+Route::get('/manage-shop', ShopSetup::class)->middleware('auth','subscribed')->name('manage-shop');
