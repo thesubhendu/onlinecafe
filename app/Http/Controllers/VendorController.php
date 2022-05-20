@@ -9,7 +9,7 @@ class VendorController extends Controller
 {
     public function show($id)
     {
-        $vendor = Vendor::where('id', $id)->with('products')->firstOrFail();
+        $vendor = Vendor::where('id', $id)->with('products', 'products.productPrices')->firstOrFail();
 
         $featuredProducts = $vendor->products->take(8);
 

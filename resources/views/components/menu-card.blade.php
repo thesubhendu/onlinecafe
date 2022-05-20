@@ -15,7 +15,9 @@
                 <div class="row menu-card-footer">
                     <div class="col-4">
                         <div class="price">
-                            <p><i class="fa fa-dollar"></i> {{$product->price}}</p>
+                            <p><i class="fa fa-dollar"></i>
+                                {{$product->productPrices->where('size', 'S')->first()->price ?? $product->price}}
+                            </p>
                         </div>
                     </div>
                     <div class="col-8">

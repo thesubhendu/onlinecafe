@@ -167,45 +167,45 @@ class ProductOptionSeeder extends Seeder
         ]);
 
         // Tea type
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'English Breakfast',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'Camoline',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'Green Tea',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'Earl Grey',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'Peppermint',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'Jasmine',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->hotChocolate()->create([
+        ProductOption::factory()->teaType()->create([
             'name' => 'Chai Tea',
             'charge' => 0,
             'price' => 0,
         ]);
 
         // Tea option
-        ProductOption::factory()->hotChocolate()->create([
-            'name' => 'honey',
+        ProductOption::factory()->teaOption()->create([
+            'name' => 'Honey',
             'charge' => 1,
         ]);
     }
