@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AllProduct;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductOption;
 use App\Models\User;
 use App\Models\Vendor;
@@ -89,14 +90,14 @@ class UsersTableSeeder extends Seeder
         $vendor1Shop->update(
             [
                 'max_stamps' => 10,
-                'free_product' => $vendor1Shop->products()->inRandomOrder()->first()->id,
+                'free_category' => ProductCategory::inRandomOrder()->first()->id,
                 'get_free' => 1
             ]
         );
         $vendor2Shop->update(
             [
                 'max_stamps' => 10,
-                'free_product' => $vendor2Shop->products()->inRandomOrder()->first()->id,
+                'free_category' => ProductCategory::inRandomOrder()->first()->id,
                 'get_free' => 1
             ]
         );

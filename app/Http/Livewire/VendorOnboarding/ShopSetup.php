@@ -18,7 +18,7 @@ class ShopSetup extends Component
         'description',
         'opening_hours',
         'max_stamps',
-        'free_product',
+        'free_category',
         'get_free',
         'address',
         'lat',
@@ -30,7 +30,6 @@ class ShopSetup extends Component
     public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
     public $newService;
     public $listeners = ['markerPositionChanged', 'addressChanged'];
-    public $vendorProducts;
     public $vendorProductsExists;
 
     public function addService()
@@ -48,7 +47,6 @@ class ShopSetup extends Component
 
         $vendor = auth()->user()->shop()->with('products')->first();
         $this->vendorProductsExists = $vendor->products()->exists();
-        $this->vendorProducts = $vendor->products;
 
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
@@ -58,12 +56,9 @@ class ShopSetup extends Component
             $this->form['address'] = $vendor->address;
             $this->form['lat'] = $vendor->lat;
             $this->form['lng'] = $vendor->lng;
-            if($this->vendorProductsExists)
-            {
-                $this->form['max_stamps'] = $vendor->max_stamps;
-                $this->form['free_product'] = $vendor->free_product;
-                $this->form['get_free'] = $vendor->get_free;
-            }
+            $this->form['max_stamps'] = $vendor->max_stamps;
+            $this->form['free_category'] = $vendor->free_category;
+            $this->form['get_free'] = $vendor->get_free;
 
             if ($vendor->opening_hours) {
                 $this->form['opening_hours'] = $vendor->opening_hours;
@@ -106,14 +101,11 @@ class ShopSetup extends Component
             'address' => $this->form['address'],
             'lat' => $this->form['lat'] ,
             'lng' => $this->form['lng'],
-            'services'=> collect($this->form['services'])->filter(fn($val, $key) => $val)->keys()->toArray()
+            'services'=> collect($this->form['services'])->filter(fn($val, $key) => $val)->keys()->toArray(),
+            'free_category' => $this->form['free_category'] === '' ? null : $this->form['free_category'],
+            'get_free' => $this->form['get_free'],
+            'max_stamps' => $this->form['max_stamps']
         ];
-        if($this->vendorProductsExists)
-        {
-            $formData['free_product'] = $this->form['free_product'] === '' ? null : $this->form['free_product'];
-            $formData['get_free'] = $this->form['get_free'];
-            $formData['max_stamps'] =  $this->form['max_stamps'];
-        }
 
         $vendor->update($formData);
 
@@ -191,9 +183,9 @@ class ShopSetup extends Component
         $this->form['lng'] = $position[1];
     }
 
-    public function freeProductChange(): void
+    public function freeProductCategoryChange(): void
     {
-        if($this->form['free_product'] === '')
+        if($this->form['free_category'] === '')
         {
             $this->form['get_free'] = null;
         }
