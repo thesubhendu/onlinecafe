@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\MustVerifyPhone;
 use BeyondCode\Vouchers\Traits\CanRedeemVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -15,11 +16,11 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Orchid\Platform\Models\User as Authenticatable;
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail,MustVerifyPhone
 {
     use HasFactory;
     use HasProfilePhoto, Favoriteability, CanRedeemVouchers;
-    use Notifiable, Billable;
+    use Notifiable, Billable, \App\Traits\MustVerifyPhone;
     use TwoFactorAuthenticatable;
 
     /**
@@ -119,16 +120,6 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-    public function hasVerifiedPhone()
-    {
-        return !is_null($this->phone_verified_at);
-    }
-
-    public function routeNotificationForNexmo($notification)
-    {
-        return $this->mobile;
-    }
-
     public function earnedRewards()
     {
         return Card::query()->where(['user_id' => $this->id, 'is_active' => false, 'is_max_stamped' => false])->get();
@@ -142,5 +133,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin()
     {
         return  Gate::allows('admin');
+    }
+
+    public function makeShopActive()
+    {
+        if($this->hasVerifiedPhone() && $this->hasVerifiedEmail()){
+            $this->shop->update(['is_active'=> 1]);
+        }
     }
 }
