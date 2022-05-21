@@ -31,7 +31,7 @@
                 <div class="mb-3">
                     <x-jet-label value="{{ __('Mobile') }}"/>
 
-                    <x-jet-input class="{{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="number" name="mobile"
+                    <x-jet-input class="{{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="tel" name="mobile"
                                  :value="old('mobile')" required/>
                     <x-jet-input-error for="email"></x-jet-input-error>
                 </div>
