@@ -55,5 +55,8 @@ class Card extends Model
         ]);
     }
 
-
+    public function eligibleClaimLoyalty(): bool
+    {
+        return $this->loyalty_claimed === 0 && $this->is_max_stamped === 1 &&  $this->user_id === auth()->id();
+    }
 }

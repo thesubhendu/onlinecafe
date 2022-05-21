@@ -140,7 +140,7 @@
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        <label for="form.free_product" class="form-label">Select Free Product</label>
+                                        <label for="form.free_product" class="form-label">Select Free Category</label>
                                         <select class="form-control" wire:model="form.free_category" wire:change="freeProductCategoryChange()" required>
                                             <option value selected>Select Option</option>
                                             @foreach(\App\Models\ProductCategory::all() as $key => $category)

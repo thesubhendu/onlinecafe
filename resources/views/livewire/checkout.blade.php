@@ -206,7 +206,7 @@
                                 <div class="col-md-12">
                                     <div class="cart-totals-result">
 
-                                        <a wire:click="submit({{$loyaltyCardId}})" class="btn btn-secondary mt-25">
+                                        <a wire:click="submit()" class="btn btn-secondary mt-25">
                                             CHECKOUT
                                         </a>
                                         <a

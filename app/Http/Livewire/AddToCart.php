@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Card;
 use App\Models\Product;
 use App\Models\VendorProductOption;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -19,6 +20,7 @@ class AddToCart extends Component
     public $selectSize;
 
     public $vendorOptionsExist;
+    public $validLoyaltyClaimCard;
 
 
 
@@ -38,7 +40,7 @@ class AddToCart extends Component
             'qty'     => 1,
             'options' => [],
         ];
-
+        $this->validLoyaltyClaimCard= $this->verifyLoyaltyCard();
         $this->vendorOptionsExist = VendorProductOption::where('vendor_id', $product->vendor_id)->count();
         $this->setDefaultOption();
     }
@@ -75,6 +77,14 @@ class AddToCart extends Component
         }
 
         $this->selectSize = 'S';
+
+        if($this->validLoyaltyClaimCard)
+        {
+            Cart::destroy();
+            $this->cartProduct['price'] = 0;
+            Cart::add($this->cartProduct)->associate(Product::class);
+            return redirect()->route('checkout.index', ['claim_loyalty_card' => $this->validLoyaltyClaimCard->id]);
+        }
 
         Cart::add($this->cartProduct)->associate(Product::class);
 
@@ -162,6 +172,19 @@ class AddToCart extends Component
             ->productOptions()
             ->whereIn('name', $options)
             ->sum('price');
+    }
+
+    private function verifyLoyaltyCard()
+    {
+        if(request('claim_loyalty_card'))
+        {
+            $claimCard = Card::find(request('claim_loyalty_card'));
+            if ($claimCard && $claimCard->eligibleClaimLoyalty()) {
+                return $claimCard;
+            }
+        }
+
+        return null;
     }
 
 }

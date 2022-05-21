@@ -26,7 +26,7 @@ class Checkout extends Component
     public $qtyOptions;
 
     public $deal;
-    public $loyaltyCardId;
+    public $claimLoyaltyCard;
 
     public function mount()
     {
@@ -38,7 +38,7 @@ class Checkout extends Component
                 $deal->addToCart();
             }
         }
-        $this->claimFreeProduct();
+        $this->claimLoyaltyCard = $this->verifyLoyaltyCard();
 
         $this->refreshCart();
         $this->fill([
@@ -49,7 +49,7 @@ class Checkout extends Component
         $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
-    public function submit($loyaltyCardId = null)
+    public function submit()
     {
         if(empty($this->items)) {
             session()->flash('message', 'Empty Cart');
@@ -66,8 +66,10 @@ class Checkout extends Component
 //        \App\Events\OrderSubmitted::dispatch($order);
         $order->vendor->owner->notify(new NewOrderNotification($order));
 
-        if($loyaltyCardId) {
-            Card::where('id', $loyaltyCardId)->update(['loyalty_claimed' => 1, 'is_active' => 0]);
+        if($this->claimLoyaltyCard) {
+            $this->claimLoyaltyCard->loyalty_claimed = 1;
+            $this->claimLoyaltyCard->is_active = 0;
+            $this->claimLoyaltyCard->save();
         }
 
         Cart::destroy();
@@ -115,28 +117,17 @@ class Checkout extends Component
         session()->flash("message", "Item has been removed");
     }
 
-    private function claimFreeProduct(): void
+    private function verifyLoyaltyCard()
     {
-        if (request('claim_loyalty_card')) {
-
+        if(request('claim_loyalty_card'))
+        {
             $claimCard = Card::find(request('claim_loyalty_card'));
-            $freeProduct = $claimCard->vendor->freeProduct ?? null;
-
-            if ($freeProduct) {
-                $cartProduct = [
-                    'id'      => $freeProduct->id,
-                    'name'    => $freeProduct->name,
-                    'price'   => 0,
-                    'weight'  => '0',
-                    'qty'     => $claimCard->vendor->get_free,
-                    'options' => [],
-                ];
-
-                $this->loyaltyCardId = $claimCard->id;
-
-                Cart::destroy();
-                Cart::add($cartProduct)->associate(Product::class);
+            if ($claimCard && $claimCard->eligibleClaimLoyalty()) {
+                return $claimCard;
             }
+            Cart::destroy();
         }
+
+        return null;
     }
 }

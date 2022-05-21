@@ -107,7 +107,11 @@ class UsersTableSeeder extends Seeder
 
         User::factory()
             ->has(
-                Vendor::factory()->has(
+                Vendor::factory()->state([
+                    'max_stamps' => 10,
+                    'free_category' => ProductCategory::inRandomOrder()->first()->id,
+                    'get_free' => 1
+                ])->has(
                     Product::factory()->count(5)
                 ),
                 'shop')

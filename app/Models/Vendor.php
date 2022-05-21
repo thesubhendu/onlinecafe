@@ -37,11 +37,6 @@ class Vendor extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function freeProduct(): BelongsTo
-    {
-        return $this->belongsTo(Product::class, 'free_product','id');
-    }
-
     public function productOptions()
     {
         return $this->hasMany(VendorProductOption::class);

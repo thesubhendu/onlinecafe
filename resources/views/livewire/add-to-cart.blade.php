@@ -16,24 +16,30 @@
                                 <div class="d-flex mb-3 ">
                                     <div class="p-1">
                                         <h5>{{$product->name}}</h5>
-                                        <p>${{number_format($cartProduct['price'], 2)}}</p>
+                                        @if($validLoyaltyClaimCard)
+                                            <s>${{number_format($cartProduct['price'], 2)}}</s> Free
+                                        @else
+                                            <p>${{number_format($cartProduct['price'], 2)}}</p>
+                                        @endif
+
                                     </div>
                                     <div class="p-2"></div>
-                                    <div class="p-1 mr-4">
-                                        <label>Quantity</label>
-                                        <div class="control-btn ">
-                                            <button type="button" class="value-button decrease"
-                                                    wire:click="updateQty('remove')" value="Decrease Value">-
-                                            </button>
-                                            <input type="number" id="number" wire:model="cartProduct.qty"/>
-                                            <button type="button" class="value-button increase" wire:click="updateQty()"
-                                                    value="Increase Value">+
-                                            </button>
+                                    @if(!$validLoyaltyClaimCard)
+                                        <div class="p-1 mr-4">
+                                            <label>Quantity</label>
+                                            <div class="control-btn ">
+                                                <button type="button" class="value-button decrease"
+                                                        wire:click="updateQty('remove')" value="Decrease Value">-
+                                                </button>
+                                                <input type="number" id="number" wire:model="cartProduct.qty"/>
+                                                <button type="button" class="value-button increase" wire:click="updateQty()"
+                                                        value="Increase Value">+
+                                                </button>
+                                            </div>
+                                            @error('cartProduct.qty') <span
+                                                class="text-danger">{{ $message }}</span> @enderror
                                         </div>
-
-                                        @error('cartProduct.qty') <span
-                                            class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
