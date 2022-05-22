@@ -26,6 +26,7 @@ class PlanResource extends Resource
             Input::make('title')->title('Plan Title')->required(),
             Input::make('slug')->title('Slug')->required(),
             Input::make('stripe_id')->title('Stripe Plan Id')->required(),
+            Input::make('display_price')->title('Display Price')->required(),
         ];
     }
 
@@ -41,6 +42,7 @@ class PlanResource extends Resource
             TD::make('title'),
             TD::make('slug'),
             TD::make('stripe_id'),
+            TD::make('display_price'),
 
             TD::make('created_at', 'Date of creation')
                 ->render(function ($model) {
