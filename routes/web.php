@@ -111,8 +111,11 @@ Route::post('phone-verification/verify',
     [PhoneVerificationController::class, 'verify'])->name('phone-verification.verify');
 
 Route::get('/user-info', function (Request $request) {
-    return auth()->user();
-})->middleware('auth');
+    if(auth()->check()) {
+        return ['user'=> auth()->user()];
+    }
+    return ['user'=>''];
+});
 
 Route::middleware(['auth:sanctum', 'verified','phone_verified'])->get('/dashboard', function () {
     return view('dashboard');

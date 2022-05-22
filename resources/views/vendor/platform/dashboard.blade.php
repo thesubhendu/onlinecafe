@@ -85,3 +85,24 @@
         @yield('content')
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+
+        window.addEventListener("turbo:load", function () {
+            fetch('/user-info', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.user) {
+                        console.log('from dash board');
+                        window.setupNotification(data.user)
+                    }
+                })
+        });
+
+    </script>
+@endpush
