@@ -41,7 +41,7 @@
                                                                                value="{{$slug}}">
                                                                         {{$title}}
                                                                         ( @if($slug=='monthly') $19.95/month
-                                                                        @elseif($slug=='yearly') $179/year @endif)
+                                                                        @elseif($slug=='yearly') $99.00/year @endif)
                                                                     </label>
                                                                 @endforeach
 
