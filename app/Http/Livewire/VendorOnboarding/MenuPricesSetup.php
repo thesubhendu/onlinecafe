@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class MenuPricesSetup extends Component
 {
-    public $productPrice;
+    public $productPrices;
     public $productOptionPrice;
     protected $rules = [
         'menus.*.isSelected' => 'boolean',
@@ -46,11 +46,11 @@ class MenuPricesSetup extends Component
         $savedProduct = $vendor->products->where('name', $product->name)->first();
         if ($savedProduct && count($savedProduct->productPrices)) {
             $savedProduct->productPrices->each(function ($productPrice) use ($product) {
-                $this->productPrice[$product->id][$productPrice->size] = $productPrice->price;
+                $this->productPrices[$product->id][$productPrice->size] = $productPrice->price;
             });
         } else {
             foreach ($this->sizes as $size) {
-                $this->productPrice[$product->id][$size] = $product->price;
+                $this->productPrices[$product->id][$size] = $product->price;
             }
         }
     }
@@ -65,8 +65,8 @@ class MenuPricesSetup extends Component
 
         // Save each product size price
         $this->vendorProducts->each(function ($product) {
-            if (isset($this->productPrice[$product->id])) {
-                foreach ($this->productPrice[$product->id] as $key => $price) {
+            if (isset($this->productPrices[$product->id])) {
+                foreach ($this->productPrices[$product->id] as $key => $price) {
                     $product->productPrices()->updateOrCreate(
                         [
                             'product_id' => $product->id,
@@ -92,6 +92,35 @@ class MenuPricesSetup extends Component
     public function render()
     {
         return view('livewire.vendor-onboarding.menu-prices-setup');
+    }
+
+    public function applyPricesToAllProducts(): void
+    {
+        $firstProductSizePrice = array_values($this->productPrices)[0];
+
+        foreach ($this->productPrices as $index => $product) {
+            if($index !== key($this->productPrices))
+            {
+                foreach($firstProductSizePrice as $size => $sizePrice)
+                {
+                    if( isset($this->productPrices[$index][$size]))
+                    {
+                        $this->productPrices[$index][$size] = $sizePrice;
+                    }
+                }
+
+            }
+        }
+    }
+
+    public function applyPricesToAllOptions(): void
+    {
+        $firstOptionPrice = $this->vendorProductOptions->first()->price;
+
+        $this->vendorProductOptions->map(function ($option) use($firstOptionPrice) {
+            $option->price = $firstOptionPrice;
+            return $option;
+        });
     }
 
 }
