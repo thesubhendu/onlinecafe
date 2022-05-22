@@ -30,6 +30,13 @@
 
 <body>
 
+@if(app()->environment('testing'))
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>{{env('TEST_SITE_NOTICE')}}</strong>
+    </div>
+@endif
+
+
 <x-navbar-home></x-navbar-home>
 
 <x-validation-errors></x-validation-errors>
