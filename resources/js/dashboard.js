@@ -11,25 +11,14 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
+window.realtimeSetup = false;
 
 
 window.addEventListener("load", function () {
-    fetch('/user-info', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            if(data.user) {
-                setupNotification(data.user)
-            }else{
-                console.log('no user at the moment');
-            }
-        })
+    fetchUser();
 });
 
-window.setupNotification = function setupNotification(user){
+function setupNotification(user){
     window.Echo.private('App.Models.User.' + user.id)
         .notification((notification) => {
 
@@ -53,3 +42,20 @@ window.setupNotification = function setupNotification(user){
         });
 }
 
+window.fetchUser = function fetchUser(){
+    if(window.realtimeSetup) {
+        return false;
+    }
+    fetch('/user-info', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if(data.user) {
+               setupNotification(data.user)
+                window.realtimeSetup = true;
+            }
+        })
+}
