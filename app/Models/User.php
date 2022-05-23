@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Contracts\MustVerifyPhone;
 use BeyondCode\Vouchers\Traits\CanRedeemVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +14,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Orchid\Platform\Models\User as Authenticatable;
 
 
-class User extends Authenticatable implements MustVerifyEmail,MustVerifyPhone
+class User extends Authenticatable
+//    implements MustVerifyEmail,MustVerifyPhone
 {
     use HasFactory;
     use HasProfilePhoto, Favoriteability, CanRedeemVouchers;
