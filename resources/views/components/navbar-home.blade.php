@@ -30,6 +30,7 @@
 
                             @can('visit-backend')
                                 <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
+                                <a class="dropdown-item" href="{{route('download-customer-flyer')}}">Download Flyer</a>
                             @endcan
                             <a class="dropdown-item"  href="{{route('orders.index')}}">
                                 My Orders
@@ -97,6 +98,7 @@
 
                                     @can('visit-backend')
                                         <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
+                                        <a class="dropdown-item" href="{{route('download-customer-flyer')}}">Download Flyer</a>
                                     @endcan
 
                                     <form action="{{ route('logout') }}" method="post">
