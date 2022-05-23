@@ -15,7 +15,6 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
-use App\Services\AbnChecker;
 use Illuminate\Support\Facades\Route;
 
 
@@ -113,11 +112,16 @@ Route::post('phone-verification/verify',
     [PhoneVerificationController::class, 'verify'])->name('phone-verification.verify');
 
 Route::get('/user-info', function (Request $request) {
-    return auth()->user();
-})->middleware('auth');
+    if(auth()->check()) {
+        return ['user'=> auth()->user()];
+    }
+    return ['user'=>''];
+});
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified','phone_verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
 Route::get('/manage-shop', ShopSetup::class)->middleware('auth','subscribed')->name('manage-shop');
+
+Route::view('/verify-phone','auth.verify-email')->name('phone-verification.notice');

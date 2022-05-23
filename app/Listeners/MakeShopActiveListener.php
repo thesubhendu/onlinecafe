@@ -2,9 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Contracts\MustVerifyPhone;
-
-class SendPhoneVerificationNotification
+class MakeShopActiveListener
 {
     /**
      * Create the event listener.
@@ -24,11 +22,6 @@ class SendPhoneVerificationNotification
      */
     public function handle($event)
     {
-        if (
-            $event->user instanceof MustVerifyPhone &&
-            ! $event->user->hasVerifiedPhone()) {
-            $event->user->sendPhoneVerificationNotification();
-        }
+       $event->user->makeShopActive();
     }
-
 }

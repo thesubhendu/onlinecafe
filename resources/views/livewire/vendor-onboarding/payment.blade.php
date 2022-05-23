@@ -33,15 +33,15 @@
                                                             <label for="plan" class="form-label">Select Plan</label>
                                                             <div class="form-check form-check-inline">
 
-                                                                @foreach($availablePlans as $title => $slug)
+                                                                @foreach($availablePlans as $plan)
                                                                     <label class="form-check-label mx-4">
                                                                         <input type="radio" class="form-check-input"
                                                                                name="plan"
-                                                                               {{$slug=='monthly' ? 'checked': ''}}
-                                                                               value="{{$slug}}">
-                                                                        {{$title}}
-                                                                        ( @if($slug=='monthly') $19.95/month
-                                                                        @elseif($slug=='yearly') $179/year @endif)
+                                                                               {{$plan->slug=='monthly' ? 'checked': ''}}
+                                                                               value="{{$plan->slug}}">
+                                                                        {{$plan->title}}
+
+                                                                       (${{$plan->display_price}})
                                                                     </label>
                                                                 @endforeach
 

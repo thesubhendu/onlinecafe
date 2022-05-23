@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Listeners\MakeShopActiveListener;
 use App\Listeners\SendPhoneVerificationNotification;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -18,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
             SendPhoneVerificationNotification::class
+        ],
+        Verified::class => [
+            MakeShopActiveListener::class,
         ],
     ];
 

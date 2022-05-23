@@ -20,9 +20,7 @@ class Payment extends Component
 
     public function mount()
     {
-        $this->availablePlans = cache()->remember('plans', 3600, function () {
-            return Plan::pluck('slug', 'title')->all();
-        });
+        $this->availablePlans = Plan::all();
         $this->clientSecret   = auth()->user()->createSetupIntent()->client_secret;
     }
     public function render()

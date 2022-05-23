@@ -17,7 +17,15 @@ class PhoneVerification
             return Str::random(5);
         });
 
-        $model->notify(new PhoneVerificationCodeNotification($code));
+        try {
+            $model->notify(new PhoneVerificationCodeNotification($code));
+
+        } catch (\Exception $e) {
+
+            logger()->info($e->getMessage());
+        }
+
+
     }
 
     public function getCode($user)
@@ -25,15 +33,15 @@ class PhoneVerification
        return cache()->get(auth()->id().'-phone-verification-code');
 
     }
-    public function verify($user, $code)
+    public function verify($model, $code)
     {
-        $cachedCode = cache()->get(auth()->id().'-phone-verification-code');
+        $cachedCode = cache()->get($model->id.'-phone-verification-code');
 
         if ($cachedCode != $code) {
             throw new VerificationCodeNotMatchedException("Code does not match");
         }else {
-            $user->phone_verified_at = now();
-            $user->save();
+            $model->markPhoneAsVerified();
+            $model->makeShopActive();
         }
 
     }

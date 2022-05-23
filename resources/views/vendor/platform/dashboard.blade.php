@@ -85,3 +85,16 @@
         @yield('content')
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+
+        window.addEventListener("turbo:load", function () {
+            if(typeof window.fetchUser == 'function') {
+                console.log('fetched user');
+                window.fetchUser();
+            }
+        });
+
+    </script>
+@endpush
