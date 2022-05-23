@@ -34,8 +34,10 @@
                                         @endif
                                         <div class="vendor-title">
                                             <h4>{{$card->vendor->shop_name ?? $card->vendor->vendor_name}}</h4>
-                                            <p>Buy {{$card->vendor->max_stamps ?? 10}} coffees get {{$card->vendor->get_free ?? 1}}
-                                                free</p>
+                                            <p>Buy {{$card->vendor->max_stamps ?? 10}} coffees get <b>{{$card->vendor->get_free ?? 1}} {{$card->vendor->freeCategory->name}}</b> free</p>
+                                            @if($card->is_max_stamped)
+                                                <p>Remaining Claim: {{$card->vendor->get_free - $card->total_claimed}}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col text-right">

@@ -67,9 +67,7 @@ class Checkout extends Component
         $order->vendor->owner->notify(new NewOrderNotification($order));
 
         if($this->claimLoyaltyCard) {
-            $this->claimLoyaltyCard->loyalty_claimed = 1;
-            $this->claimLoyaltyCard->is_active = 0;
-            $this->claimLoyaltyCard->save();
+            $this->updateLoyaltyCard($this->claimLoyaltyCard);
         }
 
         Cart::destroy();
@@ -129,5 +127,16 @@ class Checkout extends Component
         }
 
         return null;
+    }
+
+    private function updateLoyaltyCard($loyaltyCard): void
+    {
+        $loyaltyCard->total_claimed = ++$loyaltyCard->total_claimed;
+        if($loyaltyCard->total_claimed === $loyaltyCard->vendor->get_free)
+        {
+            $loyaltyCard->loyalty_claimed = 1;
+            $loyaltyCard->is_active = 0;
+        }
+        $loyaltyCard->save();
     }
 }
