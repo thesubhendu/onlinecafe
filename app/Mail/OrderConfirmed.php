@@ -32,6 +32,6 @@ class OrderConfirmed extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@mycoffees.com.au')->view('email.order-confirmed');
+        return $this->from('noreply@mycoffees.com.au')->view('mail.order.confirmed');
     }
 }
