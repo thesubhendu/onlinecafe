@@ -90,7 +90,10 @@
     <script>
 
         window.addEventListener("turbo:load", function () {
-            window.fetchUser();
+            if(typeof window.fetchUser == 'function') {
+                console.log('fetched user');
+                window.fetchUser();
+            }
         });
 
     </script>
