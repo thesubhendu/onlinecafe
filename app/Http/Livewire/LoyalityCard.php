@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Card;
 use Livewire\Component;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class LoyalityCard extends Component
 {
@@ -46,6 +47,12 @@ class LoyalityCard extends Component
     public function giftTransferred($card)
     {
         $this->cards = $this->fetchCards();
+    }
+
+    public function onClaim($card)
+    {
+        Cart::destroy();
+        return redirect()->route('vendor.loyalty-products', ['vendor'=> $card['vendor_id'], 'card' => $card['id']]);
     }
 
 }

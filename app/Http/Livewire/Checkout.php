@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Notifications\NewOrderNotification;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
@@ -27,6 +28,7 @@ class Checkout extends Component
 
     public $deal;
     public $claimLoyaltyCard;
+    public $totalCardClaimedCount = 0;
 
     public function mount()
     {
@@ -67,7 +69,7 @@ class Checkout extends Component
         $order->vendor->owner->notify(new NewOrderNotification($order));
 
         if($this->claimLoyaltyCard) {
-            $this->updateLoyaltyCard($this->claimLoyaltyCard);
+            $this->updateLoyaltyCard($this->claimLoyaltyCard, $this->items);
         }
 
         Cart::destroy();
@@ -111,7 +113,7 @@ class Checkout extends Component
     {
         Cart::remove($id);
         $this->refreshCart();
-
+        $this->verifyLoyaltyCard();
         session()->flash("message", "Item has been removed");
     }
 
@@ -121,6 +123,14 @@ class Checkout extends Component
         {
             $claimCard = Card::find(request('claim_loyalty_card'));
             if ($claimCard && $claimCard->eligibleClaimLoyalty()) {
+                $this->totalCardClaimedCount = $claimCard->total_claimed;
+                foreach(Cart::content() as $row) {
+                    if($row->price == 0)
+                    {
+                        $this->totalCardClaimedCount += $row->qty;
+                    }
+                }
+
                 return $claimCard;
             }
             Cart::destroy();
@@ -129,9 +139,9 @@ class Checkout extends Component
         return null;
     }
 
-    private function updateLoyaltyCard($loyaltyCard): void
+    private function updateLoyaltyCard($loyaltyCard ,$products): void
     {
-        $loyaltyCard->total_claimed = ++$loyaltyCard->total_claimed;
+        $loyaltyCard->total_claimed = $this->totalCardClaimedCount;
         if($loyaltyCard->total_claimed === $loyaltyCard->vendor->get_free)
         {
             $loyaltyCard->loyalty_claimed = 1;

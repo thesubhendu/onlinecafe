@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -58,5 +59,17 @@ class Card extends Model
     public function eligibleClaimLoyalty(): bool
     {
         return $this->loyalty_claimed === 0 && $this->is_max_stamped === 1 &&  $this->user_id === auth()->id();
+    }
+
+    public function cartTotalClaimed()
+    {
+        $totalClaimed = 0;
+        foreach(Cart::content() as $row) {
+            if($row->price == 0)
+            {
+                $totalClaimed += $row->qty;
+            }
+        }
+        return $totalClaimed;
     }
 }

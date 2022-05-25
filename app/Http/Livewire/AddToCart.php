@@ -39,6 +39,7 @@ class AddToCart extends Component
             'weight'  => '0',
             'qty'     => 1,
             'options' => [],
+            'type' => 'claim'
         ];
         $this->validLoyaltyClaimCard= $this->verifyLoyaltyCard();
         $this->vendorOptionsExist = VendorProductOption::where('vendor_id', $product->vendor_id)->count();
@@ -80,10 +81,28 @@ class AddToCart extends Component
 
         if($this->validLoyaltyClaimCard)
         {
-            Cart::destroy();
-            $this->cartProduct['price'] = 0;
-            Cart::add($this->cartProduct)->associate(Product::class);
+            $totalClaimed = 0;
+            foreach(Cart::content() as $row) {
+                if($row->price == 0)
+                {
+                    $totalClaimed += $row->qty;
+                }
+            }
+
+            if($totalClaimed < $this->validLoyaltyClaimCard->vendor->get_free)
+            {
+                $this->cartProduct['price'] = 0;
+                Cart::add($this->cartProduct)->associate(Product::class);
+            }
+
             return redirect()->route('checkout.index', ['claim_loyalty_card' => $this->validLoyaltyClaimCard->id]);
+
+        } else {
+            $claimedCardProductIds = Cart::content()->where('price', 0)->pluck('rowId');
+            foreach($claimedCardProductIds as $cardProductId)
+            {
+                Cart::remove($cardProductId);
+            }
         }
 
         Cart::add($this->cartProduct)->associate(Product::class);
