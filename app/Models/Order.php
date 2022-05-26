@@ -142,6 +142,10 @@ class Order extends Model
                 'options' => json_encode($product->options)
             ]);
 
+            if(!$product->model->is_stamp){
+                continue;
+            }
+
             for ($i = 0; $i < $product->qty ?? $product->quantity; $i++) {
                 $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
 
