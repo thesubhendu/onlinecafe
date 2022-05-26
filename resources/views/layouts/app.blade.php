@@ -76,6 +76,8 @@
                     options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
                 }
                 window.Swal.fire(options)
+                //add sound
+
             });
     </script>
 @endauth
