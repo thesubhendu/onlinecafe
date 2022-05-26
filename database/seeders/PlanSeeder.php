@@ -17,13 +17,15 @@ class PlanSeeder extends Seeder
         Plan::forceCreate([
            'title'=>'Monthly',
            'slug'=>'monthly',
+           'display_price'=>'19',
            'stripe_id'=>'price_1JjoA2BTgpSG0mgbNQhtbBxL'
         ]);
 
         Plan::forceCreate([
            'title'=>'Yearly',
            'slug'=>'yearly',
-           'stripe_id'=>'price_1Jm95zBTgpSG0mgblvuOgHqu'
+            'display_price'=>'99',
+            'stripe_id'=>'price_1Jm95zBTgpSG0mgblvuOgHqu'
         ]);
 
     }
