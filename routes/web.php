@@ -3,6 +3,7 @@
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ConfirmOrderController;
+use App\Http\Controllers\DownloadFlyerController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PhoneVerificationController;
 use App\Http\Controllers\ProductController;
@@ -124,3 +125,5 @@ Route::middleware(['auth:sanctum', 'verified','phone_verified'])->get('/dashboar
 Route::get('/manage-shop', ShopSetup::class)->middleware('auth','subscribed')->name('manage-shop');
 
 Route::view('/verify-phone','auth.verify-email')->name('phone-verification.notice');
+
+Route::get('download-customer-flyer', DownloadFlyerController::class)->name('download-customer-flyer');
