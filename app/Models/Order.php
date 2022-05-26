@@ -94,6 +94,10 @@ class Order extends Model
                 'options' => json_encode($product->options)
             ]);
 
+            //if product is non stampable skip
+            if(!$product->model->is_stamp){
+                continue;
+            }
             // if product price is 0 then it is claimed product so no need to add stamps
             if($product->price != 0)
             {
