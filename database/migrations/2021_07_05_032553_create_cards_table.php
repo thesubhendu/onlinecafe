@@ -20,9 +20,10 @@ class CreateCardsTable extends Migration
             $table->boolean('is_active')->nullable();
             $table->string('card_logo')->nullable();
             $table->boolean('is_max_stamped')->default(false);
+            $table->boolean('loyalty_claimed')->default(false);
+            $table->integer('total_claimed')->default(0);
             $table->string('receiver_email')->nullable();
             $table->timestamps();
-
         });
     }
 

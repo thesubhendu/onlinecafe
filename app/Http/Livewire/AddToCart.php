@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Card;
 use App\Models\Product;
 use App\Models\VendorProductOption;
+use App\Services\LoyaltyClaimService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -22,14 +22,17 @@ class AddToCart extends Component
     public $vendorOptionsExist;
     public $validLoyaltyClaimCard;
 
-
+    public $claimCardId;
+    protected $queryString = [
+        'claimCardId' => ['except' => ''],
+    ];
 
     public function render()
     {
         return view('livewire.add-to-cart');
     }
 
-    public function mount(Product $product)
+    public function mount(Product $product, LoyaltyClaimService $loyaltyClaimService)
     {
         $this->product     = $product->load('productPrices');
         $this->cartProduct = [
@@ -39,9 +42,12 @@ class AddToCart extends Component
             'weight'  => '0',
             'qty'     => 1,
             'options' => [],
-            'type' => 'claim'
         ];
-        $this->validLoyaltyClaimCard= $this->verifyLoyaltyCard();
+
+        if($this->claimCardId){
+            $this->validLoyaltyClaimCard= $loyaltyClaimService->verifiedLoyaltyCard($this->claimCardId);
+        }
+
         $this->vendorOptionsExist = VendorProductOption::where('vendor_id', $product->vendor_id)->count();
         $this->setDefaultOption();
     }
@@ -81,28 +87,24 @@ class AddToCart extends Component
 
         if($this->validLoyaltyClaimCard)
         {
-            $totalClaimed = 0;
-            foreach(Cart::content() as $row) {
-                if($row->price == 0)
-                {
-                    $totalClaimed += $row->qty;
-                }
-            }
+            $loyaltyClaimService = new LoyaltyClaimService();
+            $loyaltyClaimService->addClaimProductOnCart($this->validLoyaltyClaimCard, $this->cartProduct);
+            $remainingClaimProduct = $loyaltyClaimService->remainingClaim($this->validLoyaltyClaimCard);
 
-            if($totalClaimed < $this->validLoyaltyClaimCard->vendor->get_free)
+            if($remainingClaimProduct)
             {
-                $this->cartProduct['price'] = 0;
-                Cart::add($this->cartProduct)->associate(Product::class);
+                return redirect()->route('claim-loyalty-products', ['card' => $this->claimCardId]);
             }
 
-            return redirect()->route('checkout.index', ['claim_loyalty_card' => $this->validLoyaltyClaimCard->id]);
+            return redirect()->route('checkout.index', ['claimCardId' => $this->claimCardId]);
+        }
 
-        } else {
-            $claimedCardProductIds = Cart::content()->where('price', 0)->pluck('rowId');
-            foreach($claimedCardProductIds as $cardProductId)
-            {
-                Cart::remove($cardProductId);
-            }
+        session()->forget('claimCardId');
+        // only add free price product on loyalty claim
+        $claimedCardProductIds = Cart::content()->where('price', 0)->pluck('rowId');
+        foreach($claimedCardProductIds as $cardProductId)
+        {
+            Cart::remove($cardProductId);
         }
 
         Cart::add($this->cartProduct)->associate(Product::class);
@@ -191,19 +193,6 @@ class AddToCart extends Component
             ->productOptions()
             ->whereIn('name', $options)
             ->sum('price');
-    }
-
-    private function verifyLoyaltyCard()
-    {
-        if(request('claim_loyalty_card'))
-        {
-            $claimCard = Card::find(request('claim_loyalty_card'));
-            if ($claimCard && $claimCard->eligibleClaimLoyalty()) {
-                return $claimCard;
-            }
-        }
-
-        return null;
     }
 
 }

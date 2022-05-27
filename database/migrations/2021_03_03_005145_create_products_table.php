@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('product_image')->nullable();
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('product_categories');
+            $table->boolean('is_all_sizes_available')->default(true);
             $table->timestamps();
         });
     }

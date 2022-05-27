@@ -133,21 +133,12 @@
 
             <!-- CART TOTAL -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col cart-totals-left alert alert-danger">
-                            Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
+                    @if(!$validLoyaltyClaimCard)
+                        <div class="col-md-12">
+                            <div class="col cart-totals-left alert alert-danger">
+                                Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
+                            </div>
                         </div>
-                    </div>
-                    @if(request()->has('claim_loyalty_card') && $this->claimLoyaltyCard->vendor->get_free > $this->totalCardClaimedCount )
-                    <div class="col-md-12">
-                        <div class="col cart-totals-left alert alert-danger">
-                            You have <b>{{$this->claimLoyaltyCard->vendor->get_free - $this->totalCardClaimedCount}}</b> more product to claim please click this link to add product
-                            <a href="{{route('vendor.loyalty-products', ['vendor'=> $this->claimLoyaltyCard->vendor_id, 'card' => $this->claimLoyaltyCard->id])}}"
-                                class="">
-                                Back to claim product
-                            </a>
-                        </div>
-                    </div>
                     @endif
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
@@ -220,14 +211,12 @@
                                         <a wire:click="submit()" class="btn btn-secondary mt-25">
                                             CHECKOUT
                                         </a>
-                                        @if(request()->has('claim_loyalty_card'))
-                                            @if($this->claimLoyaltyCard->vendor->get_free > $this->totalCardClaimedCount)
-                                                <a
-                                                    href="{{route('vendor.loyalty-products', ['vendor'=> $this->claimLoyaltyCard->vendor_id, 'card' => $this->claimLoyaltyCard->id])}}"
-                                                    class="btn btn-default d-block">
-                                                    Back to claim product
-                                                </a>
-                                            @endif
+                                        @if($validLoyaltyClaimCard)
+                                            <a
+                                                href="{{route('claim-loyalty-products', ['card'=> $validLoyaltyClaimCard->id])}}"
+                                                class="btn btn-default d-block">
+                                                Back to claim product
+                                            </a>
                                         @else
                                             <a
                                                 href="{{route('vendor.show', $items->first()->model->vendor_id)}}"

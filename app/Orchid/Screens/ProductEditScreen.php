@@ -113,6 +113,8 @@ class ProductEditScreen extends Screen
             ->value(1)
             ->title('All Sizes Available')
             ->sendTrueOrFalse();
+        $fields[]=CheckBox::make('product.is_stamp')->value(1)
+            ->title('Is Stamp')->sendTrueOrFalse();
         $fields[]=CheckBox::make('product.is_active')->value(1)
             ->title('Is Active')->sendTrueOrFalse();
         $fields[]=Input::make('product.product_image')->type('file')

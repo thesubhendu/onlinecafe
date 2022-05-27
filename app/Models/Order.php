@@ -88,7 +88,7 @@ class Order extends Model
                 'quantity' => $product->qty,
                 'options' => json_encode($product->options)
             ]);
-
+            // only create loyalty cards only after order confirm
         }
 
         return $order;
@@ -106,30 +106,13 @@ class Order extends Model
         $order->order_total = $total;
         $order->save();
 
-        $card = (new Card());
-        $activeCard = $card->getOrCreateActive($user->id, $vendorId);
-
         foreach ($products as $product) {
             $order->products()->attach($product->id, [
                 'price' => $product->price,
                 'quantity' => $product->qty ?? $product->quantity,
                 'options' => json_encode($product->options)
             ]);
-
-            for ($i = 0; $i < $product->qty ?? $product->quantity; $i++) {
-                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
-
-                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
-                    //max stamped
-                    $activeCard->is_max_stamped = true;
-                    $activeCard->is_active = false;
-                    $activeCard->save();
-
-                    //create another
-                    $activeCard = $card->getOrCreateActive($user->id, $vendorId);
-                }
-            }
-
+            // only create loyalty cards only after order confirm
         }
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
@@ -151,21 +134,22 @@ class Order extends Model
 
         foreach($order->products as $product)
         {
-            // if product price is 0 then it is claimed product so no need to add stamps
-            if($product->pivot->price != 0)
-            {
-                for ($i = 0; $i < $product->pivot->quantity; $i++) {
-                    $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+            // if product price is 0 or is not stamped product then no need to add stamps
+            if(!$product->is_stamp || $product->pivot->price == 0){
+                continue;
+            }
 
-                    if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
-                        //max stamped
-                        $activeCard->is_max_stamped = true;
-                        $activeCard->is_active = false;
-                        $activeCard->save();
+            for ($i = 0; $i < $product->pivot->quantity; $i++) {
+                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
 
-                        //create another
-                        $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
-                    }
+                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
+                    //max stamped
+                    $activeCard->is_max_stamped = true;
+                    $activeCard->is_active = false;
+                    $activeCard->save();
+
+                    //create another
+                    $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
                 }
             }
         }

@@ -39,6 +39,7 @@ function setupNotification(user){
             }
 
             window.Swal.fire(options)
+            //add sound
         });
 }
 

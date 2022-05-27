@@ -21,7 +21,6 @@
                                         @else
                                             <p>${{number_format($cartProduct['price'], 2)}}</p>
                                         @endif
-
                                     </div>
                                     <div class="p-2"></div>
                                     @if(!$validLoyaltyClaimCard)
@@ -67,7 +66,7 @@
                                                             @if($productPrice->size === 'S')
                                                                 {{$productPrice->size }}
                                                             @else
-                                                                {{$productPrice->size}} +${{ number_format(($productPrice->price- $product->price), 2) }}
+                                                                {{$productPrice->size}} +${{ number_format(($productPrice->price - $product->price), 2) }}
                                                             @endif
                                                         </label>
                                                     </div>
