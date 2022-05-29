@@ -16,7 +16,7 @@
                     <div class="col-4">
                         <div class="price">
                             <p><i class="fa fa-dollar"></i>
-                                {{$product->productPrices->where('size', 'S')->first()->price ?? $product->price}}
+                                {{$product->price}}
                             </p>
                         </div>
                     </div>

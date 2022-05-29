@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
 
 //        Product::factory(150)->create();
         $this->call(OrdersTableSeeder::class);
+        $this->call(ServicesSeeder::class);
     }
 }

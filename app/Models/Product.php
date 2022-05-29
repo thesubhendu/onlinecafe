@@ -71,4 +71,9 @@ class Product extends Model implements Buyable
 //        return $this->hasMany(Stamp::class);
 //    }
 
+    public function getPriceAttribute($value)
+    {
+        return $this->productPrices->where('size', 'S')->first()->price ?? $value;
+    }
+
 }
