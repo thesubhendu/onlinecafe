@@ -20,6 +20,7 @@ class CreateAllProductsTable extends Migration
             $table->string('image')->nullable();
             $table->decimal('price');
             $table->foreignId('category_id')->constrained('product_categories');
+            $table->boolean('is_all_sizes_available')->default(1);
             $table->timestamps();
         });
     }

@@ -133,26 +133,29 @@
 
             <!-- CART TOTAL -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col cart-totals-left alert alert-danger">
-                            Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
+                    @if(!$validLoyaltyClaimCard)
+                        <div class="col-md-12">
+                            <div class="col cart-totals-left alert alert-danger">
+                                Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
+                            </div>
                         </div>
-                    </div>
+                    @endif
+                    <div class="col-md-4"></div>
+{{--                    <div class="col-md-4">--}}
+{{--                        <div class="coupen">--}}
+{{--                            <h4>DO YOU HAVE A PROMO CODE ?</h4>--}}
+{{--                            <form action="">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <input type="text" class="form-control" placeholder=" Promo Code">--}}
+{{--                                    <a href="#" class="btn btn-primary">--}}
+{{--                                        APPLY PROMO--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <div class="coupen">
-                            <h4>DO YOU HAVE A PROMO CODE ?</h4>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder=" Promo Code">
-                                    <a href="#" class="btn btn-primary">
-                                        APPLY PROMO
-                                    </a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
                         <div class="payment-final">
                             <div class="row cart-totals-row">
                                 <div class="col-md-12">
@@ -206,14 +209,23 @@
                                 <div class="col-md-12">
                                     <div class="cart-totals-result">
 
-                                        <a wire:click="submit({{$loyaltyCardId}})" class="btn btn-secondary mt-25">
+                                        <a wire:click="submit()" class="btn btn-secondary mt-25">
                                             CHECKOUT
                                         </a>
-                                        <a
-                                            href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
-                                            class="btn btn-default d-block">
-                                            Back to Shopping
-                                        </a>
+                                        @if($validLoyaltyClaimCard)
+                                            <a
+                                                href="{{route('claim-loyalty-products', ['card'=> $validLoyaltyClaimCard->id])}}"
+                                                class="btn btn-default d-block">
+                                                Back to claim product
+                                            </a>
+                                        @else
+                                            <a
+                                                href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
+                                                class="btn btn-default d-block">
+                                                Back to Shopping
+                                            </a>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>

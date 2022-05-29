@@ -127,40 +127,38 @@
                                 @enderror
                             </section>
 
-                            @if($this->vendorProductsExists)
-                                <section>
-                                    <h4 class="title">
-                                        Set Loyalty Product
-                                    </h4>
-                                    <div class="form-row row">
-                                        <div class="form-group col-md-4">
-                                            <label for="form.max_stamps" class="form-label">Buy</label>
-                                            <input class="form-control" type="number" wire:model.lazy="form.max_stamps" required>
-                                            @error('form.max_stamps') <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <label for="form.free_product" class="form-label">Select Free Product</label>
-                                            <select class="form-control" wire:model="form.free_product" required>
-                                                <option value selected>Select Option</option>
-                                                @foreach($vendorProducts as $key => $product)
-                                                    <option value="{{$product->id}}">{{$product->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('form.free_product') <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <label for="form.get_free" class="form-label">To Get Free</label>
-                                            <input class="form-control" type="number" wire:model.lazy="form.get_free" required>
-                                            @error('form.get_free') <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                            <section>
+                                <h4 class="title">
+                                    Set Loyalty Product
+                                </h4>
+                                <div class="form-row row">
+                                    <div class="form-group col-md-4">
+                                        <label for="form.max_stamps" class="form-label">Buy</label>
+                                        <input class="form-control" type="number" wire:model.lazy="form.max_stamps" required>
+                                        @error('form.max_stamps') <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                </section>
-                            @endif
+
+                                    <div class="form-group col-md-4">
+                                        <label for="form.free_product" class="form-label">Select Free Category</label>
+                                        <select class="form-control" wire:model="form.free_category" wire:change="freeProductCategoryChange()" required>
+                                            <option value selected>Select Option</option>
+                                            @foreach(\App\Models\ProductCategory::all() as $key => $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('form.free_category') <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label for="form.get_free" class="form-label">To Get Free</label>
+                                        <input class="form-control" type="number" wire:model.lazy="form.get_free" required>
+                                        @error('form.get_free') <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </section>
 
                             <button type="submit" class="btn btn-success mt-2 px-5">{{$vendorProductsExists ? 'Submit' : 'Continue'}}</button>
                         </form>

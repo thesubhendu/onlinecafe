@@ -64,6 +64,7 @@ class Order extends Model
         $this->confirmed_at = now();
         $this->confirmed_by = auth()->id();
         $this->save();
+        $this->generateLoyalty($this);
 
         Mail::to($this->user->email)->send(new OrderConfirmed($this));
         $this->user->notify(new OrderConfirmedNotification($this));
@@ -82,39 +83,13 @@ class Order extends Model
         $order->order_total = $total;
         $order->save();
 
-        $card = (new Card());
-
-        $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
-
-
         foreach ($cartItems as $product) {
             $order->products()->attach($product->id, [
-                'price' => $product->price,
+                'price' => $product->total,
                 'quantity' => $product->qty,
                 'options' => json_encode($product->options)
             ]);
-
-            //if product is non stampable skip
-            if(!$product->model->is_stamp){
-                continue;
-            }
-            // if product price is 0 then it is claimed product so no need to add stamps
-            if($product->price != 0)
-            {
-                for ($i = 0; $i < $product->qty; $i++) {
-                    $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
-
-                    if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
-                        //max stamped
-                        $activeCard->is_max_stamped = true;
-                        $activeCard->is_active = false;
-                        $activeCard->save();
-
-                        //create another
-                        $activeCard = $card->getOrCreateActive(auth()->id(), $vendorId);
-                    }
-                }
-            }
+            // only create loyalty cards only after order confirm
         }
 
         return $order;
@@ -132,34 +107,13 @@ class Order extends Model
         $order->order_total = $total;
         $order->save();
 
-        $card = (new Card());
-        $activeCard = $card->getOrCreateActive($user->id, $vendorId);
-
         foreach ($products as $product) {
             $order->products()->attach($product->id, [
                 'price' => $product->price,
                 'quantity' => $product->qty ?? $product->quantity,
                 'options' => json_encode($product->options)
             ]);
-
-            if(!$product->model->is_stamp){
-                continue;
-            }
-
-            for ($i = 0; $i < $product->qty ?? $product->quantity; $i++) {
-                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
-
-                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
-                    //max stamped
-                    $activeCard->is_max_stamped = true;
-                    $activeCard->is_active = false;
-                    $activeCard->save();
-
-                    //create another
-                    $activeCard = $card->getOrCreateActive($user->id, $vendorId);
-                }
-            }
-
+            // only create loyalty cards only after order confirm
         }
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
@@ -171,5 +125,34 @@ class Order extends Model
         $order->vendor->owner->notify(new NewOrderNotification($order));
 
         return $order;
+    }
+
+    // Generate Loyalty card only after order confirm
+    public function generateLoyalty($order): void
+    {
+        $card = (new Card());
+        $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
+
+        foreach($order->products as $product)
+        {
+            // if product price is 0 or is not stamped product then no need to add stamps
+            if(!$product->is_stamp || $product->pivot->price == 0){
+                continue;
+            }
+
+            for ($i = 0; $i < $product->pivot->quantity; $i++) {
+                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+
+                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
+                    //max stamped
+                    $activeCard->is_max_stamped = true;
+                    $activeCard->is_active = false;
+                    $activeCard->save();
+
+                    //create another
+                    $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
+                }
+            }
+        }
     }
 }

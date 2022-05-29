@@ -38,7 +38,8 @@ class CreateVendorsTable extends Migration
             $table->json('services')->nullable();
 
             $table->integer('max_stamps')->nullable();
-            $table->string('free_product')->nullable();
+            $table->unsignedBigInteger('free_category')->nullable();
+            $table->foreign('free_category')->references('id')->on('product_categories');
             $table->integer('get_free')->nullable();
 
 

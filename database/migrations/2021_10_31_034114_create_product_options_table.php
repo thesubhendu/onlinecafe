@@ -18,9 +18,9 @@ class CreateProductOptionsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->json('options')->nullable();
+            $table->foreignId('option_type_id')->references('id')->on('option_types')->onDelete('cascade');
+            $table->boolean('charge')->default(true);
             $table->decimal('price', 4, 2);
-            $table->foreignId('category_id')->constrained('product_categories');
             $table->timestamps();
         });
     }

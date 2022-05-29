@@ -12,6 +12,7 @@ use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendorRatingController;
 use App\Http\Livewire\Checkout;
+use App\Http\Livewire\ClaimLoyaltyProducts;
 use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
@@ -74,6 +75,9 @@ Route::middleware('auth')->group(function() {
     Route::get('/cart/checkout', Checkout::class)->name('checkout.index');
 
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+
+    Route::get('claim-loyalty-products/{card}', ClaimLoyaltyProducts::class )
+        ->name('claim-loyalty-products')->middleware('can_claim_loyalty');
 });
 
 //Route::post('/cart/saveforlater/{product}', [CartSaveForLaterController::class, 'save'])->name('saveforlater.save');

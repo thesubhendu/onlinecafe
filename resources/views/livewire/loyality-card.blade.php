@@ -34,8 +34,10 @@
                                         @endif
                                         <div class="vendor-title">
                                             <h4>{{$card->vendor->shop_name ?? $card->vendor->vendor_name}}</h4>
-                                            <p>Buy {{$card->vendor->max_stamps ?? 10}} coffees get {{$card->vendor->get_free ?? 1}}
-                                                free</p>
+                                            <p>Buy {{$card->vendor->max_stamps ?? 10}} coffees get <b>{{$card->vendor->get_free ?? 1}} {{$card->vendor->freeCategory->name}}</b> free</p>
+                                            @if($card->is_max_stamped)
+                                                <p>Remaining Claim: {{$card->vendor->get_free - $card->total_claimed}}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col text-right">
@@ -45,8 +47,7 @@
                                                     data-bs-target="#myModal">Pay Forward
                                             </button>
                                             @if(!$card->loyalty_claimed)
-                                                <a href="{{route('checkout.index',['claim_loyalty_card'=> $card->id])}}"
-                                                   class="btn btn-primary action-btn">Claim</a>
+                                                <button class="btn btn-primary action-btn" wire:click="onClaim({{$card}})">Claim</button>
                                             @endif
                                         @endif
                                         <a href="{{route('vendor.products', $card->vendor_id )}}"

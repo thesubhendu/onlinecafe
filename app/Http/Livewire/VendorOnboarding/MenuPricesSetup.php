@@ -19,11 +19,6 @@ class MenuPricesSetup extends Component
     public $vendorProductOptions;
     public $vendor;
     public $sizes;
-    public $form = [
-        'free_product',
-        'get_free',
-        'max_stamps',
-    ];
 
     public function mount(): void
     {
@@ -33,10 +28,6 @@ class MenuPricesSetup extends Component
             $this->setupInitialProductSizesPrice($product, $this->vendor);
             return $product;
         });
-
-        $this->form['max_stamps'] = $this->vendor->max_stamps;
-        $this->form['free_product'] = $this->vendor->free_product;
-        $this->form['get_free'] = $this->vendor->get_free;
 
         $this->vendorProductOptions = $this->vendor->productOptions()->where('charge', 1)->orderBy('name')->get();
     }
@@ -57,12 +48,6 @@ class MenuPricesSetup extends Component
 
     public function submit()
     {
-        $this->vendor->update([
-            'free_product' => $this->form['free_product'] === '' ? null : $this->form['free_product'],
-            'get_free' => $this->form['get_free'],
-            'max_stamps' => $this->form['max_stamps'],
-        ]);
-
         // Save each product size price
         $this->vendorProducts->each(function ($product) {
             if (isset($this->productPrices[$product->id])) {

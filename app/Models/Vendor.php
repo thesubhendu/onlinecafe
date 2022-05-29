@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\GeoLocationService;
 use BeyondCode\Vouchers\Traits\HasVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,14 +38,14 @@ class Vendor extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function freeProduct(): BelongsTo
-    {
-        return $this->belongsTo(Product::class, 'free_product','id');
-    }
-
     public function productOptions()
     {
         return $this->hasMany(VendorProductOption::class);
+    }
+
+    public function freeCategory(): BelongsTo
+    {
+        return $this->belongsTo(ProductCategory::class, 'free_category', 'id');
     }
 
     public function rate($rating, $user = null, $comment = null)
@@ -139,5 +140,10 @@ class Vendor extends Model
     public function scopeSubscribed($query)
     {
         return $query->where('is_subscribed', '1');
+    }
+
+    public function freeCategoryProducts(): Collection
+    {
+        return $this->products()->where('category_id', $this->free_category)->get();
     }
 }
