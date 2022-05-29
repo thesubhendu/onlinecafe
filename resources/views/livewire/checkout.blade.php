@@ -141,20 +141,21 @@
                         </div>
                     @endif
                     <div class="col-md-4"></div>
+{{--                    <div class="col-md-4">--}}
+{{--                        <div class="coupen">--}}
+{{--                            <h4>DO YOU HAVE A PROMO CODE ?</h4>--}}
+{{--                            <form action="">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <input type="text" class="form-control" placeholder=" Promo Code">--}}
+{{--                                    <a href="#" class="btn btn-primary">--}}
+{{--                                        APPLY PROMO--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <div class="coupen">
-                            <h4>DO YOU HAVE A PROMO CODE ?</h4>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder=" Promo Code">
-                                    <a href="#" class="btn btn-primary">
-                                        APPLY PROMO
-                                    </a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
                         <div class="payment-final">
                             <div class="row cart-totals-row">
                                 <div class="col-md-12">
