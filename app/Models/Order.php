@@ -64,6 +64,7 @@ class Order extends Model
         $this->confirmed_at = now();
         $this->confirmed_by = auth()->id();
         $this->save();
+        $this->generateLoyalty($this);
 
         Mail::to($this->user->email)->send(new OrderConfirmed($this));
         $this->user->notify(new OrderConfirmedNotification($this));

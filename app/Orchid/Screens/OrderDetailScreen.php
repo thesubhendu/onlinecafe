@@ -57,7 +57,6 @@ class OrderDetailScreen extends Screen
             Toast::info("Order already confirmed!");
         } else {
             $order->confirm();
-            $order->generateLoyalty($order);
             Toast::success("Order Confirmed!");
         }
 
