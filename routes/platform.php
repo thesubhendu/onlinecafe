@@ -119,3 +119,8 @@ Route::screen('deal/{deal?}', \App\Orchid\Screens\DealEditScreen::class)
 
 Route::screen('deal-add-product/{product}/{deal}', \App\Orchid\Screens\AddProductToDealScreen::class)
      ->name('platform.deal.addProduct');
+
+Route::screen('services', \App\Orchid\Screens\ServiceListScreen::class)
+    ->name('platform.service.list');
+Route::screen('service/{service?}', \App\Orchid\Screens\ServiceEditScreen::class)
+    ->name('platform.service.edit');

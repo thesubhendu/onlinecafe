@@ -57,6 +57,11 @@ class PlatformProvider extends OrchidServiceProvider
 //                ->icon('monitor')
 //                ->route('platform.deal.list'),
 
+            Menu::make('Manage Service')
+                ->icon('monitor')
+                ->route('platform.service.list')
+                ->permission('platform.systems.users'),
+
         ];
     }
 

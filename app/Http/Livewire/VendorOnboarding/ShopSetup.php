@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\VendorOnboarding;
 
+use App\Models\Service;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -27,19 +28,21 @@ class ShopSetup extends Component
     ];
     public $openingHoursOptions = [];
     public $daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    public $services = ['Food','Coffee','Drinks', 'Pet Friendly'];
+    public $services;
     public $newService;
     public $listeners = ['markerPositionChanged', 'addressChanged'];
     public $vendorProductsExists;
 
     public function addService()
     {
-        if(!$this->newService){
-            return ;
-        }
-        array_push($this->services, $this->newService);
+        $this->validate([
+            'newService' => 'sometimes|required|unique:services,name',
+        ]);
+        Service::create(['name' => $this->newService]);
+        $this->services = Service::all();
         $this->newService = '';
     }
+
     public function mount()
     {
         $this->makeOpeningHoursOptions();
@@ -47,6 +50,7 @@ class ShopSetup extends Component
 
         $vendor = auth()->user()->shop()->with('products')->first();
         $this->vendorProductsExists = $vendor->products()->exists();
+        $this->services = Service::all();
 
         if ($vendor) {
             $this->form['shop_name'] = $vendor->shop_name;
@@ -65,7 +69,8 @@ class ShopSetup extends Component
                 $services = [];
                 foreach ($vendor->services as $s) {
                     $services[$s] = true;
-                    if(!in_array($s,$this->services)){
+                    if($this->services->where('name', $s)->get('name'))
+                    {
                         $this->services[] = $s;
                     }
                 }

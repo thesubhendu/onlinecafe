@@ -109,8 +109,8 @@
                                 <div class="row">
                                     @foreach ($services as $index => $service)
                                         <div class="col">
-                                            <input type="checkbox" class="form-check-input" wire:model="form.services.{{$service}}" >
-                                            <label for="">{{$service}}</label>
+                                            <input type="checkbox" class="form-check-input" wire:model="form.services.{{$service->name}}" >
+                                            <label for="">{{$service->name}}</label>
                                         </div>
                                     @endforeach
                                       <div class="col">
@@ -118,8 +118,10 @@
                                       </div>
                                     <div class="col">
                                         <button type="button" class="btn btn-primary btn-sm" wire:click="addService">Add</button>
-
                                     </div>
+                                    @error('newService')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 @error('form.services')
