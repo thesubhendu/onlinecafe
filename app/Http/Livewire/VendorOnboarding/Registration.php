@@ -5,6 +5,7 @@ namespace App\Http\Livewire\VendorOnboarding;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\User;
 use App\Services\AbnChecker;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
@@ -157,20 +158,14 @@ class Registration extends Component
 
     private function updateUser(): void
     {
-        $user = auth()->user();
         $input =
             [
                 'name'   => $this->contact_name.' '.$this->contact_lastname,
                 'email'  => $this->email,
                 'mobile' => $this->mobile,
             ];
-        if ($input['email'] !== $user->email) {
-            $input['email_verified_at'] = null;
-            $user->forceFill($input)->save();
-            $user->sendEmailVerificationNotification();
-        } else {
-            $user->forceFill($input)->save();
-        }
+        $user = new User($input);
+        event(new Registered($user));
     }
 
     private function autoFillFields(): void
