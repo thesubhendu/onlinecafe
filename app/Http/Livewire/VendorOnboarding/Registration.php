@@ -2,13 +2,20 @@
 
 namespace App\Http\Livewire\VendorOnboarding;
 
+use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\User;
 use App\Services\AbnChecker;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
 use Orchid\Platform\Models\Role;
 
 class Registration extends Component
 {
+    use PasswordValidationRules;
+
     public $vendor_name;
     public $contact_name;
     public $contact_lastname;
@@ -19,26 +26,26 @@ class Registration extends Component
     public $suburb;
     public $pc;
     public $state;
-    public $cardstamps;
     public $agreement;
-
+    public $password;
     protected $shop;
+    public $authUser;
+    public $password_confirmation;
 
     public function render()
     {
         return view('livewire.vendor-onboarding.registration');
     }
 
-    public function mount()
+    public function mount(): void
     {
-        $this->shop = auth()->user()->shop;
-
-        if ($this->shop) {
-            $this->fill($this->dataToSave($this->shop));
+        $this->authUser = auth()->user();
+        if ($this->authUser) {
+            $this->autoFillFields();
         }
     }
 
-    protected function dataToSave($vendor = null)
+    protected function dataToSave($vendor = null): array
     {
         if (empty($vendor)) {
             $vendor = $this;
@@ -54,31 +61,40 @@ class Registration extends Component
             'mobile'           => $vendor->mobile,
             'suburb'           => $vendor->suburb,
             'pc'               => $vendor->pc,
-//            'cardstamps'       => $vendor->cardstamps,
             'state'            => $vendor->state,
             'abn'              => $vendor->abn,
         ];
     }
 
-    private function validationRules()
+    private function validationRules(): array
     {
         $rules = [
-            'vendor_name'      => 'required',
-            'email'            => 'email|required|unique:vendors,email',
+            'vendor_name'      => 'required|unique:vendors,vendor_name',
             'contact_name'     => 'required',
             'contact_lastname' => 'required',
-            'mobile'           => 'digits:10|required|unique:vendors,mobile',
-            'abn'              => 'required',
+            'abn'              =>  'required|unique:vendors,abn',
             'suburb'           => 'required',
             'pc'               => 'required',
-            'agreement'        => 'required',
+            'agreement' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ];
 
-        if ( ! auth()->user()->shop) {
+        if (!$this->authUser) {
+            $rules['password'] = $this->passwordRules();
+            $rules['email'] = 'email|required|unique:users,email';
+            $rules['mobile'] = 'digits:10|required|unique:users,mobile';
+
             return $rules;
         }
-        $rules['email']  = 'email|required|unique:vendors,email,'.auth()->user()->shop->id;
-        $rules['mobile'] = 'digits:10|required|unique:vendors,mobile,'.auth()->user()->shop->id;
+
+        $rules['email'] = 'email|required|unique:users,email,'.auth()->user()->id;
+        $rules['mobile'] = 'digits:10|required|unique:users,mobile,'.auth()->user()->id;
+
+        $shop = $this->authUser->shop;
+        if($shop)
+        {
+            $rules['vendor_name'] = 'required|unique:vendors,vendor_name,'.$shop->id;
+            $rules['abn'] = 'required|unique:vendors,abn,'.$shop->id;
+        }
 
         return $rules;
     }
@@ -87,43 +103,98 @@ class Registration extends Component
     {
         $this->validate($this->validationRules());
 
-        if (auth()->user()->shop) {
-            auth()->user()->shop->update($this->dataToSave());
-            session()->flash('message', 'Vendor Updated');
-
-            $this->emitUp('vendorRegistered');
-            return redirect()->route('register-business.payment');
-
-        }
         // check if valid business (ABN check)
         $abnService = (new AbnChecker($this->abn));
-
         $isValid = $abnService->isValidBusiness();
 
-        if ( ! $isValid) {
+        if (!$isValid) {
             session()->flash('error', "Not Valid ABN. Please enter correct ABN/ASIC and try again");
 
             return response()->json(['error' => 'Not Valid ABN'], 422);
         }
-        $isValidBusinessName = $abnService->isValidBusinessName($this->vendor_name);
 
-        if ( ! $isValidBusinessName) {
+        $isValidBusinessName = $abnService->isValidBusinessName($this->vendor_name);
+        if (!$isValidBusinessName) {
             session()->flash('error', "Invalid Business Name. Please enter correct Business Name and try again");
+
             return response()->json(['error' => 'Invalid Business Name'], 422);
         }
 
-        $authUser = auth()->user();
+        // Update user and vendor data on auth user exist
+        if ($this->authUser) {
+            $this->updateUser();
 
-        $authUser->shop()->create($this->dataToSave());
+            if ($this->authUser->shop) {
+                $this->authUser->shop->update($this->dataToSave());
+                session()->flash('message', 'Vendor Updated');
+
+                $this->emitUp('vendorRegistered');
+
+                return redirect()->route('register-business.payment');
+            }
+        } else {
+            // Create new User
+            $user = $this->createUser();
+            event(new Registered($user));
+            auth()->login($user);
+            $this->authUser = auth()->user();
+        }
+
+        // Create Shop
+        $this->authUser->shop()->create($this->dataToSave());
 
         //set user role to vendor
         $vendorRole = Role::where('slug', 'vendor')->first();
-        $authUser->addRole($vendorRole);
+        $this->authUser->addRole($vendorRole);
 
         session()->flash('message', 'Vendor Registered');
-
         $this->emitUp('vendorRegistered');
 
         return redirect()->route('register-business.payment');
+    }
+
+    private function createUser()
+    {
+        $input =
+            [
+                'name'     => $this->contact_name.' '.$this->contact_lastname,
+                'email'    => $this->email,
+                'mobile'   => $this->mobile,
+                'password' => Hash::make($this->password),
+            ];
+
+        return User::create($input);
+    }
+
+    private function updateUser(): void
+    {
+        $user = auth()->user();
+        $input =
+            [
+                'name'   => $this->contact_name.' '.$this->contact_lastname,
+                'email'  => $this->email,
+                'mobile' => $this->mobile,
+            ];
+        if ($input['email'] !== $user->email) {
+            $input['email_verified_at'] = null;
+            $user->forceFill($input)->save();
+            event(new Registered($user));
+        } else {
+            $user->forceFill($input)->save();
+        }
+    }
+
+    private function autoFillFields(): void
+    {
+        $this->shop = $this->authUser->shop;
+        if ($this->shop) {
+            $this->fill($this->dataToSave($this->shop));
+        } else {
+            $name = explode(' ', auth()->user()->name, 2);
+            $this->contact_name = $name[0];
+            $this->contact_lastname = $name[1] ?? '';
+            $this->email = auth()->user()->email;
+            $this->mobile = auth()->user()->mobile;
+        }
     }
 }

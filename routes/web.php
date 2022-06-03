@@ -93,10 +93,9 @@ Route::get('save-deal/{deal}', \App\Http\Livewire\SaveDeal::class)->name('save-d
 
 Route::view('/comment', 'comment');
 
+Route::get('vendor-onboarding/register',
+    VendorOnboarding\Registration::class)->name('register-business.create');
 Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
-    Route::get('/register',
-        VendorOnboarding\Registration::class)->name('register-business.create');
-
     Route::get('/payment',
         VendorOnboarding\Payment::class)->name('register-business.payment')->middleware('can:vendor');
 

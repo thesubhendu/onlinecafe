@@ -94,7 +94,22 @@
                                 @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
 
                             </div>
+                            @if(!auth()->user())
+                                <div class="form-group col-lg-6 col-sm-12 mb-5">
+                                    <label for="mobile" class="form-label"> Password</label>
+                                    <input type="password" class="form-control" wire:model.lazy="password"
+                                           placeholder="Password ">
+                                    @error('password') <span class="text-danger">{{ $message }}</span> @enderror
 
+                                </div>
+
+                                <div class="form-group col-lg-6 col-sm-12 mb-5">
+                                    <label for="mobile" class="form-label"> Confirm Password</label>
+                                    <input type="password" class="form-control" wire:model.lazy="password_confirmation"
+                                           placeholder="Confirm Password ">
+                                    @error('password_confirmation') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            @endif
 
                             <div class="form-group">
                                 <div class="row">
