@@ -69,10 +69,10 @@ class Registration extends Component
     private function validationRules(): array
     {
         $rules = [
-            'vendor_name'      => 'required',
+            'vendor_name'      => 'required|unique:vendors,vendor_name',
             'contact_name'     => 'required',
             'contact_lastname' => 'required',
-            'abn'              => 'required',
+            'abn'              =>  'required|unique:vendors,abn',
             'suburb'           => 'required',
             'pc'               => 'required',
             'agreement' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
@@ -82,9 +82,18 @@ class Registration extends Component
             $rules['password'] = $this->passwordRules();
             $rules['email'] = 'email|required|unique:users,email';
             $rules['mobile'] = 'digits:10|required|unique:users,mobile';
-        } else {
-            $rules['email'] = 'email|required|unique:users,email,'.auth()->user()->id;
-            $rules['mobile'] = 'digits:10|required|unique:users,mobile,'.auth()->user()->id;
+
+            return $rules;
+        }
+
+        $rules['email'] = 'email|required|unique:users,email,'.auth()->user()->id;
+        $rules['mobile'] = 'digits:10|required|unique:users,mobile,'.auth()->user()->id;
+
+        $shop = $this->authUser->shop;
+        if($shop)
+        {
+            $rules['vendor_name'] = 'required|unique:vendors,vendor_name,'.$shop->id;
+            $rules['abn'] = 'required|unique:vendors,abn,'.$shop->id;
         }
 
         return $rules;
@@ -126,6 +135,7 @@ class Registration extends Component
         } else {
             // Create new User
             $user = $this->createUser();
+            event(new Registered($user));
             auth()->login($user);
             $this->authUser = auth()->user();
         }
@@ -158,14 +168,20 @@ class Registration extends Component
 
     private function updateUser(): void
     {
+        $user = auth()->user();
         $input =
             [
                 'name'   => $this->contact_name.' '.$this->contact_lastname,
                 'email'  => $this->email,
                 'mobile' => $this->mobile,
             ];
-        $user = new User($input);
-        event(new Registered($user));
+        if ($input['email'] !== $user->email) {
+            $input['email_verified_at'] = null;
+            $user->forceFill($input)->save();
+            event(new Registered($user));
+        } else {
+            $user->forceFill($input)->save();
+        }
     }
 
     private function autoFillFields(): void
