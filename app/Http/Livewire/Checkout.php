@@ -2,14 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Mail\orderSubmitted;
-use App\Models\Deal;
 use App\Models\Order;
-use App\Notifications\NewOrderNotification;
-use App\Services\LoyaltyClaimService;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
 class Checkout extends Component
@@ -19,42 +13,21 @@ class Checkout extends Component
     public $subtotal;
     public $total;
     public $tax;
-
     public $user;
-
     public $qtyOptions;
 
-    public $deal;
-
-    public $validLoyaltyClaimCard;
-    public $claimCardId;
-    protected $queryString = [
-        'claimCardId' => ['except' => ''],
-    ];
-
-    public function mount(LoyaltyClaimService $loyaltyClaimService)
+    public function render()
     {
-        if(request('deal')) {
-            Cart::destroy();
-            $deal = Deal::find(request('deal'));
-            if($deal->isActive()){
-                $this->deal = $deal;
-                $deal->addToCart();
-            }
-        }
+        return view('livewire.checkout')->layout('layouts.app');
+    }
 
-        $this->claimCardId = session()->get('claimCardId');
-        if($this->claimCardId){
-            $this->validLoyaltyClaimCard= $loyaltyClaimService->verifiedLoyaltyCard($this->claimCardId);
-        }
-
+    public function mount()
+    {
         $this->refreshCart();
         $this->fill([
             'user'=> auth()->user(),
-            'cartItems'=> Cart::content(),
+            'qtyOptions' => [1, 2, 3, 4, 5, 6, 7, 8]
         ]);
-
-        $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
     public function submit()
@@ -66,41 +39,36 @@ class Checkout extends Component
 
         $order = (new Order())->generate($this->items, Cart::total());
 
-        $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
-
-        Mail::to($order->vendor->shop_email ?? $order->vendor->email)
-            ->send(new orderSubmitted($order, $confirm_url));
-
-//        \App\Events\OrderSubmitted::dispatch($order);
-        $order->vendor->owner->notify(new NewOrderNotification($order));
-
-        if($this->validLoyaltyClaimCard) {
-            (new LoyaltyClaimService())->updateLoyaltyCardOnCheckout($this->validLoyaltyClaimCard);
-            session()->forget('claimCardId');
-        }
-
         Cart::destroy();
-
         return redirect()->route('order.submitted', $order);
     }
 
     public function hydrate()
     {
-        $this->items = Cart::content();
+        $this->refreshCart();
     }
-    private function refreshCart()
+    private  function refreshCart()
     {
-        $this->items     = Cart::content();
+        //check and update cart items
+        $this->items     = $this->getCartContent();
         $this->subtotal  = Cart::subtotal();
         $this->tax       = Cart::tax();
         $this->total     = Cart::total();
         $this->itemCount = Cart::count();
     }
 
-    public function render()
+    protected function getCartContent()
     {
-        return view('livewire.checkout')->layout('layouts.app');
+        $items = Cart::content();
+        $stampableProducts = $this->stampableProducts($items);
+        $this->resetFreeProductCount($stampableProducts); //value may change on quantity update
+
+        list($lowestPriceProduct, $finalFreeQty) = $this->freeItemsCount($stampableProducts);
+        Cart::update($lowestPriceProduct->rowId, ['options'=> ['extras'=> $lowestPriceProduct->options['extras'], 'free_products'=>$finalFreeQty]]);
+
+        return Cart::content();
     }
+
 
     public function updateQty($rowId,$value,$action='add')
     {
@@ -110,6 +78,7 @@ class Checkout extends Component
             $value ++;
         }
         if($value < 1) {
+            $this->refreshCart();
             return;
         }
         Cart::update($rowId, $value);
@@ -121,6 +90,68 @@ class Checkout extends Component
         Cart::remove($id);
         $this->refreshCart();
         session()->flash("message", "Item has been removed");
+    }
+
+    /**
+     * @param $items
+     * @return mixed
+     */
+    private function stampableProducts($items)
+    {
+        $stampableProducts = $items->filter(function ($product) {
+            $model = $product->model;
+            return $model->category_id == $model->vendor->free_category;
+        });
+        return $stampableProducts;
+    }
+
+    /**
+     * @param mixed $stampableProducts
+     */
+    protected function resetFreeProductCount(mixed $stampableProducts): void
+    {
+        $stampableProducts->each(function ($product) {
+            $options = $product->options;
+            unset($options['free_products']);
+            Cart::update($product->rowId, ['options' => $options]);
+        });
+    }
+
+    /**
+     * @param $items
+     * @return array
+     */
+    protected function freeItemsCount($stampableProducts): array
+    {
+//            $freeProductsToClaim = auth()->user()->remainingClaims();
+//            $stampsToCompleteCard = auth()->user()->remainingStampsOnActiveCard();
+        $remainingFreeProductClaims = 2;
+        $stampsToCompleteCard = 3;
+
+        $this->resetFreeProductCount($stampableProducts); //value may change on quantity update
+
+        $lowestPriceProduct = $stampableProducts->sortBy('price')->first();
+
+        $totalPurchaseQty = $stampableProducts->sum('qty');
+        $extraQtyAfterStamps = $totalPurchaseQty - $stampsToCompleteCard;
+        $vendor = $lowestPriceProduct->model->vendor;
+
+        $vendorOfferedFreeQty = $vendor->get_free;
+
+        if ($extraQtyAfterStamps >= $vendorOfferedFreeQty) {
+            $extraQtyAfterStamps = $vendorOfferedFreeQty;
+        }
+
+        if ($extraQtyAfterStamps >= $lowestPriceProduct->qty) {
+            $finalFreeQty = $lowestPriceProduct->qty;
+        } else {
+            $finalFreeQty = $extraQtyAfterStamps;
+        }
+
+        if ($finalFreeQty < 1) {
+            $finalFreeQty = 0;
+        }
+        return array($lowestPriceProduct, $finalFreeQty);
     }
 
 }

@@ -92,6 +92,20 @@ class Order extends Model
             // only create loyalty cards only after order confirm
         }
 
+        $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
+
+        Mail::to($order->vendor->shop_email ?? $order->vendor->email)
+            ->send(new orderSubmitted($order, $confirm_url));
+
+//        \App\Events\OrderSubmitted::dispatch($order);
+        $order->vendor->owner->notify(new NewOrderNotification($order));
+//
+//
+//        if(session()->get('claimCardId')) {
+//            (new LoyaltyClaimService())->updateLoyaltyCardOnCheckout($this->validLoyaltyClaimCard);
+//            session()->forget('claimCardId');
+//        }
+
         return $order;
     }
 

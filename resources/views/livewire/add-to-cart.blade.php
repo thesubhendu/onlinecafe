@@ -79,7 +79,7 @@
                                                     <label for="">{{$optionType->name}}</label>
                                                     @foreach($optionType->vendorProductOptions as $key => $option)
                                                         <div class="form-check">
-                                                            <input wire:model.lazy="cartProduct.options.{{$optionType->id}}"
+                                                            <input wire:model.lazy="cartProduct.options.extras.{{$optionType->id}}"
                                                                    class="form-check-input" type="radio"
                                                                    id="product-{{$index}}-{{$key}}"
                                                                    value="{{$option->name}}"
@@ -90,7 +90,7 @@
                                                             </label>
                                                         </div>
                                                     @endforeach
-                                                    @error('cartProduct.options.'.$optionType->id) <span
+                                                    @error('cartProduct.options.extras.'.$optionType->id) <span
                                                         class="text-danger">{{ $message }}</span> @enderror
                                                 </div>
                                             @endif

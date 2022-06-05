@@ -9,7 +9,9 @@
             <div class="row hidden-xs">
                 <div class="col-md-12">
                     <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
-
+                    @if($deal)
+                        <span>({{$deal->title}})</span>
+                    @endif
 
                     <div class="table-responsive">
                         <!-- TABLE -->
@@ -46,16 +48,16 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        <div class="control-btn ">
-                                            <x-cart.update-quantity :item="$item"
-                                                                    :options="$qtyOptions"></x-cart.update-quantity>
-                                        </div>
-
-                                    </td>
-                                    <td>
-                                        @if($item->options['free_products']?? 0)
-                                            (Free: {{$item->options['free_products'] ?? 0}})
+                                        @if($deal || $item->price == 0 )
+                                            <span>{{$item->qty}}</span>
+                                        @else
+                                            <div class="control-btn ">
+                                                <x-cart.update-quantity :item="$item"
+                                                                        :options="$qtyOptions"></x-cart.update-quantity>
+                                            </div>
                                         @endif
+
+
                                     </td>
                                 </tr>
 
@@ -104,10 +106,17 @@
                             </div>
 
                             <div class="col-xs-7 no-gutters">
+                                @if($deal)
+                                    <span>{{$item->qty}}</span>
+                                @else
                                     <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
 
-                                @if($item->options['free_products']?? 0)
-                                    (Free: {{$item->options['free_products'] ?? 0}})
+{{--                                    <!-- Quantity Control -->--}}
+{{--                                    <div class="control-btn ">--}}
+{{--                                        <button type="button" class="value-button decrease" value="Decrease Value">-</button>--}}
+{{--                                        <input type="number" id="number" value="1" />--}}
+{{--                                        <button type="button" class="value-button increase" value="Increase Value">+</button>--}}
+{{--                                    </div>   --}}
                                 @endif
                             </div>
                             <div class="col-xs-3 text-end">
@@ -124,11 +133,13 @@
 
             <!-- CART TOTAL -->
                 <div class="row">
+                    @if(!$validLoyaltyClaimCard)
                         <div class="col-md-12">
                             <div class="col cart-totals-left alert alert-danger">
                                 Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
                             </div>
                         </div>
+                    @endif
                     <div class="col-md-4"></div>
 {{--                    <div class="col-md-4">--}}
 {{--                        <div class="coupen">--}}
@@ -201,12 +212,19 @@
                                         <a wire:click="submit()" class="btn btn-secondary mt-25">
                                             CHECKOUT
                                         </a>
-
-                                        <a
-                                            href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
-                                            class="btn btn-default d-block">
-                                            Back to Shopping
-                                        </a>
+                                        @if($validLoyaltyClaimCard)
+                                            <a
+                                                href="{{route('claim-loyalty-products', ['card'=> $validLoyaltyClaimCard->id])}}"
+                                                class="btn btn-default d-block">
+                                                Back to claim product
+                                            </a>
+                                        @else
+                                            <a
+                                                href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
+                                                class="btn btn-default d-block">
+                                                Back to Shopping
+                                            </a>
+                                        @endif
 
                                     </div>
                                 </div>

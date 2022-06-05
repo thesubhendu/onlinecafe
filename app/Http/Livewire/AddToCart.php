@@ -41,7 +41,7 @@ class AddToCart extends Component
             'price'   => $product->price,
             'weight'  => '0',
             'qty'     => 1,
-            'options' => [],
+            'options' => ['extras'=>[]],
         ];
 
         if($this->claimCardId){
@@ -71,16 +71,16 @@ class AddToCart extends Component
             }
         }
 
-        if(!empty($this->cartProduct['options'])) {
-            collect($this->cartProduct['options'])->map(function ($optionName, $optionTypeId) {
+        if(!empty($this->cartProduct['options']['extras'])) {
+            collect($this->cartProduct['options']['extras'])->map(function ($optionName, $optionTypeId) {
                 // Recreate cart Product options
-                $this->cartProduct['options'][$optionTypeId] =
+                $this->cartProduct['options']['extras'][$optionTypeId] =
                     $this->product->optionTypes()->where('id', $optionTypeId)->first()->name . ': ' . $optionName;
             });
         }
 
         if($this->selectSize){
-            $this->cartProduct['options'][] =  "Size: $this->selectSize" ;
+            $this->cartProduct['options']['extras'][] =  "Size: $this->selectSize" ;
         }
 
         $this->selectSize = 'S';
@@ -155,7 +155,7 @@ class AddToCart extends Component
 
     public function updateProductPrice(): void
     {
-        $totalOptionPrice = $this->getTotalOptionsPrice($this->cartProduct['options']);
+        $totalOptionPrice = $this->getTotalOptionsPrice($this->cartProduct['options']['extras']);
 
         $price = $this->product->price;
         if($this->selectSize)
@@ -180,10 +180,10 @@ class AddToCart extends Component
         $this->product->optionTypes()->each( function($optionType) use ($defaultOptionType) {
             if(array_key_exists($optionType->name, $defaultOptionType))
             {
-                $this->cartProduct['options'][$optionType->id] = $defaultOptionType[$optionType->name];
+                $this->cartProduct['options']['extras'][$optionType->id] = $defaultOptionType[$optionType->name];
             }
         });
-        $totalOptionsPrice = $this->getTotalOptionsPrice($this->cartProduct['options']);
+        $totalOptionsPrice = $this->getTotalOptionsPrice($this->cartProduct['options']['extras']);
         $this->cartProduct['price'] += $totalOptionsPrice;
     }
 
