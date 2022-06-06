@@ -97,7 +97,7 @@ Route::get('vendor-onboarding/register',
     VendorOnboarding\Registration::class)->name('register-business.create');
 Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
     Route::get('/payment',
-        VendorOnboarding\Payment::class)->name('register-business.payment')->middleware('can:vendor');
+        VendorOnboarding\Payment::class)->name('register-business.payment')->middleware('not.subscribed','can:vendor');
 
     Route::get('/shop-setup',
         ShopSetup::class)->name('register-business.shop-setup')->middleware('subscribed');
