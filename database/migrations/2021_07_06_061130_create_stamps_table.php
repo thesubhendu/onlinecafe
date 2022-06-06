@@ -16,7 +16,7 @@ class CreateStampsTable extends Migration
         Schema::create('stamps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained();
-            $table->foreignId('product_id')->constrained('products');
+//            $table->foreignId('product_id')->constrained('products');
             $table->foreignId('card_id')->constrained('cards')->onDelete('cascade');
             $table->foreignId('stamped_by')->nullable()->constrained('users');
             $table->timestamps();

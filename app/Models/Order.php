@@ -64,7 +64,14 @@ class Order extends Model
         $this->confirmed_at = now();
         $this->confirmed_by = auth()->id();
         $this->save();
-        $this->generateLoyalty($this);
+
+        if($this->stamp_count > 0){
+            $this->stampRewardCard($this);
+        }
+
+        if($this->card_id){
+            $this->updateClaimedCard();
+        }
 
         Mail::to($this->user->email)->send(new OrderConfirmed($this));
         $this->user->notify(new OrderConfirmedNotification($this));
@@ -72,7 +79,7 @@ class Order extends Model
         return $this;
     }
 
-    public function generate($cartItems, $total)
+    public function generate($cartItems, $total, $rewardData)
     {
         $vendorId = $cartItems->first()->model->vendor_id;
 
@@ -81,6 +88,9 @@ class Order extends Model
         $order->user_id = auth()->id();
         $order->vendor_id = $vendorId;
         $order->order_total = $total;
+        $order->free_products_claimed = $rewardData['free_products_claimed'];
+        $order->card_id = $rewardData['card_id'];
+        $order->stamp_count = $rewardData['stamp_count'];
         $order->save();
 
         foreach ($cartItems as $product) {
@@ -89,84 +99,40 @@ class Order extends Model
                 'quantity' => $product->qty,
                 'options' => json_encode($product->options)
             ]);
-            // only create loyalty cards only after order confirm
         }
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
 
         Mail::to($order->vendor->shop_email ?? $order->vendor->email)
             ->send(new orderSubmitted($order, $confirm_url));
-
-//        \App\Events\OrderSubmitted::dispatch($order);
-        $order->vendor->owner->notify(new NewOrderNotification($order));
-//
-//
-//        if(session()->get('claimCardId')) {
-//            (new LoyaltyClaimService())->updateLoyaltyCardOnCheckout($this->validLoyaltyClaimCard);
-//            session()->forget('claimCardId');
-//        }
-
-        return $order;
-    }
-
-    public function generateNew($products, $total, $user)
-    {
-        $firstProduct = Product::find($products->first()->id);
-        $vendorId = $firstProduct->vendor_id;
-
-        $order = new Order();
-        $order->order_number = uniqid();
-        $order->user_id = $user->id;
-        $order->vendor_id = $vendorId;
-        $order->order_total = $total;
-        $order->save();
-
-        foreach ($products as $product) {
-            $order->products()->attach($product->id, [
-                'price' => $product->price,
-                'quantity' => $product->qty ?? $product->quantity,
-                'options' => json_encode($product->options)
-            ]);
-            // only create loyalty cards only after order confirm
-        }
-
-        $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
-        //todo: ask if need to send to owner or vendor email
-        Mail::to($order->vendor->shop_email ?? $order->vendor->email)
-            ->send(new orderSubmitted($order, $confirm_url));
-
-//        \App\Events\OrderSubmitted::dispatch($order);
         $order->vendor->owner->notify(new NewOrderNotification($order));
 
         return $order;
     }
+
 
     // Generate Loyalty card only after order confirm
-    public function generateLoyalty($order): void
+    public function stampRewardCard($order): void
     {
         $card = (new Card());
         $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
 
-        foreach($order->products as $product)
-        {
-            // if product price is 0 or is not stamped product then no need to add stamps
-            if(!$product->is_stamp || $product->pivot->price == 0){
-                continue;
-            }
+        for ($i = 0; $i < $order->stamp_count; $i++) {
+            $activeCard->stamps()->create(['order_id' => $order->id]);
 
-            for ($i = 0; $i < $product->pivot->quantity; $i++) {
-                $activeCard->stamps()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+            if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
+                $activeCard->is_max_stamped = true;
+                $activeCard->save();
 
-                if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
-                    //max stamped
-                    $activeCard->is_max_stamped = true;
-                    $activeCard->is_active = false;
-                    $activeCard->save();
-
-                    //create another
-                    $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
-                }
+                $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
             }
         }
+    }
+
+    private function updateClaimedCard()
+    {
+        $card = Card::find($this->card_id);
+        $card->total_claimed = $this->free_products_claimed;
+        $card->save();
     }
 }

@@ -27,6 +27,10 @@ class CreateOrdersTable extends Migration
                   ->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id')
                   ->constrained()->onDelete('cascade');
+
+            $table->unsignedInteger('free_products_claimed')->default(0);
+            $table->foreignId('card_id')->nullable()->constrained();
+            $table->unsignedInteger('stamp_count')->default(0);
             $table->timestamps();
         });
     }
