@@ -97,7 +97,7 @@ class Order extends Model
             $order->products()->attach($product->id, [
                 'price' => $product->total,
                 'quantity' => $product->qty,
-                'options' => json_encode($product->options)
+                'options' => json_encode($product->options['extras'])
             ]);
         }
 
