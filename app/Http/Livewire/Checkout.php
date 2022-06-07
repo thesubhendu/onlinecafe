@@ -113,11 +113,21 @@ class Checkout extends Component
         $finalFreeQty = $rewardData['free_products_claimed'];
         if ($lowestPriceProduct && $finalFreeQty > 0) {
             Cart::update($lowestPriceProduct->rowId, ['options' => ['extras' => $lowestPriceProduct->options['extras'], 'free_products' => $finalFreeQty]]);
-            $priceToReduce = $finalFreeQty * $lowestPriceProduct->price ?? 0;
-            Cart::setDiscount($lowestPriceProduct->rowId, $priceToReduce);
+
+            Cart::setDiscount($lowestPriceProduct->rowId, $this->discount($finalFreeQty, $lowestPriceProduct, $stampableProducts));
         }
 
         return $rewardData;
+    }
+
+    /**
+     * @param mixed $finalFreeQty
+     * @param $lowestPriceProduct
+     * @param mixed $stampableProducts
+     */
+    private function discount(mixed $finalFreeQty, $lowestPriceProduct, mixed $stampableProducts): int
+    {
+        return (($finalFreeQty * $lowestPriceProduct->price) / $lowestPriceProduct->price* $lowestPriceProduct->qty ) ?? 0 ;
     }
 
 }
