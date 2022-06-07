@@ -21,7 +21,10 @@ class RewardService
     function __construct($products)
     {
         $this->stampableProducts = $this->stampableProducts($products);
-        $this->handle();
+
+        if($this->stampableProducts->isNotEmpty()) {
+            $this->handle();
+        }
     }
     private function calculate($stampCount, $freeProduct)
     {
@@ -35,7 +38,7 @@ class RewardService
     {
 //            $freeProductsToClaim = auth()->user()->remainingClaims();
 //            $stampsToCompleteCard = auth()->user()->remainingStampsOnActiveCard();
-        $remainingFreeProductClaims = 2;
+//        $remainingFreeProductClaims = 2;
         $stampsToCompleteCard = 3;
 
         $this->lowestPriceProduct = $this->stampableProducts->sortBy('price')->first();
@@ -78,6 +81,7 @@ class RewardService
             $model = $product->model;
             return $model->category_id == $model->vendor->free_category;
         });
+
         return $stampableProducts;
     }
 
@@ -89,7 +93,9 @@ class RewardService
      */
     private function discount(): int
     {
-        return (($this->freeProductsClaimed * $this->lowestPriceProduct->price) / $this->lowestPriceProduct->price* $this->lowestPriceProduct->qty ) ?? 0 ;
+        $price = $this->lowestPriceProduct->price;
+
+        return (($this->freeProductsClaimed * $price) / $price * $this->lowestPriceProduct->qty ) ?? 0 ;
     }
 
 

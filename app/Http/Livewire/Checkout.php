@@ -41,9 +41,9 @@ class Checkout extends Component
         $reward = $this->handleAutoReward();
 
         $rewardData = [
-          'free_products_claimed'=> $reward->freeProductsClaimed,
+          'free_products_claimed'=> $reward->freeProductsClaimed ?? 0,
           'card_id'=> null,
-          'stamp_count'=> $reward->stampCount
+          'stamp_count'=> $reward->stampCount ?? 0
         ];
 
         $order = (new Order())->generate($this->items, Cart::total(), $rewardData);
@@ -96,6 +96,9 @@ class Checkout extends Component
         $rewardData = (new RewardService(Cart::content()));
         $lowestPriceProduct = $rewardData->lowestPriceProduct;
 
+        if(!$lowestPriceProduct){
+           return $rewardData;
+        }
         if ($rewardData->freeProductsClaimed > 0) {
             Cart::update($lowestPriceProduct->rowId, ['options' => ['extras' => $lowestPriceProduct->options['extras'], 'free_products' => $rewardData->freeProductsClaimed]]);
 
