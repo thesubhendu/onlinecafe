@@ -95,6 +95,10 @@ class RewardService
     {
         $price = $this->lowestPriceProduct->price;
 
+        if($price == 0) {
+            return 0;
+        }
+
         return (($this->freeProductsClaimed * $price) / $price * $this->lowestPriceProduct->qty ) ?? 0 ;
     }
 

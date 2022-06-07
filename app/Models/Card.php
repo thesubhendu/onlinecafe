@@ -51,7 +51,7 @@ class Card extends Model
         return Card::query()->firstOrCreate([
             'user_id' => $customerId,
             'vendor_id' => $vendorId,
-            'is_active' => true
+            'is_max_stamped' => false
         ]);
     }
 
