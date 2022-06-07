@@ -17,6 +17,8 @@ use App\Http\Livewire\FavoriteVendors;
 use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
+use App\Services\RewardService;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,8 +31,8 @@ Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 
 Route::get('tinker', function () {
-    dd(geoip()->getLocation());
-    dd(geoip()->getLocation('27.974.399.65'));
+    $rewardData = (new RewardService(Cart::content()));
+
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');

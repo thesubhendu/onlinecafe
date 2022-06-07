@@ -38,12 +38,12 @@ class Checkout extends Component
             return back();
         }
 
-        $autoReward = $this->handleAutoReward();
+        $reward = $this->handleAutoReward();
 
         $rewardData = [
-          'free_products_claimed'=> $autoReward['free_products_claimed'],
+          'free_products_claimed'=> $reward->freeProductsClaimed,
           'card_id'=> null,
-          'stamp_count'=> $autoReward['stamp_count']
+          'stamp_count'=> $reward->stampCount
         ];
 
         $order = (new Order())->generate($this->items, Cart::total(), $rewardData);
@@ -91,43 +91,24 @@ class Checkout extends Component
     }
 
 
-    /**
-     * @param mixed $stampableProducts
-     */
-    private function resetFreeProductCount(mixed $stampableProducts): void
+    private function handleAutoReward(): RewardService
     {
-        $stampableProducts->each(function ($product) {
-            $options = $product->options;
+        $rewardData = (new RewardService(Cart::content()));
+        $lowestPriceProduct = $rewardData->lowestPriceProduct;
+
+        if ($rewardData->freeProductsClaimed > 0) {
+            Cart::update($lowestPriceProduct->rowId, ['options' => ['extras' => $lowestPriceProduct->options['extras'], 'free_products' => $rewardData->freeProductsClaimed]]);
+
+            Cart::setDiscount($lowestPriceProduct->rowId, $rewardData->discount);
+        }else{
+            $options = $lowestPriceProduct->options;
             unset($options['free_products']);
-            Cart::update($product->rowId, ['options' => $options]);
-        });
-    }
-
-    private function handleAutoReward(): array
-    {
-        $stampableProducts = (new RewardService())->stampableProducts(Cart::content());
-        $lowestPriceProduct = $stampableProducts->sortBy('price')->first();
-
-        $this->resetFreeProductCount($stampableProducts); //value may change on quantity update
-        $rewardData = (new RewardService())->freeItemsCount($stampableProducts);
-        $finalFreeQty = $rewardData['free_products_claimed'];
-        if ($lowestPriceProduct && $finalFreeQty > 0) {
-            Cart::update($lowestPriceProduct->rowId, ['options' => ['extras' => $lowestPriceProduct->options['extras'], 'free_products' => $finalFreeQty]]);
-
-            Cart::setDiscount($lowestPriceProduct->rowId, $this->discount($finalFreeQty, $lowestPriceProduct, $stampableProducts));
+            Cart::update($lowestPriceProduct->rowId, ['options' => $options]);
+            Cart::setDiscount($lowestPriceProduct->rowId, 0);
         }
 
         return $rewardData;
     }
 
-    /**
-     * @param mixed $finalFreeQty
-     * @param $lowestPriceProduct
-     * @param mixed $stampableProducts
-     */
-    private function discount(mixed $finalFreeQty, $lowestPriceProduct, mixed $stampableProducts): int
-    {
-        return (($finalFreeQty * $lowestPriceProduct->price) / $lowestPriceProduct->price* $lowestPriceProduct->qty ) ?? 0 ;
-    }
 
 }
