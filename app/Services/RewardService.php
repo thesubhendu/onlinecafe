@@ -30,7 +30,7 @@ class RewardService
     {
         $this->stampCount = $stampCount;
         $this->freeProductsClaimed = $freeProduct;
-        $this->discount = $this->discount();
+        $this->discount = $this->discountPercent();
 
         return true;
     }
@@ -87,19 +87,23 @@ class RewardService
 
 
     /**
+     * geting discount percent
      * @param mixed $finalFreeQty
      * @param $lowestPriceProduct
      * @param mixed $stampableProducts
      */
-    private function discount(): int
+    private function discountPercent(): float
     {
         $price = $this->lowestPriceProduct->price;
 
-        if($price == 0) {
+        $priceToReduce = $price* $this->freeProductsClaimed;
+
+        $total = $price * $this->lowestPriceProduct->qty;
+
+        if($total == 0) {
             return 0;
         }
-
-        return (($this->freeProductsClaimed * $price) / $price * $this->lowestPriceProduct->qty ) ?? 0 ;
+        return ($priceToReduce / $total) * 100;
     }
 
 
