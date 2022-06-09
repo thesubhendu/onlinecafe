@@ -96,16 +96,10 @@ class AddToCart extends Component
                 return redirect()->route('claim-loyalty-products', ['card' => $this->claimCardId]);
             }
 
-            return redirect()->route('checkout.index', ['claimCardId' => $this->claimCardId]);
+            return redirect()->route('loyalty-checkout', [$this->claimCardId]);
         }
 
         session()->forget('claimCardId');
-        // only add free price product on loyalty claim
-        $claimedCardProductIds = Cart::content()->where('price', 0)->pluck('rowId');
-        foreach($claimedCardProductIds as $cardProductId)
-        {
-            Cart::remove($cardProductId);
-        }
 
         Cart::add($this->cartProduct)->associate(Product::class);
 

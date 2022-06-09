@@ -6,6 +6,7 @@ use App\Mail\OrderConfirmed;
 use App\Mail\orderSubmitted;
 use App\Notifications\NewOrderNotification;
 use App\Notifications\OrderConfirmedNotification;
+use App\Services\LoyaltyClaimService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
@@ -69,10 +70,6 @@ class Order extends Model
             $this->stampRewardCard($this);
         }
 
-        if($this->card_id){
-            $this->updateClaimedCard();
-        }
-
         Mail::to($this->user->email)->send(new OrderConfirmed($this));
         $this->user->notify(new OrderConfirmedNotification($this));
 
@@ -99,6 +96,10 @@ class Order extends Model
                 'quantity' => $product->qty,
                 'options' => json_encode($product->options['extras'])
             ]);
+        }
+
+        if($order->card_id){
+            (new LoyaltyClaimService())->updateLoyaltyCardOnCheckout($rewardData['card_id']);
         }
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
@@ -129,10 +130,4 @@ class Order extends Model
         }
     }
 
-    private function updateClaimedCard()
-    {
-        $card = Card::find($this->card_id);
-        $card->total_claimed = $this->free_products_claimed;
-        $card->save();
-    }
 }
