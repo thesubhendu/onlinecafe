@@ -52,7 +52,6 @@ class LoyalityCard extends Component
     public function onClaim($card)
     {
         Cart::instance('manualClaimedProducts')->destroy();
-        session()->put('claimCardId', $card['id']);
         return redirect()->route('claim-loyalty-products', ['card' => $card['id']]);
     }
 

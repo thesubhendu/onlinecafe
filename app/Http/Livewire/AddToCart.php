@@ -99,8 +99,6 @@ class AddToCart extends Component
             return redirect()->route('loyalty-checkout', [$this->claimCardId]);
         }
 
-        session()->forget('claimCardId');
-
         Cart::add($this->cartProduct)->associate(Product::class);
 
 

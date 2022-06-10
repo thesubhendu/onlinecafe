@@ -19,9 +19,10 @@ class LoyaltyClaimService
 
     public function verifiedLoyaltyCard($cardId): ?Card
     {
-        $claimCard = Card::find($cardId);
-        if ($claimCard && session()->get('claimCardId') === $claimCard->id) {
-            return $claimCard;
+        $card = Card::find($cardId);
+        if($card && $card->loyalty_claimed === 0 && $card->is_max_stamped === 1 && $card->user_id === auth()->id())
+        {
+            return $card;
         }
         Cart::instance('manualClaimedProducts')->destroy();
 
@@ -45,7 +46,6 @@ class LoyaltyClaimService
         if($card->total_claimed === $card->vendor->get_free)
         {
             $card->loyalty_claimed = 1;
-            $card->is_active = 0;
         }
         $card->save();
     }
