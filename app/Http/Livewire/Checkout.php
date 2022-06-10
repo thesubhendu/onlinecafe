@@ -2,14 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Mail\orderSubmitted;
-use App\Models\Deal;
 use App\Models\Order;
-use App\Notifications\NewOrderNotification;
-use App\Services\LoyaltyClaimService;
+use App\Services\RewardService;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
 class Checkout extends Component
@@ -19,42 +14,21 @@ class Checkout extends Component
     public $subtotal;
     public $total;
     public $tax;
-
     public $user;
-
     public $qtyOptions;
 
-    public $deal;
-
-    public $validLoyaltyClaimCard;
-    public $claimCardId;
-    protected $queryString = [
-        'claimCardId' => ['except' => ''],
-    ];
-
-    public function mount(LoyaltyClaimService $loyaltyClaimService)
+    public function render()
     {
-        if(request('deal')) {
-            Cart::destroy();
-            $deal = Deal::find(request('deal'));
-            if($deal->isActive()){
-                $this->deal = $deal;
-                $deal->addToCart();
-            }
-        }
+        return view('livewire.checkout')->layout('layouts.app');
+    }
 
-        $this->claimCardId = session()->get('claimCardId');
-        if($this->claimCardId){
-            $this->validLoyaltyClaimCard= $loyaltyClaimService->verifiedLoyaltyCard($this->claimCardId);
-        }
-
+    public function mount()
+    {
         $this->refreshCart();
         $this->fill([
             'user'=> auth()->user(),
-            'cartItems'=> Cart::content(),
+            'qtyOptions' => [1, 2, 3, 4, 5, 6, 7, 8]
         ]);
-
-        $this->qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
     public function submit()
@@ -64,45 +38,37 @@ class Checkout extends Component
             return back();
         }
 
-        $order = (new Order())->generate($this->items, Cart::total());
+        $reward = $this->handleAutoReward();
 
-        $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
+        $rewardData = [
+          'free_products_claimed'=> $reward->freeProductsClaimed ?? 0,
+          'card_id'=> null,
+          'stamp_count'=> $reward->stampCount ?? 0
+        ];
 
-        Mail::to($order->vendor->shop_email ?? $order->vendor->email)
-            ->send(new orderSubmitted($order, $confirm_url));
-
-//        \App\Events\OrderSubmitted::dispatch($order);
-        $order->vendor->owner->notify(new NewOrderNotification($order));
-
-        if($this->validLoyaltyClaimCard) {
-            (new LoyaltyClaimService())->updateLoyaltyCardOnCheckout($this->validLoyaltyClaimCard);
-            session()->forget('claimCardId');
-        }
+        $order = (new Order())->generate($this->items, Cart::total(), $rewardData);
 
         Cart::destroy();
-
         return redirect()->route('order.submitted', $order);
     }
 
     public function hydrate()
     {
-        $this->items = Cart::content();
+        $this->refreshCart();
     }
-    private function refreshCart()
+    private  function refreshCart()
     {
+        $this->handleAutoReward();
+
+        //check and update cart items
         $this->items     = Cart::content();
-        $this->subtotal  = Cart::subtotal();
+        $this->subtotal  = Cart::subtotal() ;
         $this->tax       = Cart::tax();
         $this->total     = Cart::total();
         $this->itemCount = Cart::count();
     }
 
-    public function render()
-    {
-        return view('livewire.checkout')->layout('layouts.app');
-    }
-
-    public function updateQty($rowId,$value,$action='add')
+    public function updateQty($rowId,$value, $action='add')
     {
         if($action == 'remove') {
             $value--;
@@ -110,6 +76,7 @@ class Checkout extends Component
             $value ++;
         }
         if($value < 1) {
+            $this->refreshCart();
             return;
         }
         Cart::update($rowId, $value);
@@ -122,5 +89,29 @@ class Checkout extends Component
         $this->refreshCart();
         session()->flash("message", "Item has been removed");
     }
+
+
+    private function handleAutoReward(): RewardService
+    {
+        $rewardData = (new RewardService(Cart::content()));
+        $lowestPriceProduct = $rewardData->lowestPriceProduct;
+
+        if(!$lowestPriceProduct){
+           return $rewardData;
+        }
+        if ($rewardData->freeProductsClaimed > 0) {
+            Cart::update($lowestPriceProduct->rowId, ['options' => ['extras' => $lowestPriceProduct->options['extras'], 'free_products' => $rewardData->freeProductsClaimed]]);
+
+            Cart::setDiscount($lowestPriceProduct->rowId, $rewardData->discount);
+        }else{
+            $options = $lowestPriceProduct->options;
+            unset($options['free_products']);
+            Cart::update($lowestPriceProduct->rowId, ['options' => $options]);
+            Cart::setDiscount($lowestPriceProduct->rowId, 0);
+        }
+
+        return $rewardData;
+    }
+
 
 }

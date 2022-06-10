@@ -8,9 +8,8 @@
     @foreach($order->products as $product)
 
 ### {{$product->pivot->quantity}} x {{$product->name}}
-@foreach (json_decode($product->pivot->options, true) as $key => $value )
-    {{$value}}
-@endforeach
+
+@include('components.product-options')
 
 @endforeach
 # Order Total : ${{$order->order_total}}

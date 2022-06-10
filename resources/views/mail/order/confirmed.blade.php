@@ -162,9 +162,7 @@
                                         <div>{{ $product->pivot->quantity}}</div>
                                         <div>$ {{$product->pivot->price}}</div>
                                         <div>
-                                            @foreach (json_decode($product->pivot->options, true) as $key => $value )
-                                                {{$value}}
-                                            @endforeach
+                                            @include('components.product-options')
                                         </div>
                                     </div>
 

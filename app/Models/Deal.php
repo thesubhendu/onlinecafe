@@ -56,7 +56,7 @@ class Deal extends Model
                 'price'   => $product->pivot->price,
                 'weight'  => '0',
                 'qty'     => $product->pivot->quantity,
-                'options' => json_decode($product->pivot->options ?? [], true),
+                'options' => json_decode($product->pivot->options['extras'] ?? [], true),
             ];
 
             Cart::add($cartProduct)->associate(Product::class);

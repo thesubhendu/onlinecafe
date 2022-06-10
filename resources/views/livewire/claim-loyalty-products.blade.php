@@ -78,15 +78,11 @@
 
                             <!-- PRICE -->
                             <div class="row product-price">
-                                <div class="col-xs-2 qty-label">
-                                    <label for="">QTY</label>
+                                <div class="col-xs-5 qty-label">
+                                    <label for="">Qunatity: {{$item->qty}}</label>
                                 </div>
 
-                                <div class="col-xs-7 no-gutters">
-                                    <span>{{$item->qty}}</span>
-                                </div>
-                                <div class="col-xs-3 text-end">
-                                    {{--                                {{$item}}--}}
+                                <div class="col-xs-7 text-end">
                                     <button type="button" wire:click="removeItem('{{$item->rowId}}')"
                                             class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i>
                                     </button>
@@ -95,9 +91,9 @@
                         </div>
                     @endforeach
                     <a
-                        href="{{route('checkout.index', ['claimCardId' => $card->id])}}"
+                        href="{{route('loyalty-checkout', [$card->id])}}"
                         class="btn btn-default d-block">
-                        Go to Checkout Page
+                        Go to Loyalty Checkout Page
                     </a>
                 </div>
             </div>

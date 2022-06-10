@@ -8,9 +8,7 @@
             <!-- TABLE ITEMS  -->
             <div class="row hidden-xs">
                 <div class="col-md-12">
-                    <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
-
-
+                    <h2>{{ $itemCount }} {{ Str::plural('item', $itemCount)}} added for claim</h2>
                     <div class="table-responsive">
                         <!-- TABLE -->
                         <table class="table">
@@ -19,7 +17,7 @@
                             <tr>
                                 <th class="item-remove"></th>
                                 <th class="item-thumbnail">PRODUCT</th>
-                                <th class="item-name"></th>
+                                <th class="item-name">Name</th>
                                 <th class="description"></th>
                                 <th class="price-box">PRICE</th>
                                 <th class="item-quantity">QUANTITY</th>
@@ -46,25 +44,12 @@
                                     </td>
                                     <td class="price-box"> ${{$item->price}} </td>
                                     <td class="item-quantity">
-                                        <div class="control-btn ">
-                                            <x-cart.update-quantity :item="$item"
-                                                                    :options="$qtyOptions"></x-cart.update-quantity>
-                                        </div>
-
-                                    </td>
-                                    <td>
-                                        @if($item->options['free_products']?? 0)
-                                            (Free: {{$item->options['free_products'] ?? 0}})
-                                        @endif
+                                        {{$item->qty}}
                                     </td>
                                 </tr>
-
                             @endforeach
-
                             </tbody>
-
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -99,50 +84,25 @@
 
                         <!-- PRICE -->
                         <div class="row product-price">
-                            <div class="col-xs-2 qty-label">
-                                <label for="">QTY</label>
+                            <div class="col-xs-5 qty-label">
+                                <label for="">Qunatity: {{$item->qty}}</label>
                             </div>
 
-                            <div class="col-xs-7 no-gutters">
-                                    <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
-
-                                @if($item->options['free_products']?? 0)
-                                    (Free: {{$item->options['free_products'] ?? 0}})
-                                @endif
-                            </div>
-                            <div class="col-xs-3 text-end">
+                            <div class="col-xs-7 text-end">
                                 <button type="button" wire:click="removeItem('{{$item->rowId}}')"
-                                        class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i></button>
+                                        class="btn remove-item"><i class="fa fa-trash mb-1 text-danger"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 @empty
-                        <h2 class="mobile-cart">{{ $itemCount }} {{ Str::plural('item', $itemCount)}} in Shopping Cart</h2>
+                        <h2 class="mobile-cart">{{ $itemCount }} {{ Str::plural('item', $itemCount)}} added for claim</h2>
                 @endforelse
             </div>
         @if($items->first())
-
             <!-- CART TOTAL -->
                 <div class="row">
-                        <div class="col-md-12">
-                            <div class="col cart-totals-left alert alert-danger">
-                                Please note that payment will be required on collection from {{$items->first()->model->vendor->name}}
-                            </div>
-                        </div>
                     <div class="col-md-4"></div>
-{{--                    <div class="col-md-4">--}}
-{{--                        <div class="coupen">--}}
-{{--                            <h4>DO YOU HAVE A PROMO CODE ?</h4>--}}
-{{--                            <form action="">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <input type="text" class="form-control" placeholder=" Promo Code">--}}
-{{--                                    <a href="#" class="btn btn-primary">--}}
-{{--                                        APPLY PROMO--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <div class="payment-final">
@@ -161,12 +121,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="cart-totals-result">
-                                        <h4>${{$subtotal}}</h4>
+                                        <h4>$0.00</h4>
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="row cart-totals-row">
                                 <div class="col-md-6">
                                     <div class="cart-totals-title">
@@ -175,7 +133,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="cart-totals-result">
-                                        <h4 class="final-pay">${{$tax}}</h4>
+                                        <h4 class="final-pay">$0.00</h4>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +146,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="cart-totals-result">
-                                        <h4 class="final-pay">${{$total}}</h4>
+                                        <h4 class="final-pay">$0.00</h4>
                                     </div>
                                 </div>
                             </div>
@@ -201,22 +159,26 @@
                                         <a wire:click="submit()" class="btn btn-secondary mt-25">
                                             CHECKOUT
                                         </a>
-
                                         <a
-                                            href="{{route('vendor.show', $items->first()->model->vendor_id)}}"
+                                            href="{{route('claim-loyalty-products', ['card'=> $card->id])}}"
                                             class="btn btn-default d-block">
-                                            Back to Shopping
+                                            Back To Loyalty Claim Page
                                         </a>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             @endif
         </div>
+        @if(!$itemCount)
+            <a
+                href="{{route('claim-loyalty-products', ['card'=> $card->id])}}"
+                class="btn btn-default d-block">
+                Back To Loyalty Claim Page
+            </a>
+            @endif
     </section>
 
 </div>
