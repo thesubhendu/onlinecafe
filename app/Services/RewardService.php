@@ -4,6 +4,8 @@
 namespace App\Services;
 
 
+use App\Models\Card;
+
 class RewardService
 {
 
@@ -39,9 +41,11 @@ class RewardService
 //            $freeProductsToClaim = auth()->user()->remainingClaims();
 //            $stampsToCompleteCard = auth()->user()->remainingStampsOnActiveCard();
 //        $remainingFreeProductClaims = 2;
-        $stampsToCompleteCard = 3;
 
         $this->lowestPriceProduct = $this->stampableProducts->sortBy('price')->first();
+
+        $vendor = $this->lowestPriceProduct->model->vendor;
+        $stampsToCompleteCard = Card::remainingStampsOnActiveCard($vendor);
         $totalPurchaseQty = $this->stampableProducts->sum('qty');
 
         //is purchase enough for auto free reward
@@ -51,8 +55,6 @@ class RewardService
 
         $extraQtyAfterStamps = $totalPurchaseQty - $stampsToCompleteCard;
 
-
-        $vendor = $this->lowestPriceProduct->model->vendor;
 
         $vendorOfferedFreeQty = $vendor->get_free;
 

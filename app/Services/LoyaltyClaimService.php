@@ -23,7 +23,7 @@ class LoyaltyClaimService
         if ($claimCard && session()->get('claimCardId') === $claimCard->id) {
             return $claimCard;
         }
-        Cart::destroy();
+        Cart::instance('manualClaimedProducts')->destroy();
 
         return null;
     }
