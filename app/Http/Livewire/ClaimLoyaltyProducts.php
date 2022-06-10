@@ -23,14 +23,14 @@ class ClaimLoyaltyProducts extends Component
     {
         $this->card = $card;
         $this->vendor = $card->vendor;
-        $this->claimItems = Cart::content();
+        $this->claimItems = Cart::instance('manualClaimedProducts')->content();
         $this->remainingClaim = $loyaltyClaimService->remainingClaim($card);
     }
 
     public function removeItem($id)
     {
-        Cart::remove($id);
-        $this->claimItems = Cart::content();
+        Cart::instance('manualClaimedProducts')->remove($id);
+        $this->claimItems = Cart::instance('manualClaimedProducts')->content();
         $this->remainingClaim = (new LoyaltyClaimService())->remainingClaim($this->card);
         session()->flash("message", "Item has been removed");
     }

@@ -55,5 +55,18 @@ class Card extends Model
         ]);
     }
 
+    public static function remainingStampsOnActiveCard($vendor)
+    {
+        $activeCard = Card::where('vendor_id', $vendor->id)
+            ->where('user_id', auth()->id())
+            ->where('is_max_stamped', false)
+            ->first();
+        if($activeCard)
+        {
+            return $activeCard->vendor->max_stamps - $activeCard->stamps->count();
+        }
+
+        return $vendor->max_stamps;
+    }
 
 }

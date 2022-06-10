@@ -13,17 +13,18 @@ class LoyaltyClaimService
     {
         if ($this->remainingClaim($card)) {
             $cartProduct['price'] = 0;
-            Cart::add($cartProduct)->associate(Product::class);
+            Cart::instance('manualClaimedProducts')->add($cartProduct)->associate(Product::class);
         }
     }
 
     public function verifiedLoyaltyCard($cardId): ?Card
     {
-        $claimCard = Card::find($cardId);
-        if ($claimCard && session()->get('claimCardId') === $claimCard->id) {
-            return $claimCard;
+        $card = Card::find($cardId);
+        if($card && $card->loyalty_claimed === 0 && $card->is_max_stamped === 1 && $card->user_id === auth()->id())
+        {
+            return $card;
         }
-        Cart::destroy();
+        Cart::instance('manualClaimedProducts')->destroy();
 
         return null;
     }
@@ -35,24 +36,18 @@ class LoyaltyClaimService
 
     public function totalProductClaimedOnCart(): int
     {
-        $totalClaimed = 0;
-        foreach (Cart::content() as $row) {
-            if ($row->price == 0) {
-                $totalClaimed += $row->qty;
-            }
-        }
-        return $totalClaimed;
+        return Cart::instance('manualClaimedProducts')->content()->sum('qty');
     }
 
-    public function updateLoyaltyCardOnCheckout($loyaltyCard): void
+    public function updateLoyaltyCardOnCheckout($cardId): void
     {
-        $loyaltyCard->total_claimed += $this->totalProductClaimedOnCart();
-        if($loyaltyCard->total_claimed === $loyaltyCard->vendor->get_free)
+        $card = Card::find($cardId);
+        $card->total_claimed += $this->totalProductClaimedOnCart();
+        if($card->total_claimed === $card->vendor->get_free)
         {
-            $loyaltyCard->loyalty_claimed = 1;
-            $loyaltyCard->is_active = 0;
+            $card->loyalty_claimed = 1;
         }
-        $loyaltyCard->save();
+        $card->save();
     }
 
 }
