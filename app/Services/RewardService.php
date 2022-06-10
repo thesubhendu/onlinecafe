@@ -49,7 +49,7 @@ class RewardService
         $totalPurchaseQty = $this->stampableProducts->sum('qty');
 
         //is purchase enough for auto free reward
-        if($totalPurchaseQty < $stampsToCompleteCard){
+        if($totalPurchaseQty <= $stampsToCompleteCard){
             return $this->calculate($totalPurchaseQty,0);
         }
 
