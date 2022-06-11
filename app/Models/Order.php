@@ -111,7 +111,6 @@ class Order extends Model
         return $order;
     }
 
-
     // Generate Loyalty card only after order confirm
     public function stampRewardCard($order): void
     {
@@ -123,6 +122,13 @@ class Order extends Model
 
             if ($activeCard->stamps()->count() == $order->vendor->max_stamps) {
                 $activeCard->is_max_stamped = true;
+                if($order->free_products_claimed > 0)
+                {
+                    $activeCard->total_claimed = $order->free_products_claimed;
+                    if($activeCard->total_claimed === $activeCard->vendor->get_free){
+                        $activeCard->loyalty_claimed = 1;
+                    }
+                }
                 $activeCard->save();
 
                 $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
