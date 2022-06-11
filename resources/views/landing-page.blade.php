@@ -1,4 +1,20 @@
 <x-app-layout>
+<section>
+    <br>
+    <div class="container">
+
+        <div class="row">
+            <form name="vendor-search" method="get" action="{{url('vendor-search')}}">
+                <div class="input-group">
+                    <input type="search" required class="form-control rounded" name="search"
+                           placeholder="Search Vendors" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-secondary">search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+</section>
 @guest
     <!-- MAIN LANDING PAGE -->
         <section class="inner-banner-box landing-banner">
@@ -97,7 +113,8 @@
     @endguest
 
 <!-- COFFEE SHOP VENDER CARD -->
-    <section class="shop-vendors">
+    <section class="shop-vendors" style="padding: 20px 0 !important;">
+
         <div class="container">
 
             <!-- TITLE  -->
