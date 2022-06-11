@@ -20,7 +20,7 @@ class SearchRepository
             ->orWhere(function ($query) use ($searchTerm) {
                 return $query->whereRelation('products', "name", 'like', '%'.$searchTerm.'%');
             })
-            ->paginate(2);
+            ->paginate(6);
     }
 
 }
