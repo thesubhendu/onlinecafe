@@ -54,7 +54,7 @@
                                     </td>
                                     <td>
                                         @if($item->options['free_products']?? 0)
-                                            (Free: {{$item->options['free_products'] ?? 0}})
+                                            (Get Free: {{$item->options['free_products'] ?? 0}})
                                         @endif
                                     </td>
                                 </tr>
@@ -107,7 +107,7 @@
                                     <x-cart.update-quantity :item="$item" :options="$qtyOptions"></x-cart.update-quantity>
 
                                 @if($item->options['free_products']?? 0)
-                                    (Free: {{$item->options['free_products'] ?? 0}})
+                                    (Get Free: {{$item->options['free_products'] ?? 0}})
                                 @endif
                             </div>
                             <div class="col-xs-3 text-end">

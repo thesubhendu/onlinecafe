@@ -15,9 +15,9 @@ class RewardService
     public $lowestPriceProduct;
 
     public $stampableProducts;
+
     /**
-     * @param $items
-     * @return array
+     * @param $products
      */
 
     function __construct($products)
@@ -28,6 +28,7 @@ class RewardService
             $this->handle();
         }
     }
+
     private function calculate($stampCount, $freeProduct)
     {
         $this->stampCount = $stampCount;
@@ -36,12 +37,9 @@ class RewardService
 
         return true;
     }
+
     private function handle()
     {
-//            $freeProductsToClaim = auth()->user()->remainingClaims();
-//            $stampsToCompleteCard = auth()->user()->remainingStampsOnActiveCard();
-//        $remainingFreeProductClaims = 2;
-
         $this->lowestPriceProduct = $this->stampableProducts->sortBy('price')->first();
 
         $vendor = $this->lowestPriceProduct->model->vendor;
@@ -55,13 +53,13 @@ class RewardService
 
         $extraQtyAfterStamps = $totalPurchaseQty - $stampsToCompleteCard;
 
-
         $vendorOfferedFreeQty = $vendor->get_free;
 
         if($extraQtyAfterStamps <=  $vendorOfferedFreeQty) {
-            return $this->calculate(0, $extraQtyAfterStamps);
+
+            return $this->calculate($stampsToCompleteCard, $extraQtyAfterStamps);
         }
-        $stamps = $extraQtyAfterStamps - $vendorOfferedFreeQty;
+        $stamps = $extraQtyAfterStamps - $vendorOfferedFreeQty + $stampsToCompleteCard;
 
 
         if ($vendorOfferedFreeQty >= $this->lowestPriceProduct->qty) {
@@ -79,20 +77,16 @@ class RewardService
      */
     private function stampableProducts($items)
     {
-        $stampableProducts = $items->filter(function ($product) {
+        return $items->filter(function ($product) {
             $model = $product->model;
             return $model->category_id == $model->vendor->free_category;
         });
-
-        return $stampableProducts;
     }
 
 
     /**
-     * geting discount percent
-     * @param mixed $finalFreeQty
-     * @param $lowestPriceProduct
-     * @param mixed $stampableProducts
+     * getting discount percent
+     * @return float
      */
     private function discountPercent(): float
     {
