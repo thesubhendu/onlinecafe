@@ -17,6 +17,7 @@ class CreateOptionTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('category_id')->constrained('product_categories');
+            $table->integer('order_no');
             $table->timestamps();
         });
     }
