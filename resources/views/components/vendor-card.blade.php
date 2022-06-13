@@ -1,7 +1,7 @@
 <!-- CARD -->
 <div class="shop-vendors-item">
     <div class="image">
-        <img src="{{asset('assets/images/cafe.jpeg')}}" class="img-responsive" alt="">
+        <a href="{{route('vendor.show', $vendor)}}"><img src="{{asset('assets/images/cafe.jpeg')}}" class="img-responsive" alt=""></a>
         <span><i class="ti-time"></i> &nbsp; {{$vendor->is_open ? "Open Now": "Closed"}} </span>
         @auth
             <livewire:vendor-like-button :vendor="$vendor" :key="$vendor->id" class="favorite-icon" />
