@@ -24,7 +24,9 @@ class RatingStar extends Component
     {
        try {
            $this->vendor->rate($val);
+           $this->vendor->refresh();
            $this->emit('ratingSet');
+
        } catch (\InvalidArgumentException $e) {
 
        }
