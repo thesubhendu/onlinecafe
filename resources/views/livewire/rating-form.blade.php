@@ -1,5 +1,16 @@
 <div>
     <x-message></x-message>
+    @if($currentRating)
+        <div align="left">
+            Your Rating:
+            @for($i=0; $i < round($currentRating->rating); $i++)
+                <i wire:click="setRating({{$i+1}})" class="fa fa-coffee selected"></i>
+            @endfor
+            @for($i=round($currentRating->rating); $i< 5; $i++)
+                <i wire:click="setRating({{$i+1}})" class="fa fa-coffee"></i>
+            @endfor
+        </div>
+    @endif
     <form wire:submit.prevent="submit" class="rating-form">
 
 
@@ -28,13 +39,4 @@
         </ul>
     </div>
 
-    @push('scripts')
-        <script>
-
-            Livewire.on('rated', function () {
-                $('#rating-form-modal .btn-close').click()
-
-            })
-        </script>
-    @endpush
 </div>

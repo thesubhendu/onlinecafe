@@ -21,6 +21,7 @@
                             <div class="col">
                                 <div class="shop-rating">
                                     <div class="xs-block">
+                                        <span style="color: #a9a9a9">Review: </span>
                                         @can('make-rating')
                                             <livewire:rating-star :vendor="$vendor"/>
                                         @endcan
@@ -29,11 +30,10 @@
                                                 @for($i=0; $i < round($vendor->rating()); $i++)
                                                     <i class="fa fa-coffee selected"></i>
                                                 @endfor
-                                                @for($i=0; $i< 5 - round($vendor->rating()); $i++)
-                                                    <i class="fa fa-coffee"></i>
-                                                @endfor
-                                                <span><b>{{$vendor->rating()}}</b></span>
-
+                                                    @for($i=round($vendor->rating()); $i< 5; $i++)
+                                                        <i class="fa fa-coffee"></i>
+                                                    @endfor
+                                                <span style="color: #a9a9a9"><b>{{$vendor->rating()}}</b></span>
                                         @endcannot
                                     </div>
                                     <div class="xs-block last-update">Last
