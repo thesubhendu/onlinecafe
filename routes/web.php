@@ -135,3 +135,5 @@ Route::get('/manage-shop', ShopSetup::class)->middleware('auth','subscribed')->n
 Route::view('/verify-phone','auth.verify-email')->name('phone-verification.notice');
 
 Route::get('download-customer-flyer', DownloadFlyerController::class)->name('download-customer-flyer');
+
+Route::get('vendor-search', \App\Http\Livewire\VendorSearch::class)->name('vendor-search');
