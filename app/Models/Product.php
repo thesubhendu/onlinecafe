@@ -57,7 +57,7 @@ class Product extends Model implements Buyable
             ->with(['vendorProductOptions' =>  function($query){
                 return $query->where('vendor_id', $this->vendor_id)->orderBy('price');
             }])
-            ->orderBy('name')
+            ->orderBy('order_no')
             ->get();
     }
 

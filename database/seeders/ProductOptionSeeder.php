@@ -76,12 +76,12 @@ class ProductOptionSeeder extends Seeder
         ]);
 
         // Temperature
-        ProductOption::factory()->syrups()->create([
+        ProductOption::factory()->temperature()->create([
             'name' => 'Normal',
             'charge' => 0,
             'price' => 0,
         ]);
-        ProductOption::factory()->syrups()->create([
+        ProductOption::factory()->temperature()->create([
             'name' => 'Extra Large',
             'charge' => 0,
             'price' => 0,
