@@ -11,6 +11,7 @@ use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
 use Orchid\Platform\Models\User as Authenticatable;
 
 
@@ -18,6 +19,7 @@ class User extends Authenticatable
 //    implements MustVerifyEmail,MustVerifyPhone
 {
     use HasFactory;
+    use HasApiTokens;
     use HasProfilePhoto, Favoriteability, CanRedeemVouchers;
     use Notifiable, Billable, \App\Traits\MustVerifyPhone;
     use TwoFactorAuthenticatable;
