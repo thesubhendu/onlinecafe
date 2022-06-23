@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Auth
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+Route::post('/register', [AuthController::class, 'register']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    // Vendor
+    Route::get('vendors', [VendorController::class, 'index']);
+    Route::get('vendors/{vendor}', [VendorController::class, 'show']);
 });
+
+//
