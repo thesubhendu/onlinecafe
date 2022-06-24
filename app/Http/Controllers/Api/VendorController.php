@@ -6,6 +6,7 @@ use App\Http\Resources\VendorCollection;
 use App\Http\Resources\VendorResource;
 use App\Models\Vendor;
 use App\Repositories\VendorRepository;
+use Illuminate\Http\JsonResponse;
 
 class VendorController extends ApiBaseController
 {
@@ -22,5 +23,17 @@ class VendorController extends ApiBaseController
     public function show(Vendor $vendor): VendorResource
     {
         return new VendorResource($vendor->load('products', 'products.category'));
+    }
+
+    public function toggleFavorite(Vendor $vendor): JsonResponse
+    {
+        $vendor->toggleFavorite();
+        $favorite = $vendor->isFavorited();
+
+        return $this->sendResponse(
+            ['favorite' => $favorite],
+            $favorite ? 'Vendor Saved' : 'Vendor Removed'
+        );
+
     }
 }

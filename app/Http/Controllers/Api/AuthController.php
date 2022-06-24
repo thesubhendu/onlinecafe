@@ -29,14 +29,10 @@ class AuthController extends ApiBaseController
                 500);
         }
 
-        return response()->json([
-            'data'    => [
-                'user'  => $user,
-                'token' => $user->createToken($request->email)->plainTextToken,
-            ],
-            'message' => 'Logged in successfully'
-        ],
-            200);
+        return $this->sendResponse([
+            'user'  => $user,
+            'token' => $user->createToken($request->email)->plainTextToken,
+        ], 'Logged in successfully');
     }
 
 
@@ -54,14 +50,10 @@ class AuthController extends ApiBaseController
         ]);
         $user = User::create($request->all());
 
-        return response()->json([
-            'data'    => [
-                'user'  => $user,
-                'token' => $user->createToken($request->email)->plainTextToken,
-            ],
-            'message' => 'Successfully registered'
-        ],
-            Response::HTTP_CREATED);
+        return $this->sendResponse([
+            'user'  => $user,
+            'token' => $user->createToken($request->email)->plainTextToken,
+        ], 'Registered Successfully', Response::HTTP_CREATED);
     }
 
 
@@ -69,10 +61,6 @@ class AuthController extends ApiBaseController
     {
         auth()->user()->tokens()->delete();
 
-        return response()->json([
-            'data'    => null,
-            'message' => 'Logged out'
-        ],
-            200);
+        return $this->sendResponse(null, 'Logout Successfully', 200);
     }
 }

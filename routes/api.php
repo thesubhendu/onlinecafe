@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\VendorController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Vendor
     Route::get('vendors', [VendorController::class, 'index']);
     Route::get('vendors/{vendor}', [VendorController::class, 'show']);
+    // Favorite Vendor
+    Route::get('user/favourite-vendors', [UserController::class, 'favoriteVendors']);
+    // Toggle Favorite Vendor
+    Route::get('vendors/{vendor}/toggle-favourite', [VendorController::class, 'toggleFavorite']);
+    // User Order Products
+    Route::get('user/order-products', [UserController::class, 'orderProducts']);
 });
 
 //

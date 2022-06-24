@@ -21,6 +21,7 @@ class Vendor extends Model
         'opening_hours' => 'array',
         'services' => 'array',
     ];
+    protected $appends = ['is_favorite'];
 
     public function user()
     {
@@ -145,5 +146,10 @@ class Vendor extends Model
     public function freeCategoryProducts(): Collection
     {
         return $this->products()->where('category_id', $this->free_category)->get();
+    }
+
+    public function getIsFavoriteAttribute(): bool
+    {
+        return $this->isFavorited();
     }
 }

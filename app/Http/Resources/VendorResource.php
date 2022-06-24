@@ -21,7 +21,7 @@ class VendorResource extends JsonResource
     public function toArray($request): array|JsonSerializable|Arrayable
     {
         return [
-            'vendor' => [
+            'vendor'           => [
                 'id'            => $this->id,
                 'name'          => $this->vendor_name,
                 'slug'          => $this->slug,
@@ -36,11 +36,12 @@ class VendorResource extends JsonResource
                 'services'      => $this->services,
                 'lat'           => $this->lat,
                 'lng'           => $this->lng,
+                'isFavorite'    => $data->isFavorite,
             ],
             'ratings'          => $this->ratings,
             'featuredProducts' => $this->products->take(8),
-            'openingInfo'     => app()->make(VendorRepository::class)->getOpeningInfo($this),
-            'products'        => $this->products->groupBy('category.name')
+            'openingInfo'      => app()->make(VendorRepository::class)->getOpeningInfo($this),
+            'products'         => $this->products->groupBy('category.name')
         ];
 
     }

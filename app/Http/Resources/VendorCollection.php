@@ -35,9 +35,10 @@ class VendorCollection extends ResourceCollection
                         'services'      => $data->services,
                         'lat'           => $data->lat,
                         'lng'           => $data->lng,
+                        'isFavorite'    => $data->isFavorite,
                         'ratings'       => $data->ratings,
                     ];
-                })
+                })->values()
             ]
         ];
     }
