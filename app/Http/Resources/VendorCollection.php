@@ -37,6 +37,7 @@ class VendorCollection extends ResourceCollection
                         'lng'           => $data->lng,
                         'isFavorite'    => $data->isFavorite,
                         'ratings'       => $data->ratings,
+                        'distance'      => $data->getDistanceFromCustomer(geoip()->getLocation()),
                     ];
                 })->values()
             ]

@@ -36,12 +36,12 @@ class VendorResource extends JsonResource
                 'services'      => $this->services,
                 'lat'           => $this->lat,
                 'lng'           => $this->lng,
-                'isFavorite'    => $data->isFavorite,
+                'isFavorite'    => $this->isFavorite,
             ],
             'ratings'          => $this->ratings,
             'featuredProducts' => $this->products->take(8),
             'openingInfo'      => app()->make(VendorRepository::class)->getOpeningInfo($this),
-            'products'         => $this->products->groupBy('category.name')
+            'categoryProducts' => $this->products->groupBy('category.name')
         ];
 
     }

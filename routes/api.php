@@ -31,5 +31,3 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // User Order Products
     Route::get('user/order-products', [UserController::class, 'orderProducts']);
 });
-
-//
