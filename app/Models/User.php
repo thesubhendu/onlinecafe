@@ -5,6 +5,7 @@ namespace App\Models;
 use BeyondCode\Vouchers\Traits\CanRedeemVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Cashier\Billable;
@@ -141,5 +142,10 @@ class User extends Authenticatable
         if($this->hasVerifiedPhone() && $this->hasVerifiedEmail()){
             $this->shop->update(['is_active'=> 1]);
         }
+    }
+
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
     }
 }
