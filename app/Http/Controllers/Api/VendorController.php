@@ -22,7 +22,7 @@ class VendorController extends ApiBaseController
 
     public function show(Vendor $vendor): VendorResource
     {
-        return new VendorResource($vendor->load('products', 'products.category'));
+        return new VendorResource($vendor->load('products', 'products.category', 'products.optionTypes'));
     }
 
     public function toggleFavorite(Vendor $vendor): JsonResponse

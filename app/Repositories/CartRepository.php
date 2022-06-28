@@ -1,12 +1,8 @@
 <?php
 
-
 namespace App\Repositories;
 
-
 use App\Models\Cart;
-use App\Models\OrderProduct;
-use Illuminate\Database\Eloquent\Collection;
 
 class CartRepository
 {
@@ -15,14 +11,41 @@ class CartRepository
     ) {
     }
 
+    public function get()
+    {
+        return auth()->user()->carts;
+    }
+
     public function addToCart($data)
     {
-        return auth()->user()->carts()->create($data);
+        $cartExist = auth()->user()->carts()->where(
+            [
+                'product_id' => $data['product_id'],
+                'price'      => $data['price'],
+            ]
+        )
+            ->whereJsonContains('options', $data['options'])
+            ->first();
+
+        if ($cartExist) {
+            $data['quantity'] += $cartExist['quantity'];
+            $data['options'] = json_encode($data['options']);
+
+            return tap($cartExist)->update($data);
+        }
+
+        return auth()->user()->carts()
+            ->create([
+                'product_id' => $data['product_id'],
+                'price'      => $data['price'],
+                'quantity'   => $data['quantity'],
+                'options'    => json_encode($data['options'])
+            ]);
+
     }
 
     public function removeFromCart(Cart $cart): ?bool
     {
         return $cart->delete();
     }
-
 }

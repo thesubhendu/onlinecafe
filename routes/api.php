@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\VendorController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\{
+    AuthController,
+    ProductController,
+    VendorController,
+    UserController,
+    CartController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('vendors/{vendor}/toggle-favourite', [VendorController::class, 'toggleFavorite']);
     // User Order Products
     Route::get('user/order-products', [UserController::class, 'orderProducts']);
+    // User Order Products
+    Route::apiResource('carts', CartController::class)->except(['update', 'show']);
+    Route::get('products/{product}', [ProductController::class, 'show']);
 });
