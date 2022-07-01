@@ -15,11 +15,17 @@ class ProductOptionSeeder extends Seeder
      */
     public function run()
     {
+//        Default Options
+//        'Coffee Type' => 'House Blend',
+//        'Milk'        => 'Full Cream',
+//        'Sugar'       => 'No Sugar',
+//        'Syrups'      => 'No thanks'
 
         ProductOption::factory()->coffeeType()->create([
             'name' => 'House Blend',
             'charge' => 0,
-            'price' => 0
+            'price' => 0,
+            'default_option' => true,
         ]);
 
         ProductOption::factory()->coffeeType()->create([
@@ -36,7 +42,8 @@ class ProductOptionSeeder extends Seeder
         ProductOption::factory()->milk()->create([
             'name' => 'Full Cream',
             'charge' => 0,
-            'price' => 0
+            'price' => 0,
+            'default_option' => true,
         ]);
         ProductOption::factory()->milk()->create([
             'name' => 'Skim',
@@ -61,6 +68,7 @@ class ProductOptionSeeder extends Seeder
             'name' => 'No thanks',
             'charge' => 0,
             'price' => 0,
+            'default_option' => true,
         ]);
         ProductOption::factory()->syrups()->create([
             'name' => 'Vanilla',
@@ -108,6 +116,7 @@ class ProductOptionSeeder extends Seeder
             'name' => 'No Sugar',
             'charge' => 0,
             'price' => 0,
+            'default_option' => true,
         ]);
         ProductOption::factory()->sugar()->create([
             'name' => 'Raw',

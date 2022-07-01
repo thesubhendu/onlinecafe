@@ -21,6 +21,7 @@ class CreateProductOptionsTable extends Migration
             $table->foreignId('option_type_id')->references('id')->on('option_types')->onDelete('cascade');
             $table->boolean('charge')->default(true);
             $table->decimal('price', 4, 2);
+            $table->boolean('default_option')->default(false);
             $table->timestamps();
         });
     }

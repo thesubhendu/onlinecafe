@@ -144,7 +144,8 @@ class UsersTableSeeder extends Seeder
                 'name' => $option->name,
                 'price' => $option->price +  1,
                 'option_type_id' => $option->option_type_id,
-                'charge' => $option->charge
+                'charge' => $option->charge,
+                'default_option' => $option->default_option,
             ]);
         });
     }

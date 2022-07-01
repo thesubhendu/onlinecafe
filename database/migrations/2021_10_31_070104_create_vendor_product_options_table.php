@@ -22,6 +22,7 @@ class CreateVendorProductOptionsTable extends Migration
             $table->boolean('charge')->default(true);
             $table->decimal('price', 4, 2);
             $table->foreignId('vendor_id')->constrained('vendors');
+            $table->boolean('default_option')->default(false);
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -17,9 +18,30 @@ class ProductResource extends JsonResource
      */
     public function toArray($request): array|JsonSerializable|Arrayable
     {
+        $optionTypes =$this->optionTypes();
+
         return array_merge(
             parent::toArray($request),
-            ['productOption' => $this->optionTypes()]
+            [
+                'option_types' => $optionTypes,
+                'updated_price' => $this->getProductPrice($this, $optionTypes),
+                'vendor_product_options' => $this->vendor->productOptions
+            ]
         );
+    }
+
+    private function getProductPrice($product, $optionTypes): int
+    {
+        $price = 0;
+        if($product->productPrices->count()){
+            $price = $product->productPrices()->where('size', 'S')->first()->price ?? $this->product->price;
+        }
+
+        $price += $product->vendor
+            ->productOptions()
+        ->where('default_option', true)
+        ->sum('price');
+
+        return $price;
     }
 }
