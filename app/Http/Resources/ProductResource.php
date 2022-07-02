@@ -25,7 +25,7 @@ class ProductResource extends JsonResource
             [
                 'option_types' => $optionTypes,
                 'updated_price' => $this->getProductPrice($this, $optionTypes),
-                'vendor_product_options' => $this->vendor->productOptions
+                'vendor_product_options' => $this->vendor->productOptions()->with('optionType')->get()
             ]
         );
     }
