@@ -28,6 +28,7 @@ class UserOrderProductCollection extends ResourceCollection
                         'product_id'   => $data->product_id,
                         'price'        => $data->price,
                         'quantity'     => $data->quantity,
+                        'order_total'=> $data->order->order_total,
                         'options'      => json_decode($data->options, false),
                         'product_name' => $data->product->name,
                     ];

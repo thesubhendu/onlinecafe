@@ -16,8 +16,9 @@ class UserRepository
 
     public function myOrderProducts(): Collection|array
     {
-        return $this->orderProduct::with('order', 'product')
-            ->get();
+        return OrderProduct::whereHas('order', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->with('order', 'order.vendor')->latest()->get();
     }
 
 }
