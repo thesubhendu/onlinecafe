@@ -13,7 +13,7 @@ class CartRepository
 
     public function get()
     {
-        return auth()->user()->carts;
+        return auth()->user()->carts()->with('product')->get();
     }
 
     public function addToCart($data)

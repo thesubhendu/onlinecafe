@@ -36,7 +36,7 @@ class CartController extends ApiBaseController
     {
         $cartItem  = $this->cartRepository->addToCart($request->all());
 
-        return $this->sendResponse($cartItem);
+        return $this->sendResponse($cartItem->load('product'));
     }
 
     /**
