@@ -6,6 +6,7 @@ use App\Http\Requests\CartRequest;
 use App\Models\Cart;
 use App\Repositories\CartRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CartController extends ApiBaseController
 {
@@ -35,6 +36,13 @@ class CartController extends ApiBaseController
     public function store(CartRequest $request): JsonResponse
     {
         $cartItem  = $this->cartRepository->addToCart($request->all());
+
+        return $this->sendResponse($cartItem->load('product'));
+    }
+
+    public function update(Request $request, Cart $cart): JsonResponse
+    {
+        $cartItem  = $this->cartRepository->update($cart, $request->all());
 
         return $this->sendResponse($cartItem->load('product'));
     }

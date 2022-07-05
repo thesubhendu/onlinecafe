@@ -49,5 +49,10 @@ class CartRepository
         return $cart->delete();
     }
 
+    public function update($cart, $data)
+    {
+        return tap($cart)->update($data);
+    }
+
     //destroy
 }

@@ -34,6 +34,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // User Order Products
     Route::get('user/order-products', [UserController::class, 'orderProducts']);
     // User Order Products
-    Route::apiResource('carts', CartController::class)->except(['update', 'show']);
+    Route::apiResource('carts', CartController::class)->except(['show']);
     Route::get('products/{product}', [ProductController::class, 'show']);
 });
