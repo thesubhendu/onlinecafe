@@ -21,4 +21,9 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getOptionsAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

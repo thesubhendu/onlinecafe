@@ -29,9 +29,8 @@ class CartRepository
 
         if ($cartExist) {
             $data['quantity'] += $cartExist['quantity'];
-            $data['options'] = json_encode($data['options']);
 
-            return tap($cartExist)->update($data);
+            return $this->update($cartExist, $data);
         }
 
         return auth()->user()->carts()
@@ -51,6 +50,7 @@ class CartRepository
 
     public function update($cart, $data)
     {
+        $data['options'] = json_encode( $data['options']);
         return tap($cart)->update($data);
     }
 
