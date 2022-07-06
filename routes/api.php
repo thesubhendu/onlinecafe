@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\{
-    AuthController,
+use App\Http\Controllers\Api\{AuthController,
+    CartController,
     ProductController,
-    VendorController,
+    RewardController,
     UserController,
-    CartController};
+    VendorController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // User Order Products
     Route::apiResource('carts', CartController::class)->except(['show']);
     Route::get('products/{product}', [ProductController::class, 'show']);
+
+    Route::get('/rewards',[RewardController::class,'index']);
+
 });
