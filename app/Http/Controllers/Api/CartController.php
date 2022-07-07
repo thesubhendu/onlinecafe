@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\CartRequest;
-use App\Models\Cart;
-use App\Repositories\CartRepository;
+use App\Models\OrderProduct;
+use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,47 +12,32 @@ class CartController extends ApiBaseController
 {
 
     public function __construct(
-        public CartRepository $cartRepository
+        public CartService $cartService
     )
     {
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return JsonResponse
-     */
-    public function index(): JsonResponse
+    public function getActiveOrder(): JsonResponse
     {
-        return $this->sendResponse($this->cartRepository->get());
+        return $this->sendResponse($this->cartService->getActiveOrder());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  CartRequest  $request
-     * @return JsonResponse
-     */
-    public function store(CartRequest $request): JsonResponse
+    public function addToCart(CartRequest $request): JsonResponse
     {
-        $cartItem  = $this->cartRepository->addToCart($request->all());
+        $cartItem  = $this->cartService->addToCart($request->all());
 
         return $this->sendResponse($cartItem->load('product'));
     }
 
-    public function update(Request $request, Cart $cart): JsonResponse
+    public function updateCartProduct(Request $request, OrderProduct $orderProduct): JsonResponse
     {
-        $cartItem  = $this->cartRepository->update($cart, $request->all());
+        $cartItem  = $this->cartService->update($orderProduct, $request->all());
 
         return $this->sendResponse($cartItem->load('product'));
     }
 
-    /**
-     * @param  Cart  $cart
-     * @return JsonResponse
-     */
-    public function destroy(Cart $cart): JsonResponse
+    public function removeFromCart(OrderProduct $orderProduct): JsonResponse
     {
-        return $this->sendResponse($this->cartRepository->removeFromCart($cart));
+        return $this->sendResponse($this->cartService->remove($orderProduct));
     }
 }

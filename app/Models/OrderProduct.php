@@ -11,6 +11,7 @@ class OrderProduct extends Model
     use HasFactory;
 
     public $table = 'order_product';
+    public $guarded = [];
 
     public function order(): BelongsTo
     {
@@ -20,5 +21,10 @@ class OrderProduct extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function getOptionsAttribute($value)
+    {
+        return json_decode($value);
     }
 }

@@ -33,8 +33,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('vendors/{vendor}/toggle-favourite', [VendorController::class, 'toggleFavorite']);
     // User Order Products
     Route::get('user/order-products', [UserController::class, 'orderProducts']);
-    // User Order Products
-    Route::apiResource('carts', CartController::class)->except(['show']);
+
+    Route::get('get-active-order', [CartController::class, 'getActiveOrder']);
+    Route::post('add-to-cart', [CartController::class, 'addToCart']);
+    Route::put('update-cart-product/{orderProduct}', [CartController::class, 'updateCartProduct']);
+    Route::delete('remove-from-cart/{orderProduct}', [CartController::class, 'removeFromCart']);
+
     Route::get('products/{product}', [ProductController::class, 'show']);
 
     Route::get('/rewards',[RewardController::class,'index']);
