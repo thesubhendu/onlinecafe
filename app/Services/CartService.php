@@ -79,7 +79,7 @@ class CartService
     private function createActiveOrder(array $productData): Order
     {
         $orderService = new OrderService();
-        $subTotal = $this->priceTotal($productData['price'], $productData['qty']);
+        $subTotal = $this->priceTotal($productData['price'], $productData['quantity']);
         $taxTotal = $this->tax($subTotal);
 
         $order = [

@@ -48,6 +48,8 @@ class OrderItem
 
     public function update($orderProduct, array $updateData)
     {
+        unset($updateData['vendor_id']);
+
         return $orderProduct->update($updateData);
     }
 
