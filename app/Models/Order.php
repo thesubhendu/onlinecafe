@@ -64,6 +64,7 @@ class Order extends Model
     {
         $this->confirmed_at = now();
         $this->confirmed_by = auth()->id();
+        $this->status = 'completed';
         $this->save();
 
         if($this->stamp_count > 0){
@@ -85,6 +86,9 @@ class Order extends Model
         $order->user_id = auth()->id();
         $order->vendor_id = $vendorId;
         $order->order_total = $total;
+        $order->sub_total = 0;
+        $order->tax = 0;
+        $order->status = 'processing';
         $order->free_products_claimed = $rewardData['free_products_claimed'];
         $order->card_id = $rewardData['card_id'];
         $order->stamp_count = $rewardData['stamp_count'];

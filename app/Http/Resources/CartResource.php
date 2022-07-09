@@ -16,6 +16,13 @@ class CartResource extends JsonResource
      */
     public function toArray($request): array
     {
+        if(!$this->resource)
+        {
+            return [
+                'order'          => null,
+                'order_products' => []
+            ];
+        }
         $order = [
             'id'                    => $this->id,
             "user_id"               => $this->user_id,
