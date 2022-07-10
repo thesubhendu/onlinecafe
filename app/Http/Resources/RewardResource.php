@@ -14,19 +14,22 @@ class RewardResource extends JsonResource
      */
     public function toArray($request)
     {
+        $maxStamps = $this->vendor->max_stamps ?? 10;
+        $stampCount = $this->stamps->count();
         return [
             'reward_card_id'=> $this->id,
             'is_loyalty_claimed' => $this->loyalty_claimed,
             'vendor_id' => $this->vendor_id,
             'card_logo'=> $this->card_logo,
             'shop_name'=> $this->vendor->shop_name ?? $this->vendor->vendor_name,
-            'max_stamps'=> $this->vendor->max_stamps ?? 10,
-            'is_max_stamped'=> $this->is_max_stamped,
-            'get_free'=> $this->vendor->get_free,
+            'max_stamps'=> $maxStamps,
+            'is_max_stamped'=> (bool)$this->is_max_stamped ,
+            'get_free'=> $this->vendor->get_free ?? 0,
             'free_category'=> $this->vendor->freeCategory->name,
             'total_claimed'=> $this->total_claimed,
             'remaining_claim'=> $this->vendor->get_free - $this->total_claimed,
-            'stamp_count'=> $this->stamps->count(),
+            'stamp_count'=> $stampCount,
+            'stamps_left'=> $maxStamps - $stampCount,
             'updated_at'=> $this->updated_at->diffForHumans(),
         ];
     }
