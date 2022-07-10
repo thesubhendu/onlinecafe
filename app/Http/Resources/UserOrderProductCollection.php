@@ -29,7 +29,7 @@ class UserOrderProductCollection extends ResourceCollection
                         'price'        => $data->price,
                         'quantity'     => $data->quantity,
                         'order_total'=> $data->order->order_total,
-                        'options'      => json_decode($data->options, false),
+                        'options'      =>$data->options,
                         'product_name' => $data->product->name,
                     ];
                 })->values()
