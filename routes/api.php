@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\{AuthController,
+use App\Http\Controllers\Api\{
+    AuthController,
+    CheckoutController,
+    OrderProductsController,
+    OrdersController,
+    ShippingAddressController,
     CartController,
     ProductController,
     RewardController,
@@ -38,9 +43,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('add-to-cart', [CartController::class, 'addToCart']);
     Route::put('update-cart-product/{orderProduct}', [CartController::class, 'updateCartProduct']);
     Route::delete('remove-from-cart/{orderProduct}', [CartController::class, 'removeFromCart']);
+    Route::delete('destroy-active-order', [CartController::class, 'destroyActiveOrder']);
 
     Route::get('products/{product}', [ProductController::class, 'show']);
 
-    Route::get('/rewards',[RewardController::class,'index']);
+    Route::get('/rewards', [RewardController::class, 'index']);
 
+    Route::get('get-user-shipping-address', [ShippingAddressController::class, 'getUserShippingAddress']);
+    Route::apiResource('shipping-address', ShippingAddressController::class);
+
+    Route::post('/checkout', CheckoutController::class);
+    Route::get('/orders/{order}', [OrdersController::class, 'show']);
+    Route::get('/order-products', [OrderProductsController::class, 'index']);
 });

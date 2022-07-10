@@ -25,4 +25,5 @@ class UserController extends ApiBaseController
     {
         return new UserOrderProductCollection($this->userRepository->myOrderProducts());
     }
+
 }

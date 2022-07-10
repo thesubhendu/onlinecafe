@@ -18,7 +18,7 @@ class CartService
 
         (new OrderItem($activeOrder))->add($productData);
 
-        return $this->updateOrder($activeOrder);
+        return $this->updateOrder($activeOrder->refresh());
     }
 
     public function remove(OrderProduct $orderProduct): Order
@@ -35,17 +35,22 @@ class CartService
         return $this->updateOrder($this->getActiveOrder());
     }
 
-    public function destroy(): void
+    public function destroy(): bool
     {
         $activeOrder = $this->getActiveOrder();
         if ($activeOrder) {
             $activeOrder->delete();
         }
+        return true;
     }
 
     private function updateOrder($order): Order
     {
-        $subTotal = $this->priceTotal($order->products->sum('pivot.price'), $order->products->sum('pivot.quantity'));
+
+        $subTotal = $order->products->sum(function($product) {
+            return $product->pivot->price * $product->pivot->quantity;
+        });
+
         $taxTotal = $this->tax($subTotal);
         $data = [
             'sub_total'   => $subTotal,

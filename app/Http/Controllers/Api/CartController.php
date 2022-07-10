@@ -49,4 +49,9 @@ class CartController extends ApiBaseController
                 $this->cartService->remove($orderProduct)->load('products'))
         );
     }
+
+    public function destroyActiveOrder(): JsonResponse
+    {
+        return $this->sendResponse( $this->cartService->destroy());
+    }
 }
