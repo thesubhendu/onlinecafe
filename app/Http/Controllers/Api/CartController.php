@@ -8,7 +8,6 @@ use App\Models\OrderProduct;
 use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class CartController extends ApiBaseController
 {

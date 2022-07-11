@@ -3,11 +3,38 @@
 namespace App\Services;
 
 use App\Models\Card;
+use App\Models\Order;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class LoyaltyClaimService
 {
+
+    public function __construct(
+        public OrderService $orderService,
+        public Card $card,
+        public Order $order
+    ) {
+
+    }
+
+    public function applyManualClaim($card): Order
+    {
+        $this->order->where('status', 'rewardClaim')->delete();
+
+        $order = [
+            'order_number' => uniqid(),
+            'user_id'      => auth()->id(),
+            'vendor_id'    => $card->vendor->id,
+            'sub_total'    => 0,
+            'tax'          => 0,
+            'order_total'  => 0,
+            'status'       => 'rewardClaim',
+            'card_id'      => $card->id,
+        ];
+
+        return $this->orderService->create($order);
+    }
 
     public function addClaimProductOnCart($card, $cartProduct): void
     {
@@ -20,8 +47,7 @@ class LoyaltyClaimService
     public function verifiedLoyaltyCard($cardId): ?Card
     {
         $card = Card::find($cardId);
-        if($card && $card->loyalty_claimed === 0 && $card->is_max_stamped === 1 && $card->user_id === auth()->id())
-        {
+        if ($card && $card->loyalty_claimed === 0 && $card->is_max_stamped === 1 && $card->user_id === auth()->id()) {
             return $card;
         }
         Cart::instance('manualClaimedProducts')->destroy();
@@ -43,8 +69,7 @@ class LoyaltyClaimService
     {
         $card = Card::find($cardId);
         $card->total_claimed += $this->totalProductClaimedOnCart();
-        if($card->total_claimed === $card->vendor->get_free)
-        {
+        if ($card->total_claimed === $card->vendor->get_free) {
             $card->loyalty_claimed = 1;
         }
         $card->save();

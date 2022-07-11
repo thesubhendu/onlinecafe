@@ -21,7 +21,13 @@ class OrderRepository
             ->where('status', 'pending')
             ->where('user_id', auth()->id())
             ->first();
+
+        $stampCount = $order->products->sum(function ($product) {
+            return $product->pivot->quantity;
+        });
+
         $order->status = 'processing';
+        $order->stamp_count = $stampCount;
         $order->save();
 
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);

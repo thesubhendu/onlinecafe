@@ -2,19 +2,38 @@
 
 namespace App\Services;
 
+use App\Models\Card;
 use App\Models\Order;
 use App\Models\OrderProduct;
 
 
-class CartService
+class ManualRewardClaimService
 {
     public function __construct(
-        public OrderService $orderService
+        public OrderService $orderService,
+        public Card $card,
     ) {
 
     }
 
-    public function addToCart(array $productData): Order
+    public function applyManualClaim($card): Order
+    {
+        $orderExist = $this->card->
+        $order = [
+            'order_number' => uniqid(),
+            'user_id'      => auth()->id(),
+            'vendor_id'    => $card->vendor->id,
+            'sub_total'    => 0,
+            'tax'          => 0,
+            'order_total'  => 0,
+            'status'       => 'manualRewardClaim',
+            'card_id'    => $card->id,
+        ];
+
+        return $this->orderService->create($order);
+    }
+
+    public function startClaim(array $productData): Order
     {
         $activeOrder = $this->getActiveOrder();
 

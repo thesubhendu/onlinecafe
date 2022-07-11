@@ -118,9 +118,9 @@ class Order extends Model
     // Generate Loyalty card only after order confirm
     public function stampRewardCard($order): void
     {
+
         $card = (new Card());
         $activeCard = $card->getOrCreateActive($order->user_id, $order->vendor_id);
-
         for ($i = 0; $i < $order->stamp_count; $i++) {
             $activeCard->stamps()->create(['order_id' => $order->id]);
 
