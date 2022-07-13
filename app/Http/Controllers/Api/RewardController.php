@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 
 class RewardController extends ApiBaseController
 {
-    private function __construct(
+    public function __construct(
         public RewardRepository $repository,
         public LoyaltyClaimService $loyaltyClaimService
     ) {
@@ -30,4 +30,7 @@ class RewardController extends ApiBaseController
             'Reward order created'
         );
     }
+
+
+
 }

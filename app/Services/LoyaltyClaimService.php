@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Card;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -20,15 +21,12 @@ class LoyaltyClaimService
 
     public function applyManualClaim($card): Order
     {
-        $this->order->where('status', 'rewardClaim')->delete();
+        $this->destroy();
 
         $order = [
             'order_number' => uniqid(),
             'user_id'      => auth()->id(),
             'vendor_id'    => $card->vendor->id,
-            'sub_total'    => 0,
-            'tax'          => 0,
-            'order_total'  => 0,
             'status'       => 'rewardClaim',
             'card_id'      => $card->id,
         ];
@@ -36,13 +34,48 @@ class LoyaltyClaimService
         return $this->orderService->create($order);
     }
 
-    public function addClaimProductOnCart($card, $cartProduct): void
+    public function addClaimProductOnCart($card, $data)
     {
-        if ($this->remainingClaim($card)) {
-            $cartProduct['price'] = 0;
-            Cart::instance('manualClaimedProducts')->add($cartProduct)->associate(Product::class);
-        }
+        $card->order->products()
+            ->attach($data['product_id'], [
+                'price'    => 0,
+                'quantity' => 0,
+                'options'  => json_encode($data['options'])
+            ]);
+
+        return $order->refresh();
     }
+
+    public function remove(OrderProduct $orderProduct): Order
+    {
+        $orderProduct->delete();
+
+        return $this->getClaimOrder();
+    }
+
+    public function getClaimOrder(): null|Order
+    {
+        return Order::where('user_id', auth()->id())->where('status', 'rewardClaim')->with('products')->first();
+    }
+
+    public function destroy(): bool
+    {
+        $claimOrder = $this->getClaimOrder();
+        if ($claimOrder) {
+            $claimOrder->delete();
+        }
+
+        return true;
+    }
+
+
+//    public function addClaimProductOnCart($card, $cartProduct): void
+//    {
+//        if ($this->remainingClaim($card)) {
+//            $cartProduct['price'] = 0;
+//            Cart::instance('manualClaimedProducts')->add($cartProduct)->associate(Product::class);
+//        }
+//    }
 
     public function verifiedLoyaltyCard($cardId): ?Card
     {
