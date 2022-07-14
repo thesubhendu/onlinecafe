@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\{
     AuthController,
     CheckoutController,
+    rewardClaimController,
     OrderProductsController,
     OrdersController,
     ShippingAddressController,
@@ -49,10 +50,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/rewards', [RewardController::class, 'index']);
 
+    // Manual Claim
+    Route::get('/rewards/get-claimed-order', [RewardController::class, 'getClaimedOrder']);
+    Route::post('/rewards/{card}/claim', [RewardController::class, 'claim'])
+        ->middleware('can_claim_loyalty');
+    Route::post('/rewards/add-product/{order}', [RewardController::class, 'addProduct']);
+    Route::delete('/rewards/remove-product/{orderProduct}', [RewardController::class, 'removeProduct']);
+
     Route::get('get-user-shipping-address', [ShippingAddressController::class, 'getUserShippingAddress']);
     Route::apiResource('shipping-address', ShippingAddressController::class);
 
-    Route::post('/checkout', CheckoutController::class);
+    Route::post('/checkout/{?type}', CheckoutController::class);
     Route::get('/orders/{order}', [OrdersController::class, 'show']);
     Route::get('/order-products', [OrderProductsController::class, 'index']);
 });

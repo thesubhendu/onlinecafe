@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Order;
+use App\Services\LoyaltyClaimService;
+use App\Services\RewardClaimService;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\orderSubmitted;
 use Illuminate\Support\Facades\URL;
@@ -11,16 +13,19 @@ use App\Notifications\NewOrderNotification;
 class OrderRepository
 {
     public function __construct(
-        public Order $order
+        public Order $order,
+        public RewardClaimService $rewardClaimService
     ) {
     }
 
-    public function submitPendingOrder()
+    public function submitOrder($status)
     {
-        $order = $this->order
-            ->where('status', 'pending')
-            ->where('user_id', auth()->id())
-            ->first();
+        $order = $this->order->where('user_id', auth()->id())
+            ->when($status === 'pending', function ($q) {
+                return $q->where('status', 'pending');
+            })->when($status === 'rewardClaim', function ($q) {
+                return $q->where('status', 'rewardClaim');
+            })->first();
 
         $stampCount = $order->products->sum(function ($product) {
             return $product->pivot->quantity;
@@ -30,6 +35,10 @@ class OrderRepository
         $order->stamp_count = $stampCount;
         $order->save();
 
+        if ($order->card_id) {
+            $this->rewardClaimService->updateRewardCardOnCheckout($order);
+        }
+
         $confirm_url = URL::signedRoute('confirm_order.confirm', $order->id);
 
         Mail::to($order->vendor->shop_email ?? $order->vendor->email)
@@ -38,4 +47,5 @@ class OrderRepository
 
         return $order;
     }
+
 }

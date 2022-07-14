@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 
 class Card extends Model
@@ -30,6 +31,11 @@ class Card extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function claimOrder(): HasOne
+    {
+        return $this->hasOne(Order::class);
     }
 
     public static function activeCard($id)

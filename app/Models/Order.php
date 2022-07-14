@@ -24,7 +24,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'date', 'order_number', 'is_confirmed', 'payment_method', 'order_total', 'user_id', 'vendor_id', 'status', 'sub_total', 'tax'
+        'date', 'order_number', 'is_confirmed', 'payment_method', 'order_total', 'user_id', 'vendor_id', 'status', 'sub_total', 'tax', 'card_id'
     ];
 
     protected $casts = [
@@ -55,9 +55,9 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('id', 'price', 'quantity','options')->withTimestamps();
     }
 
-    public function cards()
+    public function card()
     {
-        return $this->hasMany(Card::class);
+        return $this->belongsTo(Card::class);
     }
 
     public function confirm()

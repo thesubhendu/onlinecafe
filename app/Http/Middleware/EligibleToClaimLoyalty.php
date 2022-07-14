@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Card;
-use App\Services\LoyaltyClaimService;
+use App\Services\RewardClaimService;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,7 @@ class EligibleToClaimLoyalty
      */
     public function handle(Request $request, Closure $next)
     {
-        if ((new LoyaltyClaimService())->verifiedLoyaltyCard($request->card)) {
+        if ((new RewardClaimService())->verifiedLoyaltyCard($request->card)) {
             return $next($request);
         }
 
