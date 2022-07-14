@@ -33,11 +33,6 @@ class Card extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function claimOrder(): HasOne
-    {
-        return $this->hasOne(Order::class);
-    }
-
     public static function activeCard($id)
     {
 
