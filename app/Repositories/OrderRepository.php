@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Order;
-use App\Services\LoyaltyClaimService;
 use App\Services\RewardClaimService;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\orderSubmitted;
