@@ -58,7 +58,7 @@ class CartService
             'order_total' => $this->total($subTotal, $taxTotal)
         ];
 
-        return (new orderService())->update($order, $data);
+        return (new OrderService())->update($order, $data);
     }
 
     public function getActiveOrder(): null|Order
