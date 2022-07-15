@@ -10,11 +10,11 @@ class RewardClaimService
 {
     public function applyManualClaim($card): Order
     {
-        $this->destroy();
+        $this->destroyClaimedOrder($card->user_id);
 
         $order = [
             'order_number' => uniqid(),
-            'user_id'      => auth()->id(),
+            'user_id'      => $card->user_id,
             'vendor_id'    => $card->vendor->id,
             'status'       => 'rewardClaim',
             'card_id'      => $card->id,
@@ -23,11 +23,10 @@ class RewardClaimService
         return (new orderService())->create($order)->load('products', 'card', 'vendor');
     }
 
-    public function addClaimProductOnCart($data): ?Order
+    public function addClaimProductOnCart($order, $data): ?Order
     {
         $data['price'] = 0;
         $data['quantity'] = 1;
-        $order = $this->getClaimedOrder();
         (new OrderItem($order))->add($data);
 
         return $order->refresh();
@@ -35,22 +34,23 @@ class RewardClaimService
 
     public function remove(OrderProduct $orderProduct): Order
     {
+        $userId = $orderProduct->order->user_id;
         $orderProduct->delete();
 
-        return $this->getClaimedOrder();
+        return $this->getClaimedOrder($userId);
     }
 
-    public function getClaimedOrder(): null|Order
+    public function getClaimedOrder($userId): null|Order
     {
-        return Order::where('user_id', auth()->id())
+        return Order::where('user_id', $userId)
             ->where('status', 'rewardClaim')
             ->with('products', 'card', 'vendor')
             ->first();
     }
 
-    public function destroy(): bool
+    public function destroyClaimedOrder($userId): bool
     {
-        $claimOrder = $this->getClaimedOrder();
+        $claimOrder = $this->getClaimedOrder($userId);
         if ($claimOrder) {
             $claimOrder->delete();
         }

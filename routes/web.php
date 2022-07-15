@@ -80,9 +80,9 @@ Route::middleware('auth')->group(function() {
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 
     Route::get('claim-loyalty-products/{card}', ClaimLoyaltyProducts::class )
-        ->name('claim-loyalty-products')->middleware('can_claim_loyalty');
+        ->name('claim-loyalty-products');
     Route::get('loyalty-checkout/{card}', LoyaltyCheckout::class )
-        ->name('loyalty-checkout')->middleware('can_claim_loyalty');
+        ->name('loyalty-checkout');
 });
 
 //Route::post('/cart/saveforlater/{product}', [CartSaveForLaterController::class, 'save'])->name('saveforlater.save');

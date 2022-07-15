@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\{
     AuthController,
     CheckoutController,
-    rewardClaimController,
     OrderProductsController,
     OrdersController,
     ShippingAddressController,

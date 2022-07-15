@@ -30,7 +30,7 @@ class RewardController extends ApiBaseController
     public function getClaimedOrder(): JsonResponse
     {
         return $this->sendResponse(
-            new ClaimedOrderResource($this->rewardClaimService->getClaimedOrder())
+            new ClaimedOrderResource($this->rewardClaimService->getClaimedOrder(auth()->id()))
         );
     }
 
@@ -52,7 +52,7 @@ class RewardController extends ApiBaseController
 
         if ($this->rewardClaimService->remainingClaimProductCount($order)) {
             return $this->sendResponse(
-                new ClaimedOrderResource($this->rewardClaimService->addClaimProductOnCart($request->all())),
+                new ClaimedOrderResource($this->rewardClaimService->addClaimProductOnCart($order, $request->all())),
                 "Product add to cart"
             );
         }
