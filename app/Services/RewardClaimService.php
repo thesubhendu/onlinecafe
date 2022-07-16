@@ -79,7 +79,9 @@ class RewardClaimService
     public function updateRewardCardOnCheckout($order): void
     {
         $card = $order->card;
-        $card->total_claimed += $order->products()->count();
+        $card->total_claimed += $order->products->sum(function ($product) {
+            return $product->pivot->quantity;
+        });
         if ($card->total_claimed === $card->vendor->get_free) {
             $card->loyalty_claimed = 1;
         }

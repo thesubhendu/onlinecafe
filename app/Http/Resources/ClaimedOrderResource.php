@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Services\LoyaltyClaimService;
+use App\Services\RewardClaimService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -49,7 +50,7 @@ class ClaimedOrderResource extends JsonResource
             ];
         });
         $card = $this->card;
-        $card['remaining_claim'] = (new LoyaltyClaimService())->remainingClaim($this->resource);
+        $card['remaining_claim'] = (new RewardClaimService())->remainingClaimProductCount($this->resource);
 
         return [
             'order'          => $order,

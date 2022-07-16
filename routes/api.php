@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('get-user-shipping-address', [ShippingAddressController::class, 'getUserShippingAddress']);
     Route::apiResource('shipping-address', ShippingAddressController::class);
 
-    Route::post('/checkout/{?type}', CheckoutController::class);
+    Route::post('/checkout/{type?}', CheckoutController::class);
     Route::get('/orders/{order}', [OrdersController::class, 'show']);
     Route::get('/order-products', [OrderProductsController::class, 'index']);
 });

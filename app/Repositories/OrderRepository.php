@@ -17,14 +17,16 @@ class OrderRepository
     ) {
     }
 
-    public function submitOrder($status)
+    public function submitOrder($userId, $status)
     {
-        $order = $this->order->where('user_id', auth()->id())
+        $order = $this->order->where('user_id', $userId)
             ->when($status === 'pending', function ($q) {
                 return $q->where('status', 'pending');
             })->when($status === 'rewardClaim', function ($q) {
                 return $q->where('status', 'rewardClaim');
-            })->first();
+            })
+            ->first();
+
 
         $stampCount = $order->products->sum(function ($product) {
             return $product->pivot->quantity;

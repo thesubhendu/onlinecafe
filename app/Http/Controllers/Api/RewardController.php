@@ -58,7 +58,7 @@ class RewardController extends ApiBaseController
         }
 
         return $this->sendError(
-            "Card has been fully claimed"
+            "No remaining reward claim products", 500
         );
     }
 
