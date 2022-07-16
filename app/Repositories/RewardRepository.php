@@ -5,9 +5,7 @@ namespace App\Repositories;
 
 
 use App\Models\Card;
-use App\Models\Order;
 use App\Models\User;
-use App\Services\OrderService;
 
 class RewardRepository
 {
