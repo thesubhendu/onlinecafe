@@ -27,10 +27,13 @@ class OrderRepository
             })
             ->first();
 
-
-        $stampCount = $order->products->sum(function ($product) {
-            return $product->pivot->quantity;
-        });
+        $stampCount = $order->stamp_count;
+        if($status !== 'rewardClaim')
+        {
+            $stampCount = $order->products->sum(function ($product) {
+                return $product->pivot->quantity;
+            });
+        }
 
         $order->status = 'processing';
         $order->stamp_count = $stampCount;
