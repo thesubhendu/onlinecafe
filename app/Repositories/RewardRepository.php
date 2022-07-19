@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Card;
 use App\Models\User;
 
