@@ -17,9 +17,11 @@ class CreateShippingAddressesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
+            $table->string('email');
+            $table->string('phone');
             $table->string('city');
             $table->string('state');
-            $table->string('zip');
+            $table->string('zip')->nullable();
             $table->timestamps();
         });
     }

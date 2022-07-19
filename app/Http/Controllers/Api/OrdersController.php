@@ -11,6 +11,6 @@ class OrdersController extends ApiBaseController
 {
     public function show(Order $order): JsonResponse
     {
-        return $this->sendResponse($order);
+        return $this->sendResponse($order->load('vendor'));
     }
 }

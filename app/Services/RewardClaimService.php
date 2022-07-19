@@ -20,7 +20,7 @@ class RewardClaimService
             'card_id'      => $card->id,
         ];
 
-        return (new OrderService())->create($order)->load('products', 'card', 'vendor');
+        return (new orderService())->create($order)->load('products', 'card', 'vendor');
     }
 
     public function addClaimProductOnCart($order, $data): ?Order
