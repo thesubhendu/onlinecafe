@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Order;
 use App\Repositories\OrderRepository;
+use Illuminate\Http\JsonResponse;
 
 class CheckoutController extends ApiBaseController
 {
@@ -13,9 +13,9 @@ class CheckoutController extends ApiBaseController
 
     }
 
-    public function __invoke()
+    public function __invoke($type = null): JsonResponse
     {
-        $updatedOrder = $this->orderRepository->submitPendingOrder();
-        $this->sendResponse($updatedOrder);
+        $updatedOrder = $this->orderRepository->submitOrder(auth()->id(), $type ? 'rewardClaim' : 'pending');
+        return $this->sendResponse($updatedOrder);
     }
 }

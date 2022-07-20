@@ -25,6 +25,8 @@ class ShippingAddressRequest extends FormRequest
     {
         return [
             'name'  => 'required|string',
+            'phone' => 'required|digits:10',
+            'email' => 'required|email',
             'city'  => 'required|string',
             'state' => 'required|string',
         ];

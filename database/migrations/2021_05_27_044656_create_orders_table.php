@@ -26,9 +26,9 @@ class CreateOrdersTable extends Migration
                   ->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id')
                   ->constrained()->onDelete('cascade');
-            $table->decimal('order_total');
-            $table->decimal('sub_total');
-            $table->decimal('tax');
+            $table->decimal('order_total')->default(0);
+            $table->decimal('sub_total')->default(0);
+            $table->decimal('tax')->default(0);
             $table->string('status');
             $table->unsignedInteger('free_products_claimed')->default(0);
             $table->unsignedBigInteger('card_id')->nullable();

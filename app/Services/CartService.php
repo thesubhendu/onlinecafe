@@ -8,6 +8,12 @@ use App\Models\OrderProduct;
 
 class CartService
 {
+    public function __construct(
+        public OrderService $orderService
+    ) {
+
+    }
+
     public function addToCart(array $productData): Order
     {
         $activeOrder = $this->getActiveOrder();
@@ -47,7 +53,7 @@ class CartService
     private function updateOrder($order): Order
     {
 
-        $subTotal = $order->products->sum(function($product) {
+        $subTotal = $order->products->sum(function ($product) {
             return $product->pivot->price * $product->pivot->quantity;
         });
 
@@ -58,7 +64,7 @@ class CartService
             'order_total' => $this->total($subTotal, $taxTotal)
         ];
 
-        return (new OrderService())->update($order, $data);
+        return $this->orderService->update($order, $data);
     }
 
     public function getActiveOrder(): null|Order
@@ -83,7 +89,6 @@ class CartService
 
     private function createActiveOrder(array $productData): Order
     {
-        $orderService = new OrderService();
         $subTotal = $this->priceTotal($productData['price'], $productData['quantity']);
         $taxTotal = $this->tax($subTotal);
 
@@ -97,7 +102,9 @@ class CartService
             'status'       => 'pending'
         ];
 
-        return $orderService->create($order);
+        return $this->orderService->create($order);
     }
+
+
 
 }

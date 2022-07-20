@@ -6,6 +6,7 @@ use App\Http\Requests\ShippingAddressRequest;
 use App\Http\Resources\ShippingAddressResource;
 use App\Models\ShippingAddress;
 use App\Repositories\ShippingAddressRepository;
+use Illuminate\Http\JsonResponse;
 
 class ShippingAddressController extends ApiBaseController
 {
@@ -13,8 +14,14 @@ class ShippingAddressController extends ApiBaseController
         public ShippingAddressRepository $shippingAddressRepository
     ) {
     }
-    public function getUserShippingAddress(): ShippingAddressResource
+    public function getUserShippingAddress(): ShippingAddressResource|JsonResponse
     {
+        $shippingAddress = auth()->user()->shippingAddress;
+        if(!$shippingAddress)
+        {
+            return $this->sendResponse(null, 'Empty shipping address');
+        }
+
         return new ShippingAddressResource(auth()->user()->shippingAddress);
     }
 
