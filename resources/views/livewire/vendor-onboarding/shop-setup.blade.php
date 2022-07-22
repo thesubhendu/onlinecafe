@@ -60,6 +60,12 @@
                                 @error('logo') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label for="vendorImage" class="form-label">Vendor Image</label>
+                                <input class="form-control" type="file" wire:model="vendorImage">
+                                @error('vendorImage') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+
                             <div class="opening-hours form-part">
                                 <h2 class="title">Shop Opening Hours</h2>
                                 @foreach($daysInWeek as $day)

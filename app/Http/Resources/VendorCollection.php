@@ -27,7 +27,7 @@ class VendorCollection extends ResourceCollection
                         'mobile'        => $data->mobile,
                         'address'       => $data->address,
                         'suburb'        => $data->suburb,
-                        'vendor_image'  => $data->vendor_image,
+                        'vendor_image'  => $data->vendor_image ? asset('storage/' . $data->vendor_image) : null,
                         'state'         => $data->state,
                         'pc'            => $data->pc,
                         'shop_name'     => $data->shop_name,
