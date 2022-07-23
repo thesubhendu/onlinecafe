@@ -19,27 +19,7 @@ class VendorCollection extends ResourceCollection
     {
         return [
             'data' => [
-                'vendors' => $this->collection->map(function ($data) {
-                    return [
-                        'id'            => $data->id,
-                        'name'          => $data->vendor_name,
-                        'slug'          => $data->slug,
-                        'mobile'        => $data->mobile,
-                        'address'       => $data->address,
-                        'suburb'        => $data->suburb,
-                        'vendor_image'  => $data->vendor_image ? asset('storage/' . $data->vendor_image) : null,
-                        'state'         => $data->state,
-                        'pc'            => $data->pc,
-                        'shop_name'     => $data->shop_name,
-                        'opening_hours' => $data->opening_hours,
-                        'services'      => $data->services,
-                        'lat'           => $data->lat,
-                        'lng'           => $data->lng,
-                        'isFavorite'    => $data->isFavorite,
-                        'ratings'       => $data->ratings,
-                        'distance'      => $data->getDistanceFromCustomer(geoip()->getLocation()),
-                    ];
-                })->values()
+                'vendors' => $this->collection
             ]
         ];
     }
