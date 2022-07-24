@@ -19,7 +19,7 @@ class VendorCollection extends ResourceCollection
     {
         return [
             'data' => [
-                'vendors' => $this->collection
+                'vendors' => $this->collection->toArray()
             ]
         ];
     }
