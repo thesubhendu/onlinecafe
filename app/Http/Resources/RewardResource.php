@@ -16,6 +16,12 @@ class RewardResource extends JsonResource
     {
         $maxStamps = $this->vendor->max_stamps ?? 10;
         $stampCount = $this->stamps->count();
+        $stampsLeft = $maxStamps- $stampCount;
+        if($stampCount > $maxStamps){
+            $stampsLeft = 0;
+        }else {
+            $stampsLeft = $maxStamps - $stampCount;
+        }
         return [
             'reward_card_id'=> $this->id,
             'is_loyalty_claimed' => $this->loyalty_claimed,
@@ -29,7 +35,7 @@ class RewardResource extends JsonResource
             'total_claimed'=> $this->total_claimed,
             'remaining_claim'=> $this->vendor->get_free - $this->total_claimed,
             'stamp_count'=> $stampCount,
-            'stamps_left'=> $maxStamps - $stampCount,
+            'stamps_left'=> $stampsLeft,
             'updated_at'=> $this->updated_at->diffForHumans(),
         ];
     }
