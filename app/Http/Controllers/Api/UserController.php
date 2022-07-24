@@ -17,7 +17,7 @@ class UserController extends ApiBaseController
     public function favoriteVendors(): VendorCollection
     {
         return new VendorCollection(
-            auth()->user()->favorite(Vendor::class)
+            auth()->user()->favorite(Vendor::class)->values()
         );
     }
 
