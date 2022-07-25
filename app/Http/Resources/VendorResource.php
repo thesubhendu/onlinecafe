@@ -36,7 +36,7 @@ class VendorResource extends JsonResource
             'lat'                => $this->lat,
             'lng'                => $this->lng,
             'isFavorite'         => $this->isFavorite,
-            'free_category_name' => $this->freeCategory->name,
+            'free_category_name' => $this->freeCategory->name ?? null,
             'ratings'       => $this->ratings,
             'is_open' => $this->is_open,
             'distance'      => $this->getDistanceFromCustomer(geoip()->getLocation()),
