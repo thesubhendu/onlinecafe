@@ -4,14 +4,17 @@ namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Models\Service;
 use Carbon\Carbon;
+use Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Storage;
 
 class ShopSetup extends Component
 {
     use WithFileUploads;
 
     public $logo;
+    public $vendorImage;
     public $form = [
         'shop_name',
         'shop_email',
@@ -88,6 +91,7 @@ class ShopSetup extends Component
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.services' => 'required',
+            // 'vendorImage' => 'required|image|max:2048'
         ]);
 
         $vendor = auth()->user()->shop()->first();
@@ -116,8 +120,27 @@ class ShopSetup extends Component
 
 
         if (!empty($this->logo)) {
+            if(Storage::exists($vendor->vendor_logo)) {
+                Storage::delete($vendor->vendor_logo);
+            }
+
             $fileName = $this->logo->store('vendor-logos');
-            $vendor->vendor_image = $fileName;
+            $vendor->vendor_logo = $fileName;
+            $vendor->save();
+        }
+
+        if (!empty($this->vendorImage))
+        {
+            if(Storage::exists($vendor->vendor_image)) {
+                Storage::delete($vendor->vendor_image);
+            }
+
+            $hashName = $this->vendorImage->hashName();
+            $saveUrl = 'vendor-images/'.$hashName;
+            $img = Image::make($this->vendorImage)->resize(500, 172)->save($hashName);
+            Storage::disk('public')->put($saveUrl ,$img);
+
+            $vendor->vendor_image = $saveUrl;
             $vendor->save();
         }
 

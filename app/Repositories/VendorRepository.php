@@ -16,7 +16,7 @@ class VendorRepository
 
     public function getAll()
     {
-        return $this->vendor::with('ratings')
+        return $this->vendor::with('ratings','freeCategory','products')
             ->subscribed()
             ->get();
     }
