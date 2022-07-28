@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\{
+    FrequentOrdersVendorsController,
     AuthController,
     CheckoutController,
     NotificationController,
@@ -66,4 +67,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('customer-notifications/', [NotificationController::class, 'getCustomerNotifications']);
     Route::get('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead']);
+
+    Route::get('user/{user}/frequent-orders-vendors', FrequentOrdersVendorsController::class);
 });
