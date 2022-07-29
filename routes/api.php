@@ -69,4 +69,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead']);
 
     Route::get('user/{user}/frequent-orders-vendors', FrequentOrdersVendorsController::class);
+
+    Route::post('vendor/{vendor}/rate', [VendorController::class, 'rate']);
+
 });
