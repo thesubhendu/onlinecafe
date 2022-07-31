@@ -52,7 +52,7 @@ class VendorRepository
         return $vendor
             ->ratings()
             ->updateOrCreate([
-                'user_id' => $input['user_id'],
+                'user_id' => auth()->id(),
             ], $data);
     }
 

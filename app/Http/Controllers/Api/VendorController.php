@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\VendorCollection;
+use App\Http\Resources\VendorRatingResource;
 use App\Http\Resources\VendorResource;
 use App\Models\Vendor;
 use App\Repositories\VendorRepository;
@@ -23,7 +24,11 @@ class VendorController extends ApiBaseController
 
     public function show(Vendor $vendor): VendorResource
     {
-        return new VendorResource($vendor->load('products', 'products.category', 'ratings'));
+        return new VendorResource($vendor->load([
+            'products', 'products.category', 'ratings.author' => function ($query) {
+                return $query->select(['id', 'name']);
+            },
+        ]));
     }
 
     public function toggleFavorite(Vendor $vendor): JsonResponse
@@ -43,14 +48,20 @@ class VendorController extends ApiBaseController
         $request->validate([
             'rating'  => 'required|integer|max:5|min:1',
             'comment' => 'string',
-            'user_id' => 'required|integer',
         ]);
 
         return $this->sendResponse(
-           [
-               'rating' =>  $this->vendorRepository->rate($vendor, $request->all()),
-               'vendor_average_rating' => $vendor->rating()
-           ],
+            [
+                'rating'                =>
+                    new VendorRatingResource($this->vendorRepository
+                    ->rate($vendor, $request->all())
+                    ->load([
+                        'author' => function ($query) {
+                            return $query->select(['id', 'name']);
+                        },
+                    ])),
+                'vendor_average_rating' => $vendor->rating(),
+            ],
             'Rating Saved!'
         );
 
