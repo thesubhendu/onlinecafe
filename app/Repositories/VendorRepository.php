@@ -16,7 +16,7 @@ class VendorRepository
 
     public function getAll()
     {
-        return $this->vendor::with('ratings','freeCategory','products')
+        return $this->vendor::with('ratings', 'freeCategory', 'products')
             ->subscribed()
             ->get();
     }
@@ -40,6 +40,20 @@ class VendorRepository
         }
 
         return null;
+    }
+
+    public function rate(Vendor $vendor, array $input)
+    {
+        $data['rating'] = $input['rating'];
+        if (isset($input['comment'])) {
+            $data['comment'] = $input['comment'];
+        }
+
+        return $vendor
+            ->ratings()
+            ->updateOrCreate([
+                'user_id' => auth()->id(),
+            ], $data);
     }
 
 }
