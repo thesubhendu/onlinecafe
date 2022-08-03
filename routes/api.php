@@ -9,10 +9,12 @@ use App\Http\Controllers\Api\{
     OrdersController,
     ShippingAddressController,
     CartController,
+    HomeController,
     ProductController,
     RewardController,
     UserController,
-    VendorController};
+    VendorController
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/home', HomeController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     // Vendor
     Route::get('vendors', [VendorController::class, 'index']);

@@ -152,4 +152,23 @@ class Vendor extends Model
     {
         return $this->isFavorited();
     }
+
+    public function scopePopular($query)
+    {
+       return $query->withCount('orders')->orderByDesc('orders_count');
+    }
+
+    public function scopeTopRated($query)
+    {
+       return $query->withCount('ratings')->orderByDesc('ratings_count');
+    }
+
+    public function scopeNearBy($query, $location)
+    {
+        $lat = floatval($location->lat);
+        $lng = floatval($location->lon);
+        $radius = 1533;
+        $distance = \DB::raw("*, ( 6371 * acos( cos( radians($lat) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( lat ) ) ) ) AS distance");
+        return $query->select($distance)->orderBy('distance')->having('distance', '<=', $radius);
+    }
 }

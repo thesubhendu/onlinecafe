@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
-class VendorResource extends JsonResource
+class VendorCardResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +20,6 @@ class VendorResource extends JsonResource
      */
     public function toArray($request): array|JsonSerializable|Arrayable
     {
-        $currentUserRating = $this->ratings()->where(['user_id' => auth()->id()])->first();
         return [
             'id'                  => $this->id,
             'name'                => $this->name,
@@ -31,21 +30,13 @@ class VendorResource extends JsonResource
             'vendor_image'        => $this->vendor_image ? asset('storage/'.$this->vendor_image) : null,
             'state'               => $this->state,
             'pc'                  => $this->pc,
-            'shop_name'           => $this->shop_name,
             'opening_hours'       => $this->opening_hours,
             'services'            => $this->services,
-            'lat'                 => $this->lat,
-            'lng'                 => $this->lng,
             'isFavorite'          => $this->isFavorite,
             'free_category_name'  => $this->freeCategory->name ?? null,
-            'ratings'             => VendorRatingResource::collection($this->ratings),
             'average_rating'      => $this->rating(),
-            'current_user_rating' => $currentUserRating,
             'is_open'             => $this->is_open,
             'distance'            => $this->getDistanceFromCustomer(geoip()->getLocation()),
-            'categoryProducts'    => $this->products->groupBy('category.name'),
-            'featuredProducts'    => $this->products->take(4),
-            'openingInfo'         => app()->make(VendorRepository::class)->getOpeningInfo($this),
         ];
     }
 
