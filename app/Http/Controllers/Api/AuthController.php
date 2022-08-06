@@ -22,7 +22,7 @@ class AuthController extends ApiBaseController
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password) || $user->isVendor()) {
             return response()->json([
                 'message' => 'The provided credentials are incorrect.'
             ],
