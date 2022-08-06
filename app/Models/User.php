@@ -130,7 +130,7 @@ class User extends Authenticatable
 
     public function isVendor()
     {
-        return  Gate::allows('vendor');
+        return  (bool) $this->shop;
     }
 
     public function isAdmin()
