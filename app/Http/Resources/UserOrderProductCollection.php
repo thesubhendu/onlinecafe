@@ -28,9 +28,10 @@ class UserOrderProductCollection extends ResourceCollection
                         'product_id'   => $data->product_id,
                         'price'        => $data->price,
                         'quantity'     => $data->quantity,
-                        'order_total'=> $data->order->order_total,
+                        'order_total'=> round($data->order->order_total,2),
                         'options'      =>$data->options,
                         'status'=>  $data->order->status,
+                        'created_at'=> $data->order->created_at->diffForHumans(),
                         'product_name' => $data->product->name,
                     ];
                 })->values()
