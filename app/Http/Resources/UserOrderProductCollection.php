@@ -30,6 +30,7 @@ class UserOrderProductCollection extends ResourceCollection
                         'quantity'     => $data->quantity,
                         'order_total'=> $data->order->order_total,
                         'options'      =>$data->options,
+                        'status'=>  $data->order->status,
                         'product_name' => $data->product->name,
                     ];
                 })->values()

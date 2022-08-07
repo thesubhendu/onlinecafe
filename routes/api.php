@@ -66,7 +66,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/checkout/{type?}', CheckoutController::class);
     Route::get('/orders/{order}', [OrdersController::class, 'show']);
-    Route::get('/order-products', [OrderProductsController::class, 'index']);
 
     Route::get('customer-notifications/', [NotificationController::class, 'getCustomerNotifications']);
     Route::get('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead']);
