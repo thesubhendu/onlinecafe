@@ -28,9 +28,9 @@ class VendorFactory extends Factory
             'contact_name' => $this->faker->name,
             'contact_lastname' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'mobile' => $this->faker->PhoneNumber,
+            'mobile' => $this->faker->numerify('##########'),
             'shop_email' => $this->faker->unique()->safeEmail,
-            'shop_mobile' => $this->faker->PhoneNumber,
+            'shop_mobile' => $this->faker->numerify('##########'),
             'address' => $this->faker->address,
             'suburb' => $this->faker->cityPrefix,
             'pc' => $this->faker->postcode,
@@ -40,4 +40,5 @@ class VendorFactory extends Factory
             'max_stamps' => 10,
         ];
     }
+
 }

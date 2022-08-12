@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Models\Service;
+use App\Services\StripeService;
 use Carbon\Carbon;
 use Image;
 use Livewire\Component;
@@ -144,12 +145,9 @@ class ShopSetup extends Component
             $vendor->save();
         }
 
-        if($this->vendorProductsExists)
-        {
-            return redirect()->route('vendor.show', $vendor->id);
-        }
 
-        return redirect()->route('register-business.menu-products-setup');
+        $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
+        return redirect()->to($stripeConnectUrl);
     }
 
     public function render()

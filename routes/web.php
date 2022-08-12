@@ -85,11 +85,6 @@ Route::middleware('auth')->group(function() {
         ->name('loyalty-checkout');
 });
 
-//Route::post('/cart/saveforlater/{product}', [CartSaveForLaterController::class, 'save'])->name('saveforlater.save');
-//Route::delete('/saveforlater/{product}', [CartSaveForLaterController::class, 'destroy'])->name('saveforlater.remove');
-//Route::post('/saveforlater/addtocart/{product}',
-//    [CartSaveForlaterController::class, 'moveToCart'])->name('saveforlater.addtocart');
-
 
 Route::get('/cards', \App\Http\Livewire\LoyalityCard::class)->name('cards.index')->middleware('auth');
 Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
@@ -110,6 +105,9 @@ Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
         VendorOnboarding\MenuProductsSetup::class)->name('register-business.menu-products-setup')->middleware('can:vendor');
     Route::get('/menu-prices-setup',
         VendorOnboarding\MenuPricesSetup::class)->name('register-business.menu-prices-setup')->middleware('can:vendor');
+
+    Route::get('/stripe/refresh-url',[\App\Http\Controllers\StripeConnectController::class, 'refreshUrl'])->name('stripe.refreshUrl');
+    Route::get('/stripe/return-url',[\App\Http\Controllers\StripeConnectController::class, 'refreshUrl'])->name('stripe.returnUrl');
 });
 
 //send mobile verification code

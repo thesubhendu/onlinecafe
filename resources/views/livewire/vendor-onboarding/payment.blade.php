@@ -74,7 +74,7 @@
                                                         <button id="card-button"
                                                                 class="w-100 btn btn-success btn-lg mt-4"
                                                                 type="submit" data-secret="{{ $clientSecret }}">
-                                                            Proceed to Checkout.
+                                                            Proceed.
                                                         </button>
 
 
@@ -135,7 +135,7 @@
                         errorDiv.innerText = error.message;
 
                         cardButton.disabled = false
-                        cardButton.innerHTML = "Proceed To Checkout"
+                        cardButton.innerHTML = "Proceed"
 
                     } else {
                         errorDiv.innerText = "";

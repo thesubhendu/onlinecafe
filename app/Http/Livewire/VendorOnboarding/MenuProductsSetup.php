@@ -16,8 +16,13 @@ class MenuProductsSetup extends Component
     public $menus;
     public $options;
 
-    public function mount(): void
+    public function mount()
     {
+        $vendor = auth()->user()->shop()->first();
+        if($vendor->products->exists())
+        {
+            return redirect()->route('vendor.show', $vendor->id);
+        }
         $this->menus = AllProduct::orderBy('name')->get()->map(function ($product)  {
             $product->isSelected = true;
 

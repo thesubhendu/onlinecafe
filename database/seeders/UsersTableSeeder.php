@@ -54,7 +54,11 @@ class UsersTableSeeder extends Seeder
         $vendor2 = User::factory()->has(
             Vendor::factory()
                   ->state(function (array $attributes) {
-                      return ['vendor_name' => "Vendor Pvt Ltd", 'shop_name' => 'Vendor coffee Shop'];
+                      return [
+                          'vendor_name'   => 'G.S DHODI & J.M RAJENDRAN',
+                          'shop_name' => 'Vendor coffee Shop',
+                          'abn'=> '38236823729',
+                      ];
                   })
             , 'shop')->create([
             'name'   => 'Vendor',

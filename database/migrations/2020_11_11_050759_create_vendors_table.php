@@ -21,6 +21,8 @@ class CreateVendorsTable extends Migration
             $table->string('contact_lastname');
             $table->string('email')->unique();
             $table->string('mobile')->unique();
+            $table->string('stripe_account_id', 100)->nullable();
+
             $table->string('shop_email')->unique()->nullable();
             $table->string('shop_mobile')->unique()->nullable();
             $table->string('address');
