@@ -11,7 +11,7 @@ class StripeService
     private \Stripe\StripeClient $stripe;
     function __construct()
     {
-        $this->stripe = new \Stripe\StripeClient('sk_test_M8hfDnQwXx36Lm8qJ2zWjVDP');
+        $this->stripe = new \Stripe\StripeClient(config('services.stripe.api_key'));
     }
     public function createAccount(Vendor $vendor): string
     {

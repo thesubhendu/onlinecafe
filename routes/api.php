@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\{
+use App\Http\Controllers\Api\{CustomerStripePaymentController,
     FrequentOrdersVendorsController,
     AuthController,
     CheckoutController,
@@ -13,8 +13,7 @@ use App\Http\Controllers\Api\{
     ProductController,
     RewardController,
     UserController,
-    VendorController
-};
+    VendorController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,4 +73,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('vendor/{vendor}/rate', [VendorController::class, 'rate']);
 
+    Route::post('payment',[CustomerStripePaymentController::class,'generatePaymentLink']);
 });
