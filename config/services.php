@@ -34,7 +34,7 @@ return [
         'sms_from' => env('NEXMO_FROM_PHONE'),
     ],
     'stripe'=> [
-        'api_key'=> env('STRIPE_API_KEY')
+        'api_key'=> env('STRIPE_KEY')
     ]
 
 ];
