@@ -121,17 +121,13 @@ class Registration extends Component
         }
 
         // Update user and vendor data on auth user exist
-        if ($this->authUser) {
-            $this->updateUser();
 
-            if ($this->authUser->shop) {
-                $this->authUser->shop->update($this->dataToSave());
-                session()->flash('message', 'Vendor Updated');
+        if ($this->authUser && $this->authUser->shop) {
+            $this->authUser->shop->update($this->dataToSave());
+            session()->flash('message', 'Vendor Updated');
 
-                $this->emitUp('vendorRegistered');
-
-                return redirect()->route('register-business.payment');
-            }
+            $this->emitUp('vendorRegistered');
+            return redirect()->route('register-business.payment');
         } else {
             // Create new User
             $user = $this->createUser();

@@ -27,16 +27,16 @@ class StripeService
         $vendor->stripe_account_id = $accountId;
         $vendor->save();
 
-        return $this->refreshUrl($accountId);
+        return $this->refreshUrl($vendor);
     }
 
-    public function refreshUrl(string $accountId) : string
+    public function refreshUrl(Vendor $vendor) : string
     {
         return $this->stripe->accountLinks->create(
             [
-                'account' => $accountId,
-                'refresh_url' => route('stripe.refreshUrl'),
-                'return_url' => route('stripe.returnUrl'),
+                'account' => $vendor->stripe_account_id,
+                'refresh_url' => route('stripe.refreshUrl',$vendor),
+                'return_url' => route('vendor.show', $vendor->id),
                 'type' => 'account_onboarding',
             ]
         )->url;
@@ -48,23 +48,28 @@ class StripeService
      */
     private function data(Vendor $vendor): array
     {
-        return [
+        $data = [
             'country' => 'AU',
             'type' => 'standard',
             'email' => $vendor->email,
-            // 'phone' => $vendor['contact_phone'],
 //            'capabilities' => [
 //                'card_payments' => ['requested' => true],
 //                'transfers' => ['requested' => true],
 //            ],
             'business_type' => 'individual',
             'business_profile' => [
-                "mcc" => '5462',
+                'mcc' => '5462', //bakeries https://stripe.com/docs/connect/setting-mcc
                 'name' => $vendor->shop_name,
-                'url' => 'https://mycoffees.online',
+                'product_description' => $vendor->description,
+                'support_email' => $vendor->shop_email,
+                'support_phone' => $vendor->shop_mobile,
+                'url' => config('app.url'),
             ],
             'company' => [
+                'name' => $vendor->vendor_name,
+                'phone' => $vendor->mobile,
                 'address' => [
+                    'country' => 'AU',
                     'line1' => $vendor->address,
 //                        'line2' => $vendor['street_address'],
                     'city' => $vendor->suburb,
@@ -72,7 +77,22 @@ class StripeService
                     'postal_code' => $vendor->pc,
                 ],
                 'tax_id' => $vendor->abn
-            ]
+            ],
+//            'individual' => [
+//                'address' => $vendor->address,
+//                'email' => $vendor->owner->email,
+//                'first_name' => $vendor->contact_name,
+//                'last_name' => $vendor->contact_lastname,
+//                'phone' => $vendor->mobile
+//            ],
+
+//            'settings' => [
+//                'branding' => [
+//                    'logo' => $vendor->vendor_logo ? fopen(asset('storage/' . $vendor->vendor_logo), 'r') : null
+//                ]
+//            ]
+
         ];
+        return $data;
     }
 }

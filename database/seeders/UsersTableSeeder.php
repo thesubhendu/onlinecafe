@@ -58,12 +58,17 @@ class UsersTableSeeder extends Seeder
                           'vendor_name'   => 'G.S DHODI & J.M RAJENDRAN',
                           'shop_name' => 'Vendor coffee Shop',
                           'abn'=> '38236823729',
+                          'pc'=> 1215,
+                          'state'=>'NSW',
+                          'address'=>'AUSTRALIA SQUARE, NSW',
+                          'suburb'=>'Sydney'
+
                       ];
                   })
             , 'shop')->create([
             'name'   => 'Vendor',
             'email'  => 'vendor@cafe.np',
-            'mobile' => 9779809333222,
+            'mobile' => 61476857122,
         ]);
 
 //        $productOption = ProductOption::where('charge', 1)->random()->limit(10);

@@ -92,8 +92,16 @@ class ShopSetup extends Component
             'form.shop_mobile' => 'digits:10|required',
             'form.opening_hours' => 'required',
             'form.services' => 'required',
-            // 'vendorImage' => 'required|image|max:2048'
         ]);
+        if($this->logo){
+            $this -> validate([
+                'logo' => 'image|max:512',
+            ]);
+        }elseif($this->vendorImage){
+            $this -> validate([
+                'vendorImage' => 'image|max:2048',
+            ]);
+        }
 
         $vendor = auth()->user()->shop()->first();
 
