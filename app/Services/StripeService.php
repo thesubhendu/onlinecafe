@@ -35,7 +35,7 @@ class StripeService
         return $this->stripe->accountLinks->create(
             [
                 'account' => $vendor->stripe_account_id,
-                'refresh_url' => route('stripe.refreshUrl',$vendor),
+                'refresh_url' => route('stripe.refreshUrl',$vendor->id),
                 'return_url' => route('vendor.show', $vendor->id),
                 'type' => 'account_onboarding',
             ]
