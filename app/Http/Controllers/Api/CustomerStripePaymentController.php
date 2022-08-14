@@ -3,35 +3,36 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 
 class CustomerStripePaymentController extends Controller
 {
+    function __construct(
+        public CartService $cartService
+    )
+    {
+
+    }
     public function generatePaymentLink(Request $request)
     {
+        $customer = auth()->user();
+        $activeOrder = $this->cartService->getActiveOrder();
         \Stripe\Stripe::setApiKey(config('services.stripe.api_key'));
-
-        $session = \Stripe\Checkout\Session::create([
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'usd',
-                    'product_data' => [
-                        'name' => 'T-shirt',
-                    ],
-                    'unit_amount' => 2000,
+        try {
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount' => $activeOrder->order_total*100,
+                'currency' => 'usd',
+                'automatic_payment_methods' => [
+                    'enabled' => true,
                 ],
-                'quantity' => 2,
-            ]],
-            'mode' => 'payment',
-            'success_url' => config('app.client_url').'/#!/my-orders/',
-            'cancel_url' => config('app.client_url').'/#!/checkout',
-//            'payment_intent_data' => [
-//                'application_fee_amount' => 123,
-//            ],
-        ]
-//            ['stripe_account' => '{{CONNECTED_ACCOUNT_ID}}']
-        );
+            ]);
 
-        return ['sessionId'=> $session->id];
+            //todo add connected account id
+            return response()->json(['clientSecret'=> $paymentIntent->client_secret]);
+        } catch (\Exception $e) {
+            return response()->json(['error'=> $e->getMessage()], 500);
+        }
+
     }
 }
