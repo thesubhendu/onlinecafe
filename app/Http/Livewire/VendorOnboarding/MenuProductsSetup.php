@@ -19,7 +19,7 @@ class MenuProductsSetup extends Component
     public function mount()
     {
         $vendor = auth()->user()->shop()->first();
-        if($vendor->products->exists())
+        if($vendor->products()->exists())
         {
             return redirect()->route('vendor.show', $vendor->id);
         }
