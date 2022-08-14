@@ -15,7 +15,7 @@ class HomeController
         return new HomeCollection([
             'nearBy'=> VendorCardResource::collection(Vendor::subscribed()->nearBy(getCustomerLocation())->take(5)->get()),
             'topRated'=> VendorCardResource::collection(Vendor::subscribed()->topRated()->take(5)->get()),
-            'popular'=> VendorCardResource::collection(Vendor::subscribed()->popular()->take(5)->get()),
+            'popular'=> VendorCardResource::collection(Vendor::subscribed()->orderBy('created_at','desc')->take(5)->get()),
         ]);
     }
 
