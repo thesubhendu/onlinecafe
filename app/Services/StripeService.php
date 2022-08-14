@@ -16,7 +16,8 @@ class StripeService
     public function createAccount(Vendor $vendor): string
     {
         if(!is_null($vendor->stripe_account_id)){
-            return $this->refreshUrl($vendor);
+            return route('register-business.menu-products-setup');
+//            return $this->refreshUrl($vendor);
         }
 
         $stripe_account = $this->stripe->accounts->create(
