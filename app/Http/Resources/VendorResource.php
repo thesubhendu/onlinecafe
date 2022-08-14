@@ -42,7 +42,7 @@ class VendorResource extends JsonResource
             'average_rating'      => $this->rating(),
             'current_user_rating' => $currentUserRating,
             'is_open'             => $this->is_open,
-            'distance'            => $this->getDistanceFromCustomer(geoip()->getLocation()),
+//            'distance'            => $this->getDistanceFromCustomer(geoip()->getLocation()),
             'categoryProducts'    => $this->products->groupBy('category.name'),
             'featuredProducts'    => $this->products->take(4),
             'openingInfo'         => app()->make(VendorRepository::class)->getOpeningInfo($this),

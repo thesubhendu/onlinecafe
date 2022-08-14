@@ -135,6 +135,10 @@ class Vendor extends Model
         $latTo = $this->lat;
         $lngTo = $this->lng;
 
+        if(is_null($latTo) || is_null($lngTo) || empty($customerLocation)) {
+            return null;
+        }
+
         return round((new GeoLocationService())->haversineGreatCircleDistance($latFrom,$lngFrom, $latTo,$lngTo));
     }
 

@@ -36,7 +36,7 @@ class VendorCardResource extends JsonResource
             'free_category_name'  => $this->freeCategory->name ?? null,
             'average_rating'      => $this->rating(),
             'is_open'             => $this->is_open,
-            'distance'            => $this->getDistanceFromCustomer(geoip()->getLocation()),
+            'distance'            => $this->getDistanceFromCustomer(getCustomerLocation()),
         ];
     }
 
