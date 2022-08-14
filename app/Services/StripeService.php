@@ -36,7 +36,7 @@ class StripeService
             [
                 'account' => $vendor->stripe_account_id,
                 'refresh_url' => route('stripe.refreshUrl',$vendor->id),
-                'return_url' => route('vendor.show', $vendor->id),
+                'return_url' => route('register-business.menu-products-setup'),
                 'type' => 'account_onboarding',
             ]
         )->url;
