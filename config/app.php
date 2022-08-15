@@ -68,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'asia/kathmandu',
+    'timezone' => 'Australia/Sydney',
 
     /*
     |--------------------------------------------------------------------------
