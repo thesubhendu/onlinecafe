@@ -5,13 +5,13 @@ use App\Http\Controllers\Api\{CustomerStripePaymentController,
     AuthController,
     CheckoutController,
     NotificationController,
-    OrderProductsController,
     OrdersController,
     ShippingAddressController,
     CartController,
     HomeController,
     ProductController,
     RewardController,
+    StripeWebhookController,
     UserController,
     VendorController};
 use Illuminate\Support\Facades\Route;
@@ -74,4 +74,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('vendor/{vendor}/rate', [VendorController::class, 'rate']);
 
     Route::post('payment',[CustomerStripePaymentController::class,'generatePaymentLink']);
+
 });
+
+//todo setup on stripe dash on production
+Route::post('brewsta-stripe-whook', StripeWebhookController::class);

@@ -16,8 +16,9 @@ class CustomerStripePaymentController extends Controller
     }
     public function generatePaymentLink(Request $request)
     {
-        $customer = auth()->user();
         $activeOrder = $this->cartService->getActiveOrder();
+        $vendor = $activeOrder->vendor;
+        $applicationFee = 0.1*$activeOrder->order_total*100; //10% of total todo ask and update
         \Stripe\Stripe::setApiKey(config('services.stripe.api_key'));
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
@@ -26,9 +27,14 @@ class CustomerStripePaymentController extends Controller
                 'automatic_payment_methods' => [
                     'enabled' => true,
                 ],
-            ]);
+                'metadata' => [
+                    'order_id' => $activeOrder->id,
+                ],
+                'application_fee_amount' => $applicationFee,
+            ],
+                ['stripe_account' => $vendor->stripe_account_id]
+            );
 
-            //todo add connected account id
             return response()->json(['clientSecret'=> $paymentIntent->client_secret]);
         } catch (\Exception $e) {
             return response()->json(['error'=> $e->getMessage()], 500);
