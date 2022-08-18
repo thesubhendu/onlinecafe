@@ -13,4 +13,10 @@ class StripeConnectController extends Controller
         return redirect()->to((new StripeService())->refreshUrl($vendor));
     }
 
+    public function createAccount(Vendor $vendor)
+    {
+        $stripeConnectUrl = (new StripeService())->createAccount($vendor);
+        return redirect()->to($stripeConnectUrl);
+    }
+
 }

@@ -107,6 +107,7 @@ Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
         VendorOnboarding\MenuPricesSetup::class)->name('register-business.menu-prices-setup')->middleware('can:vendor');
 
     Route::get('/stripe/refresh-url/{vendor}',[\App\Http\Controllers\StripeConnectController::class, 'refreshUrl'])->name('stripe.refreshUrl');
+    Route::get('/stripe/create-connect-account/{vendor}',[\App\Http\Controllers\StripeConnectController::class, 'createAccount'])->name('stripe.createAccount');
 });
 
 //send mobile verification code
