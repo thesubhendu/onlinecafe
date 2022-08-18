@@ -32,21 +32,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
 
             @foreach($order->products as $product)
-                <td>
-                    {{$product->name}}
-                </td>
-                <td>{{ $product->pivot->quantity}}</td>
-                <td>
-                    {{$product->pivot->price}}
-                </td>
-                <td>
-                   @include('components.product-options')
-                </td>
+                <tr>
+                    <td>
+                        {{$product->name}}
+                    </td>
+                    <td>{{ $product->pivot->quantity}}</td>
+                    <td>
+                        {{$product->pivot->price}}
+                    </td>
+                    <td>
+                       @include('components.product-options')
+                    </td>
+                </tr>
             @endforeach
-        </tr>
         </tbody>
     </table>
 
