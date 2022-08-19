@@ -63,7 +63,10 @@ class OrderConfirmedNotification extends Notification
         return [
             'title' => 'Order Confirmed',
             'text' => 'Order Confirmed by ' . $this->order->vendor->shop_name,
-            'action' => ''
+            'action' => '',
+            'data'=> [
+                'orderId'=> $this->order->id
+            ]
         ];
     }
 }
