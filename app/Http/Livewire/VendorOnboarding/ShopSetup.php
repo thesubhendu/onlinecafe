@@ -28,6 +28,7 @@ class ShopSetup extends Component
         'address',
         'lat',
         'lng',
+        'is_rewarding_active',
         'services'
     ];
     public $openingHoursOptions = [];
@@ -67,6 +68,7 @@ class ShopSetup extends Component
             $this->form['max_stamps'] = $vendor->max_stamps;
             $this->form['free_category'] = $vendor->free_category;
             $this->form['get_free'] = $vendor->get_free;
+            $this->form['is_rewarding_active'] = $vendor->is_rewarding_active;
 
             if ($vendor->opening_hours) {
                 $this->form['opening_hours'] = $vendor->opening_hours;
@@ -122,7 +124,8 @@ class ShopSetup extends Component
             'services'=> collect($this->form['services'])->filter(fn($val, $key) => $val)->keys()->toArray(),
             'free_category' => $this->form['free_category'] === '' ? null : $this->form['free_category'],
             'get_free' => $this->form['get_free'],
-            'max_stamps' => $this->form['max_stamps']
+            'max_stamps' => $this->form['max_stamps'],
+            'is_rewarding_active' => $this->form['is_rewarding_active'],
         ];
 
         $vendor->update($formData);
