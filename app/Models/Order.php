@@ -67,7 +67,7 @@ class Order extends Model
         $this->status = 'completed';
         $this->save();
 
-        if($this->stamp_count > 0){
+        if($this->stamp_count > 0 && $this->vendor->is_rewarding_active){
             $this->stampRewardCard($this);
         }
 

@@ -28,7 +28,7 @@ class OrderRepository
             ->first();
 
         $stampCount = $order->stamp_count;
-        if($status !== 'rewardClaim')
+        if($status !== 'rewardClaim' && $order->vendor->is_rewarding_active)
         {
             $stampCount = $order->products->sum(function ($product) {
                 return $product->pivot->quantity;
