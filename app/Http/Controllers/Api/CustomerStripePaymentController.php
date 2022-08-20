@@ -18,7 +18,7 @@ class CustomerStripePaymentController extends Controller
     {
         $activeOrder = $this->cartService->getActiveOrder();
         $vendor = $activeOrder->vendor;
-        $applicationFee = 0.1*$activeOrder->order_total*100; //10% of total todo ask and update
+        $applicationFee = 10; //10 cents
         \Stripe\Stripe::setApiKey(config('services.stripe.api_key'));
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
