@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Repositories\OrderRepository;
 
 class StripeWebhookController extends Controller
 {
@@ -30,6 +31,12 @@ class StripeWebhookController extends Controller
                    if($order){
                        $order->is_paid= true;
                        $order->save();
+                        try{
+                            app()->make(OrderRepository::class)->submitOrder($order->user_id);
+
+                        } catch(\Exception $e){
+                            logger($e->getMessage());
+                        }
                    }
                }
                break;
