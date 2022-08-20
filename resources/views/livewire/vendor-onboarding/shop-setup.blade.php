@@ -54,16 +54,35 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="logo" class="form-label">Logo</label>
-                                <input class="form-control" type="file" wire:model="logo">
-                                @error('logo') <span class="text-danger">{{ $message }}</span> @enderror
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="logo" class="form-label">Logo</label>
+                                    <input class="form-control" type="file" wire:model="logo">
+                                    @error('logo') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="col">
+                                    @if($vendor->vendor_logo)
+                                        <img class="mt-4" src="{{asset('storage/'.$vendor->vendor_logo)}}" alt="" width="50" height="50">
+                                    @endif
+                                </div>
+
+
                             </div>
 
-                            <div class="form-group">
-                                <label for="vendorImage" class="form-label">Vendor Image</label>
-                                <input class="form-control" type="file" wire:model="vendorImage">
-                                @error('vendorImage') <span class="text-danger">{{ $message }}</span> @enderror
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="vendorImage" class="form-label">Vendor Image</label>
+                                    <input class="form-control" type="file" wire:model="vendorImage">
+                                    @error('vendorImage') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="col">
+                                    @if($vendor->vendor_image)
+                                        <img class="mt-3" src="{{asset('storage/'.$vendor->vendor_image)}}" alt="" width="300" height="100">
+                                    @endif
+                                </div>
+
                             </div>
 
                             <div class="opening-hours form-part">

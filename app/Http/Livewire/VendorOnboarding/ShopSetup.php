@@ -14,6 +14,7 @@ class ShopSetup extends Component
 {
     use WithFileUploads;
 
+    public $vendor;
     public $logo;
     public $vendorImage;
     public $form = [
@@ -54,6 +55,7 @@ class ShopSetup extends Component
         $this->initializeOpeningHours();
 
         $vendor = auth()->user()->shop()->with('products')->first();
+        $this->vendor = $vendor;
         $this->vendorProductsExists = $vendor->products()->exists();
         $this->services = Service::all();
 
