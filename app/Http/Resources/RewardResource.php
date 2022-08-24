@@ -36,6 +36,7 @@ class RewardResource extends JsonResource
             'remaining_claim'=> $this->vendor->get_free - $this->total_claimed,
             'stamp_count'=> $stampCount,
             'stamps_left'=> $stampsLeft,
+            'is_gifted'=> auth()->check() && auth()->user()->email === $this->receiver_email,
             'updated_at'=> $this->updated_at->diffForHumans(),
         ];
     }

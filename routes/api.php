@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\{CustomerStripePaymentController,
     CheckoutController,
     NotificationController,
     OrdersController,
+    PayForwardController,
     ShippingAddressController,
     CartController,
     HomeController,
@@ -52,6 +53,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('products/{product}', [ProductController::class, 'show']);
 
     Route::get('/rewards', [RewardController::class, 'index']);
+    Route::post('/pay-forward/{card}', [PayForwardController::class, 'sendGift']);
+    Route::get('/pay-forward/{card}/accept', [PayForwardController::class, 'accept']);
+    Route::get('/pay-forward/{card}/reject', [PayForwardController::class, 'reject']);
 
     // Manual Claim
     Route::get('/rewards/get-claimed-order', [RewardController::class, 'getClaimedOrder']);

@@ -3,7 +3,7 @@
 
     ## Congratulations, {{$user->name}}  gifted you free coffee
 
-    @component('mail::button', ['url' => route('cards.index')])
+    @component('mail::button', ['url' => config('app.client_url')])
         Click to view
     @endcomponent
 

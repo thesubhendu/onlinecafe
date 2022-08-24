@@ -78,4 +78,9 @@ class Card extends Model
         ]);
     }
 
+    public function isRewardable(): bool
+    {
+        return $this->is_max_stamped && !$this->loyalty_claimed;
+    }
+
 }
