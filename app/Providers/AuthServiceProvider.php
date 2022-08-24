@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Policies\SubscriptionPolicy;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Cashier\Subscription;
@@ -29,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(Dashboard $dashboard)
     {
         $this->registerPolicies();
+
+//        ResetPassword::createUrlUsing(function ($user, string $token) {
+//            return config('app.client_url').'?token='.$token."&email=".$user->email;
+//        });
 
         Gate::define('subscribed', function (User $user) {
             return $user->subscribed('subscribed');

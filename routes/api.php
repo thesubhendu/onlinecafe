@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\{CustomerStripePaymentController,
     UserController,
     VendorController};
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Http\Controllers\NewPasswordController;
+use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,11 @@ use Illuminate\Support\Facades\Route;
 // Auth
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/forgot-password',[ PasswordResetLinkController::class,'store']);
+//Route::post('/reset-password',[ NewPasswordController::class,'store']);
+
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/home', HomeController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
