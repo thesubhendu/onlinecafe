@@ -49,6 +49,9 @@ class CreateVendorsTable extends Migration
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
 
+            $table->boolean('is_rewarding_active')->default(true);
+            $table->timestamp('charges_enabled_at')->nullable();
+
             $table->timestamps();
         });
     }

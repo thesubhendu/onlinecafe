@@ -123,11 +123,6 @@ class User extends Authenticatable
         );
     }
 
-    public function earnedRewards()
-    {
-        return Card::query()->where(['user_id' => $this->id, 'is_active' => false, 'is_max_stamped' => false])->get();
-    }
-
     public function isVendor()
     {
         return  (bool) $this->shop;

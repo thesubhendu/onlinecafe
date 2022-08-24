@@ -33,6 +33,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('free_products_claimed')->default(0);
             $table->unsignedBigInteger('card_id')->nullable();
             $table->unsignedInteger('stamp_count')->default(0);
+            $table->boolean('is_paid')->default(false);
+
             $table->timestamps();
         });
     }
