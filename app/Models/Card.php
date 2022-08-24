@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,14 @@ class Card extends Model
         }
 
         return $vendor->max_stamps;
+    }
+
+    public function scopeRewardable(Builder $builder)
+    {
+        return $builder->where([
+           'is_max_stamped'=> true,
+           'loyalty_claimed'=> false,
+        ]);
     }
 
 }

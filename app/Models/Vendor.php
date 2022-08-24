@@ -175,4 +175,13 @@ class Vendor extends Model
         $distance = \DB::raw("*, ( 6371 * acos( cos( radians($lat) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( lat ) ) ) ) AS distance");
         return $query->select($distance)->orderBy('distance')->having('distance', '<=', $radius);
     }
+    public function userRewardsQuery(User $user)
+    {
+        return $user->cards()->where('vendor_id',$this->id)->rewardable();
+    }
+
+    public function isRewardAvailable(User $user) : bool
+    {
+        return (bool)$this->userRewardsQuery($user)->count();
+    }
 }

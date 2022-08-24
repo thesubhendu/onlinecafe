@@ -130,6 +130,7 @@ class Order extends Model
                     $activeCard->total_claimed = $order->free_products_claimed;
                     if($activeCard->total_claimed === $activeCard->vendor->get_free){
                         $activeCard->loyalty_claimed = 1;
+                        $activeCard->is_active = false;
                     }
                 }
                 $activeCard->save();
