@@ -13,10 +13,11 @@ class LandingPageController extends Controller
      */
     public function index()
     {
+
+        return redirect()->route('vendor-landing');
         $vendors = Vendor::with('ratings')
             ->subscribed()
             ->get();
 
-        return view('landing-page', compact('vendors'));
     }
 }

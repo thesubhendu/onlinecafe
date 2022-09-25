@@ -1,21 +1,13 @@
 <?php
 
 use App\Http\Controllers\Account\AccountController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\DownloadFlyerController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PhoneVerificationController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\VendorController;
-use App\Http\Controllers\VendorRatingController;
-use App\Http\Livewire\Checkout;
-use App\Http\Livewire\ClaimLoyaltyProducts;
-use App\Http\Livewire\FavoriteVendors;
-use App\Http\Livewire\LoyaltyCheckout;
-use App\Http\Livewire\MyOrders;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
 use App\Services\RewardService;
@@ -27,7 +19,6 @@ Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
 
-
 Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 
@@ -37,7 +28,7 @@ Route::get('tinker', function () {
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
-Route::get('/vendor/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
+Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
 
 Route::group(['namespace' => 'Subscriptions'], function () {
     Route::get('plans', [PlanController::class, 'index'])
@@ -56,40 +47,15 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
 
 require(__DIR__ . '/partials/_manage-subscriptions.php');
 
-Route::post('/vendor/{vendor}/rate', [VendorRatingController::class, 'store'])->name('vendor.rating')->middleware('auth');
 
-Route::get('/vendor/{vendor}/products', [ProductController::class, 'vendorProducts'])->name('vendor.products');
 
-Route::get('/user/favourites', FavoriteVendors::class)->name('user.likes')->middleware('auth');
 Route::get('/confirm/{order}/update',
     [ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
 
 //Auth Routes
-Route::middleware('auth')->group(function() {
-
-    Route::get('add-to-cart/{product}', \App\Http\Livewire\AddToCart::class)->name('orders.create');
-
-    Route::get('orders', MyOrders::class)->name('orders.index');
 
 
-    Route::get('/order-submitted/{order}',
-        \App\Http\Livewire\OrderSubmitted::class)->name('order.submitted'); //status displaying page
 
-    Route::get('/cart/checkout', Checkout::class)->name('checkout.index');
-
-    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
-
-    Route::get('claim-loyalty-products/{card}', ClaimLoyaltyProducts::class )
-        ->name('claim-loyalty-products');
-    Route::get('loyalty-checkout/{card}', LoyaltyCheckout::class )
-        ->name('loyalty-checkout');
-});
-
-
-Route::get('/cards', \App\Http\Livewire\LoyalityCard::class)->name('cards.index')->middleware('auth');
-Route::get('/rate/{vendor}', [VendorRatingController::class, 'index'])->name('vendor_rating.index');
-
-Route::get('save-deal/{deal}', \App\Http\Livewire\SaveDeal::class)->name('save-deal');
 
 Route::view('/comment', 'comment');
 
@@ -134,4 +100,3 @@ Route::view('/verify-phone','auth.verify-email')->name('phone-verification.notic
 
 Route::get('download-customer-flyer', DownloadFlyerController::class)->name('download-customer-flyer');
 
-Route::get('vendor-search', \App\Http\Livewire\VendorSearch::class)->name('vendor-search');

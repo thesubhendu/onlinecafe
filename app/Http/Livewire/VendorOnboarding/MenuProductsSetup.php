@@ -21,7 +21,7 @@ class MenuProductsSetup extends Component
         $vendor = auth()->user()->shop()->first();
         if($vendor->products()->exists())
         {
-            return redirect()->route('vendor.show', $vendor->id);
+            return redirect()->route('platform.main');
         }
         $this->menus = AllProduct::orderBy('name')->get()->map(function ($product)  {
             $product->isSelected = true;

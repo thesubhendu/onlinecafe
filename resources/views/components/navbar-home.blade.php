@@ -12,7 +12,9 @@
                     </a>
                 </div>
                 <div class="visible-xs mobile-nav">
-                    <a href="{{ route('vendor-landing') }}" class="partner-with">Partner with Us</a>
+                    @guest()
+                        <a href="{{ route('register-business.create') }}" class="partner-with">Partner with Us</a>
+                    @endguest
                 </div>
 
 {{--                MOBILE Dropdown--}}
@@ -22,19 +24,17 @@
                     </a>
                     <div class="dropdown-menu">
                         @guest
-                            <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp; User
+                            <a class="dropdown-item" href="{{route('platform.main')}}"> <i class="ti-user"></i> &nbsp;
                                 Login</a>
-                            <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i> &nbsp; User
-                                Register</a>
+{{--                            <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i> &nbsp;--}}
+{{--                                Register</a>--}}
                         @else
 
                             @can('visit-backend')
                                 <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
                                 <a class="dropdown-item" href="{{route('download-customer-flyer')}}">Download Flyer</a>
                             @endcan
-                            <a class="dropdown-item"  href="{{route('orders.index')}}">
-                                My Orders
-                            </a>
+
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"> Logout</i>
@@ -54,22 +54,13 @@
             <div class="offset-4 col-md-6 col-xs-10  navbar-right xs-left hidden-xs">
                 <ul class="cart">
                     <li>
-                        <a href="{{ route('vendor-landing') }}">Partner with Us</a>
-                    </li>
-                    <li>
-                        <a href="{{route('checkout.index')}}">
-                            <i class="ti-shopping-cart"></i>
-                            @if (Cart::count())
-                                <span class="badge">{{ Cart::count() }}</span>
-                            @endif
-                        </a>
+                        @guest()
+                            <a href="{{ route('register-business.create') }}">Partner with Us</a>
+
+                        @endguest
                     </li>
 
-                    <li>
-                        <a href="{{route('profile.show')}}">
-                            <i class="ti-user"></i>
-                        </a>
-                    </li>
+
 
 {{--                    DESKTOP dropdown--}}
                     <li class="register">
@@ -81,20 +72,11 @@
                             <div class="dropdown-menu">
                                 @guest
                                     <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp;
-                                        User Login</a>
-                                    <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>
-                                        &nbsp; User Register</a>
+                                         Login</a>
+{{--                                    <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>--}}
+{{--                                        &nbsp;  Register</a>--}}
                                 @else
-                                    @if(auth()->user()->shop)
-                                        <a class="dropdown-item" href="{{route('vendor.show', auth()->user()->shop)}}">My
-                                            Shop</a>
 
-                                    @else
-                                    @endif
-
-                                    <a class="dropdown-item" href="{{route('orders.index')}}">My Orders</a>
-                                    <a class="dropdown-item" href="{{route('user.likes')}}">My Cafes</a>
-                                    <a class="dropdown-item" href="{{route('cards.index')}}">My Loyality</a>
 
                                     @can('visit-backend')
                                         <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
@@ -117,51 +99,4 @@
     </div>
 </div>
 
-<!-- FOOTER BOTTOM NAVIGATION Mobile -->
-<div class="bottom-bar visible-md">
-    <div class="container">
-        <div class="row">
-            @guest
-                <div class="col">
-                    <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp;
-                         Login</a>
 
-                </div>
-
-                <div class="col">
-                    <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i>
-                        &nbsp;  Register</a>
-                </div>
-
-            @else
-                @if (Cart::count())
-                    <div class="col">
-                        <a href="{{route('checkout.index')}}">
-                            <i class="fa fa-shopping-cart"></i>
-                            Your Cart
-
-                                <span class="badge bg-success">{{ Cart::count() }}</span>
-                        </a>
-                    </div>
-                @endif
-
-                <div class="col">
-                    <a href="{{route('user.likes')}}">
-                        <i class="fa fa-coffee"></i>
-                        My cafes
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="{{ route('cards.index') }}">
-                        <i class="fa fa-credit-card"></i>
-                        My Loyality
-                    </a>
-                </div>
-
-
-            @endguest
-
-
-        </div>
-    </div>
-</div>
