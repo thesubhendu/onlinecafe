@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -44,6 +43,8 @@ class CartResource extends JsonResource
                 "category_id" => $product->category_id,
                 'price'       => $product->pivot->price,
                 'quantity'    => $product->pivot->quantity,
+                'is_reward'    => (bool)$product->pivot->card_id,
+                'is_deal'    =>  (bool)$product->pivot->deal_id,
                 'options'     => json_decode($product->pivot->options),
             ];
         });

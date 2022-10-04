@@ -52,7 +52,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('id', 'price', 'quantity','options')->withTimestamps();
+        return $this->belongsToMany(Product::class)->withPivot('id', 'price', 'quantity','options','card_id','deal_id')->withTimestamps();
     }
 
     public function card()
