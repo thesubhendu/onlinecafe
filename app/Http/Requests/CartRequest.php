@@ -24,9 +24,9 @@ class CartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => 'required',
+//            'price' => 'required',
             'quantity' => 'required',
-            'product_id' => 'required',
+//            'product_id' => 'required',
             'options' => 'required|array'
         ];
     }

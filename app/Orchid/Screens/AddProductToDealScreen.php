@@ -46,10 +46,10 @@ class AddProductToDealScreen extends Screen
         foreach ($this->product->optionTypes() ?? [] as $optionType) {
             $optionOptions = ["" => "Select"];
             foreach ($optionType->vendorProductOptions ?? [] as $opt) {
-                $optionOptions[$optionType->name.':'.$opt->name] = $opt->name. "(+". $opt->price .")";
+                $optionOptions[$opt->name] = $opt->name. "(+". $opt->price .")";
             }
 
-            $fields[] = Select::make('productoptions.'.$optionType->id)
+            $fields[] = Select::make('productoptions.'.$optionType->name)
                 ->options($optionOptions)
                 ->title($optionType->name);
         }
@@ -65,8 +65,10 @@ class AddProductToDealScreen extends Screen
         $deal->products()->attach($product->id,[
             'price' => $data['price'],
             'quantity' => $data['qty'],
-            'options' => json_encode(array_filter($request->get('productoptions')) ?? [])
+            'options' => json_encode(collect($request->get('productoptions'))->filter(fn($value, $key) => !!$value) ?? [])
         ]);
+
+        $deal->fresh()->updateTotal();
 
         Alert::info('You have successfully added product to deal.');
 

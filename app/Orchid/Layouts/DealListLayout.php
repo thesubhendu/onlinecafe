@@ -18,6 +18,7 @@ class DealListLayout extends Table
         return [
             TD::make('id'),
             TD::make('title'),
+            TD::make('total'),
             TD::make('expires_at')->render(fn($deal)=> $deal->expires_at->diffForHumans()),
             TD::make('status')->render(fn($deal) => $deal->status?"Active":"Inactive"),
             TD::make("Action")

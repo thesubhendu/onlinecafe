@@ -1,22 +1,21 @@
 <?php
 
-use App\Http\Controllers\Api\{CustomerStripePaymentController,
-    FrequentOrdersVendorsController,
-    AuthController,
+use App\Http\Controllers\Api\{AuthController,
+    CartController,
     CheckoutController,
+    CustomerStripePaymentController,
+    FrequentOrdersVendorsController,
+    HomeController,
     NotificationController,
     OrdersController,
     PayForwardController,
-    ShippingAddressController,
-    CartController,
-    HomeController,
     ProductController,
     RewardController,
+    ShippingAddressController,
     StripeWebhookController,
     UserController,
     VendorController};
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
 /*
@@ -52,7 +51,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user/order-products', [UserController::class, 'orderProducts']);
 
     Route::get('get-active-order', [CartController::class, 'getActiveOrder']);
-    Route::post('add-to-cart', [CartController::class, 'addToCart']);
+    Route::post('add-to-cart/{product}', [CartController::class, 'addToCart']);
+    Route::post('add-deal-to-cart/{deal}', [CartController::class, 'addDealToCart']);
     Route::put('update-cart-product/{orderProduct}', [CartController::class, 'updateCartProduct']);
     Route::delete('remove-from-cart/{orderProduct}', [CartController::class, 'removeFromCart']);
     Route::delete('destroy-active-order', [CartController::class, 'destroyActiveOrder']);

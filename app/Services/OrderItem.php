@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Models\OrderProduct;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class OrderItem
 {
@@ -15,27 +15,58 @@ class OrderItem
         $this->order = $order;
     }
 
-    public function add($data): void
+    public function add(Product $product, $quantity, array $options): void
     {
+        $calculateProductTotal = new CalculateProductTotal($product, $options);
+        $readableOptions = $calculateProductTotal->redableOptions;
+
         $productExist = OrderProduct::where(
             [
-                'product_id' => $data['product_id'],
-                'price'      => $data['price'],
+                'product_id' => $product->id,
+                'price'      => $product->price,
                 'order_id'   => $this->order->id,
             ]
-        )
-            ->whereJsonContains('options', $data['options'])
+    )
+            ->whereJsonContains('options', $readableOptions)
             ->first();
 
         if ($productExist) {
-            $data['quantity'] += $productExist['quantity'];
-            $this->update($productExist, $data);
+            $quantity += $productExist->quantity;
+            $productExist->update(['quantity'=> $quantity]);
         } else {
             $this->order->products()
-                ->attach($data['product_id'], [
-                    'price'    => $data['price'],
-                    'quantity' => $data['quantity'],
-                    'options'  => json_encode($data['options'])
+                ->attach($product->id, [
+                    'price'    => $calculateProductTotal->totalPrice,
+                    'quantity' => $quantity,
+                    'options'  => json_encode($readableOptions)
+                ]);
+        }
+    }
+    public function addRewardProduct(Product $product, $quantity, array $options): void
+    {
+        $cardId = $options['card_id'];
+        $calculateProductTotal = new CalculateProductTotal($product, $options);
+        $readableOptions = $calculateProductTotal->redableOptions;
+
+        $productExist = OrderProduct::where(
+            [
+                'product_id' => $product->id,
+                'price'      => 0,
+                'card_id'=> $cardId,
+                'order_id'   => $this->order->id,
+            ]
+           )
+            ->first();
+
+        if ($productExist) {
+            $productExist->update(['options'  => json_encode($readableOptions)]);
+        } else {
+            $this->order->products()
+                ->attach($product->id, [
+                    'price'    => 0,
+                    'card_id'=> $cardId,
+                    'quantity' => $quantity,
+                    'options'  => json_encode($readableOptions)
                 ]);
         }
     }

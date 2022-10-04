@@ -60,6 +60,7 @@ class DealDetailScreen extends Screen
                 'options' => $optionsArray[$productId]
             ]);
         }
+        $deal->fresh()->updateTotal();
     }
 
     public function layout(): array
@@ -72,7 +73,7 @@ class DealDetailScreen extends Screen
     public function removeProduct($dealId,$productId)
     {
         $deal = Deal::find($dealId);
-
         $deal->products()->detach($productId);
+        $deal->fresh()->updateTotal();
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\CartRequest;
 use App\Http\Resources\CartResource;
+use App\Models\Deal;
 use App\Models\OrderProduct;
+use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,13 +26,20 @@ class CartController extends ApiBaseController
         );
     }
 
-    public function addToCart(CartRequest $request): JsonResponse
+    public function addToCart(CartRequest $request, Product $product): JsonResponse
     {
-        $cartItem = $this->cartService->addToCart($request->all());
-
+        $cartItem = $this->cartService->addToCart($product, $request->get('quantity'), $request->get('options'));
         return $this->sendResponse(
             new CartResource($cartItem->load('products'))
         );
+    }
+
+    public function addDealToCart(Deal $deal)
+    {
+        $this->cartService->addDealToCart($deal);
+        return $this->sendResponse([
+
+        ]);
     }
 
     public function updateCartProduct(Request $request, OrderProduct $orderProduct): JsonResponse

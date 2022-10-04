@@ -73,4 +73,16 @@ class Deal extends Model
     {
         $query->where('status', '1')->where('expires_at','>=',now());
     }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function updateTotal()
+    {
+        $this->fill([
+            'total'=> $this->products->reduce(fn($carry,$product) => $carry + ($product->pivot->price*$product->pivot->quantity))
+        ])->save();
+    }
 }
