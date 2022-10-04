@@ -47,7 +47,7 @@ class VendorResource extends JsonResource
             'featuredProducts'    => $this->products->take(4),
             'openingInfo'         => app()->make(VendorRepository::class)->getOpeningInfo($this),
             'isRewardAvailable'     => $this->resource->isRewardAvailable(auth()->user()),
-            'deals'=> $this->deals->where('status',1)
+            'deals'=> $this->deals()->active()->get()
         ];
     }
 
