@@ -12,9 +12,9 @@
                     @endphp
                     @if(!$shop)
                         Please setup the shop. <a href="{{route('register-business.shop-setup')}}">Shop Setup</a>
-                    @elseif(!$shop->stripe_account_id)
-                        <a href="{{route('stripe.createAccount', $shop)}}">Please Create Account on stripe to received payment. Click here</a>
-                    @elseif($shop->charges_enabled_at)
+                    @elseif(!$shop->stripe_account_id )
+                        <a href="{{route('stripe.createAccount', $shop)}}">Please Create Account on stripe to receive payment. Click here</a>
+                    @elseif(!$shop->charges_enabled_at)
                         Please complete stripe connect onboarding flow to receive payment.
                         <a href="{{route('stripe.refreshUrl', $shop)}}" target="_blank">Click Here</a>
                     @endif

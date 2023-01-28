@@ -158,8 +158,12 @@ class ShopSetup extends Component
             $vendor->save();
         }
 
+        try {
+            $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
+        }catch (\Exception $e){
 
-        $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
+        }
+
         return redirect()->to($stripeConnectUrl);
     }
 

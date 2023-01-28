@@ -49,14 +49,16 @@ class StripeService
      */
     private function data(Vendor $vendor): array
     {
+        $owner = explode(' ', $vendor->owner->name);
+
         $data = [
             'country' => 'AU',
-            'type' => 'standard',
+            'type' => 'express',
             'email' => $vendor->email,
-//            'capabilities' => [
-//                'card_payments' => ['requested' => true],
-//                'transfers' => ['requested' => true],
-//            ],
+            'capabilities' => [
+                'card_payments' => ['requested' => true],
+                'transfers' => ['requested' => true],
+            ],
             'business_type' => 'individual',
             'business_profile' => [
                 'mcc' => '5462', //bakeries https://stripe.com/docs/connect/setting-mcc
@@ -66,26 +68,20 @@ class StripeService
                 'support_phone' => $vendor->shop_mobile,
                 'url' => config('app.url'),
             ],
-            'company' => [
-                'name' => $vendor->vendor_name,
-                'phone' => $vendor->mobile,
+//
+            'individual' => [
                 'address' => [
-                    'country' => 'AU',
-                    'line1' => $vendor->address,
-//                        'line2' => $vendor['street_address'],
-                    'city' => $vendor->suburb,
-                    'state' => $vendor->state,
-                    'postal_code' => $vendor->pc,
+                    'city'=> $vendor->suburb,
+                    'country'=>'AU',
+                    'line1'=> $vendor->address,
+                    'postal_code'=> $vendor->pc,
+                    'state'=> $vendor->state
                 ],
-                'tax_id' => $vendor->abn
+                'email' => $vendor->email,
+                'first_name' => $owner[0],
+                'last_name' => $owner[1] ?? '',
+                'phone' => $vendor->owner->mobile
             ],
-//            'individual' => [
-//                'address' => $vendor->address,
-//                'email' => $vendor->owner->email,
-//                'first_name' => $vendor->contact_name,
-//                'last_name' => $vendor->contact_lastname,
-//                'phone' => $vendor->mobile
-//            ],
 
 //            'settings' => [
 //                'branding' => [
