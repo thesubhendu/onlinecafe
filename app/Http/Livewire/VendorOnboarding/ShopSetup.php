@@ -162,6 +162,9 @@ class ShopSetup extends Component
             $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
         }catch (\Exception $e){
 
+            //todo send email to vendor saying to receive payment complete stripe connect
+
+            return redirect()->route('register-business.menu-products-setup');
         }
 
         return redirect()->to($stripeConnectUrl);
