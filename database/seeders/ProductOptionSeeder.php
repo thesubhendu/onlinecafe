@@ -93,6 +93,7 @@ class ProductOptionSeeder extends Seeder
             'name' => 'Extra Hot',
             'charge' => 0,
             'price' => 0,
+            'default_option' => true,
         ]);
 
         // Shots
@@ -100,6 +101,8 @@ class ProductOptionSeeder extends Seeder
             'name' => 'Regular',
             'charge' => 0,
             'price' => 0,
+            'default_option' => true,
+
         ]);
         ProductOption::factory()->shots()->create([
             'name' => 'Extra Shot',
