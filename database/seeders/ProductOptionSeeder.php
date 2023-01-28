@@ -90,7 +90,7 @@ class ProductOptionSeeder extends Seeder
             'price' => 0,
         ]);
         ProductOption::factory()->temperature()->create([
-            'name' => 'Extra Large',
+            'name' => 'Extra Hot',
             'charge' => 0,
             'price' => 0,
         ]);
