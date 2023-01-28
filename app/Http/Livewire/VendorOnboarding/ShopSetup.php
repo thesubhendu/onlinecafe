@@ -164,7 +164,8 @@ class ShopSetup extends Component
 
             //todo send email to vendor saying to receive payment complete stripe connect
 
-            return redirect()->route('register-business.menu-products-setup');
+            session()->flash('error', $e->getMessage());
+            return redirect()->route('register-business.create');
         }
 
         return redirect()->to($stripeConnectUrl);
