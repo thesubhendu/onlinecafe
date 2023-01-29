@@ -161,7 +161,7 @@
 
                                 <div class="mb-3">
                                     <input type="checkbox" class="form-check-input" wire:model="form.is_rewarding_active" >
-                                    <label for="">Toggle loyalty Program</label>
+                                    <label for="">Loyalty Program</label>
                                 </div>
 
                                 @if($form['is_rewarding_active'])

@@ -28,7 +28,7 @@
                     <div class="">
                         <form wire:submit.prevent="register" class="row">
                             <div class="form-group col-lg-6 col-sm-12">
-                                <label for="vendor_name" class="form-label"> Business Name</label>
+                                <label for="vendor_name" class="form-label"> Business Name (Entity Name)</label>
                                 <input type="text" class="form-control" wire:model.lazy="vendor_name"
                                        placeholder="Business Name">
                                 @error('vendor_name') <span class="text-danger">{{ $message }}</span> @enderror
