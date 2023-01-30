@@ -11,15 +11,15 @@
             </div>
         </div>
 
-        <div wire:loading.delay.longest.class.remove="d-none" class="d-none alert alert-wartning validator" role="status">
-            <div class="container">
-                <div class="row">
-                    <div class="alert alert-info">
-                        <strong>Validating ABN. Please Wait...</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--        <div wire:loading.delay.longest.class.remove="d-none" class="d-none alert alert-wartning validator" role="status">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row">--}}
+{{--                    <div class="alert alert-info">--}}
+{{--                        <strong>Validating ABN. Please Wait...</strong>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="container">
             <div class="row">
