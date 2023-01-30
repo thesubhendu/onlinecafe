@@ -5,6 +5,7 @@ namespace App\Http\Livewire\VendorOnboarding;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\User;
 use App\Services\AbnChecker;
+use App\Services\StripeService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -31,6 +32,10 @@ class Registration extends Component
     protected $shop;
     public $authUser;
     public $password_confirmation;
+
+    public $validationError;
+
+    protected $queryString = ['validationError'];
 
     public function render()
     {
@@ -99,6 +104,15 @@ class Registration extends Component
         return $rules;
     }
 
+    public function submit()
+    {
+        if(empty($this->validationError)){
+            $this->register();
+        }else {
+            $this->updateData();
+        }
+    }
+
     public function register()
     {
         $this->validate($this->validationRules());
@@ -149,6 +163,54 @@ class Registration extends Component
         return redirect()->route('register-business.payment');
     }
 
+    public function updateData()
+    {
+        $this->validate($this->validationRules());
+
+        // check if valid business (ABN check)
+        $abnService = (new AbnChecker($this->abn));
+        $isValid = $abnService->isValidBusiness();
+
+        if (!$isValid) {
+            session()->flash('error', "Not Valid ABN. Please enter correct ABN/ASIC and try again");
+
+            return response()->json(['error' => 'Not Valid ABN'], 422);
+        }
+
+        $isValidBusinessName = $abnService->isValidBusinessName($this->vendor_name);
+
+        if (!$isValidBusinessName) {
+            session()->flash('error', "Invalid Business Name. Please enter correct Business Name and try again");
+
+            return response()->json(['error' => 'Invalid Business Name'], 422);
+        }
+
+
+        if ($this->authUser) {
+            $this->authUser->update(
+                $this->dataToSave()
+            );
+        }
+
+        $vendor = auth()->user()->shop;
+
+        $vendor->update($this->dataToSave());
+
+
+        try {
+            $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
+        }catch (\Exception $e){
+
+            //todo send email to vendor saying to receive payment complete stripe connect
+
+            session()->flash('error', $e->getMessage());
+            return redirect()->route('register-business.create',['validationError'=>'1']);
+        }
+
+        return redirect()->to($stripeConnectUrl);
+
+    }
+
     private function createUser()
     {
         $input =
@@ -182,15 +244,25 @@ class Registration extends Component
 
     private function autoFillFields(): void
     {
-        $this->shop = $this->authUser->shop;
-        if ($this->shop) {
-            $this->fill($this->dataToSave($this->shop));
-        } else {
-            $name = explode(' ', auth()->user()->name, 2);
+         $name = explode(' ', auth()->user()->name, 2);
             $this->contact_name = $name[0];
             $this->contact_lastname = $name[1] ?? '';
             $this->email = auth()->user()->email;
             $this->mobile = auth()->user()->mobile;
+
+        $this->shop = $this->authUser->shop;
+
+        if ($this->shop) {
+            $this->fill(
+                [
+                    'vendor_name'      => $this->shop->vendor_name,
+                    'address'          => $this->shop->address,
+                    'suburb'           => $this->shop->suburb,
+                    'pc'               => $this->shop->pc,
+                    'state'            => $this->shop->state,
+                    'abn'              => $this->shop->abn,
+                ]
+            );
         }
     }
 }

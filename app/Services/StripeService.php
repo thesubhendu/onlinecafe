@@ -15,18 +15,28 @@ class StripeService
     }
     public function createAccount(Vendor $vendor): string
     {
-        if(!is_null($vendor->stripe_account_id)){
-            return route('register-business.menu-products-setup');
-//            return $this->refreshUrl($vendor);
+        if($vendor->charges_enabled_at){
+            return false;
         }
 
-        $stripe_account = $this->stripe->accounts->create(
-            $this->data($vendor)
-        );
+        try {
 
-        $accountId = $stripe_account->id;
-        $vendor->stripe_account_id = $accountId;
-        $vendor->save();
+             if($vendor->stripe_account_id) {
+                 $this->stripe->accounts->update(
+                     $vendor->stripe_account_id,
+                     $this->data($vendor)
+                 );
+            }else {
+                 $stripe_account = $this->stripe->accounts->create(
+                    $this->data($vendor)
+                );
+                $vendor->stripe_account_id = $stripe_account->id;
+                $vendor->save();
+             }
+        } catch (\Exception $e) {
+//                dd($e->getMessage());
+            throw new \Exception($e->getMessage());
+        }
 
         return $this->refreshUrl($vendor);
     }

@@ -26,7 +26,7 @@
                 <div class="register-form">
                     <h4 class="title mt-5 mb-4">Register your business</h4>
                     <div class="">
-                        <form wire:submit.prevent="register" class="row">
+                        <form wire:submit.prevent="submit" class="row">
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="vendor_name" class="form-label"> Business Name (Entity Name)</label>
                                 <input type="text" class="form-control" wire:model.lazy="vendor_name"

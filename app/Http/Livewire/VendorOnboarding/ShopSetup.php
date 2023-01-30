@@ -158,6 +158,11 @@ class ShopSetup extends Component
             $vendor->save();
         }
 
+
+        if($vendor->charges_enabled_at){
+            return route('register-business.menu-products-setup');
+        }
+
         try {
             $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
         }catch (\Exception $e){
@@ -165,7 +170,7 @@ class ShopSetup extends Component
             //todo send email to vendor saying to receive payment complete stripe connect
 
             session()->flash('error', $e->getMessage());
-            return redirect()->route('register-business.create');
+            return redirect()->route('register-business.create',['validationError'=>'1']);
         }
 
         return redirect()->to($stripeConnectUrl);
