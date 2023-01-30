@@ -29,7 +29,7 @@ class CreateVendorsTable extends Migration
             $table->string('suburb')->nullable();
             $table->string('pc');
             $table->string('state');
-            $table->string('vendor_image')->nullable()->default('vendor_image.jpg');
+            $table->string('vendor_image')->nullable();
             $table->string('vendor_logo')->nullable();
             $table->foreignId('owner_id')->default(1)->constrained('users');
             $table->boolean('is_active')->default(false);
