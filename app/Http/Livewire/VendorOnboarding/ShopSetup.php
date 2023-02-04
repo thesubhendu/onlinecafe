@@ -159,8 +159,10 @@ class ShopSetup extends Component
         }
 
 
+
         if($vendor->stripe_account_id){
-            return route('register-business.menu-products-setup');
+
+            return redirect()->route('register-business.menu-products-setup');
         }
 
         try {
