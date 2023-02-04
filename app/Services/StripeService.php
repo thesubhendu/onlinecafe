@@ -20,22 +20,22 @@ class StripeService
         }
 
         try {
-
              if($vendor->stripe_account_id) {
-                 $this->stripe->accounts->update(
-                     $vendor->stripe_account_id,
-                     $this->data($vendor)
-                 );
-            }else {
+                 $this->stripe->accounts->delete($vendor->stripe_account_id);
+             }
+        } catch (\Exception $e) {
+
+        }
+
+        try {
                  $stripe_account = $this->stripe->accounts->create(
                     $this->data($vendor)
                 );
                 $vendor->stripe_account_id = $stripe_account->id;
                 $vendor->save();
-             }
-        } catch (\Exception $e) {
-//                dd($e->getMessage());
-            throw new \Exception($e->getMessage());
+            } catch (\Exception $e) {
+                throw new \Exception($e->getMessage());
+
         }
 
         return $this->refreshUrl($vendor);

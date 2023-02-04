@@ -11,15 +11,15 @@
             </div>
         </div>
 
-{{--        <div wire:loading.delay.longest.class.remove="d-none" class="d-none alert alert-wartning validator" role="status">--}}
-{{--            <div class="container">--}}
-{{--                <div class="row">--}}
-{{--                    <div class="alert alert-info">--}}
-{{--                        <strong>Validating ABN. Please Wait...</strong>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--        <div wire:loading.delay.longest.class.remove="d-none" class="d-none alert alert-wartning validator" role="status">--}}
+        {{--            <div class="container">--}}
+        {{--                <div class="row">--}}
+        {{--                    <div class="alert alert-info">--}}
+        {{--                        <strong>Validating ABN. Please Wait...</strong>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
 
         <div class="container">
             <div class="row">
@@ -87,11 +87,18 @@
 
                             </div>
 
+
                             <div class="form-group col-lg-6 col-sm-12 mb-5">
                                 <label for="mobile" class="form-label"> Phone</label>
-                                <input type="text" class="form-control" wire:model.lazy="mobile"
-                                       placeholder="Phone No ">
-                                @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">+61</span>
+
+                                    <input type="text" class="form-control" wire:model.lazy="mobile"
+                                           placeholder="Phone No ">
+                                    @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
+
+                                </div>
 
                             </div>
                             @if(!auth()->user())
@@ -107,7 +114,8 @@
                                     <label for="mobile" class="form-label"> Confirm Password</label>
                                     <input type="password" class="form-control" wire:model.lazy="password_confirmation"
                                            placeholder="Confirm Password ">
-                                    @error('password_confirmation') <span class="text-danger">{{ $message }}</span> @enderror
+                                    @error('password_confirmation') <span
+                                        class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             @endif
 

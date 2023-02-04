@@ -63,7 +63,7 @@ class Registration extends Component
             'contact_name'     => $vendor->contact_name,
             'contact_lastname' => $vendor->contact_lastname,
             'address'          => $vendor->address,
-            'mobile'           => $vendor->mobile,
+            'mobile'           => "+61".ltrim($vendor->mobile, "0"),
             'suburb'           => $vendor->suburb,
             'pc'               => $vendor->pc,
             'state'            => $vendor->state,
@@ -196,19 +196,7 @@ class Registration extends Component
 
         $vendor->update($this->dataToSave());
 
-
-        try {
-            $stripeConnectUrl = (new StripeService())->createAccount($vendor->fresh());
-        }catch (\Exception $e){
-
-            //todo send email to vendor saying to receive payment complete stripe connect
-
-            session()->flash('error', $e->getMessage());
-            return redirect()->route('register-business.create',['validationError'=>'1']);
-        }
-
-        return redirect()->to($stripeConnectUrl);
-
+        return redirect()->route('register-business.payment');
     }
 
     private function createUser()
