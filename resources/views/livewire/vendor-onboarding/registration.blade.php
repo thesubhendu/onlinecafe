@@ -24,7 +24,9 @@
         <div class="container">
             <div class="row">
                 <div class="register-form">
-                    <h4 class="title mt-5 mb-4">Register your business</h4>
+                    <h4 class="">Register your business</h4>
+                    <p>(Please keep photo of driving license with you) </p>
+
                     <div class="">
                         <form wire:submit.prevent="submit" class="row">
                             <div class="form-group col-lg-6 col-sm-12">
