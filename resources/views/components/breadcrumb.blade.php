@@ -7,7 +7,7 @@
                     <li>
                         <a href="{{route('home')}}">Home</a>
                     </li>
-                    <li><a href="{{route('register-business.create')}}">Vender Registration</a></li>
+                    <li><a href="{{route('register-business.create')}}">Vendor Registration</a></li>
                     <li>Register Business</li>
                 </ul>
             </div>

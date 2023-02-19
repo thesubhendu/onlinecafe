@@ -20,10 +20,14 @@ class DatabaseSeeder extends Seeder
         $this->call(OptionTypeSeeder::class);
         $this->call(ProductOptionSeeder::class);
 
-        $this->call(UsersTableSeeder::class);
+         if(app()->environment('production')){
+            $this->call(RoleSeeder::class);
+        }else{
+             $this->call(UsersTableSeeder::class);
+             $this->call(OrdersTableSeeder::class);
+         }
 
 //        Product::factory(150)->create();
-        $this->call(OrdersTableSeeder::class);
         $this->call(ServicesSeeder::class);
     }
 }
