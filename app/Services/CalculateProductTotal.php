@@ -13,14 +13,17 @@ class CalculateProductTotal
 
     public function __construct(Product $product, array $productOptions)
     {
-        $this->totalPrice = $product->price;
 
         $sizeId = $productOptions['selected_size_id'];
         $selectedOptions = $productOptions['selected_extras'];
 
         $size = $product->productPrices()->find($sizeId);
 
-        $this->totalPrice += $size->price ?? 0;
+        if(!empty($size->price)){
+            $this->totalPrice = $size->price;
+        }else{
+            $this->totalPrice = $product->price;
+        }
 
 
         $this->redableOptions['extra']['size'] = $size->size;

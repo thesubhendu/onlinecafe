@@ -23,10 +23,9 @@ class OrderItem
         $productExist = OrderProduct::where(
             [
                 'product_id' => $product->id,
-                'price'      => $product->price,
                 'order_id'   => $this->order->id,
             ]
-    )
+        )
             ->whereJsonContains('options', $readableOptions)
             ->first();
 
