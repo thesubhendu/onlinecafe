@@ -79,8 +79,7 @@ class MenuProductsSetup extends Component
 
     public function saveProductOption($option, $vendor): void
     {
-        $vendor->productOptions()->create([
-            'name' => $option->name,
+       $vendor->productOptions()->updateOrCreate(['name' => $option->name],[
             'price' => $option->price,
             'option_type_id' => $option->option_type_id,
             'charge' => $option->charge,
