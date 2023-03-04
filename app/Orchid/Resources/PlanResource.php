@@ -83,4 +83,14 @@ class PlanResource extends Resource
         }
         return false;
     }
+
+        /**
+     * Get the permission key for the resource.
+     *
+     * @return string|null
+     */
+    public static function permission(): ?string
+    {
+        return 'platform.systems.users'; //user management permission , only admin can access this
+    }
 }
