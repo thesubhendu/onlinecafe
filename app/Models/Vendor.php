@@ -149,6 +149,11 @@ class Vendor extends Model
         return $query->where('is_subscribed', '1');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', '1');
+    }
+
     public function freeCategoryProducts(): Collection
     {
         return $this->products()->where('category_id', $this->free_category)->get();

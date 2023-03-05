@@ -47,6 +47,7 @@ class StripeWebhookController extends Controller
                $vendor = Vendor::where('stripe_account_id', $accountId)->first();
                if($vendor && is_null($vendor->charges_enabled_at) && $eventData->charges_enabled === true){
                   $vendor->charges_enabled_at = now();
+                  $vendor->is_active = true;
                   $vendor->save();
                }
                break;
