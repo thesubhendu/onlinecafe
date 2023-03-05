@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 use Spatie\OpeningHours\OpeningHours;
 
 class Vendor extends Model
 {
-    use HasFactory, Favoriteable, HasVouchers;
+    use HasFactory, Favoriteable, HasVouchers, AsSource, Filterable;
 
     protected $guarded = ['owner_id'];
     protected $casts = [
