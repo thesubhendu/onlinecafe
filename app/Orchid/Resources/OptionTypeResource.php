@@ -2,19 +2,21 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\ProductCategory;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\TD;
 
-class VendorResource extends Resource
+class OptionTypeResource extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Vendor::class;
+    public static $model = \App\Models\OptionType::class;
 
     /**
      * Get the fields displayed by the resource.
@@ -24,14 +26,13 @@ class VendorResource extends Resource
     public function fields(): array
     {
         return [
-          Input::make('vendor_name')->title('Vendor Name')->required(),
-          Input::make('mobile')->title('Vendor Mobile')->required(),
-          Input::make('stripe_account_id')->title('Stripe account ID'),
-          CheckBox::make('is_active')
-            ->value(1)
-            ->title('Shop Active Status')
-            ->sendTrueOrFalse()
 
+            Input::make('name')->title('Name')->required(),
+            Input::make('order_no')->title('Order')->required(),
+//        Input::make('category_id')->title('Option Type')->required(),
+            Relation::make('category_id')
+                ->fromModel(ProductCategory::class, 'name')
+                ->title('Category')->required()
 
         ];
     }
@@ -45,23 +46,8 @@ class VendorResource extends Resource
     {
         return [
             TD::make('id'),
-
-            TD::make('vendor_name'),
-            TD::make('contact_name'),
-            TD::make('contact_lastname'),
-            TD::make('email'),
-            TD::make('mobile'),
-//            TD::make('stripe_account_id'),
-
-            TD::make('created_at', 'Date of creation')
-                ->render(function ($model) {
-                    return $model->created_at->toDateTimeString();
-                }),
-
-            TD::make('updated_at', 'Update date')
-                ->render(function ($model) {
-                    return $model->updated_at->toDateTimeString();
-                }),
+            TD::make('name'),
+            TD::make('category_id'),
         ];
     }
 
@@ -87,13 +73,13 @@ class VendorResource extends Resource
 
     public static function displayInNavigation(): bool
     {
-        if(auth()->check() && auth()->user()->isAdmin()){
-                return true;
+        if (auth()->check() && auth()->user()->isAdmin()) {
+            return true;
         }
         return false;
     }
 
-        /**
+    /**
      * Get the permission key for the resource.
      *
      * @return string|null

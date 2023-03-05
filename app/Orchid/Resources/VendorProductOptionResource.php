@@ -2,19 +2,21 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\OptionType;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\TD;
 
-class VendorResource extends Resource
+class VendorProductOptionResource extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Vendor::class;
+    public static $model = \App\Models\VendorProductOption::class;
 
     /**
      * Get the fields displayed by the resource.
@@ -24,13 +26,19 @@ class VendorResource extends Resource
     public function fields(): array
     {
         return [
-          Input::make('vendor_name')->title('Vendor Name')->required(),
-          Input::make('mobile')->title('Vendor Mobile')->required(),
-          Input::make('stripe_account_id')->title('Stripe account ID'),
-          CheckBox::make('is_active')
-            ->value(1)
-            ->title('Shop Active Status')
-            ->sendTrueOrFalse()
+
+        Input::make('name')->title('Name')->required(),
+        Input::make('price')->title('Price')->required(),
+        Relation::make('option_type_id')->fromModel(OptionType::class, 'name')->title('Option Type')->required(),
+        CheckBox::make('default_option')
+                    ->value(1)
+                    ->title('Is Default Option')
+                    ->sendTrueOrFalse(),
+
+        CheckBox::make('charge')
+                    ->value(1)
+                    ->title('Is Chargeable')
+                    ->sendTrueOrFalse()
 
 
         ];
@@ -45,18 +53,12 @@ class VendorResource extends Resource
     {
         return [
             TD::make('id'),
+            TD::make('name'),
+            TD::make('price'),
+            TD::make('option_type_id', 'Option Type')->render(fn($p) => $p->optionType->name),
 
-            TD::make('vendor_name'),
-            TD::make('contact_name'),
-            TD::make('contact_lastname'),
-            TD::make('email'),
-            TD::make('mobile'),
-//            TD::make('stripe_account_id'),
-
-            TD::make('created_at', 'Date of creation')
-                ->render(function ($model) {
-                    return $model->created_at->toDateTimeString();
-                }),
+            TD::make('default_option','Is Default'),
+            TD::make('charge'),
 
             TD::make('updated_at', 'Update date')
                 ->render(function ($model) {
@@ -85,7 +87,7 @@ class VendorResource extends Resource
         return [];
     }
 
-    public static function displayInNavigation(): bool
+     public static function displayInNavigation(): bool
     {
         if(auth()->check() && auth()->user()->isAdmin()){
                 return true;

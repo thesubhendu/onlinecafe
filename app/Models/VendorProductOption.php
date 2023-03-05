@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 
 class VendorProductOption extends Model implements Buyable
 {
 
-    use HasFactory;
+    use HasFactory, AsSource, Filterable;
 
     protected $guarded = [];
     protected $casts = ['options' => 'array'];
