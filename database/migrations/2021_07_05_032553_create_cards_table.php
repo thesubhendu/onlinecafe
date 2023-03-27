@@ -15,15 +15,15 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('vendor_id');
-            $table->integer('maxStamps');
-            $table->boolean('is_Active');
-            $table->string('card_logo')->nullable()->default('card_logo.jpg');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('vendor_id')->constrained('vendors');
+            $table->boolean('is_active')->default(true);
+            $table->string('card_logo')->nullable();
+            $table->boolean('is_max_stamped')->default(false);
+            $table->boolean('loyalty_claimed')->default(false);
+            $table->integer('total_claimed')->default(0);
+            $table->string('receiver_email')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
         });
     }
 

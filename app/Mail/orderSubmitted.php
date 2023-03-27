@@ -6,7 +6,6 @@ use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class orderSubmitted extends Mailable
 {
@@ -33,6 +32,6 @@ class orderSubmitted extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.order.submitted');
+        return $this->from('orders@mycoffees.com.au')->markdown('mail.order.submitted');
     }
 }

@@ -17,7 +17,7 @@ class NotSubscribed
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() && $request->user()->subscribed('subscribed')) {
-            return redirect()->route('account.subscriptions');
+            return redirect()->route('register-business.shop-setup');
         }
         return $next($request);
     }

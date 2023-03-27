@@ -13,9 +13,11 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::inRandomOrder()->where('is_subscribed', '1')
-                         ->get();
-        return view('landing-page')
-            ->with('vendors', $vendors);
+
+        return redirect()->route('vendor-landing');
+        $vendors = Vendor::with('ratings')
+            ->subscribed()
+            ->get();
+
     }
 }

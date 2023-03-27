@@ -1,8 +1,24 @@
-<footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2021 mycoffees.com.au</p>
-    <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacy</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Support</a></li>
-    </ul>
+<footer class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-content">
+                        <h2>Contact</h2>
+                        <ul class="contact-list">
+                            <li>
+                                <i class="fa fa-envelope"></i>  <a href="mailto:support@mycoffees.com.au">someone@example.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="bottom-footer">
+        <div class="container">
+            <small> 2021 © {{config('app.name')}}. All rights reserved. </small>
+        </div>
+    </div>
 </footer>

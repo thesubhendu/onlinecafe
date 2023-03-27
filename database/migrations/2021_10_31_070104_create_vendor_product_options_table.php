@@ -18,9 +18,11 @@ class CreateVendorProductOptionsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->foreignId('option_type_id')->references('id')->on('option_types')->onDelete('cascade');
+            $table->boolean('charge')->default(true);
             $table->decimal('price', 4, 2);
             $table->foreignId('vendor_id')->constrained('vendors');
-            $table->foreignId('category_id')->constrained('product_categories');
+            $table->boolean('default_option')->default(false);
             $table->timestamps();
         });
     }

@@ -22,11 +22,19 @@ class CreateOrdersTable extends Migration
                   ->constrained()->onDelete('cascade');
             $table->enum('payment_method', ['in_store', 'credit_card'])
                   ->default('in_store');
-            $table->integer('order_total');
             $table->unsignedBigInteger('user_id')
                   ->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id')
                   ->constrained()->onDelete('cascade');
+            $table->decimal('order_total')->default(0);
+            $table->decimal('sub_total')->default(0);
+            $table->decimal('tax')->default(0);
+            $table->string('status');
+            $table->unsignedInteger('free_products_claimed')->default(0);
+            $table->unsignedBigInteger('card_id')->nullable();
+            $table->unsignedInteger('stamp_count')->default(0);
+            $table->boolean('is_paid')->default(false);
+
             $table->timestamps();
         });
     }

@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'phone_verified'   => EnsurePhoneIsVerified::class,
         'subscribed'       => \App\Http\Middleware\Subscribed::class,
         'not.subscribed'   => \App\Http\Middleware\NotSubscribed::class,
+        'can_claim_loyalty'=>\App\Http\Middleware\EligibleToClaimLoyalty::class,
     ];
 }

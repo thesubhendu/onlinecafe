@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateOrderProductTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations.2
      *
      * @return void
      */
@@ -21,11 +21,11 @@ class CreateOrderProductTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
-            $table->integer('price');
+            $table->decimal('price');
             $table->integer('quantity');
-            $table->string('milk')->nullable();
-            $table->integer('sugar')->nullable();
-            $table->string('syrup')->nullable();
+
+            $table->json('options')->nullable();
+
             $table->timestamps();
         });
     }

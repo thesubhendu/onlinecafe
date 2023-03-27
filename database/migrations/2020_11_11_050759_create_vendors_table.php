@@ -21,12 +21,16 @@ class CreateVendorsTable extends Migration
             $table->string('contact_lastname');
             $table->string('email')->unique();
             $table->string('mobile')->unique();
+            $table->string('stripe_account_id', 100)->nullable();
+
+            $table->string('shop_email')->unique()->nullable();
+            $table->string('shop_mobile')->unique()->nullable();
             $table->string('address');
             $table->string('suburb')->nullable();
             $table->string('pc');
             $table->string('state');
-            $table->string('cardstamps')->nullable();
-            $table->string('vendor_image')->nullable()->default('vendor_image.jpg');
+            $table->string('vendor_image')->nullable();
+            $table->string('vendor_logo')->nullable();
             $table->foreignId('owner_id')->default(1)->constrained('users');
             $table->boolean('is_active')->default(false);
             $table->boolean('is_subscribed')->default(false);
@@ -34,7 +38,20 @@ class CreateVendorsTable extends Migration
             $table->string('shop_name', 60)->nullable();
             $table->text('description')->nullable();
             $table->json('opening_hours')->nullable();
-            $table->boolean('is_pet_friendly')->nullable();
+            $table->json('services')->nullable();
+
+            $table->integer('max_stamps')->nullable();
+            $table->unsignedBigInteger('free_category')->nullable();
+            $table->foreign('free_category')->references('id')->on('product_categories');
+            $table->integer('get_free')->nullable();
+
+
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
+
+            $table->boolean('is_rewarding_active')->default(true);
+            $table->timestamp('charges_enabled_at')->nullable();
+
             $table->timestamps();
         });
     }

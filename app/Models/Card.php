@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Stamp;
-use App\Models\Vendor;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'vendor_id', 'maxStamps', 'is_Active'];
+    protected $fillable = ['user_id', 'vendor_id', 'is_active', 'receiver_email'];
 
     public function user()
     {
@@ -40,7 +38,7 @@ class Card extends Model
 
         $card = static::where('user_id', Auth::id())
             ->where('vendor_id', $id)
-            ->where('is_Active', true)->first();
+            ->where('is_active', true)->first();
 
         if (! $card) {
             return false;
@@ -49,14 +47,40 @@ class Card extends Model
         return $card;
     }
 
-    public function create()
+    public function getOrCreateActive($customerId, $vendorId)
     {
-        //
+        return Card::query()->firstOrCreate([
+            'user_id' => $customerId,
+            'vendor_id' => $vendorId,
+            'is_max_stamped' => false
+        ]);
     }
 
-
-    public function stampCard()
+    public static function remainingStampsOnActiveCard($vendor)
     {
-        //
+        $activeCard = Card::where('vendor_id', $vendor->id)
+            ->where('user_id', auth()->id())
+            ->where('is_max_stamped', false)
+            ->first();
+        if($activeCard)
+        {
+            return $activeCard->vendor->max_stamps - $activeCard->stamps->count();
+        }
+
+        return $vendor->max_stamps;
     }
+
+    public function scopeRewardable(Builder $builder)
+    {
+        return $builder->where([
+           'is_max_stamped'=> true,
+           'loyalty_claimed'=> false,
+        ]);
+    }
+
+    public function isRewardable(): bool
+    {
+        return $this->is_max_stamped && !$this->loyalty_claimed;
+    }
+
 }

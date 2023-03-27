@@ -9,23 +9,37 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "alexpechkarev/google-maps": "^8.0",
+        "beyondcode/laravel-vouchers": "^2.0",
         "bumbummen99/shoppingcart": "^4.0",
+        "christiankuri/laravel-favorite": "^1.4",
+        "doctrine/dbal": "^3.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.7",
+        "itsgoingd/clockwork": "^5.1",
         "laravel/cashier": "^13.5",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^2.4",
         "laravel/nexmo-notification-channel": "^2.5",
-        "laravel/sanctum": "^2.12",
+        "laravel/sanctum": "^2.15",
+        "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "nexmo/laravel": "^2.4",
         "orangehill/iseed": "^3.0",
+        "orchid/crud": "3.3.0",
+        "orchid/platform": "^10.22",
+        "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "^7.0",
+        "realrashid/sweet-alert": "^4.1",
+        "silviolleite/laravelpwa": "^2.0",
         "sparkeleven/abn-lookup": "^1.0",
         "spatie/opening-hours": "^2.10",
+        "stripe/stripe-php": "^9.0",
         "symfony/routing": "^5.3",
-        "tcg/voyager": "^1.4"
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -51,7 +65,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

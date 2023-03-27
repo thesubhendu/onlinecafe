@@ -17,28 +17,17 @@ class DatabaseSeeder extends Seeder
         $this->call(PlanSeeder::class);
         $this->call(ProductCategorySeeder::class);
         $this->call(AllProductSeeder::class);
+        $this->call(OptionTypeSeeder::class);
         $this->call(ProductOptionSeeder::class);
 
-        $this->call(RolesTableSeeder::class);
-        $this->call(UserRolesTableSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(PermissionRoleTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
+         if(app()->environment('production')){
+            $this->call(RoleSeeder::class);
+        }else{
+             $this->call(UsersTableSeeder::class);
+             $this->call(OrdersTableSeeder::class);
+         }
 
 //        Product::factory(150)->create();
-
-        $this->call(OrdersTableSeeder::class);
-
-
-        //voyager seeders
-        $this->call(DataTypesTableSeeder::class);
-        $this->call(DataRowsTableSeeder::class);
-        $this->call(CategoriesTableSeeder::class);
-        $this->call(PostsTableSeeder::class);
-        $this->call(PagesTableSeeder::class);
-        $this->call(MenusTableSeeder::class);
-        $this->call(MenuItemsTableSeeder::class);
-        $this->call(SettingsTableSeeder::class);
-
+        $this->call(ServicesSeeder::class);
     }
 }

@@ -17,7 +17,7 @@ class Subscribed
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() && !$request->user()->subscribed('subscribed')) {
-            return redirect()->route('subscriptions.plans');
+            return redirect()->route('register-business.payment');
         }
 
         return $next($request);

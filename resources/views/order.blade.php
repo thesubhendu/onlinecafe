@@ -21,39 +21,39 @@
                                 <div class="col-lg-12 mb-3">
                                     <h4> Select Options</h4>
                                 </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-4 mb-3">
                                     <label>Quantity</label>
-                                    <select name="quantity" id="" class="form-control" required>
+                                    <select name="quantity" id="" class="form-select" required>
                                         @foreach ([1,2,3,4,5,6,7,8,9,10] as $option)
                                         <option value="{{$option}}">{{$option}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-4 mb-3">
                                     <label for="">Which Milk</label>
-                                    <select name="milk" id="milk" class="form-control">
+                                    <select name="milk" id="milk" class="form-select">
                                         @foreach ($milkOptions as $option)
                                         <option value="{{$option}}">{{$option}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-4 mb-3">
                                     <label for="">How Many Sugars</label>
-                                    <select name="sugar" id="sugar" class="form-control">
+                                    <select name="sugar" id="sugar" class="form-select">
                                         @foreach ($sugar as $option)
                                         <option value="{{$option}}">{{$option}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-4 mb-3">
                                     <label for="">Syrup</label>
-                                    <select name="syrup" id="syrup" class="form-control">
+                                    <select name="syrup" id="syrup" class="form-select">
                                         @foreach ($syrup as $option)
                                         <option value="{{$option}}">{{$option}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-lg-8 form-group text-right">
+                                <div class="col-lg-8 mb-3 text-right">
                                     <div class="total-submit">
                                         <button class="btn btn-secondary">
                                             Add to Cart &nbsp; <i class="fa fa-shopping-cart"></i>

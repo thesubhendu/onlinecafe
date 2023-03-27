@@ -2,19 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use BeyondCode\Vouchers\Traits\CanRedeemVouchers;
+use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
+use Orchid\Platform\Models\User as Authenticatable;
 
-class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
+
+class User extends Authenticatable
+//    implements MustVerifyEmail,MustVerifyPhone
 {
     use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable, Billable;
+    use HasApiTokens;
+    use HasProfilePhoto, Favoriteability, CanRedeemVouchers;
+    use Notifiable, Billable, \App\Traits\MustVerifyPhone;
     use TwoFactorAuthenticatable;
 
     /**
@@ -27,6 +36,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'email',
         'mobile',
         'password',
+        'permissions',
     ];
 
     /**
@@ -39,6 +49,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'permissions',
     ];
 
     /**
@@ -48,6 +59,32 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'permissions'       => 'array',
+    ];
+
+    /**
+     * The attributes for which you can use filters in url.
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+        'id',
+        'name',
+        'email',
+        'permissions',
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'email',
+        'updated_at',
+        'created_at',
     ];
 
     /**
@@ -62,11 +99,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function orders()
     {
         return $this->hasMany(Order::class);
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
     }
 
     public function cards()
@@ -91,13 +123,30 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         );
     }
 
-    public function hasVerifiedPhone()
+    public function isVendor()
     {
-        return ! is_null($this->phone_verified_at);
+        return  (bool) $this->shop;
     }
 
-    public function routeNotificationForNexmo($notification)
+    public function isAdmin()
     {
-        return $this->mobile;
+        return  Gate::allows('admin');
+    }
+
+    public function makeShopActive()
+    {
+        if($this->hasVerifiedPhone() && $this->hasVerifiedEmail()){
+            $this->shop->update(['is_active'=> 1]);
+        }
+    }
+
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function shippingAddress(): HasOne
+    {
+        return $this->hasOne(ShippingAddress::class);
     }
 }

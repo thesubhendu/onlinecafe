@@ -1,43 +1,107 @@
 <x-app-layout>
+
     <!-- VENDOR BANNER -->
     <section class="banner-inner">
         <div class="container">
-
             <!-- VENDER DETAILS -->
             <div class="row text-center banner-content">
-                <h2>{{$vendor->shop_name ?? $vendor->vendor_name}}</h2>
+                <h2>{{$vendor->name}}
+
+
+                </h2>
                 <p><i class="fa fa-map-marker"></i> {{$vendor->address}}, {{$vendor->suburb}}
                     , {{$vendor->state}}, {{$vendor->pc}}</p>
-                <p><i class="fa fa-envelope"></i> {{$vendor->email}} &nbsp; | &nbsp; <i
-                        class="fa fa-phone"></i> {{$vendor->mobile}}</p>
+
                 <p>
                     {{$openingInfo}}
                 </p>
                 <div class="vendor-actions">
                     <div class="icon-ratings">
-                        <span class="xs-block">
-                            <i class="fa fa-coffee selected"></i>
-                            <i class="fa fa-coffee selected"></i>
-                            <i class="fa fa-coffee selected"></i>
-                            <i class="fa fa-coffee"></i>
-                            <i class="fa fa-coffee"></i>
-                            <span>3.0</span>
-                        </span>
-                        <a href="" class="xs-block">Add Review</a>
-                        <span class="xs-block last-update">Last Update: {{$vendor->updated_at->diffForHumans()}}</span>
+                        <div class="row">
+                            <div class="col">
+                                <div class="shop-rating">
+                                    <div class="xs-block">
+                                        <span style="color: #a9a9a9">Review: </span>
+                                        @can('make-rating')
+                                            <livewire:rating-star :vendor="$vendor"/>
+                                        @endcan
+
+                                        @cannot('make-rating')
+                                                @for($i=0; $i < round($vendor->rating()); $i++)
+                                                    <i class="fa fa-coffee selected"></i>
+                                                @endfor
+                                                    @for($i=round($vendor->rating()); $i< 5; $i++)
+                                                        <i class="fa fa-coffee"></i>
+                                                    @endfor
+                                                <span style="color: #a9a9a9"><b>{{$vendor->rating()}}</b></span>
+                                        @endcannot
+                                    </div>
+                                    <div class="xs-block last-update">Last
+                                        Update: {{$vendor->updated_at->diffForHumans()}}
+                                    </div>
+                                </div>
+                                @can('make-rating')
+                                    <span title="Like cafe" >
+                                             <livewire:vendor-like-button :vendor="$vendor" />
+                                    </span>
+                                @endcan
+                            </div>
+
+                            @can('make-rating')
+                                <!-- Modal -->
+                                <div class="modal fade" id="rating-form-modal"
+                                     aria-labelledby="rating-form-modal"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Rate the
+                                                    vendor</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <livewire:rating-form :vendor="$vendor"/>
+                                            </div>
+                                    </div>
+
+                                </div>
+                            @endcan
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VENDER MENU -->
+    <section class="vendor-menu">
+        <div class="container">
+
+        <x-deals-section :deals="$deals"></x-deals-section>
+
+            <!-- TITLE -->
+            <div class="row mb-4">
+                <div class="col-md-12 m-0 p-0 ">
+                    <div class="content-heading">
+                        <h3 class="title">Featured Coffee</h3>
                     </div>
                 </div>
             </div>
 
-        </div>
-    </section>
-    <!-- VENDER MENU -->
-    <section class="category">
-        <div class="container">
+            <div class="owl-carousel owl-theme mb-4">
+                @foreach($featuredProducts as $product)
+                    <div class="item">
+                        <x-menu-card :product="$product"></x-menu-card>
+                    </div>
+                @endforeach
+            </div>
 
         @forelse ($vendor->products->groupBy('category_id') as $products)
             <!-- TITLE -->
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-md-12 m-0 p-0 ">
                         <div class="content-heading">
                             <h3 class="title">{{$products->first()->category->name}}</h3>
@@ -47,7 +111,9 @@
 
                 <div class="row  @if($loop->index > 0) mt-4 @endif ">
                     @foreach ($products as $product)
+                        <div class="col-md-6">
                         <x-menu-card :product="$product"></x-menu-card>
+                        </div>
                     @endforeach
                 </div>
 
@@ -60,4 +126,15 @@
 
     </section>
 
+    <x-footer></x-footer>
+
 </x-app-layout>
+
+    <script>
+        Livewire.on('ratingSet', id => {
+            var myModal = new bootstrap.Modal(document.getElementById('rating-form-modal'), {
+                keyboard: false
+            })
+            myModal.toggle()
+        })
+    </script>
