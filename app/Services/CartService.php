@@ -130,7 +130,7 @@ class CartService
 
     public function tax($price): float
     {
-        return round($price * (10 / 100), 2);
+        return round($price * (1 / 11), 2);
     }
 
     private function total($subtotal, $taxTotal): float
