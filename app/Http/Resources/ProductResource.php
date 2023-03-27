@@ -23,6 +23,7 @@ class ProductResource extends JsonResource
         return array_merge(
             parent::toArray($request),
             [
+                'product_prices'=> $this->productPrices->where('price','!=','0.00')->all(),
                 'option_types' => $optionTypes,
                 'updated_price' => $this->getProductPrice($this, $optionTypes),
                 'vendor_product_options' => $this->vendor->productOptions()->with('optionType')->get()
