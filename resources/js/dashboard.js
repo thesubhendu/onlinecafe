@@ -15,6 +15,10 @@ window.realtimeSetup = false;
 
 
 window.addEventListener("load", function () {
+
+    Notification.requestPermission().then((result) => {
+      console.log(result);
+    });
     fetchUser();
 });
 
@@ -44,6 +48,11 @@ function setupNotification(user){
                 options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
             }
 
+            let chromeNotification = new Notification(notification.title, { body: notification.text});
+
+            chromeNotification.addEventListener('click', () => {
+                window.href = notification.action;
+            })
             window.Swal.fire(options)
             //add sound
             playNotificationAudio();

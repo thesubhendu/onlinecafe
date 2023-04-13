@@ -13,6 +13,15 @@ use App\Http\Livewire\VendorOnboarding\ShopSetup;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('test', function () {
+    $u = \App\Models\User::where('email', 'admin@cafe.np')->first();
+
+    $u->notify(new \App\Notifications\NewOrderNotification(\App\Models\Order::first()));
+
+    dd('tested');
+
+});
+
 Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
