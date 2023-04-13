@@ -17,10 +17,24 @@ window.realtimeSetup = false;
 window.addEventListener("load", function () {
 
     Notification.requestPermission().then((result) => {
-      console.log(result);
     });
     fetchUser();
 });
+
+function createChromeNotification(notification){
+    Notification.requestPermission().then(function(permission) {
+  if (permission === "granted") {
+
+    var chromeNotification = new Notification(notification.title, { body: notification.text, requireInteraction: true});
+
+    chromeNotification.onclick = (event) => {
+      event.preventDefault(); // Prevents the browser from focusing the Notification's tab
+      window.open(notification.action); // Opens the website in a new tab
+      notification.close(); // Closes the notification
+    };
+  }
+});
+}
 
 function playNotificationAudio(){
         const audio = new Audio("./../elevator.wav");
@@ -48,11 +62,8 @@ function setupNotification(user){
                 options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
             }
 
-            let chromeNotification = new Notification(notification.title, { body: notification.text});
+            createChromeNotification(notification)
 
-            chromeNotification.addEventListener('click', () => {
-                window.href = notification.action;
-            })
             window.Swal.fire(options)
             //add sound
             playNotificationAudio();
