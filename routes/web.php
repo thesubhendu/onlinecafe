@@ -13,7 +13,7 @@ use App\Http\Livewire\VendorOnboarding\ShopSetup;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('test', function () {
+Route::get('test1995', function () {
     $u = \App\Models\User::where('email', 'admin@cafe.np')->first();
 
     $u->notify(new \App\Notifications\NewOrderNotification(\App\Models\Order::first()));
