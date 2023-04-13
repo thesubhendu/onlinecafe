@@ -13,10 +13,12 @@ use App\Http\Livewire\VendorOnboarding\ShopSetup;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('test1995', function () {
+Route::get('test', function () {
     $u = \App\Models\User::where('email', 'admin@cafe.np')->first();
-
-    $u->notify(new \App\Notifications\NewOrderNotification(\App\Models\Order::first()));
+$order = \App\Models\Order::first();
+$order->confirmed_at = Null;
+$order->save();
+    $u->notify(new \App\Notifications\NewOrderNotification($order));
 
     dd('tested');
 

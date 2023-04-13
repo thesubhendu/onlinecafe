@@ -1,6 +1,8 @@
 import Echo from 'laravel-echo';
 import Swal from "sweetalert2";
 
+import soundUrl from '../../public/elevator.wav'
+
 window.Pusher = require('pusher-js');
 
 window.Swal = Swal;
@@ -37,9 +39,13 @@ function createChromeNotification(notification){
 }
 
 function playNotificationAudio(){
-        const audio = new Audio("./../elevator.wav");
+        // const audio = new Audio("./../elevator.wav");
+        const audio = new Audio(soundUrl);
         audio.play();
-
+        window.notificationSound = audio;
+        setTimeout(() => {
+            playNotificationAudio()
+        },  2000); // Call playSound() again after the duration of the sound
 }
 
 function setupNotification(user){

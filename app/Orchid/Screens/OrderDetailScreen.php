@@ -42,6 +42,8 @@ class OrderDetailScreen extends Screen
     {
         return [
             Button::make('Confirm Order')
+                ->rawClick()
+                ->id("order-confirm-button")
                 ->canSee(!$this->order->confirmed_at)
                 ->icon('user-following')
                 ->method('confirmOrder')
