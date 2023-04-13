@@ -17,6 +17,13 @@ Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
 
+Route::get('/user-info', function (\Illuminate\Http\Request $request) {
+    if(auth()->check()) {
+        return ['user'=> auth()->user()];
+    }
+    return ['user'=>''];
+});
+
 Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 

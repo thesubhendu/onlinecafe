@@ -18,6 +18,12 @@ window.addEventListener("load", function () {
     fetchUser();
 });
 
+function playNotificationAudio(){
+        const audio = new Audio("./../elevator.wav");
+        audio.play();
+
+}
+
 function setupNotification(user){
     window.Echo.private('App.Models.User.' + user.id)
         .notification((notification) => {
@@ -40,6 +46,7 @@ function setupNotification(user){
 
             window.Swal.fire(options)
             //add sound
+            playNotificationAudio();
         });
 }
 
