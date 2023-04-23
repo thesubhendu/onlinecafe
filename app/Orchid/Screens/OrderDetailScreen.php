@@ -3,11 +3,13 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Actions\Button;
 use Orchid\Support\Facades\Toast;
+use Orchid\Support\Facades\Layout;
+use Orchid\Screen\Actions\ModalToggle;
 
 class OrderDetailScreen extends Screen
 {
@@ -41,24 +43,30 @@ class OrderDetailScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make('Confirm Order')
-                ->rawClick()
-                ->id("order-confirm-button")
-                ->canSee(!$this->order->confirmed_at)
-                ->icon('user-following')
-                ->method('confirmOrder')
+            ModalToggle::make('Confirm Order')
+            ->rawClick()
+            ->id("order-confirm-button")
+            ->modal('order-confirm-modal')
+            // ->canSee(!$this->order->confirmed_at)
+            ->icon('user-following')
+            ->method('confirmOrder')
 
         ];
     }
 
     public function confirmOrder(Request $request)
     {
-        $order = Order::find($request->order);
+        $request->validate([
+            'order_ready_in'=>'required|numeric'
+        ]);
 
+        $order = Order::find($request->order);
         if ($order->confirmed_at) {
             Toast::info("Order already confirmed!");
         } else {
             $order->confirm();
+            $order->order_ready_in = $request->get('order_ready_in');
+            $order->save();
             Toast::success("Order Confirmed!");
         }
 
@@ -72,7 +80,16 @@ class OrderDetailScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::view('admin.orders.detail')
+            Layout::view('admin.orders.detail'),
+            Layout::modal('order-confirm-modal', [
+                Layout::rows([
+                    Input::make('order_ready_in')
+                    ->type('number')
+                    ->required()
+                    ->title('How many minutes order will be ready?')
+                    ->placeholder('enter in minutes'),
+                ]),
+            ])->title("Order ready in?"),
         ];
     }
 }
