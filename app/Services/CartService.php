@@ -135,7 +135,7 @@ class CartService
 
     private function total($subtotal, $taxTotal): float
     {
-        return round($subtotal + $taxTotal, 2);
+        return round($subtotal, 2);
     }
 
     private function createActiveOrder(User $user, Vendor $vendor): Order
