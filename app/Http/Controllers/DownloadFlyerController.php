@@ -15,7 +15,7 @@ class DownloadFlyerController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $filepath = public_path('assets/pdf/customer_flyer.pdf');
+        $filepath = public_path('assets/customer-flyer.png');
         return Response::download($filepath);
     }
 }
