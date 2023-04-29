@@ -24,7 +24,7 @@
                     </a>
                     <div class="dropdown-menu">
                         @guest
-                            <a class="dropdown-item" href="{{route('platform.main')}}"> <i class="ti-user"></i> &nbsp;
+                            <a class="dropdown-item" href="{{route('login')}}"> <i class="ti-user"></i> &nbsp;
                                 Login</a>
 {{--                            <a class="dropdown-item" href="{{route('register')}}"> <i class="ti-unlock"></i> &nbsp;--}}
 {{--                                Register</a>--}}
