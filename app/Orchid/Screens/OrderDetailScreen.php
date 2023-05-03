@@ -47,7 +47,7 @@ class OrderDetailScreen extends Screen
             ->rawClick()
             ->id("order-confirm-button")
             ->modal('order-confirm-modal')
-            // ->canSee(!$this->order->confirmed_at)
+            ->canSee(!$this->order->confirmed_at)
             ->icon('user-following')
             ->method('confirmOrder')
 
