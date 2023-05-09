@@ -14,7 +14,7 @@ class ProductController extends ApiBaseController
      */
     public function show(Product $product)
     {
-       return new ProductResource($product);
+       return new ProductResource($product->load('vendor'));
     }
 
 }

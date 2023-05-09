@@ -32,7 +32,8 @@ class CartResource extends JsonResource
             "status"                => $this->status,
             "free_products_claimed" => $this->free_products_claimed,
             "card_id"               => $this->card_id,
-            "stamp_count"           => $this->stamp_count
+            "stamp_count"           => $this->stamp_count,
+            "is_open" => $this->vendor->is_open
         ];
         $orderProducts = $this->products->map(function ($product) {
             return [

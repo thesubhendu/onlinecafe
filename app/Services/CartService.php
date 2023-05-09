@@ -120,7 +120,8 @@ class CartService
 
     public function getActiveOrder(): null|Order
     {
-        return Order::where('user_id', auth()->id())->where('status', 'pending')->with('products')->first();
+        return Order::with('products.vendor')
+        ->first();
     }
 
     public function priceTotal($price, $qty): float
