@@ -121,7 +121,7 @@ class CartService
     public function getActiveOrder(): null|Order
     {
         return Order::with('products.vendor')
-        ->where('status','!=','completed')
+        ->where('status','pending')
         ->first();
     }
 
