@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\SettingScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -124,3 +125,8 @@ Route::screen('services', \App\Orchid\Screens\ServiceListScreen::class)
     ->name('platform.service.list');
 Route::screen('service/{service?}', \App\Orchid\Screens\ServiceEditScreen::class)
     ->name('platform.service.edit');
+
+
+// Settings
+
+Route::screen('settings', SettingScreen::class)->name('platform.settings');
