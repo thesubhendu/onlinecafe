@@ -31,7 +31,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('home'),
             Menu::make('Toggle Taking Orders')
                 ->icon('monitor')
-                ->permission('vendor')
+                // ->permission('vendor')
                 ->route('platform.settings'),
 
             Menu::make(__('Users'))
