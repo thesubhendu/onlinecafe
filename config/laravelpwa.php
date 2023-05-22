@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => 'mycoffees.com.au',
         'short_name' => 'mycoffees',
-        'start_url' => '/',
+        'start_url' => '/vendors/main',
         'background_color' => '#000000',
         'theme_color' => '#28a745',
         'display' => 'fullScreen',
