@@ -57,8 +57,12 @@ class OrderListScreen extends Screen
     {
         return [
             Layout::table('orders', [
-                TD::make('id'),
-                TD::make('order_number'),
+                TD::make('id')->render(function ($order) {
+                        return "<a href='". route('platform.order.show', $order) ."' > $order->id </a>";
+                }),
+                TD::make('order_number')->render(function ($order) {
+                        return "<a href='". route('platform.order.show', $order) ."' > $order->order_number </a>";
+                }),
                 TD::make('payment_method'),
                 TD::make('confirmed_at'),
                 TD::make('confirmed_by'),
