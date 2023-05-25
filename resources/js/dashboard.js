@@ -66,7 +66,7 @@ function setupNotification(user){
                 // toast: true,
                 position: 'top-right',
                 allowOutsideClick:false,
-                timer:4000,
+                // timer:4000,
                 text: notification.text,
             };
 
