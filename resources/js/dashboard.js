@@ -63,8 +63,9 @@ function setupNotification(user){
 
             let options = {
                 title: notification.title,
-                toast: true,
+                // toast: true,
                 position: 'top-right',
+                allowOutsideClick:false,
                 timer:4000,
                 text: notification.text,
             };
