@@ -38,11 +38,20 @@ function createChromeNotification(notification){
 });
 }
 
+const audio = new Audio(soundUrl);
+// const
+var soundCount = 0;
+
 function playNotificationAudio(){
         // const audio = new Audio("./../elevator.wav");
-        const audio = new Audio(soundUrl);
         audio.play();
         window.notificationSound = audio;
+        soundCount++;
+
+        if(soundCount > 3){
+            return;
+        }
+
         setTimeout(() => {
             playNotificationAudio()
         },  2000); // Call playSound() again after the duration of the sound
@@ -54,9 +63,10 @@ function setupNotification(user){
 
             let options = {
                 title: notification.title,
-                toast: true,
+                // toast: true,
                 position: 'top-right',
-                timer:4000,
+                allowOutsideClick:false,
+                // timer:4000,
                 text: notification.text,
             };
 

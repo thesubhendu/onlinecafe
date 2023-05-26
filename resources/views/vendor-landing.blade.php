@@ -108,7 +108,7 @@
         </div>
     </section>
 
-    @include('partnerwithus-cto')
+    @include('partnerwithus-cto-2')
 
     {{--    <section class="get-start-banner">--}}
     {{--        <div class="container">--}}

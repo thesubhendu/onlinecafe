@@ -14,6 +14,7 @@ use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Spatie\OpeningHours\OpeningHours;
 
+
 class Vendor extends Model
 {
     use HasFactory, Favoriteable, HasVouchers, AsSource, Filterable;
@@ -22,6 +23,7 @@ class Vendor extends Model
     protected $casts = [
         'opening_hours' => 'array',
         'services' => 'array',
+        'is_taking_orders' => 'boolean'
     ];
     protected $appends = ['is_favorite'];
 
@@ -82,6 +84,11 @@ class Vendor extends Model
 
     public function getIsOpenAttribute()
     {
+
+        if($this->is_taking_orders == false){
+            return false;
+        }
+
         if ($this->opening_hours) {
             $data = collect($this->opening_hours)
                 ->filter(fn($val, $key) => $val['is_active'])
@@ -93,11 +100,12 @@ class Vendor extends Model
 
             if ($range) {
                 return true;
-//                $openingInfo = "Open Now. Closes at ".$range->end();
             }
 
             return false;
         }
+
+        return true;
     }
 
 

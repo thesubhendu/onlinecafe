@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'name' => 'mycoffees.com.au',
+    'name' => 'brewsta.com.au',
     'manifest' => [
-        'name' => 'mycoffees.com.au',
-        'short_name' => 'mycoffees',
-        'start_url' => '/',
+        'name' => 'brewsta.com.au',
+        'short_name' => 'Brewsta Admin',
+        'start_url' => '/vendors/main',
         'background_color' => '#000000',
         'theme_color' => '#28a745',
         'display' => 'fullScreen',
