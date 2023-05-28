@@ -1,6 +1,6 @@
 {
-    "name": "Brewsta.com.au",
-    "short_name": "Brewsta-Admin",
+    "name": "Brewsta",
+    "short_name": "Brewsta-Vendor",
     "theme_color": "#ff6b22",
     "background_color": "#000000",
     "display": "fullScreen",
