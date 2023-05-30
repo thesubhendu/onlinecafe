@@ -28,6 +28,10 @@ class CartController extends ApiBaseController
 
     public function addToCart(CartRequest $request, Product $product): JsonResponse
     {
+        if(!$product->vendor->is_open) {
+            return $this->sendError("Shop is closed! Cannot order at the moment", 401);
+        }
+
         $cartItem = $this->cartService->addToCart($product, $request->get('quantity'), $request->get('options'));
         return $this->sendResponse(
             new CartResource($cartItem->load('products'))
