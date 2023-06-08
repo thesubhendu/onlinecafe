@@ -15,6 +15,67 @@ window.Echo = new Echo({
 
 window.realtimeSetup = false;
 
+//pwa install prompt
+
+function isIos() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+}
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+
+function isAppInstalled(){
+    if (localStorage.getItem('pwaInstalled') === 'true' || (window.matchMedia('(display-mode: standalone)').matches) || (navigator.standalone)) {
+        console.log('result is', localStorage.getItem('pwaInstalled'))
+
+        return true;
+    }
+    console.log('result false', localStorage.getItem('pwaInstalled'))
+    return false;
+}
+
+
+    let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+
+        if (!isAppInstalled()) {
+            setTimeout(() => {
+                window.Swal.fire({
+                    title: 'Add Brewsta to your home screen and use it like regular app',
+                    showDenyButton: true,
+                    confirmButtonText: 'Install Now',
+                    denyButtonText: `Not Now`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        deferredPrompt.prompt();
+
+                        deferredPrompt.userChoice.then((choiceResult) => {
+                            if (choiceResult.outcome === 'accepted') {
+                                // pwaInstallPrompt.close()
+                                localStorage.setItem('pwaInstalled', 'true');
+
+                            }
+                            deferredPrompt = null;
+                        });
+                    } else if (result.isDenied) {
+
+                    }
+                })
+            }, 2000)
+        }
+
+    })
+//end pwa install prompt
+
+
+
 
 window.addEventListener("load", function () {
 
