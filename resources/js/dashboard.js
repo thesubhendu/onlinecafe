@@ -47,7 +47,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
         if (!isAppInstalled()) {
             setTimeout(() => {
                 window.Swal.fire({
-                    title: 'Add Brewsta to your home screen and use it like regular app',
+                    title: 'Add Brewsta Admin to your home screen and use it like regular app',
                     showDenyButton: true,
                     confirmButtonText: 'Install Now',
                     denyButtonText: `Not Now`,
