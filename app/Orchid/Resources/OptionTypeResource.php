@@ -19,6 +19,16 @@ class OptionTypeResource extends Resource
     public static $model = \App\Models\OptionType::class;
 
     /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return "Product Setting: 2 Option Types";
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @return array

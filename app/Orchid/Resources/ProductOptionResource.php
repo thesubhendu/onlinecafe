@@ -45,6 +45,16 @@ class ProductOptionResource extends Resource
     }
 
     /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return "Product Setting: 3 Options";
+    }
+
+    /**
      * Get the columns displayed by the resource.
      *
      * @return TD[]

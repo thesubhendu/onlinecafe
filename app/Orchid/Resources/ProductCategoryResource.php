@@ -26,7 +26,20 @@ class ProductCategoryResource extends Resource
         return [
 
         Input::make('name')->title('Name')->required(),
+        Input::make('slug')->title('Slug')
+        ->help('Slugified version of name, Eg. If name is hot dog, slug can be hot_dog')
+        ->required()
         ];
+    }
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return "Product Setting: 1 Categories";
     }
 
     /**
