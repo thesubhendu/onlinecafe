@@ -112,4 +112,9 @@ class AllProductResource extends Resource
             new DefaultSorted('created_at', 'desc'),
         ];
     }
+
+    public static function displayInNavigation(): bool
+    {
+        return auth()->check() && auth()->user()->isAdmin();
+    }
 }
