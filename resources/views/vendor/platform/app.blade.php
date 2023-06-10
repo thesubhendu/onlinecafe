@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{  app()->getLocale() }}" data-controller="html-load">
 <head>
+    @if(app()->environment('production'))
+        @include('_google-analytics')
+    @endif
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
@@ -44,6 +48,12 @@
 </head>
 
 <body class="{{ \Orchid\Support\Names::getPageNameClass() }}">
+    @if(app()->environment('production'))
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SFTN2F" height="0" width="0"
+                style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    @endif
 
 <div class="container-fluid" data-controller="@yield('controller')" @yield('controller-data')>
 
