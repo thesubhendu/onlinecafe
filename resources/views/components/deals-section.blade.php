@@ -23,7 +23,6 @@
         <div class="icon-title">
             <p>Expires at: {{$deal->expires_at->diffForHumans()}}</p>
         </div>
-        <a href="{{route('checkout.index',['deal'=> $deal->id])}}" class="btn btn-primary action-btn">Add Deal</a>
     </div>
 </div>
 @endforeach

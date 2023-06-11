@@ -19,9 +19,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav align-items-baseline">
 
-                <x-jet-nav-link href="{{ route('checkout.index') }}" :active="request()->routeIs('cart')">
-                    {{ __('Cart') }}
-                </x-jet-nav-link>
+               
 
                 <!-- Settings Dropdown -->
                 @auth

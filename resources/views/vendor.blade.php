@@ -80,8 +80,6 @@
     <section class="vendor-menu">
         <div class="container">
 
-        <x-deals-section :deals="$deals"></x-deals-section>
-
             <!-- TITLE -->
             <div class="row mb-4">
                 <div class="col-md-12 m-0 p-0 ">
