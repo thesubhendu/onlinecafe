@@ -19,6 +19,8 @@
     <div class="bottom-footer">
         <div class="container">
             <small> 2021 © {{config('app.name')}}. All rights reserved. </small>
+        | <a href="{{route('privacy')}}"><small>Privacy</small></a>
+        | <a href="{{route('terms-conditions')}}"><small>Terms and Conditions</small></a>
         </div>
     </div>
 </footer>

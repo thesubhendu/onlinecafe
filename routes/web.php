@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/offline', 'vendor.laravelpwa.offline');
 
+Route::view('/privacy-policy', 'privacy')->name('privacy');
+Route::view('/terms-conditions', 'termscondition')->name('terms-conditions');
+
+
 Route::get('/user-info', function (\Illuminate\Http\Request $request) {
     if (auth()->check()) {
         return ['user' => auth()->user()];
