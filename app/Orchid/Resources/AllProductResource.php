@@ -68,7 +68,7 @@ class AllProductResource extends Resource
 
         $fields[] = Relation::make('category_id')
         ->title('Category')
-        ->fromModel(ProductCategory::class, 'name');
+        ->fromModel(ProductCategory::class, 'name')->chunk(100);
 
 
         return $fields;

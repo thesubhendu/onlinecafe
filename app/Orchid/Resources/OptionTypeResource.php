@@ -42,7 +42,9 @@ class OptionTypeResource extends Resource
 //        Input::make('category_id')->title('Option Type')->required(),
             Relation::make('category_id')
                 ->fromModel(ProductCategory::class, 'name')
-                ->title('Category')->required()
+                ->title('Category')
+                ->required()
+                ->chunk(50)
 
         ];
     }

@@ -29,7 +29,7 @@ class VendorProductOptionResource extends Resource
 
         Input::make('name')->title('Name')->required(),
         Input::make('price')->title('Price')->required(),
-        Relation::make('option_type_id')->fromModel(OptionType::class, 'name')->title('Option Type')->required(),
+        Relation::make('option_type_id')->fromModel(OptionType::class, 'name')->title('Option Type')->required()->chunk(200),
         CheckBox::make('default_option')
                     ->value(1)
                     ->title('Is Default Option')
