@@ -99,6 +99,7 @@ class ProductEditScreen extends Screen
         {
             $sizeInputs[] = Input::make('product.productPrices.'.$size)
                 ->type('number')
+                ->step('any')
                 ->title($key.'('.$size .  ') size price')
                 ->value($this->product->productPrices()->where('size', $size)->first()->price ?? $this->product->price)
                 ->required();
