@@ -61,7 +61,7 @@
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <livewire:rating-form :vendor="$vendor"/>
+{{--                                                <livewire:rating-form :vendor="$vendor"/>--}}
                                             </div>
                                     </div>
 

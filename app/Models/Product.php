@@ -76,4 +76,9 @@ class Product extends Model implements Buyable
         return $this->productPrices->where('size', 'S')->first()->price ?? $value;
     }
 
+    public function getProductImageAttribute($value)
+    {
+        return $value? \Storage::url($value) : 'img/products/single/pic1.png';
+    }
+
 }
