@@ -3,6 +3,8 @@
 namespace App\Orchid\Resources;
 
 use App\Models\OptionType;
+use App\Models\Vendor;
+use App\Orchid\Filters\VendorQueryFilter;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
@@ -30,8 +32,7 @@ class VendorProductOptionResource extends Resource
      */
     public function fields(): array
     {
-        return [
-
+        $fields = [
         Input::make('name')->title('Name')->required(),
         Input::make('price')->title('Price')->required(),
         Relation::make('option_type_id')->fromModel(OptionType::class, 'name')->title('Option Type')->required()->chunk(200),
@@ -47,6 +48,16 @@ class VendorProductOptionResource extends Resource
 
 
         ];
+
+        if(auth()->user()->isAdmin()){
+            $fields[] = Relation::make('vendor_id')->fromModel(Vendor::class, 'vendor_name')->title('Vendor')->required()->chunk(100);
+        }else{
+            $fields[] = Input::make('vendor_id')
+                ->type('hidden')
+                ->value(auth()->id());
+        }
+
+        return $fields;
     }
 
     /**
@@ -90,15 +101,15 @@ class VendorProductOptionResource extends Resource
      */
     public function filters(): array
     {
-        return [];
+        return [VendorQueryFilter::class];
     }
 
      public static function displayInNavigation(): bool
     {
-        if(auth()->check() && auth()->user()->isAdmin()){
-                return true;
-        }
-        return false;
+//        if(auth()->check() && auth()->user()->isAdmin()){
+//                return true;
+//        }
+        return true;
     }
 
         /**
@@ -108,6 +119,6 @@ class VendorProductOptionResource extends Resource
      */
     public static function permission(): ?string
     {
-        return 'platform.systems.users'; //user management permission , only admin can access this
+        return null;
     }
 }
