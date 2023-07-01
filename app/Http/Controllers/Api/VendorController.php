@@ -25,7 +25,7 @@ class VendorController extends ApiBaseController
     public function show(Vendor $vendor): VendorResource
     {
         return new VendorResource($vendor->load([
-            'products', 'products.category', 'ratings.author' => function ($query) {
+            'activeProducts', 'activeProducts.category', 'ratings.author' => function ($query) {
                 return $query->select(['id', 'name']);
             },
         ]));

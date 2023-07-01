@@ -43,6 +43,11 @@ class Vendor extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function activeProducts()
+    {
+        return $this->hasMany(Product::class)->where('is_active', true);
+    }
+
     public function productOptions()
     {
         return $this->hasMany(VendorProductOption::class);

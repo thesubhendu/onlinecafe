@@ -11,7 +11,7 @@ class VendorController extends Controller
     {
         $vendor = Vendor::where('id', $id)->with('products', 'products.productPrices')->firstOrFail();
 
-        $featuredProducts = $vendor->products->take(8);
+        $featuredProducts = $vendor->activeProducts->take(8);
 
         $openingInfo = '';
 
