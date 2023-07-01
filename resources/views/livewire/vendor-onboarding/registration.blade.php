@@ -28,7 +28,7 @@
                     <p>(Please keep photo of driving license with you) </p>
 
                     <div class="">
-                        <form wire:submit.prevent="submit" class="row">
+                        <form id="vendor-registration-form" wire:submit.prevent="submit" class="row">
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="vendor_name" class="form-label"> Business Name (Entity Name)</label>
                                 <input type="text" class="form-control" wire:model.lazy="vendor_name"
@@ -133,7 +133,7 @@
 
                                     </div>
                                     <div class="col-lg-3 col-sm-12 text-right">
-                                        <button type="submit" class="btn btn-success d-block" style="width:100%">
+                                        <button id="vendor-register-submit-button" type="submit" class="btn btn-success d-block" style="width:100%">
                                             Register
                                         </button>
                                     </div>
