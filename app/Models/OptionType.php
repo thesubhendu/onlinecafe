@@ -14,6 +14,6 @@ class OptionType extends Model
 
     public function vendorProductOptions(): HasMany
     {
-        return $this->hasMany(VendorProductOption::class);
+        return $this->hasMany(VendorProductOption::class)->orderBy('default_option', 'desc');
     }
 }
