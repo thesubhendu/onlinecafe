@@ -39,4 +39,9 @@ class VendorProductOption extends Model implements Buyable
         return $this->belongsTo(OptionType::class, 'option_type_id', 'id');
     }
 
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
 }

@@ -18,6 +18,11 @@ class VendorProductOptionResource extends Resource
      */
     public static $model = \App\Models\VendorProductOption::class;
 
+//    public function with(): array
+//    {
+//        return ['vendor'];
+//    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -55,6 +60,7 @@ class VendorProductOptionResource extends Resource
             TD::make('id'),
             TD::make('name'),
             TD::make('price'),
+            TD::make('vendor_id', 'Vendor')->render(fn($p) => $p->vendor->name),
             TD::make('option_type_id', 'Option Type')->render(fn($p) => $p->optionType->name),
 
             TD::make('default_option','Is Default'),
