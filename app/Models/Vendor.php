@@ -25,7 +25,6 @@ class Vendor extends Model
         'services' => 'array',
         'is_taking_orders' => 'boolean'
     ];
-    protected $appends = ['is_favorite'];
 
     public function user()
     {
