@@ -16,15 +16,24 @@ class OptionTypeSeeder extends Seeder
      */
     public function run()
     {
-        OptionType::factory()->coffee()->create(['name' =>'Coffee Type', 'order_no' => 1]);
-        OptionType::factory()->coffee()->create(['name' =>'Milk', 'order_no' => 2]);
-        OptionType::factory()->coffee()->create(['name' =>'Sugar', 'order_no' => 3]);
-        OptionType::factory()->coffee()->create(['name' =>'Sweetener', 'order_no' => 4]);
-        OptionType::factory()->coffee()->create(['name' =>'Syrups', 'order_no' => 5]);
-        OptionType::factory()->coffee()->create(['name' =>'Shots', 'order_no' => 6]);
-        OptionType::factory()->coffee()->create(['name' =>'Temperature', 'order_no' => 7]);
-        OptionType::factory()->coffee()->create(['name' =>'Hot Chocolate', 'order_no' => 8]);
-        OptionType::factory()->coffee()->create(['name' =>'Tea Type', 'order_no' => 9]);
-        OptionType::factory()->hotChocolateAndTea()->create(['name' =>'Tea option', 'order_no' => 1]);
+
+        $coffeeIds = [];
+
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Coffee Type', 'order_no' => 1])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Milk', 'order_no' => 2])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Sugar', 'order_no' => 3])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Sweetener', 'order_no' => 4])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Syrups', 'order_no' => 5])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Shots', 'order_no' => 6])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Temperature', 'order_no' => 7])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Hot Chocolate', 'order_no' => 8])->id;
+        $coffeeIds[] = OptionType::factory()->create(['name' =>'Tea Type', 'order_no' => 9])->id;
+
+        ProductCategory::where('name', 'Coffee')->first()->optionTypes()->sync($coffeeIds);
+
+        $teaId = OptionType::factory()->create(['name' =>'Tea option', 'order_no' => 1])->id;
+
+        ProductCategory::where('name', 'Hot Chocolate & Tea')->first()->optionTypes()->sync($teaId);
+
     }
 }

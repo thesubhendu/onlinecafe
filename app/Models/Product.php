@@ -52,7 +52,8 @@ class Product extends Model implements Buyable
 
     public function optionTypes()
     {
-        return OptionType::where('category_id', $this->category_id)
+
+        return $this->category->optionTypes()
             ->whereHas('vendorProductOptions')
             ->with(['vendorProductOptions' =>  function($query){
                 return $query->where('vendor_id', $this->vendor_id)->orderBy('price');

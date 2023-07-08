@@ -3,7 +3,9 @@
 namespace App\Orchid\Resources;
 
 use App\Models\ProductCategory;
+use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\Resource;
+use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
@@ -17,6 +19,11 @@ class OptionTypeResource extends Resource
      * @var string
      */
     public static $model = \App\Models\OptionType::class;
+
+    public function with(): array
+    {
+        return ['productCategories'];
+    }
 
     /**
      * Get the displayable label of the resource.
@@ -39,14 +46,25 @@ class OptionTypeResource extends Resource
 
             Input::make('name')->title('Name')->required(),
             Input::make('order_no')->title('Order')->required(),
-//        Input::make('category_id')->title('Option Type')->required(),
-            Relation::make('category_id')
+            Relation::make('productCategories.')
                 ->fromModel(ProductCategory::class, 'name')
+                ->multiple()
                 ->title('Category')
                 ->required()
                 ->chunk(50)
 
         ];
+    }
+
+    public function onSave(ResourceRequest $request, Model $model)
+    {
+        $data = $request->except('productCategories');
+
+        $model->forceFill($data)->save();
+
+        if($request->has('productCategories')){
+            $model->productCategories()->sync($request->productCategories);
+        }
     }
 
     /**
@@ -59,7 +77,11 @@ class OptionTypeResource extends Resource
         return [
             TD::make('id'),
             TD::make('name'),
-            TD::make('category_id'),
+            TD::make('Categories')
+                ->render(function ($option) {
+                    return implode(", ", $option->productCategories->pluck('name')->toArray());
+                })
+            ,
         ];
     }
 

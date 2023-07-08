@@ -19,23 +19,4 @@ class OptionTypeFactory extends Factory
             'name' => $this->faker->unique()->word(1),
         ];
     }
-
-    public function hotChocolateAndTea(): OptionTypeFactory
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'category_id' => ProductCategory::where('name', 'Hot Chocolate & Tea')->first()->id,
-            ];
-        });
-    }
-
-    public function coffee(): OptionTypeFactory
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'category_id' => ProductCategory::where('name', 'Coffee')->first()->id,
-            ];
-        });
-    }
-
 }
