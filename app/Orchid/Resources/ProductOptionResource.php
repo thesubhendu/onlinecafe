@@ -18,6 +18,11 @@ class ProductOptionResource extends Resource
      */
     public static $model = \App\Models\ProductOption::class;
 
+    public function with(): array
+    {
+        return ['optionType'];
+    }
+
     /**
      * Get the fields displayed by the resource.
      *

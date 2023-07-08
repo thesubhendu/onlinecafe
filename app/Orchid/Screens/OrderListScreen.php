@@ -26,7 +26,7 @@ class OrderListScreen extends Screen
      */
     public function query(): array
     {
-        $orders = Order::query()->with('vendor')->filters()->latest();
+        $orders = Order::query()->with('vendor','user')->filters()->latest();
         if (Gate::allows('admin')) {
             $orders = $orders;
         } else {

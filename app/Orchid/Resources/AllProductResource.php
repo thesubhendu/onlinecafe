@@ -22,6 +22,11 @@ class AllProductResource extends Resource
      */
     public static $model = AllProduct::class;
 
+    public function with(): array
+    {
+        return ['productCategory'];
+    }
+
     public static function label(): string
     {
         return "Product Setting: 4 All Products";

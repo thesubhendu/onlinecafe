@@ -24,10 +24,12 @@ class ProductListScreen extends Screen
      */
     public function query(): array
     {
+        $productQuery = Product::with('vendor', 'category','productPrices');
+
         if (Gate::allows('admin')) {
-            $products = Product::with('vendor', 'category')->filters()->latest()->paginate(50);
+            $products = $productQuery->filters()->latest()->paginate(50);
         } else {
-            $products = Product::with('vendor', 'category')->where('vendor_id',
+            $products = $productQuery->where('vendor_id',
                 auth()->user()->shop->id)->filters()->latest()->paginate(50);
         }
 
