@@ -11,7 +11,7 @@ class ProductOption extends Model
 {
     use HasFactory, AsSource, Filterable;
 
-    protected $fillable = ['name', 'description', 'image', 'price', 'category_id'];
+    protected $fillable = ['name', 'description', 'image', 'price', 'option_type_id'];
 
     protected $casts = ['options' => 'array'];
 
