@@ -66,11 +66,11 @@
                                     <div class="accordion-item">
                                         <h2 class="accordion-header ">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#category-{{$optionTypeId}}">
+                                                    data-bs-target="#product-{{$optionTypeId}}">
                                                 {{ $optionTypes[$optionTypeId]  }}
                                             </button>
                                         </h2>
-                                        <div id="category-{{$optionTypeId}}" class="accordion-collapse collapse show">
+                                        <div id="product-{{$optionTypeId}}" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
                                                 <p>Select Options</p>
                                                 @foreach($options as $index => $option)
