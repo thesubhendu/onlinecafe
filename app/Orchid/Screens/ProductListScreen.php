@@ -27,10 +27,10 @@ class ProductListScreen extends Screen
         $productQuery = Product::with('vendor', 'category','productPrices');
 
         if (Gate::allows('admin')) {
-            $products = $productQuery->filters()->latest()->paginate(50);
+            $products = $productQuery->filters()->latest()->paginate(30);
         } else {
             $products = $productQuery->where('vendor_id',
-                auth()->user()->shop->id)->filters()->latest()->paginate(50);
+                auth()->user()->shop->id)->filters()->latest()->paginate(30);
         }
 
         return [

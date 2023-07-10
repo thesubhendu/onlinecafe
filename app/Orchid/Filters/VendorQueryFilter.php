@@ -30,7 +30,7 @@ class VendorQueryFilter extends Filter
     public function run(Builder $builder): Builder
     {
 
-        return $builder->where('vendor_id', request()->user()->id);
+        return $builder->where('vendor_id', request()->user()->shop->id);
     }
 
     /**

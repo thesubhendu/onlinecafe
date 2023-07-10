@@ -20,10 +20,10 @@ class VendorProductOptionResource extends Resource
      */
     public static $model = \App\Models\VendorProductOption::class;
 
-//    public function with(): array
-//    {
-//        return ['vendor'];
-//    }
+    public function with(): array
+    {
+        return ['vendor','optionType'];
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -101,6 +101,10 @@ class VendorProductOptionResource extends Resource
      */
     public function filters(): array
     {
+        if(auth()->user()->isAdmin()){
+            return [];
+        }
+
         return [VendorQueryFilter::class];
     }
 
