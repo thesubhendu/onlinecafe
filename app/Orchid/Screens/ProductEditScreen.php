@@ -118,21 +118,22 @@ class ProductEditScreen extends Screen
             ->title('Is Stamp')->sendTrueOrFalse();
         $fields[]=CheckBox::make('product.is_active')->value(1)
             ->title('Is Active')->sendTrueOrFalse();
+
+        $fields[] = Relation::make('product.category_id')
+            ->title('Category')
+            ->fromModel(ProductCategory::class, 'name');
+
+
         $fields[]=Input::make('product.product_image')->type('file')
             ->title('Upload Product Image');
-
 
         if(auth()->user()->isAdmin()) {
             $fields[] = Relation::make('product.vendor_id')
                 ->title('Vendor')
                 ->fromModel(Vendor::class, 'vendor_name');
 
-            $fields[] = Relation::make('product.category_id')
-                ->title('Category')
-                ->fromModel(ProductCategory::class, 'name');
         }else{
             $fields[] = Input::make('product.vendor_id')->hidden(true)->value(auth()->user()->shop->id);
-            $fields[] = Input::make('product.category_id')->hidden(true)->value(1);
         }
 
         return [
