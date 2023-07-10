@@ -5,6 +5,7 @@ namespace App\Orchid\Resources;
 use App\Models\OptionType;
 use App\Models\Vendor;
 use App\Orchid\Filters\VendorQueryFilter;
+use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
@@ -102,10 +103,10 @@ class VendorProductOptionResource extends Resource
     public function filters(): array
     {
         if(auth()->user()->isAdmin()){
-            return [];
+            return [ new DefaultSorted('option_type_id', 'desc')];
         }
 
-        return [VendorQueryFilter::class];
+        return [VendorQueryFilter::class, new DefaultSorted('option_type_id', 'desc')];
     }
 
      public static function displayInNavigation(): bool

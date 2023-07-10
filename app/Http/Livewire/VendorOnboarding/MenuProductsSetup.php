@@ -85,13 +85,16 @@ class MenuProductsSetup extends Component
             $vendor->productOptions()->delete();
 
             foreach ($selectedProducts as $menu) {
-                $vendor->products()->updateOrCreate(['name' => $menu->name],
+                $vendor->products()->updateOrCreate([
+                    'name' => $menu->name,
+                    'vendor_id'=> $vendor->id,
+                    'category_id' => $menu->category_id,
+                    ],
                     [
                         'description' => $menu->description ?? 'dummy description',
                         'product_image' => $menu->image,
                         'price' => $menu->price,
                         'is_stamp' => 1,
-                        'category_id' => $menu->category_id,
                         'is_all_sizes_available' => 1
                     ]);
             }
@@ -106,9 +109,12 @@ class MenuProductsSetup extends Component
 
     public function saveProductOption($option, $vendor): void
     {
-       $vendor->productOptions()->updateOrCreate(['name' => $option->name],[
+       $vendor->productOptions()->updateOrCreate([
+                    'name' => $option->name,
+                    'option_type_id' => $option->option_type_id,
+                    'vendor_id'=> $vendor->id
+       ],[
             'price' => $option->price,
-            'option_type_id' => $option->option_type_id,
             'charge' => $option->charge,
             'default_option' => $option->default_option
         ]);
