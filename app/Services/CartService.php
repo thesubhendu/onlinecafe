@@ -59,7 +59,9 @@ class CartService
 
     public function addToCart(Product $product, $quantity, array $options): Order
     {
+
         $activeOrder = $this->getActiveOrder();
+
 
         if (!$activeOrder) {
             $activeOrder = $this->createActiveOrder(auth()->user(), $product->vendor);
@@ -72,7 +74,9 @@ class CartService
                 (new OrderItem($activeOrder))->addRewardProduct($product, $quantity, $options);
             }
         }else{
+
             (new OrderItem($activeOrder))->add($product, $quantity, $options);
+
         }
 
         return $this->updateOrder($activeOrder->refresh());
