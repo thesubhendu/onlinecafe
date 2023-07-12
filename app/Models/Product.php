@@ -25,6 +25,8 @@ class Product extends Model implements Buyable
         'updated_at',
     ];
 
+    protected $with = ['productPrices'];
+
     protected $allowedFilters = [
         'name',
     ];
@@ -74,7 +76,9 @@ class Product extends Model implements Buyable
 
     public function getPriceAttribute($value)
     {
-        return $this->productPrices->where('size', 'S')->first()->price ?? $value;
+        $prices =  $this->productPrices->pluck('price','size')->filter(fn($price, $size) => $price !== '0.00' && !empty($price) )->toArray();
+
+        return $prices['S'] ?? $prices['M'] ?? $prices['L'] ?? $prices['XL'] ?? $value;
     }
 
     public function getProductImageAttribute($value)
