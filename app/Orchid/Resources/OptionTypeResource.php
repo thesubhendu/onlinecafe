@@ -46,6 +46,12 @@ class OptionTypeResource extends Resource
 
             Input::make('name')->title('Name')->required(),
             Input::make('order_no')->title('Order')->required(),
+
+            CheckBox::make('is_multiselect')
+                ->value(1)
+                ->title('Is Multiselect')
+                ->sendTrueOrFalse(),
+
             Relation::make('productCategories.')
                 ->fromModel(ProductCategory::class, 'name')
                 ->multiple()
