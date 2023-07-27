@@ -77,11 +77,6 @@ class VendorProductOptionResource extends Resource
 
             TD::make('default_option','Is Default'),
             TD::make('charge'),
-
-            TD::make('updated_at', 'Update date')
-                ->render(function ($model) {
-                    return $model->updated_at->toDateTimeString();
-                }),
         ];
     }
 
