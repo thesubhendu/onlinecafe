@@ -55,7 +55,7 @@ class VendorProductOptionResource extends Resource
         }else{
             $fields[] = Input::make('vendor_id')
                 ->type('hidden')
-                ->value(auth()->id());
+                ->value(auth()->user()->shop->id);
         }
 
         return $fields;
