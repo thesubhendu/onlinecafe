@@ -81,8 +81,8 @@ class MenuProductsSetup extends Component
 
 
         DB::transaction(function () use($vendor, $selectedProducts, $selectedOptions) {
-            $vendor->products()->delete();
-            $vendor->productOptions()->delete();
+//            $vendor->products()->delete();
+//            $vendor->productOptions()->delete();
 
             foreach ($selectedProducts as $menu) {
                 $vendor->products()->updateOrCreate([
