@@ -29,7 +29,7 @@ class OrdersTableSeeder extends Seeder
                     'order_total'    => 3,
                     'sub_total'      => 2,
                     'tax'            => 1,
-                    'status'         => 'pending',
+                    'status'         => 'completed',
                     'user_id'        => 6,
                     'vendor_id'      => 2,
                     'created_at'     => '2021-08-03 04:36:38',
