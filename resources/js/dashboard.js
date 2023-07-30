@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 import {showToastNotification, isAppInstalled} from "@/helpers";
 
-import soundUrl from '../../public/elevator.wav'
+import {playNotificationAudio, createChromeNotification} from "@/services/orderNotifications";
 
 window.Pusher = require('pusher-js');
 
@@ -55,51 +55,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
     })
 //end pwa install prompt
 
-
-
-
 window.addEventListener("load", function () {
 
     Notification.requestPermission().then((result) => {
     });
     fetchUser();
 });
-
-function createChromeNotification(notification){
-    Notification.requestPermission().then(function(permission) {
-  if (permission === "granted") {
-
-    var chromeNotification = new Notification(notification.title, { body: notification.text, requireInteraction: true});
-
-    chromeNotification.onclick = (event) => {
-      event.preventDefault(); // Prevents the browser from focusing the Notification's tab
-      window.open(notification.action); // Opens the website in a new tab
-      notification.close(); // Closes the notification
-    };
-  }
-});
-}
-
-const audio = new Audio(soundUrl);
-// const
-var soundCount = 0;
-
-window.stopSound= false;
-
-function playNotificationAudio(){
-        // const audio = new Audio("./../elevator.wav");
-        audio.play();
-        window.notificationSound = audio;
-        soundCount++;
-
-        if(window.stopSound || soundCount > 30){
-            return;
-        }
-
-        setTimeout(() => {
-            playNotificationAudio()
-        },  2000); // Call playSound() again after the duration of the sound
-}
 
 function setupNotification(user){
     window.Echo.private('App.Models.User.' + user.id)
