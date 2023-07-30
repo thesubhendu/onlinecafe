@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use App\Notifications\NewOrderNotification;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -17,3 +19,15 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+
+Artisan::command('tinker:order-initiate', function () {
+
+    $vendor = User::where('email', 'vendor@cafe.np')->first();
+    $order = \App\Models\Order::first();
+
+    $vendor->notify(new NewOrderNotification($order));
+
+})->purpose('Test command do not run');
+
+

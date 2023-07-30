@@ -1,6 +1,8 @@
 import Echo from 'laravel-echo';
 import Swal from "sweetalert2";
 
+import {showToastNotification, isAppInstalled} from "@/helpers";
+
 import soundUrl from '../../public/elevator.wav'
 
 window.Pusher = require('pusher-js');
@@ -15,28 +17,7 @@ window.Echo = new Echo({
 
 window.realtimeSetup = false;
 
-//pwa install prompt
-
-function isIos() {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test(userAgent);
-}
-// Detects if device is in standalone mode
-const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-
-
-function isAppInstalled(){
-    if (localStorage.getItem('pwaInstalled') === 'true' || (window.matchMedia('(display-mode: standalone)').matches) || (navigator.standalone)) {
-        console.log('result is', localStorage.getItem('pwaInstalled'))
-
-        return true;
-    }
-    console.log('result false', localStorage.getItem('pwaInstalled'))
-    return false;
-}
-
-
-    let deferredPrompt;
+let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
         // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -103,13 +84,15 @@ const audio = new Audio(soundUrl);
 // const
 var soundCount = 0;
 
+window.stopSound= false;
+
 function playNotificationAudio(){
         // const audio = new Audio("./../elevator.wav");
         audio.play();
         window.notificationSound = audio;
         soundCount++;
 
-        if(soundCount > 3){
+        if(window.stopSound || soundCount > 30){
             return;
         }
 
@@ -122,28 +105,13 @@ function setupNotification(user){
     window.Echo.private('App.Models.User.' + user.id)
         .notification((notification) => {
 
-            let options = {
-                title: notification.title,
-                // toast: true,
-                position: 'top-right',
-                allowOutsideClick:false,
-                // timer:4000,
-                text: notification.text,
-            };
-
             let badge = document.querySelector('.badge');
             let count = badge.textContent;
             badge.innerHTML = count++;
 
-            if (notification.action) {
-                options.confirmButtonText = "<a class='text-white' href='" + notification.action + "'>View</a>"
-            }
-
-            createChromeNotification(notification)
-
-            window.Swal.fire(options)
-            //add sound
             playNotificationAudio();
+            createChromeNotification(notification)
+            showToastNotification(notification)
         });
 }
 

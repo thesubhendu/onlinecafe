@@ -54,3 +54,11 @@
     </ul>
 
 </div>
+
+<script>
+    const confirmButton = document.getElementById('order-confirm-button')
+
+    confirmButton.addEventListener('click', () => {
+       window.stopSound = true;
+    })
+</script>

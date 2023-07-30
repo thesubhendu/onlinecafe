@@ -22,7 +22,7 @@
     @else
         <link rel="stylesheet" type="text/css" href="{{  orchid_mix('/css/orchid.css','orchid') }}">
     @endif
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     @stack('head')
 
     <meta name="turbo-root" content="{{  Dashboard::prefix() }}">
@@ -35,6 +35,8 @@
     <script src="{{ orchid_mix('/js/manifest.js','orchid') }}" type="text/javascript"></script>
     <script src="{{ orchid_mix('/js/vendor.js','orchid') }}" type="text/javascript"></script>
     <script src="{{ orchid_mix('/js/orchid.js','orchid') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" type="text/javascript"></script>
+
 
     @foreach(Dashboard::getResource('stylesheets') as $stylesheet)
         <link rel="stylesheet" href="{{  $stylesheet }}">
