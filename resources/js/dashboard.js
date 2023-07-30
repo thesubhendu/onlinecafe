@@ -1,7 +1,7 @@
 import Echo from 'laravel-echo';
 import Swal from "sweetalert2";
 
-import {showToastNotification, isAppInstalled} from "@/helpers";
+import {showToastNotification, isAppInstalled, increaseOrderCount} from "@/helpers";
 
 import {playNotificationAudio, createChromeNotification} from "@/services/orderNotifications";
 
@@ -65,11 +65,7 @@ window.addEventListener("load", function () {
 function setupNotification(user){
     window.Echo.private('App.Models.User.' + user.id)
         .notification((notification) => {
-
-            let badge = document.querySelector('.badge');
-            let count = badge.textContent;
-            badge.innerHTML = count++;
-
+            increaseOrderCount();
             playNotificationAudio();
             createChromeNotification(notification)
             showToastNotification(notification)

@@ -30,3 +30,10 @@ export function isAppInstalled(){
     }
     return false;
 }
+
+export function increaseOrderCount(){
+    let badge = document.querySelector('.badge');
+    let count = parseInt( badge.textContent);
+    count++;
+    badge.innerHTML = count.toString();
+}

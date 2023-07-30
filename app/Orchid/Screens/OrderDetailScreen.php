@@ -85,6 +85,7 @@ class OrderDetailScreen extends Screen
                 Layout::rows([
                     Input::make('order_ready_in')
                     ->type('number')
+                    ->value(10)
                     ->required()
                     ->title('How many minutes order will be ready?')
                     ->placeholder('enter in minutes'),
