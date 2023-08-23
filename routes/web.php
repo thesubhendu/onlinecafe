@@ -48,8 +48,8 @@ Route::get('/confirm/{order}/update',[ConfirmOrderController::class, 'confirm'])
 
 Route::get('vendor-onboarding/register',VendorOnboarding\Registration::class)->name('register-business.create');
 Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
-    Route::get('/payment',VendorOnboarding\Payment::class)->name('register-business.payment')->middleware('not.subscribed','can:vendor');
-    Route::get('/shop-setup',ShopSetup::class)->name('register-business.shop-setup')->middleware('subscribed');
+    Route::get('/payment',VendorOnboarding\Payment::class)->name('register-business.payment')->can('vendor');
+    Route::get('/shop-setup',ShopSetup::class)->name('register-business.shop-setup')->can('vendor');
     Route::get('/menu-products-setup',VendorOnboarding\MenuProductsSetup::class)->name('register-business.menu-products-setup')->middleware('can:vendor');
     Route::get('/menu-prices-setup', VendorOnboarding\MenuPricesSetup::class)->name('register-business.menu-prices-setup')->middleware('can:vendor');
 
@@ -63,5 +63,5 @@ Route::post('phone-verification/verify',[PhoneVerificationController::class, 've
 Route::view('/verify-phone','auth.verify-email')->name('phone-verification.notice');
 
 
-Route::get('/manage-shop', ShopSetup::class)->middleware('auth','subscribed')->name('manage-shop');
+Route::get('/manage-shop', ShopSetup::class)->middleware('auth','can:vendor')->name('manage-shop');
 Route::get('download-customer-flyer', DownloadFlyerController::class)->name('download-customer-flyer');

@@ -20,8 +20,15 @@ class Payment extends Component
 
     public function mount()
     {
-        $this->availablePlans = Plan::all();
-        $this->clientSecret   = auth()->user()->createSetupIntent()->client_secret;
+//        todo remove for normal subscription
+
+        $shop = auth()->user()->shop;
+        $shop->is_subscribed = true;
+        $shop->save();
+
+        return redirect()->route('register-business.shop-setup');
+//        $this->availablePlans = Plan::all();
+//        $this->clientSecret   = auth()->user()->createSetupIntent()->client_secret;
     }
     public function render()
     {

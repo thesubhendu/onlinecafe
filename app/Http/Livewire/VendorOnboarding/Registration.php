@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\VendorOnboarding;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\Plan;
 use App\Models\User;
 use App\Services\AbnChecker;
 use App\Services\StripeService;
