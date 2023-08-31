@@ -30,7 +30,7 @@ class CustomerStripePaymentController extends Controller
                 'metadata' => [
                     'order_id' => $activeOrder->id,
                 ],
-                'application_fee_amount' => $applicationFee,
+                // 'application_fee_amount' => $applicationFee,
             ],
                 ['stripe_account' => $vendor->stripe_account_id]
             );

@@ -17,7 +17,7 @@ class OrderRepository
     ) {
     }
 
-    public function submitOrder($userId, $status)
+    public function submitOrder($userId, $status='pending')
     {
         $order = $this->order->where('user_id', $userId)
             ->when($status === 'pending', function ($q) {
