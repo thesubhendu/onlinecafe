@@ -30,12 +30,12 @@ class CustomerStripePaymentController extends Controller
                 'metadata' => [
                     'order_id' => $activeOrder->id,
                 ],
-                // 'application_fee_amount' => $applicationFee,
+                 'application_fee_amount' => $applicationFee,
             ],
                 ['stripe_account' => $vendor->stripe_account_id]
             );
 
-            return response()->json(['clientSecret'=> $paymentIntent->client_secret]);
+            return response()->json(['clientSecret'=> $paymentIntent->client_secret, 'stripeConnectedAccountId'=> $vendor->stripe_account_id]);
         } catch (\Exception $e) {
             return response()->json(['error'=> $e->getMessage()], 500);
         }
