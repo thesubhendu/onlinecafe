@@ -23,7 +23,7 @@ class CustomerStripePaymentController extends Controller
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
                 'amount' => $activeOrder->order_total*100,
-                'currency' => 'usd',
+                'currency' => 'aud',
                 'automatic_payment_methods' => [
                     'enabled' => true,
                 ],
