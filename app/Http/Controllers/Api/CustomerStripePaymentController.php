@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class CustomerStripePaymentController extends Controller
     {
         $activeOrder = $this->cartService->getActiveOrder();
         $vendor = $activeOrder->vendor;
-        $applicationFee = 10; //10 cents
+        $applicationFee = $this->getApplicationFee($activeOrder); //10 cents
         \Stripe\Stripe::setApiKey(config('services.stripe.api_key'));
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
@@ -40,5 +41,14 @@ class CustomerStripePaymentController extends Controller
             return response()->json(['error'=> $e->getMessage()], 500);
         }
 
+    }
+
+    /**
+     * @return int
+     */
+    public function getApplicationFee(Order $order): int
+    {
+        // 3% of total order in cents by default 10 cents (fallback case)
+        return $order->order_total*100*0.03 ?? 10;
     }
 }
