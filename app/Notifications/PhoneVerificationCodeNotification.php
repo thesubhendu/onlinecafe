@@ -4,7 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\NexmoMessage;
+use Illuminate\Notifications\Messages\VonageMessage;
 use Illuminate\Notifications\Notification;
 
 class PhoneVerificationCodeNotification extends Notification
@@ -33,7 +33,7 @@ class PhoneVerificationCodeNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['nexmo'];
+        return ['vonage'];
     }
 
     /**
@@ -69,11 +69,11 @@ class PhoneVerificationCodeNotification extends Notification
      *
      * @param  mixed  $notifiable
      *
-     * @return \Illuminate\Notifications\Messages\NexmoMessage
+     * @return \Illuminate\Notifications\Messages\VonageMessage
      */
-    public function toNexmo($notifiable)
+    public function toVonage($notifiable)
     {
-        return (new NexmoMessage)
+        return (new VonageMessage)
             ->content('Your verification code is '.$this->code);
     }
 }

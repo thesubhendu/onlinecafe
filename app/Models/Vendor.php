@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Services\GeoLocationService;
-use BeyondCode\Vouchers\Traits\HasVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +16,7 @@ use Spatie\OpeningHours\OpeningHours;
 
 class Vendor extends Model
 {
-    use HasFactory, Favoriteable, HasVouchers, AsSource, Filterable;
+    use HasFactory, Favoriteable, AsSource, Filterable;
 
     protected $guarded = ['owner_id'];
     protected $casts = [

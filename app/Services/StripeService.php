@@ -15,12 +15,14 @@ class StripeService
     }
     public function createAccount(Vendor $vendor): string
     {
-        if($vendor->charges_enabled_at){
+        if($vendor->charges_enabled_at)
+        {
             return false;
         }
 
         try {
-             if($vendor->stripe_account_id) {
+             if($vendor->stripe_account_id)
+             {
                  $this->stripe->accounts->delete($vendor->stripe_account_id);
              }
         } catch (\Exception $e) {

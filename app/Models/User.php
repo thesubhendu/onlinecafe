@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use BeyondCode\Vouchers\Traits\CanRedeemVouchers;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,7 +21,7 @@ class User extends Authenticatable
 {
     use HasFactory;
     use HasApiTokens;
-    use HasProfilePhoto, Favoriteability, CanRedeemVouchers;
+    use HasProfilePhoto, Favoriteability;
     use Notifiable, Billable, \App\Traits\MustVerifyPhone;
     use TwoFactorAuthenticatable;
 

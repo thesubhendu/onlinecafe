@@ -5,7 +5,7 @@ namespace App\Notifications;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\NexmoMessage;
+use Illuminate\Notifications\Messages\VonageMessage;
 use Illuminate\Notifications\Notification;
 use Orchid\Platform\Notifications\DashboardChannel;
 use Orchid\Platform\Notifications\DashboardMessage;
@@ -39,7 +39,6 @@ class NewOrderNotification extends Notification
     public function via($notifiable)
     {
         return [DashboardChannel::class, 'broadcast'];
-//        return ['nexmo', DashboardChannel::class];
     }
 
     /**
@@ -84,11 +83,11 @@ class NewOrderNotification extends Notification
      *
      * @param mixed $notifiable
      *
-     * @return \Illuminate\Notifications\Messages\NexmoMessage
+     * @return \Illuminate\Notifications\Messages\VonageMessage
      */
-    public function toNexmo($notifiable)
+    public function toVonage($notifiable)
     {
-        return (new NexmoMessage)
+        return (new VonageMessage)
             ->content('New Order! Visit Dashboard to confirm it');
     }
 }

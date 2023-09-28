@@ -12,8 +12,8 @@ return [
     |
     */
 
-    'api_key'    => function_exists('env') ? env('NEXMO_KEY', '') : '',
-    'api_secret' => function_exists('env') ? env('NEXMO_SECRET', '') : '',
+    'api_key'    => function_exists('env') ? env('VONAGE_KEY', '') : '',
+    'api_secret' => function_exists('env') ? env('VONAGE_SECRET', '') : '',
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'signature_secret' => function_exists('env') ? env('NEXMO_SIGNATURE_SECRET', '') : '',
+    'signature_secret' => function_exists('env') ? env('VONAGE_SIGNATURE_SECRET', '') : '',
 
     /*
     |--------------------------------------------------------------------------
@@ -39,8 +39,8 @@ return [
     |
     */
 
-    'private_key'    => function_exists('env') ? env('NEXMO_PRIVATE_KEY', '') : '',
-    'application_id' => function_exists('env') ? env('NEXMO_APPLICATION_ID', '') : '',
+    'private_key'    => function_exists('env') ? env('VONAGE_PRIVATE_KEY', '') : '',
+    'application_id' => function_exists('env') ? env('VONAGE_APPLICATION_ID', '') : '',
 
     /*
     |--------------------------------------------------------------------------
@@ -53,8 +53,8 @@ return [
     */
 
     'app' => [
-        'name'    => function_exists('env') ? env('NEXMO_APP_NAME', 'NexmoLaravel') : 'NexmoLaravel',
-        'version' => function_exists('env') ? env('NEXMO_APP_VERSION', '1.1.2') : '1.1.2',
+        'name'    => function_exists('env') ? env('VONAGE_APP_NAME', 'NexmoLaravel') : 'NexmoLaravel',
+        'version' => function_exists('env') ? env('VONAGE_APP_VERSION', '1.1.2') : '1.1.2',
     ],
 
     /*
@@ -67,5 +67,5 @@ return [
     |
     */
 
-    'http_client' => function_exists('env') ? env('NEXMO_HTTP_CLIENT', '') : '',
+    'http_client' => function_exists('env') ? env('VONAGE_HTTP_CLIENT', '') : '',
 ];

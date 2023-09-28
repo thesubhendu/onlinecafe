@@ -30,5 +30,5 @@ interface MustVerifyPhone
      *
      * @return string
      */
-    public function routeNotificationForNexmo($notification);
+    public function routeNotificationForVonage($notification);
 }
