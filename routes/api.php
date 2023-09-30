@@ -35,14 +35,14 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/forgot-password',[ PasswordResetLinkController::class,'store']);
 //Route::post('/reset-password',[ NewPasswordController::class,'store']);
+Route::get('/home', HomeController::class);
+Route::get('vendors/{vendor}', [VendorController::class, 'show']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/home', HomeController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     // Vendor
     Route::get('vendors', [VendorController::class, 'index']);
-    Route::get('vendors/{vendor}', [VendorController::class, 'show']);
     // Favorite Vendor
     Route::get('user/favourite-vendors', [UserController::class, 'favoriteVendors']);
     // Toggle Favorite Vendor

@@ -134,9 +134,9 @@ class ShopSetup extends Component
 
 
         if (!empty($this->logo)) {
-            if(Storage::exists($vendor->vendor_logo)) {
-                Storage::delete($vendor->vendor_logo);
-            }
+//            if(Storage::exists($vendor->vendor_logo)) {
+//                Storage::delete($vendor->vendor_logo);
+//            }
 
             $fileName = $this->logo->store('vendor-logos');
             $vendor->vendor_logo = $fileName;
@@ -145,9 +145,9 @@ class ShopSetup extends Component
 
         if (!empty($this->vendorImage))
         {
-            if(Storage::exists($vendor->vendor_image)) {
-                Storage::delete($vendor->vendor_image);
-            }
+//            if(Storage::exists($vendor->vendor_image)) {
+//                Storage::delete($vendor->vendor_image);
+//            }
 
             $hashName = $this->vendorImage->hashName();
             $saveUrl = 'vendor-images/'.$hashName;

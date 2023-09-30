@@ -21,7 +21,7 @@ class VendorResource extends JsonResource
     public function toArray($request): array|JsonSerializable|Arrayable
     {
         $currentUserRating = $this->ratings()->where(['user_id' => auth()->id()])->first();
-        return [
+        $data =  [
             'id'                  => $this->id,
             'name'                => $this->name,
             'slug'                => $this->slug,
@@ -46,9 +46,12 @@ class VendorResource extends JsonResource
             'categoryProducts'    => $this->activeProducts->groupBy('category.name'),
             'featuredProducts'    => $this->activeProducts->take(4),
             'openingInfo'         => app()->make(VendorRepository::class)->getOpeningInfo($this),
-            'isRewardAvailable'     => $this->resource->isRewardAvailable(auth()->user()),
             'deals'=> $this->deals()->active()->get()
         ];
+
+        $data['isRewardAvailable']     = auth()->check() ? $this->resource->isRewardAvailable(auth()->user()) : false;
+
+        return $data;
     }
 
     public function with($request): array
