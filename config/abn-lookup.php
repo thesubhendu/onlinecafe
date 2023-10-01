@@ -31,7 +31,7 @@ return [
     |
     */
 
-    'wsdl' => \SparkEleven\AbnLookup\Services\AbnLookupService::DEFAULT_WSDL,
+    'wsdl' => \App\Services\AbnLookup\AbnLookupService::DEFAULT_WSDL,
 
     /*
     |--------------------------------------------------------------------------

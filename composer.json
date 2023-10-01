@@ -8,30 +8,28 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1.0",
         "alexpechkarev/google-maps": "10.*",
         "christiankuri/laravel-favorite": "^1.4",
         "doctrine/dbal": "^3.3",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "itsgoingd/clockwork": "^5.1",
         "laravel/cashier": "^13.5",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^10.0",
         "laravel/jetstream": "^2.4",
-        "laravel/sanctum": "^2.15",
-        "laravel/telescope": "^4.9",
+        "laravel/sanctum": "^3.2",
+        "laravel/telescope": "*",
         "laravel/tinker": "^2.5",
         "laravel/vonage-notification-channel": "^3.0",
         "livewire/livewire": "^2.5",
         "orangehill/iseed": "^3.0",
-        "orchid/crud": "3.9.0",
-        "orchid/platform": "^13.0",
+        "orchid/crud": "^4.0.1",
+        "orchid/platform": "^14.0",
         "predis/predis": "^1.1",
-        "pusher/pusher-php-server": "^5.0",
+        "pusher/pusher-php-server": "^7.2",
         "realrashid/sweet-alert": "^7",
         "silviolleite/laravelpwa": "^2.0",
-        "sparkeleven/abn-lookup": "^1.0",
         "spatie/opening-hours": "^2.10",
         "stripe/stripe-php": "^9.0",
         "symfony/routing": "^6.0",
@@ -40,12 +38,11 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
-        "spatie/laravel-ignition": "^1.0",
+        "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
-        "nascent-africa/jetstrap": "^2.5",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.3.3"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0"
     },
     "config": {
         "optimize-autoloader": true,
@@ -72,7 +69,6 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
         "post-update-cmd": [

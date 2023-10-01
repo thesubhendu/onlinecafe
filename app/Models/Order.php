@@ -30,10 +30,10 @@ class Order extends Model
     protected $casts = [
         'created_at' => 'datetime:d-m-Y',
         'updated_at' => 'datetime:d-m-Y',
-        'date' => 'datetime:d-m-Y'
+        'date' => 'datetime:d-m-Y',
+        'confirmed_at'=>'datetime'
     ];
 
-    protected $dates = ['confirmed_at'];
 
     public function getFormattedDate()
     {

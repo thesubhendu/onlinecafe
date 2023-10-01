@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use SparkEleven\AbnLookup\Facades\AbnLookup;
+use App\Services\AbnLookup\AbnLookupService ;
 
 class AbnChecker
 {
@@ -20,7 +20,13 @@ class AbnChecker
     public function initAbnResponse()
     {
         try {
-            $this->abnResponse = AbnLookup::searchByAbn($this->abn);
+            //init abn lookup service
+            AbnLookupService::reset(
+                config('abn-lookup.auth_guid'),
+                config('abn-lookup.wsdl'),
+                config('abn-lookup.wsdl_cache'),
+            );
+            $this->abnResponse = AbnLookupService::searchByAbn($this->abn);
         } catch (\Exception $e) {
             logger()->error('Error searching abn name - '. $e->getMessage());
             $this->abnResponse = null;

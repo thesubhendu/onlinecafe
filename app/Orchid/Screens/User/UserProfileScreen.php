@@ -9,6 +9,7 @@ use App\Orchid\Layouts\User\UserEditLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Orchid\Access\Impersonation;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
@@ -54,7 +55,14 @@ class UserProfileScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [ Button::make('Back to my account')
+            ->canSee(Impersonation::isSwitch())
+            ->icon('bs.people')
+            ->route('platform.switch.logout'),
+
+            Button::make('Sign out')
+                ->icon('bs.box-arrow-left')
+                ->route('platform.logout'),];
     }
 
     /**

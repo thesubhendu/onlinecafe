@@ -14,7 +14,9 @@ class Deal extends Model
 {
     use HasFactory, Filterable, AsSource, Attachable;
 
-    protected $dates = ['expires_at'];
+    protected $casts = [
+      'expires_at' => 'datetime'
+    ];
     protected $guarded = [];
     public function products()
     {

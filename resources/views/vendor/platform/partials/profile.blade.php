@@ -14,10 +14,10 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow bg-white">
 
-            @unless(Dashboard::isEmptyMenu(\Orchid\Platform\Dashboard::MENU_PROFILE))
-                {!! Dashboard::renderMenu(\Orchid\Platform\Dashboard::MENU_PROFILE) !!}
+{{--            @unless(Dashboard::isEmptyMenu(\Orchid\Platform\Dashboard::MENU_PROFILE))--}}
+{{--                {!! Dashboard::renderMenu(\Orchid\Platform\Dashboard::MENU_PROFILE) !!}--}}
                 <div class="dropdown-divider"></div>
-            @endunless
+{{--            @endunless--}}
 
             @if(\Orchid\Access\UserSwitch::isSwitch())
                 <a href="#"

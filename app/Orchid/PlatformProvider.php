@@ -73,7 +73,7 @@ class PlatformProvider extends OrchidServiceProvider
     /**
      * @return Menu[]
      */
-    public function registerProfileMenu(): array
+    public function registerMenu(): array
     {
         return [
             Menu::make('Profile')
