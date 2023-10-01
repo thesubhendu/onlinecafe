@@ -7,13 +7,10 @@ use Orchid\Screen\AsSource;
 use Orchid\Filters\Filterable;
 use Orchid\Attachment\Attachable;
 use Illuminate\Database\Eloquent\Model;
-use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Product extends Model implements Buyable
+class Product extends Model
 {
-
-    use \App\Traits\CanBeBought;
 
     use HasFactory, AsSource, Attachable, Filterable;
 

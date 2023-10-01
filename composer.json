@@ -10,7 +10,6 @@
     "require": {
         "php": "^8.0.2",
         "alexpechkarev/google-maps": "10.*",
-        "bumbummen99/shoppingcart": "^4.0",
         "christiankuri/laravel-favorite": "^1.4",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
