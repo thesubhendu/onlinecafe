@@ -2,16 +2,14 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
+    "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
         "php": "^8.1.0",
         "alexpechkarev/google-maps": "10.*",
         "christiankuri/laravel-favorite": "^1.4",
         "doctrine/dbal": "^3.3",
+        "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "itsgoingd/clockwork": "^5.1",
@@ -22,7 +20,7 @@
         "laravel/telescope": "*",
         "laravel/tinker": "^2.5",
         "laravel/vonage-notification-channel": "^3.0",
-        "livewire/livewire": "^2.5",
+        "livewire/livewire": "^3.0",
         "orangehill/iseed": "^3.0",
         "orchid/crud": "^4.0.1",
         "orchid/platform": "^14.0",
@@ -76,7 +74,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -85,6 +84,5 @@
             "@php artisan key:generate --ansi"
         ]
     },
-    "repositories": {
-    }
+    "repositories": []
 }
