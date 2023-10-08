@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "993b2d5fcb62437c66cc6ad8ef3c643c",
+    "content-hash": "06492f2845770f9e98e0834e51fe4abd",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -10315,16 +10315,16 @@
         },
         {
             "name": "vonage/client-core",
-            "version": "4.3.1",
+            "version": "4.3.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Vonage/vonage-php-sdk-core.git",
-                "reference": "9d8189ec9e6c54d6f8e08b86dbed88a511a436a8"
+                "reference": "a7db15d14754ce21b0006452e16dd907577c1e4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vonage/vonage-php-sdk-core/zipball/9d8189ec9e6c54d6f8e08b86dbed88a511a436a8",
-                "reference": "9d8189ec9e6c54d6f8e08b86dbed88a511a436a8",
+                "url": "https://api.github.com/repos/Vonage/vonage-php-sdk-core/zipball/a7db15d14754ce21b0006452e16dd907577c1e4b",
+                "reference": "a7db15d14754ce21b0006452e16dd907577c1e4b",
                 "shasum": ""
             },
             "require": {
@@ -10342,7 +10342,7 @@
                 "helmich/phpunit-json-assert": "^3.3",
                 "php-http/mock-client": "^1.4",
                 "phpspec/prophecy-phpunit": "^2.0",
-                "phpstan/phpstan": "^1.9",
+                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^8.5|^9.4",
                 "rector/rector": "^0.14.8",
                 "roave/security-advisories": "dev-latest",
@@ -10374,7 +10374,7 @@
                 "issues": "https://github.com/Vonage/vonage-php-sdk-core/issues",
                 "source": "https://github.com/Vonage/vonage-php-sdk-core"
             },
-            "time": "2023-08-10T11:00:19+00:00"
+            "time": "2023-10-02T09:26:26+00:00"
         },
         {
             "name": "vonage/nexmo-bridge",
@@ -11240,16 +11240,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.6",
+            "version": "10.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "56f33548fe522c8d82da7ff3824b42829d324364"
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/56f33548fe522c8d82da7ff3824b42829d324364",
-                "reference": "56f33548fe522c8d82da7ff3824b42829d324364",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/355324ca4980b8916c18b9db29f3ef484078f26e",
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e",
                 "shasum": ""
             },
             "require": {
@@ -11306,7 +11306,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.6"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.7"
             },
             "funding": [
                 {
@@ -11314,7 +11314,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-19T04:59:03+00:00"
+            "time": "2023-10-04T15:34:17+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

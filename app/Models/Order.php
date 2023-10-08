@@ -45,6 +45,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function confirmedBy()
+    {
+        return $this->belongsTo(User::class, 'confirmed_by');
+    }
+
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);

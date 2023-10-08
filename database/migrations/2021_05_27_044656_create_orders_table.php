@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->timestamp('confirmed_at')->nullable();
             $table->unsignedBigInteger('confirmed_by')->nullable()
                   ->constrained()->onDelete('cascade');
-            $table->enum('payment_method', ['in_store', 'credit_card'])
+            $table->string('payment_method')
                   ->default('in_store');
             $table->unsignedBigInteger('user_id')
                   ->constrained()->onDelete('cascade');

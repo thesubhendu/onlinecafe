@@ -10,18 +10,11 @@ use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\VendorController;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('test', function () {
-    // Initiate service
-    \App\Services\AbnLookup\AbnLookupService::reset(
-        config('abn-lookup.auth_guid'),
-        config('abn-lookup.wsdl'),
-        config('abn-lookup.wsdl_cache'),
-    );
-   $res =  \App\Services\AbnLookup\AbnLookupService::searchByAbn(53930548027);
 
-    dd($res);
 
 });
 
