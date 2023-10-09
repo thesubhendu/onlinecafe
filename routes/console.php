@@ -1,5 +1,6 @@
 <?php
 
+use App\Imports\VendorImport;
 use App\Models\User;
 use App\Notifications\NewOrderNotification;
 use Illuminate\Foundation\Inspiring;
@@ -30,4 +31,11 @@ Artisan::command('tinker:order-initiate', function () {
 
 })->purpose('Test command do not run');
 
+Artisan::command('import-vendors', function () {
+    $this->output->title('Starting import');
+    $vendorImport = new VendorImport();
+    $vendorImport->withOutput($this->output)->import( public_path('vendors.csv'));
+    $this->output->success('Import successful');
+
+})->purpose('Import vendor from csv');
 
