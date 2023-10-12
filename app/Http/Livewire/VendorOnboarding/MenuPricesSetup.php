@@ -71,7 +71,7 @@ class MenuPricesSetup extends Component
             ]);
         }
 
-        return redirect()->route('vendor.show', $this->vendor->id);
+        return redirect()->route('platform.main');
     }
 
     public function render()
