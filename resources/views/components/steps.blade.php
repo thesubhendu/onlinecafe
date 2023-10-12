@@ -18,7 +18,7 @@
             <!-- SHIPPING -->
             <div
                 class="col-md-4 col-sm-4 col-xs-4 bs-wizard-step {{ $step == 'shop-setup' ? 'active' : ''}}">
-                <div class="text-center bs-wizard-stepnum">Payment</div>
+                <div class="text-center bs-wizard-stepnum">Create Account</div>
                 <div class="progress">
                     <div class="progress-bar"></div>
                 </div>
