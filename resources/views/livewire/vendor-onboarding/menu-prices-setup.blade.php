@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card shop-setup-card">
-                        <form wire:submit.prevent="submit">
+                        <form wire:submit="submit">
                             <div class="container">
                                 <h3>
                                     <b>Set Your Product Prices</b>
@@ -42,7 +42,7 @@
                                                     <div class="col-sm-3 col-sm-3">
                                                         <h6>{{$size}} $</h6>
                                                         <input
-                                                            wire:model.lazy="productPrices.{{$product->id}}.{{$size}}"
+                                                            wire:model.blur="productPrices.{{$product->id}}.{{$size}}"
                                                             type="number"
                                                             class="form-control"
                                                             value="{{$productPrices[$product->id][$size] ?? 0}}"
@@ -71,7 +71,7 @@
                                             @endif
                                             <div class="form-group form-inline row">
                                                 <input
-                                                    wire:model="vendorProductOptions.{{$index}}.price"
+                                                    wire:model.live="vendorProductOptions.{{$index}}.price"
                                                     type="number"
                                                     class="form-control"
                                                     value="{{$productOption->price}}"

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\VendorOnboarding;
+namespace App\Livewire\VendorOnboarding;
 
 use App\Models\Service;
 use App\Services\StripeService;

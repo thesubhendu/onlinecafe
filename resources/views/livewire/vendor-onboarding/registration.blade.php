@@ -28,29 +28,29 @@
                     <p>(Please keep photo of driving license with you) </p>
 
                     <div class="">
-                        <form id="vendor-registration-form" wire:submit.prevent="submit" class="row">
+                        <form id="vendor-registration-form" wire:submit="submit" class="row">
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="vendor_name" class="form-label"> Business Name (Entity Name)</label>
-                                <input type="text" class="form-control" wire:model.lazy="vendor_name"
+                                <input type="text" class="form-control" wire:model.blur="vendor_name"
                                        placeholder="Business Name">
                                 @error('vendor_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                             </div>
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="abn" class="form-label">Enter ABN/ASIC</label>
-                                <input type="text" class="form-control" wire:model.lazy="abn"
+                                <input type="text" class="form-control" wire:model.blur="abn"
                                        placeholder="Enter ABN / ASIC">
                                 @error('abn') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="email" class="form-label"> Email</label>
-                                <input type="email" class="form-control" wire:model.lazy="email" placeholder="Email">
+                                <input type="email" class="form-control" wire:model.blur="email" placeholder="Email">
                                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
 
                             </div>
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="contact_name" class="form-label"> Contact First Name</label>
-                                <input type="text" class="form-control" wire:model.lazy="contact_name"
+                                <input type="text" class="form-control" wire:model.blur="contact_name"
                                        placeholder="Contact First Name">
                                 @error('contact_name') <span class="text-danger">{{ $message }}</span> @enderror
 
@@ -58,7 +58,7 @@
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="contact_lastname" class="form-label"> Contact Last Name</label>
 
-                                <input type="text" class="form-control" wire:model.lazy="contact_lastname"
+                                <input type="text" class="form-control" wire:model.blur="contact_lastname"
                                        placeholder="Contact Last Name">
                                 @error('contact_lastname') <span class="text-danger">{{ $message }}</span> @enderror
 
@@ -66,25 +66,25 @@
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="address" class="form-label"> Address</label>
 
-                                <input type="text" class="form-control" wire:model.lazy="address" placeholder="Address">
+                                <input type="text" class="form-control" wire:model.blur="address" placeholder="Address">
                                 @error('address') <span class="text-danger">{{ $message }}</span> @enderror
 
                             </div>
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="suburb" class="form-label"> Suburb</label>
-                                <input type="text" class="form-control" wire:model.lazy="suburb" placeholder="Suburb">
+                                <input type="text" class="form-control" wire:model.blur="suburb" placeholder="Suburb">
                                 {{-- @error('suburb') <span class="text-danger">{{ $message }}</span> @enderror--}}
 
                             </div>
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="state" class="form-label"> State</label>
-                                <input type="text" class="form-control" wire:model.lazy="state" placeholder="State">
+                                <input type="text" class="form-control" wire:model.blur="state" placeholder="State">
                                 @error('state') <span class="text-danger">{{ $message }}</span> @enderror
 
                             </div>
                             <div class="form-group col-lg-6 col-sm-12">
                                 <label for="pc" class="form-label"> Postal Code</label>
-                                <input type="text" class="form-control" wire:model.lazy="pc" placeholder="Postal Code">
+                                <input type="text" class="form-control" wire:model.blur="pc" placeholder="Postal Code">
                                 @error('pc') <span class="text-danger">{{ $message }}</span> @enderror
 
                             </div>
@@ -96,7 +96,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">+61</span>
 
-                                    <input type="text" class="form-control" wire:model.lazy="mobile"
+                                    <input type="text" class="form-control" wire:model.blur="mobile"
                                            placeholder="Phone No ">
                                     @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
 
@@ -106,7 +106,7 @@
                             @if(!auth()->user())
                                 <div class="form-group col-lg-6 col-sm-12 mb-5">
                                     <label for="mobile" class="form-label"> Password</label>
-                                    <input type="password" class="form-control" wire:model.lazy="password"
+                                    <input type="password" class="form-control" wire:model.blur="password"
                                            placeholder="Password ">
                                     @error('password') <span class="text-danger">{{ $message }}</span> @enderror
 
@@ -114,7 +114,7 @@
 
                                 <div class="form-group col-lg-6 col-sm-12 mb-5">
                                     <label for="mobile" class="form-label"> Confirm Password</label>
-                                    <input type="password" class="form-control" wire:model.lazy="password_confirmation"
+                                    <input type="password" class="form-control" wire:model.blur="password_confirmation"
                                            placeholder="Confirm Password ">
                                     @error('password_confirmation') <span
                                         class="text-danger">{{ $message }}</span> @enderror
@@ -126,7 +126,7 @@
 
                                     <div class="col-lg-3 col-sm-12 mb-4">
                                         <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox"
-                                               wire:model="agreement">
+                                               wire:model.live="agreement">
                                         <label for="styled-checkbox-2"> Agree to <a href="">Terms & Conditions</a>
                                         </label>
                                         @error('agreement') <span class="text-danger">{{ $message }}</span> @enderror

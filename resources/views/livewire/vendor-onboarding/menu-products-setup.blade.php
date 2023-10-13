@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card shop-setup-card">
-                        <form wire:submit.prevent="submit">
+                        <form wire:submit="submit">
                             <div class="container">
                                 <h4>
                                     <small>Choose your menus</small>
@@ -39,7 +39,7 @@
                                                             <label>
                                                                 <input
                                                                     autocomplete="off"
-                                                                    wire:model="formData.products.{{$product->id}}"
+                                                                    wire:model.live="formData.products.{{$product->id}}"
                                                                     type="checkbox"
                                                                 />
 
@@ -81,7 +81,7 @@
                                                             <label>
                                                                 <input
                                                                     autocomplete="off"
-                                                                    wire:model="formData.options.{{$option->id}}"
+                                                                    wire:model.live="formData.options.{{$option->id}}"
                                                                     type="checkbox"
                                                                 />
 

@@ -19,7 +19,7 @@
                 <div class="mb-3">
                     <x-jet-label for="name" value="{{ __('Token Name') }}" />
                     <x-jet-input id="name" type="text" class="{{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                 wire:model.defer="createApiTokenForm.name" autofocus />
+                                 wire:model="createApiTokenForm.name" autofocus />
                     <x-jet-input-error for="name" />
                 </div>
 
@@ -33,7 +33,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <div class="form-check">
-                                            <x-jet-checkbox wire:model.defer="createApiTokenForm.permissions" id="{{ 'create-'.$permission }}" :value="$permission"/>
+                                            <x-jet-checkbox wire:model="createApiTokenForm.permissions" id="{{ 'create-'.$permission }}" :value="$permission"/>
                                             <label class="form-check-label" for="{{ 'create-'.$permission }}">
                                                 {{ $permission }}
                                             </label>
@@ -103,7 +103,7 @@
     @endif
 
     <!-- Token Value Modal -->
-    <x-jet-dialog-modal wire:model="displayingToken">
+    <x-jet-dialog-modal wire:model.live="displayingToken">
         <x-slot name="title">
             {{ __('API Token') }}
         </x-slot>
@@ -129,7 +129,7 @@
     </x-jet-dialog-modal>
 
     <!-- API Token Permissions Modal -->
-    <x-jet-dialog-modal wire:model="managingApiTokenPermissions">
+    <x-jet-dialog-modal wire:model.live="managingApiTokenPermissions">
         <x-slot name="title">
             {{ __('API Token Permissions') }}
         </x-slot>
@@ -140,7 +140,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <div class="form-check">
-                                <x-jet-checkbox wire:model.defer="updateApiTokenForm.permissions" id="{{ 'update-'.$permission }}" :value="$permission"/>
+                                <x-jet-checkbox wire:model="updateApiTokenForm.permissions" id="{{ 'update-'.$permission }}" :value="$permission"/>
                                 <label class="form-check-label" for="{{ 'update-'.$permission }}">
                                     {{ $permission }}
                                 </label>
@@ -163,7 +163,7 @@
     </x-jet-dialog-modal>
 
     <!-- Delete Token Confirmation Modal -->
-    <x-jet-confirmation-modal wire:model="confirmingApiTokenDeletion">
+    <x-jet-confirmation-modal wire:model.live="confirmingApiTokenDeletion">
         <x-slot name="title">
             {{ __('Delete API Token') }}
         </x-slot>

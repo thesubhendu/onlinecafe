@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-8">
         <div class="card shadow-sm">
-            <form wire:submit.prevent="{{ $submit }}">
+            <form wire:submit="{{ $submit }}">
                 <div class="card-body">
                 {{ $form }}
                 </div>

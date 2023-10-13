@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\VendorOnboarding;
+namespace App\Livewire\VendorOnboarding;
 
 use App\Models\Plan;
 use Livewire\Component;
@@ -53,7 +53,7 @@ class Payment extends Component
         $shop->is_subscribed = true;
         $shop->save();
 
-        $this->emitUp('paymentSuccess');
+        $this->dispatch('paymentSuccess');
         $this->loader = false;
 
         return redirect()->route('register-business.shop-setup');

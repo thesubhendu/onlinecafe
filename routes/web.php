@@ -4,8 +4,11 @@ use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\DownloadFlyerController;
 use App\Http\Controllers\PhoneVerificationController;
 use App\Http\Controllers\VendorController;
-use App\Http\Livewire\VendorOnboarding;
-use App\Http\Livewire\VendorOnboarding\ShopSetup;
+use App\Livewire\VendorOnboarding\MenuPricesSetup;
+use App\Livewire\VendorOnboarding\MenuProductsSetup;
+use App\Livewire\VendorOnboarding\Payment;
+use App\Livewire\VendorOnboarding\Registration;
+use App\Livewire\VendorOnboarding\ShopSetup;
 use Illuminate\Support\Facades\Route;
 
 //Static Routes
@@ -31,12 +34,12 @@ Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->name('vendor
 Route::get('/confirm/{order}/update',[ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
 
 //Vendor Onboarding Routes
-Route::get('vendor-onboarding/register',VendorOnboarding\Registration::class)->name('register-business.create');
+Route::get('vendor-onboarding/register',Registration::class)->name('register-business.create');
 Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
-    Route::get('/payment',VendorOnboarding\Payment::class)->name('register-business.payment')->can('vendor');
+    Route::get('/payment',Payment::class)->name('register-business.payment')->can('vendor');
     Route::get('/shop-setup',ShopSetup::class)->name('register-business.shop-setup')->can('vendor');
-    Route::get('/menu-products-setup',VendorOnboarding\MenuProductsSetup::class)->name('register-business.menu-products-setup')->middleware('can:vendor');
-    Route::get('/menu-prices-setup', VendorOnboarding\MenuPricesSetup::class)->name('register-business.menu-prices-setup')->middleware('can:vendor');
+    Route::get('/menu-products-setup',MenuProductsSetup::class)->name('register-business.menu-products-setup')->middleware('can:vendor');
+    Route::get('/menu-prices-setup', MenuPricesSetup::class)->name('register-business.menu-prices-setup')->middleware('can:vendor');
 
     Route::get('/stripe/refresh-url/{vendor}',[\App\Http\Controllers\StripeConnectController::class, 'refreshUrl'])->name('stripe.refreshUrl');
     Route::get('/stripe/create-connect-account/{vendor}',[\App\Http\Controllers\StripeConnectController::class, 'createAccount'])->name('stripe.createAccount');
