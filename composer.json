@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.5",
         "laravel/vonage-notification-channel": "^3.0",
         "livewire/livewire": "^3.0",
+        "maatwebsite/excel": "^3.1",
         "orangehill/iseed": "^3.0",
         "orchid/crud": "^4.0.1",
         "orchid/platform": "^14.0",
