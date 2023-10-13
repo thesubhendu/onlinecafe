@@ -25,7 +25,7 @@ class CalculateProductTotal
             $this->totalPrice = $product->price;
         }
 
-        $this->redableOptions['extra']['size'] = $size->size;
+        $this->redableOptions['extra']['size'] = $size->size ?? "S";
 
         //sum of options
         foreach ($selectedOptions as $optionTypeId => $optionsId){

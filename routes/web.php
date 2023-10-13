@@ -1,25 +1,15 @@
 <?php
 
-use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\ConfirmOrderController;
 use App\Http\Controllers\DownloadFlyerController;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PhoneVerificationController;
-use App\Http\Controllers\Subscriptions\PlanController;
-use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\VendorController;
 use App\Http\Livewire\VendorOnboarding;
 use App\Http\Livewire\VendorOnboarding\ShopSetup;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
-Route::get('test', function () {
-
-
-});
-
+//Static Routes
 Route::view('/offline', 'vendor.laravelpwa.offline');
-
 Route::view('/privacy-policy', 'privacy')->name('privacy');
 Route::view('/terms-conditions', 'termscondition')->name('terms-conditions');
 
@@ -31,27 +21,16 @@ Route::get('/user-info', function (\Illuminate\Http\Request $request) {
     return ['user' => ''];
 });
 
-Route::view('/main-landing', 'main-landing')->name('main-landing');
+//Route::view('/main-landing', 'main-landing')->name('main-landing');
 Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
 
 
-Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::redirect('/', '/vendor-landing')->name('home');
 Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
-
-Route::group(['namespace' => 'Subscriptions'], function () {
-    Route::get('plans', [PlanController::class, 'index'])->name('subscriptions.plans');
-    Route::get('/plans/subscriptions', [SubscriptionController::class, 'index'])->name('plans.subscribe')->middleware('auth');
-    Route::post('/subscriptions', [SubscriptionController::class, 'store'])->name('subscriptions.store')->middleware('auth');
-});
-
-Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
-    Route::get('/account', [AccountController::class, 'index'])->name('account');
-});
-
-require(__DIR__ . '/partials/_manage-subscriptions.php');
 
 Route::get('/confirm/{order}/update',[ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
 
+//Vendor Onboarding Routes
 Route::get('vendor-onboarding/register',VendorOnboarding\Registration::class)->name('register-business.create');
 Route::middleware('auth')->prefix('vendor-onboarding')->group(function () {
     Route::get('/payment',VendorOnboarding\Payment::class)->name('register-business.payment')->can('vendor');

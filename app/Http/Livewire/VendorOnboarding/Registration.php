@@ -87,13 +87,13 @@ class Registration extends Component
         if (!$this->authUser) {
             $rules['password'] = $this->passwordRules();
             $rules['email'] = 'email|required|unique:users,email';
-            $rules['mobile'] = 'digits:10|required|unique:users,mobile';
+            $rules['mobile'] = 'digits|required|unique:users,mobile';
 
             return $rules;
         }
 
         $rules['email'] = 'email|required|unique:users,email,'.auth()->user()->id;
-        $rules['mobile'] = 'digits:10|required|unique:users,mobile,'.auth()->user()->id;
+        $rules['mobile'] = 'digits|required|unique:users,mobile,'.auth()->user()->id;
 
         $shop = $this->authUser->shop;
         if($shop)
@@ -206,7 +206,7 @@ class Registration extends Component
             [
                 'name'     => $this->contact_name.' '.$this->contact_lastname,
                 'email'    => $this->email,
-                'mobile'   => $this->mobile,
+                'mobile'   => "+61".ltrim($this->mobile, "0"),
                 'password' => Hash::make($this->password),
             ];
 
