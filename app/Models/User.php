@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MustVerifyPhone;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,8 @@ use Laravel\Cashier\Subscription;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Orchid\Platform\Models\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 
 class User extends Authenticatable
@@ -21,9 +23,13 @@ class User extends Authenticatable
 {
     use HasFactory;
     use HasApiTokens;
-    use HasProfilePhoto, Favoriteability;
-    use Notifiable, Billable, \App\Traits\MustVerifyPhone;
+    use Favoriteability;
+    use HasProfilePhoto;
+    use MustVerifyPhone;
+    use Billable;
+    use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
