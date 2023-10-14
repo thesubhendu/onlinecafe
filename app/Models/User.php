@@ -41,7 +41,6 @@ class User extends Authenticatable
         'email',
         'mobile',
         'password',
-        'permissions',
     ];
 
     /**
@@ -54,7 +53,6 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        'permissions',
     ];
 
     /**
@@ -63,43 +61,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'permissions'       => 'array',
+        'email_verified_at' => 'datetime'
     ];
 
-    /**
-     * The attributes for which you can use filters in url.
-     *
-     * @var array
-     */
-    protected $allowedFilters = [
-        'id',
-        'name',
-        'email',
-        'permissions',
-    ];
-
-    /**
-     * The attributes for which can use sort in url.
-     *
-     * @var array
-     */
-    protected $allowedSorts = [
-        'id',
-        'name',
-        'email',
-        'updated_at',
-        'created_at',
-    ];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
 
     public function orders()
     {
