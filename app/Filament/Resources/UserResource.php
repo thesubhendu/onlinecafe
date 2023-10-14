@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -96,6 +97,7 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
+                Impersonate::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

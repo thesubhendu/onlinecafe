@@ -30,6 +30,7 @@
         "realrashid/sweet-alert": "^7",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/opening-hours": "^2.10",
+        "stechstudio/filament-impersonate": "^3.5",
         "stripe/stripe-php": "^9.0",
         "symfony/routing": "^6.0",
         "torann/geoip": "^3.0",

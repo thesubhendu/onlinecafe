@@ -91,5 +91,7 @@
             });
     </script>
 @endauth
+
+    <x-impersonate::banner/>
 </body>
 </html>

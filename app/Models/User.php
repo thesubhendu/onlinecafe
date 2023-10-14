@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Traits\MustVerifyPhone;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -18,7 +20,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 //    implements MustVerifyEmail,MustVerifyPhone
 {
     use HasFactory;
@@ -64,6 +66,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime'
     ];
 
+    public function canAccessPanel(Panel $panel):bool
+    {
+        return true; //todo in production only allow user with superadmin role to access it.
+    }
+
+    public function canImpersonate():bool
+    {
+        return true;
+    }
 
     public function orders()
     {
