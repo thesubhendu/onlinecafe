@@ -84,9 +84,9 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('confirmedBy.name')
 
                     ->sortable(),
-                Tables\Columns\TextColumn::make('payment_method')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label('Ordered By')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('vendor.name')
@@ -94,16 +94,9 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('order_total')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('sub_total')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tax')
-                    ->numeric()
-                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
-
-
 
                 Tables\Columns\IconColumn::make('is_paid')
                     ->boolean(),
@@ -111,11 +104,6 @@ class OrderResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
             ])
             ->filters([
                 //

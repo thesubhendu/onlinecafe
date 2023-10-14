@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Mail\OrderConfirmed;
 use App\Mail\orderSubmitted;
+use App\Models\Scopes\VendorScope;
 use App\Notifications\NewOrderNotification;
 use App\Notifications\OrderConfirmedNotification;
 use App\Services\LoyaltyClaimService;
@@ -16,7 +17,9 @@ use Orchid\Screen\AsSource;
 
 class Order extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource;
+    use Filterable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +36,11 @@ class Order extends Model
         'date' => 'datetime:d-m-Y',
         'confirmed_at'=>'datetime'
     ];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new VendorScope());
+    }
 
 
     public function getFormattedDate()
