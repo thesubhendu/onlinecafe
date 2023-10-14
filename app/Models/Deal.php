@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Gloudemans\Shoppingcart\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart; //todo remove cart from deal
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Orchid\Attachment\Attachable;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
 
 class Deal extends Model
 {
-    use HasFactory, Filterable, AsSource, Attachable;
+    use HasFactory;
 
     protected $casts = [
       'expires_at' => 'datetime'

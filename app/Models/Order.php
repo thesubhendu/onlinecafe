@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Mail\OrderConfirmed;
 use App\Mail\orderSubmitted;
-use App\Models\Scopes\VendorScope;
 use App\Notifications\NewOrderNotification;
 use App\Notifications\OrderConfirmedNotification;
 use App\Services\LoyaltyClaimService;
@@ -13,13 +12,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
 
 class Order extends Model
 {
-    use AsSource;
-    use Filterable;
     use HasFactory;
     use ApplyVendorScope;
 

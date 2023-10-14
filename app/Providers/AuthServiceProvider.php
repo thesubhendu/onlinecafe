@@ -9,7 +9,6 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Cashier\Subscription;
-use Orchid\Platform\Dashboard;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Dashboard $dashboard)
+    public function boot()
     {
         $this->registerPolicies();
 
@@ -44,11 +43,12 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('visit-backend', function (User $user) {
-            return $user->hasAccess('platform.index');
+//            return $user->hasAccess('platform.index'); // todo add actual implementation
         });
 
         Gate::define('admin', function (User $user) {
-            return $user->hasAccess('platform.systems.roles');
+            return true;
+//            return $user->hasAccess('platform.systems.roles'); // todo add actual implementation
         });
 
         Gate::define('make-order', function (User $user, Vendor $vendor) {

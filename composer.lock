@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d2f12bb15cd4021b7032e2d38292d22",
+    "content-hash": "22f544afcf62cbf11fedf4d22f70b006",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -1617,16 +1617,16 @@
         },
         {
             "name": "filament/actions",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/actions.git",
-                "reference": "a8aa20c9f007a35745097d4ac3a1346124196daa"
+                "reference": "8285ec4ed3f0b5db7a3edb7771f1fb67d76ebe17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/actions/zipball/a8aa20c9f007a35745097d4ac3a1346124196daa",
-                "reference": "a8aa20c9f007a35745097d4ac3a1346124196daa",
+                "url": "https://api.github.com/repos/filamentphp/actions/zipball/8285ec4ed3f0b5db7a3edb7771f1fb67d76ebe17",
+                "reference": "8285ec4ed3f0b5db7a3edb7771f1fb67d76ebe17",
                 "shasum": ""
             },
             "require": {
@@ -1663,20 +1663,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-12T12:23:44+00:00"
+            "time": "2023-10-13T19:26:44+00:00"
         },
         {
             "name": "filament/filament",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/panels.git",
-                "reference": "f99678159767e62725300fc40ca683ea06eb2540"
+                "reference": "a24da52f8f7854d6dbfbacfdbb277be6fa1d01e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/panels/zipball/f99678159767e62725300fc40ca683ea06eb2540",
-                "reference": "f99678159767e62725300fc40ca683ea06eb2540",
+                "url": "https://api.github.com/repos/filamentphp/panels/zipball/a24da52f8f7854d6dbfbacfdbb277be6fa1d01e4",
+                "reference": "a24da52f8f7854d6dbfbacfdbb277be6fa1d01e4",
                 "shasum": ""
             },
             "require": {
@@ -1728,20 +1728,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-12T12:23:50+00:00"
+            "time": "2023-10-13T19:26:48+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "e72076934a07a15235edc47f644fd969ff303a16"
+                "reference": "1559b283083a66b40cb04407ac9001a09753ed42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/e72076934a07a15235edc47f644fd969ff303a16",
-                "reference": "e72076934a07a15235edc47f644fd969ff303a16",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/1559b283083a66b40cb04407ac9001a09753ed42",
+                "reference": "1559b283083a66b40cb04407ac9001a09753ed42",
                 "shasum": ""
             },
             "require": {
@@ -1784,11 +1784,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-12T12:23:39+00:00"
+            "time": "2023-10-14T11:48:23+00:00"
         },
         {
             "name": "filament/infolists",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/infolists.git",
@@ -1839,16 +1839,16 @@
         },
         {
             "name": "filament/notifications",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
-                "reference": "72e1e9ca8abb794f9a86ed98ee6a61971244cd1a"
+                "reference": "ae21e99853c0df0a093001e6db36b844f6fec535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/72e1e9ca8abb794f9a86ed98ee6a61971244cd1a",
-                "reference": "72e1e9ca8abb794f9a86ed98ee6a61971244cd1a",
+                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/ae21e99853c0df0a093001e6db36b844f6fec535",
+                "reference": "ae21e99853c0df0a093001e6db36b844f6fec535",
                 "shasum": ""
             },
             "require": {
@@ -1887,20 +1887,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-12T12:23:40+00:00"
+            "time": "2023-10-13T19:26:43+00:00"
         },
         {
             "name": "filament/support",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "ceaae48422028bbe14a0e7dbd9486e3cf8bb33ba"
+                "reference": "1c3d8f738caa4090511f038c62a7f35985cef6b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/ceaae48422028bbe14a0e7dbd9486e3cf8bb33ba",
-                "reference": "ceaae48422028bbe14a0e7dbd9486e3cf8bb33ba",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/1c3d8f738caa4090511f038c62a7f35985cef6b5",
+                "reference": "1c3d8f738caa4090511f038c62a7f35985cef6b5",
                 "shasum": ""
             },
             "require": {
@@ -1944,20 +1944,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-12T12:23:44+00:00"
+            "time": "2023-10-14T11:48:56+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "af59df20203dad1acb7e0293028aa5c1f1079c6a"
+                "reference": "fec5e1d3fb4526a98da332677b01ed723db33a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/af59df20203dad1acb7e0293028aa5c1f1079c6a",
-                "reference": "af59df20203dad1acb7e0293028aa5c1f1079c6a",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/fec5e1d3fb4526a98da332677b01ed723db33a02",
+                "reference": "fec5e1d3fb4526a98da332677b01ed723db33a02",
                 "shasum": ""
             },
             "require": {
@@ -1997,20 +1997,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-12T12:23:44+00:00"
+            "time": "2023-10-13T19:27:10+00:00"
         },
         {
             "name": "filament/widgets",
-            "version": "v3.0.74",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/widgets.git",
-                "reference": "f717516dd7449b75551d8a28d3076bd681744541"
+                "reference": "6f4a53631e50472f4439b0ec5139a3386d1c7ab2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/widgets/zipball/f717516dd7449b75551d8a28d3076bd681744541",
-                "reference": "f717516dd7449b75551d8a28d3076bd681744541",
+                "url": "https://api.github.com/repos/filamentphp/widgets/zipball/6f4a53631e50472f4439b0ec5139a3386d1c7ab2",
+                "reference": "6f4a53631e50472f4439b0ec5139a3386d1c7ab2",
                 "shasum": ""
             },
             "require": {
@@ -2041,7 +2041,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-08T18:26:58+00:00"
+            "time": "2023-10-13T19:27:11+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -3626,81 +3626,6 @@
                 "source": "https://github.com/laravel/sanctum"
             },
             "time": "2023-09-07T15:46:33+00:00"
-        },
-        {
-            "name": "laravel/scout",
-            "version": "v10.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/scout.git",
-                "reference": "c3fe5fdef438c0dec6e58834cf2b18037e9d0358"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/c3fe5fdef438c0dec6e58834cf2b18037e9d0358",
-                "reference": "c3fe5fdef438c0dec6e58834cf2b18037e9d0358",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/bus": "^9.0|^10.0",
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/http": "^9.0|^10.0",
-                "illuminate/pagination": "^9.0|^10.0",
-                "illuminate/queue": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "algolia/algoliasearch-client-php": "^3.2",
-                "meilisearch/meilisearch-php": "^1.0",
-                "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^7.31|^8.11",
-                "php-http/guzzle7-adapter": "^1.0",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.3"
-            },
-            "suggest": {
-                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^3.2).",
-                "meilisearch/meilisearch-php": "Required to use the Meilisearch engine (^1.0)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "10.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Scout\\ScoutServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Scout\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
-            "keywords": [
-                "algolia",
-                "laravel",
-                "search"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/scout/issues",
-                "source": "https://github.com/laravel/scout"
-            },
-            "time": "2023-10-10T15:41:23+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -5790,289 +5715,6 @@
                 "source": "https://github.com/orangehill/iseed/tree/v3.0.3"
             },
             "time": "2023-03-27T06:14:43+00:00"
-        },
-        {
-            "name": "orchid/blade-icons",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchidsoftware/blade-icons.git",
-                "reference": "14a2bd18bdf10dab61bbce53d44d25f122c44396"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/blade-icons/zipball/14a2bd18bdf10dab61bbce53d44d25f122c44396",
-                "reference": "14a2bd18bdf10dab61bbce53d44d25f122c44396",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "laravel/framework": "^10.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Orchid\\Icons\\IconServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchid\\Icons\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "tabuna",
-                    "email": "bliz48rus@gmail.com"
-                }
-            ],
-            "description": "An easy way inline SVG images in your Blade templates.",
-            "support": {
-                "issues": "https://github.com/orchidsoftware/blade-icons/issues",
-                "source": "https://github.com/orchidsoftware/blade-icons/tree/4.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/orchid",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2023-02-18T22:44:06+00:00"
-        },
-        {
-            "name": "orchid/crud",
-            "version": "4.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchidsoftware/crud.git",
-                "reference": "93a8632332723b672884646a19d4fabdbe0d86df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/crud/zipball/93a8632332723b672884646a19d4fabdbe0d86df",
-                "reference": "93a8632332723b672884646a19d4fabdbe0d86df",
-                "shasum": ""
-            },
-            "require": {
-                "orchid/platform": "^14.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0",
-                "phpunit/phpunit": "^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Orchid\\Crud\\CrudServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchid\\Crud\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandr Chernyaev",
-                    "email": "bliz48rus@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Build CRUD apps in fewer lines of code for Laravel Orchid.",
-            "homepage": "https://github.com/orchid/crud",
-            "keywords": [
-                "crud",
-                "orchid"
-            ],
-            "support": {
-                "issues": "https://github.com/orchidsoftware/crud/issues",
-                "source": "https://github.com/orchidsoftware/crud/tree/4.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/orchid",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2023-09-21T22:01:01+00:00"
-        },
-        {
-            "name": "orchid/icons",
-            "version": "2.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchidsoftware/icons.git",
-                "reference": "52c74d4bcb86daf455dc142104a20c43defdc817"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/icons/zipball/52c74d4bcb86daf455dc142104a20c43defdc817",
-                "reference": "52c74d4bcb86daf455dc142104a20c43defdc817",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Orchid\\IconPack\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandr Chernyaev",
-                    "email": "bliz48rus@gmail.com"
-                },
-                {
-                    "name": "Dmitry Skirta"
-                },
-                {
-                    "name": "Jamal Jama"
-                },
-                {
-                    "name": "Ahmad Firoz"
-                }
-            ],
-            "description": "Simple and Minimal Line Icons",
-            "support": {
-                "source": "https://github.com/orchidsoftware/icons/tree/2.2.1"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/tabuna/10usd",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://opencollective.com/orchid",
-                    "type": "open_collective"
-                }
-            ],
-            "abandoned": true,
-            "time": "2021-11-18T22:25:19+00:00"
-        },
-        {
-            "name": "orchid/platform",
-            "version": "14.14.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "710ffc53c83d959c08b98aa7f1993593a95b04d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/710ffc53c83d959c08b98aa7f1993593a95b04d7",
-                "reference": "710ffc53c83d959c08b98aa7f1993593a95b04d7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^10.0",
-                "laravel/scout": "^9.0 || ^10.0",
-                "orchid/blade-icons": "^4.0",
-                "tabuna/breadcrumbs": "^4.0",
-                "twbs/bootstrap-icons": "^1.10",
-                "watson/active": "^7.0"
-            },
-            "conflict": {
-                "laravel/framework": "<10.2.0",
-                "nesbot/carbon": "<2.66.0"
-            },
-            "require-dev": {
-                "doctrine/dbal": "^2.10 || ^3.0",
-                "fakerphp/faker": "^1.9.1",
-                "laravel/pint": "^1.2",
-                "orchestra/testbench-core": "^8.0",
-                "orchestra/testbench-dusk": "^8.0",
-                "phpunit/php-code-coverage": "^10.0",
-                "phpunit/phpunit": "^10.0",
-                "vimeo/psalm": "^4.3 || ^5.0"
-            },
-            "suggest": {
-                "orchid/crud": "Automated CRUD based on your files resources.",
-                "orchid/fortify": "Orchid template for Laravel Fortify."
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Orchid\\Platform\\Providers\\FoundationServiceProvider"
-                    ],
-                    "aliases": {
-                        "Alert": "Orchid\\Support\\Facades\\Alert",
-                        "Dashboard": "Orchid\\Support\\Facades\\Dashboard"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Support/helpers.php"
-                ],
-                "psr-4": {
-                    "Orchid\\Alert\\": "src/Alert/",
-                    "Orchid\\Access\\": "src/Access/",
-                    "Orchid\\Screen\\": "src/Screen/",
-                    "Orchid\\Filters\\": "src/Filters/",
-                    "Orchid\\Metrics\\": "src/Metrics/",
-                    "Orchid\\Support\\": "src/Support/",
-                    "Orchid\\Platform\\": "src/Platform/",
-                    "Orchid\\Attachment\\": "src/Attachment/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandr Chernyaev",
-                    "email": "bliz48rus@gmail.com",
-                    "homepage": "https://tabuna.github.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Platform for back-office applications, admin panel or CMS your Laravel app.",
-            "homepage": "https://orchid.software",
-            "keywords": [
-                "admin",
-                "cmf",
-                "cms",
-                "extranet",
-                "framework",
-                "laravel",
-                "orchid",
-                "platform",
-                "rad"
-            ],
-            "support": {
-                "docs": "https://orchid.software/en/docs",
-                "email": "bliz48rus@gmail.com",
-                "issues": "https://github.com/orchidsoftware/platform/issues",
-                "source": "https://github.com/orchidsoftware/platform"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/orchid",
-                    "type": "opencollective"
-                }
-            ],
-            "time": "2023-09-22T02:21:20+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -10553,71 +10195,6 @@
             "time": "2023-09-12T10:11:35+00:00"
         },
         {
-            "name": "tabuna/breadcrumbs",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tabuna/breadcrumbs.git",
-                "reference": "ca48c28f85ece717ba47caa83c5b8bb8168eee51"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/ca48c28f85ece717ba47caa83c5b8bb8168eee51",
-                "reference": "ca48c28f85ece717ba47caa83c5b8bb8168eee51",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^10.0",
-                "laravel/serializable-closure": "^1.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0",
-                "phpunit/php-code-coverage": "^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Tabuna\\Breadcrumbs\\BreadcrumbsServiceProvider"
-                    ],
-                    "aliases": {
-                        "Breadcrumbs": "Tabuna\\Breadcrumbs\\Breadcrumbs"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tabuna\\Breadcrumbs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandr Chernyaev",
-                    "email": "bliz48rus@gmail.com"
-                },
-                {
-                    "name": "Dwight Watson",
-                    "email": "dwight@studentservices.com.au"
-                },
-                {
-                    "name": "Dave James Miller",
-                    "email": "dave@davejamesmiller.com"
-                }
-            ],
-            "description": "An easy way to add breadcrumbs to your Laravel app.",
-            "support": {
-                "issues": "https://github.com/tabuna/breadcrumbs/issues",
-                "source": "https://github.com/tabuna/breadcrumbs/tree/4.0.0"
-            },
-            "time": "2023-02-17T12:47:20+00:00"
-        },
-        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.6",
             "source": {
@@ -10749,45 +10326,6 @@
                 "source": "https://github.com/Torann/laravel-geoip/tree/3.0.5"
             },
             "time": "2023-02-21T14:02:27+00:00"
-        },
-        {
-            "name": "twbs/bootstrap-icons",
-            "version": "v1.11.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/icons.git",
-                "reference": "8d7bc695fb407627378cb184976b348e6a128d59"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/icons/zipball/8d7bc695fb407627378cb184976b348e6a128d59",
-                "reference": "8d7bc695fb407627378cb184976b348e6a128d59",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "Official open source SVG icon library for Bootstrap",
-            "homepage": "https://icons.getbootstrap.com/",
-            "keywords": [
-                "bootstrap",
-                "icon font",
-                "icons",
-                "svg"
-            ],
-            "support": {
-                "issues": "https://github.com/twbs/icons/issues",
-                "source": "https://github.com/twbs/icons/tree/v1.11.1"
-            },
-            "time": "2023-09-17T14:09:28+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -11161,72 +10699,6 @@
                 "source": "https://github.com/Nexmo/vonage-php-nexmo-bridge/tree/0.1.2"
             },
             "time": "2023-02-14T15:54:06+00:00"
-        },
-        {
-            "name": "watson/active",
-            "version": "7.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dwightwatson/active.git",
-                "reference": "ae143167005e1fae6f8a2d92c592d294b49f95d5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/active/zipball/ae143167005e1fae6f8a2d92c592d294b49f95d5",
-                "reference": "ae143167005e1fae6f8a2d92c592d294b49f95d5",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "^9.0|^10.0",
-                "illuminate/http": "^9.0|^10.0",
-                "illuminate/routing": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5.1",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Watson\\Active\\ActiveServiceProvider"
-                    ],
-                    "aliases": {
-                        "Active": "Watson\\Watson\\Facades\\Active"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Watson\\Active\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dwight Watson",
-                    "email": "dwight@studiousapp.com"
-                }
-            ],
-            "description": "Laravel helper for recognising the current route, controller and action",
-            "keywords": [
-                "active",
-                "laravel",
-                "routing"
-            ],
-            "support": {
-                "issues": "https://github.com/dwightwatson/active/issues",
-                "source": "https://github.com/dwightwatson/active/tree/7.0.0"
-            },
-            "time": "2023-02-15T02:30:02+00:00"
         },
         {
             "name": "webmozart/assert",

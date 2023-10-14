@@ -24,9 +24,6 @@
         "livewire/livewire": "^3.0",
         "maatwebsite/excel": "^3.1",
         "orangehill/iseed": "^3.0",
-        "orchid/crud": "^4.0.1",
-        "orchid/icons": "^2.0",
-        "orchid/platform": "^14.0",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^7.2",
         "realrashid/sweet-alert": "^7",
@@ -73,7 +70,6 @@
     "prefer-stable": true,
     "scripts": {
         "post-update-cmd": [
-            "@php artisan orchid:publish --ansi"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

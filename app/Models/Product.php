@@ -4,9 +4,6 @@ namespace App\Models;
 
 use App\Traits\ApplyVendorScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Orchid\Screen\AsSource;
-use Orchid\Filters\Filterable;
-use Orchid\Attachment\Attachable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,9 +11,6 @@ class Product extends Model
 {
 
     use ApplyVendorScope;
-    use AsSource;
-    use Attachable;
-    use Filterable;
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'product_image', 'price', 'category_id', 'vendor_id', 'is_active', 'is_stamp', 'is_all_sizes_available'];

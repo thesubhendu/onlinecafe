@@ -6,13 +6,9 @@ use App\Traits\ApplyVendorScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
 
 class VendorProductOption extends Model
 {
-    use AsSource;
-    use Filterable;
     use HasFactory;
     use ApplyVendorScope;
 
