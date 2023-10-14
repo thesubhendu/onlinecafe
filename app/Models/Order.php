@@ -8,6 +8,7 @@ use App\Models\Scopes\VendorScope;
 use App\Notifications\NewOrderNotification;
 use App\Notifications\OrderConfirmedNotification;
 use App\Services\LoyaltyClaimService;
+use App\Traits\ApplyVendorScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
@@ -20,6 +21,7 @@ class Order extends Model
     use AsSource;
     use Filterable;
     use HasFactory;
+    use ApplyVendorScope;
 
     /**
      * The attributes that are mass assignable.
@@ -36,11 +38,6 @@ class Order extends Model
         'date' => 'datetime:d-m-Y',
         'confirmed_at'=>'datetime'
     ];
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new VendorScope());
-    }
 
 
     public function getFormattedDate()

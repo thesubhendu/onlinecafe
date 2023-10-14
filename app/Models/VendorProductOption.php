@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ApplyVendorScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,8 +11,10 @@ use Orchid\Screen\AsSource;
 
 class VendorProductOption extends Model
 {
-
-    use HasFactory, AsSource, Filterable;
+    use AsSource;
+    use Filterable;
+    use HasFactory;
+    use ApplyVendorScope;
 
     protected $guarded = [];
     protected $casts = ['options' => 'array'];
