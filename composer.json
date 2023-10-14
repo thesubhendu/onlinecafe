@@ -24,6 +24,7 @@
         "maatwebsite/excel": "^3.1",
         "orangehill/iseed": "^3.0",
         "orchid/crud": "^4.0.1",
+        "orchid/icons": "^2.0",
         "orchid/platform": "^14.0",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^7.2",
