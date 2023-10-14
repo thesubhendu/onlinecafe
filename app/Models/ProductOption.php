@@ -15,6 +15,7 @@ class ProductOption extends Model
 
     protected $casts = ['options' => 'array'];
 
+
     public function scopeZeroChargeProductOptions($query)
     {
         return $query->where('charge', 0);

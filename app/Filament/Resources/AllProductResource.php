@@ -19,6 +19,10 @@ class AllProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isAdmin();
+    }
     public static function getNavigationGroup(): ?string
     {
         return "Product Settings";

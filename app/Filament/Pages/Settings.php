@@ -24,6 +24,7 @@ class Settings extends Page
     {
         return [
             Action::make('Toggle Taking Orders')
+                ->visible(!empty($this->vendor))
                 ->fillForm(fn(): array => [
                     'is_taking_orders' => $this->vendor->is_taking_orders
                 ])

@@ -18,6 +18,11 @@ class ProductOptionResource extends Resource
      */
     public static $model = \App\Models\ProductOption::class;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isAdmin();
+    }
+
     public function with(): array
     {
         return ['optionType'];
