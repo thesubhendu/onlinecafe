@@ -7,8 +7,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\VonageMessage;
 use Illuminate\Notifications\Notification;
-use Orchid\Platform\Notifications\DashboardChannel;
-use Orchid\Platform\Notifications\DashboardMessage;
 
 class NewOrderNotification extends Notification
 {
@@ -38,7 +36,7 @@ class NewOrderNotification extends Notification
      */
     public function via($notifiable)
     {
-        return [DashboardChannel::class, 'broadcast'];
+        return [ 'broadcast']; //todo adjust this notification class
     }
 
     /**
@@ -55,13 +53,13 @@ class NewOrderNotification extends Notification
             ->line('Thank you for using our application!');
     }
 
-    public function toDashboard($notifiable)
-    {
-        return (new DashboardMessage)
-            ->title('New Order')
-            ->message('New Order has been placed')
-            ->action(route('platform.order.show', $this->order->id));
-    }
+//    public function toDashboard($notifiable)
+//    {
+//        return (new DashboardMessage)
+//            ->title('New Order')
+//            ->message('New Order has been placed')
+//            ->action(route('platform.order.show', $this->order->id));
+//    }
 
     /**
      * Get the array representation of the notification.

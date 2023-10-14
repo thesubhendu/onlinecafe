@@ -11,7 +11,6 @@ use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
-use Orchid\Platform\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -23,19 +22,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $vendorRole = Role::create(
-            [
-                'name'        => 'Vendor',
-                'slug'        => 'vendor',
-                'permissions' => [
-                    "platform.index"              => "1",
-                    "platform.systems.roles"      => "0",
-                    "platform.systems.users"      => "0",
-                    "platform.systems.attachment" => "0",
-                ],
-            ]);
-
-        Artisan::call('orchid:admin admin admin@cafe.np password');
+//        $vendorRole = Role::create(
+//            [
+//                'name'        => 'Vendor',
+//                'slug'        => 'vendor',
+//                'permissions' => [
+//                    "platform.index"              => "1",
+//                    "platform.systems.roles"      => "0",
+//                    "platform.systems.users"      => "0",
+//                    "platform.systems.attachment" => "0",
+//                ],
+//            ]);
+//
+//        Artisan::call('orchid:admin admin admin@cafe.np password');
 
         User::factory()->create(['name' => 'Customer', 'email' => 'customer@cafe.np']); //customer
 
@@ -111,8 +110,8 @@ class UsersTableSeeder extends Seeder
             ]
         );
 
-        $vendor1->addRole($vendorRole);
-        $vendor2->addRole($vendorRole);
+//        $vendor1->addRole($vendorRole);
+//        $vendor2->addRole($vendorRole);
 
         User::factory()
             ->has(

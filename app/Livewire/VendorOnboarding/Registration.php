@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
-use Orchid\Platform\Models\Role;
 
 class Registration extends Component
 {
@@ -138,8 +137,9 @@ class Registration extends Component
         $this->authUser->shop()->create($this->dataToSave());
 
         //set user role to vendor
-        $vendorRole = Role::where('slug', 'vendor')->first();
-        $this->authUser->addRole($vendorRole);
+        //todo set role
+//        $vendorRole = Role::where('slug', 'vendor')->first();
+//        $this->authUser->addRole($vendorRole);
 
         session()->flash('message', 'Vendor Registered');
         $this->dispatch('vendorRegistered');

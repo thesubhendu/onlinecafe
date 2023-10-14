@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Orchid\Platform\Models\Role;
 
 
 class RoleSeeder extends Seeder
@@ -15,16 +14,17 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-       $vendorRole = Role::create(
-            [
-                'name'        => 'Vendor',
-                'slug'        => 'vendor',
-                'permissions' => [
-                    "platform.index"              => "1",
-                    "platform.systems.roles"      => "0",
-                    "platform.systems.users"      => "0",
-                    "platform.systems.attachment" => "0",
-                ],
-            ]);
+//        todo create role
+//       $vendorRole = Role::create(
+//            [
+//                'name'        => 'Vendor',
+//                'slug'        => 'vendor',
+//                'permissions' => [
+//                    "platform.index"              => "1",
+//                    "platform.systems.roles"      => "0",
+//                    "platform.systems.users"      => "0",
+//                    "platform.systems.attachment" => "0",
+//                ],
+//            ]);
     }
 }
