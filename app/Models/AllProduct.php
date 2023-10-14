@@ -12,6 +12,8 @@ class AllProduct extends Model
 {
     use HasFactory, AsSource, Attachable, Filterable;
 
+    protected $guarded = [];
+
     public function productCategory()
     {
         return $this->belongsTo(ProductCategory::class, 'category_id');
