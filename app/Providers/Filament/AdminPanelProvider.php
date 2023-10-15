@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -67,6 +66,8 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-building-storefront')
                     ->sort(2),
             ])
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('40s')
             ;
     }
 }

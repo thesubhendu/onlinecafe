@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        FilamentAsset::register([
+//            Js::make('dashboard-js', __DIR__ . '/../../resources/js/dashboard.js'),
+        ]);
     }
 }
