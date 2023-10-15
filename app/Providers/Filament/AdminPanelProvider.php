@@ -60,7 +60,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
-                FilamentSpatieRolesPermissionsPlugin::make()
             ])
             ->navigationItems([
                 NavigationItem::make('Update Shop Info')

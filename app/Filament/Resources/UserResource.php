@@ -23,7 +23,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return "Roles and Permissions";
+        return "Filament Shield";
     }
 
     public static function form(Form $form): Form

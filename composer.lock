@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70cb5468ca0988bd214b458736722976",
+    "content-hash": "d4deeb776b9dc81859e69aa429123b9d",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -131,69 +131,6 @@
                 "source": "https://github.com/alexpechkarev/google-maps/tree/v10.0.2"
             },
             "time": "2023-02-19T10:48:09+00:00"
-        },
-        {
-            "name": "althinect/filament-spatie-roles-permissions",
-            "version": "v2.0.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Althinect/filament-spatie-roles-permissions.git",
-                "reference": "516ff3ccf5b86d13faed8995a60753761d8239b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Althinect/filament-spatie-roles-permissions/zipball/516ff3ccf5b86d13faed8995a60753761d8239b7",
-                "reference": "516ff3ccf5b86d13faed8995a60753761d8239b7",
-                "shasum": ""
-            },
-            "require": {
-                "filament/filament": "^3.0",
-                "illuminate/support": "^9|^10",
-                "php": "^8.1|^8.2",
-                "spatie/laravel-permission": "^5.4"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.10",
-                "orchestra/testbench": "^7.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Althinect\\FilamentSpatieRolesPermissions\\FilamentSpatieRolesPermissionsServiceProvider"
-                    ],
-                    "aliases": {
-                        "FilamentSpatieRolesPermissions": "Althinect\\FilamentSpatieRolesPermissions\\FilamentSpatieRolesPermissionsFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Althinect\\FilamentSpatieRolesPermissions\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tharinda Rodrigo",
-                    "email": "tharindarodrigo@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "homepage": "https://github.com/althinect/filament-spatie-roles-permissions",
-            "keywords": [
-                "althinect",
-                "filament-spatie-roles-permissions"
-            ],
-            "support": {
-                "issues": "https://github.com/Althinect/filament-spatie-roles-permissions/issues",
-                "source": "https://github.com/Althinect/filament-spatie-roles-permissions/tree/v2.0.14"
-            },
-            "time": "2023-10-07T21:33:06+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
