@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         FilamentAsset::register([
-//            Js::make('dashboard-js', __DIR__ . '/../../resources/js/dashboard.js'),
+            Js::make('dashboard-js', asset('/js/dashboard.js')),
         ]);
     }
 }

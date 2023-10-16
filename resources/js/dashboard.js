@@ -65,10 +65,8 @@ window.addEventListener("load", function () {
 function setupNotification(user){
     window.Echo.private('App.Models.User.' + user.id)
         .notification((notification) => {
-            increaseOrderCount();
             playNotificationAudio();
             createChromeNotification(notification)
-            showToastNotification(notification)
         });
 }
 
