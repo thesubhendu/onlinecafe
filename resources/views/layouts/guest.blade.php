@@ -15,6 +15,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        @laravelPWA
+
     </head>
     <body class="bg-light font-sans antialiased form-body ">
 

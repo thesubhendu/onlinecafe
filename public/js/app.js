@@ -8214,25 +8214,59 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/helpers */ "./resources/js/helpers.js");
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__.default;
-alpinejs__WEBPACK_IMPORTED_MODULE_0__.default.start();
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__.default;
+alpinejs__WEBPACK_IMPORTED_MODULE_1__.default.start();
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__.default({
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__.default({
   broadcaster: 'pusher',
   key: "7007330d425e26b3235d",
   cluster: "us2",
   forceTLS: true
 });
-window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
+window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function (e) {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  e.preventDefault(); // Stash the event so it can be triggered later.
+
+  deferredPrompt = e;
+
+  if (!(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isAppInstalled)()) {
+    setTimeout(function () {
+      window.Swal.fire({
+        title: 'Add Brewsta Admin to your home screen and use it like regular app',
+        showDenyButton: true,
+        confirmButtonText: 'Install Now',
+        denyButtonText: "Not Now"
+      }).then(function (result) {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function (choiceResult) {
+            if (choiceResult.outcome === 'accepted') {
+              // pwaInstallPrompt.close()
+              localStorage.setItem('pwaInstalled', 'true');
+            }
+
+            deferredPrompt = null;
+          });
+        } else if (result.isDenied) {}
+      });
+    }, 2000);
+  }
+}); //end pwa install prompt
 
 /***/ }),
 
@@ -8277,6 +8311,61 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/helpers.js":
+/*!*********************************!*\
+  !*** ./resources/js/helpers.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "showToastNotification": () => (/* binding */ showToastNotification),
+/* harmony export */   "isIos": () => (/* binding */ isIos),
+/* harmony export */   "isInStandaloneMode": () => (/* binding */ isInStandaloneMode),
+/* harmony export */   "isAppInstalled": () => (/* binding */ isAppInstalled),
+/* harmony export */   "increaseOrderCount": () => (/* binding */ increaseOrderCount)
+/* harmony export */ });
+function showToastNotification(notification) {
+  console.log('n id', notification.id);
+  iziToast.show({
+    id: notification.id,
+    title: notification.title,
+    message: notification.text,
+    color: 'green',
+    position: 'topRight',
+    // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+    timeout: false,
+    buttons: [['<a target="_blank" href="' + notification.action + '">View</a>', function (instance, toast) {
+      location.href = notification.action; // Turbo.visit(notification.action, { action: "replace" })
+      // instance.click();
+    }, true]]
+  });
+}
+function isIos() {
+  var userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test(userAgent);
+} // Detects if device is in standalone mode
+
+var isInStandaloneMode = function isInStandaloneMode() {
+  return 'standalone' in window.navigator && window.navigator.standalone;
+};
+function isAppInstalled() {
+  if (localStorage.getItem('pwaInstalled') === 'true' || window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    return true;
+  }
+
+  return false;
+}
+function increaseOrderCount() {
+  var badge = document.querySelector('.badge');
+  var count = parseInt(badge.textContent);
+  count++;
+  badge.innerHTML = count.toString();
+}
 
 /***/ }),
 

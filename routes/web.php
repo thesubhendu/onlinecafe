@@ -16,6 +16,7 @@ Route::view('/offline', 'vendor.laravelpwa.offline');
 Route::view('/privacy-policy', 'privacy')->name('privacy');
 Route::view('/terms-conditions', 'termscondition')->name('terms-conditions');
 
+Route::redirect('/vendors/login', '/login')->name('vendor.login');
 
 Route::get('/user-info', function (\Illuminate\Http\Request $request) {
     if (auth()->check()) {

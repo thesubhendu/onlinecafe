@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => 'brewsta.com.au',
         'short_name' => 'Brewsta Admin',
-        'start_url' => '/admin',
+        'start_url' => '/login',
         'background_color' => '#000000',
         'theme_color' => '#28a745',
         'display' => 'fullScreen',
