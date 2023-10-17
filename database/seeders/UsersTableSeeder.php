@@ -124,7 +124,11 @@ class UsersTableSeeder extends Seeder
                 ),
                 'shop')
             ->count(5)
-            ->create()->each(fn($user) => $user->addRole($vendorRole)); //vendors
+            ->create()
+//            ->each(
+////                fn($user) => $user->addRole($vendorRole) //todo add role
+//            )
+        ; //vendors
     }
 
     private function seedVendorProductPrices(Model $vendor, $sizes): void
