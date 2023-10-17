@@ -23,8 +23,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
+        User::factory()->create(['name' => 'Admin', 'email' => 'admin@cafe.test']); //admin
         User::factory()->create(['name' => 'Customer', 'email' => 'customer@cafe.test']); //customer
-        User::factory()->create(['name' => 'Admin', 'email' => 'customer@cafe.test']); //customer
 
         $vendor1 = User::factory()->has(
             Vendor::factory()
