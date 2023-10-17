@@ -22,21 +22,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-//        $vendorRole = Role::create(
-//            [
-//                'name'        => 'Vendor',
-//                'slug'        => 'vendor',
-//                'permissions' => [
-//                    "platform.index"              => "1",
-//                    "platform.systems.roles"      => "0",
-//                    "platform.systems.users"      => "0",
-//                    "platform.systems.attachment" => "0",
-//                ],
-//            ]);
-//
-//        Artisan::call('orchid:admin admin admin@cafe.np password');
 
-        User::factory()->create(['name' => 'Customer', 'email' => 'customer@cafe.np']); //customer
+        User::factory()->create(['name' => 'Customer', 'email' => 'customer@cafe.test']); //customer
+        User::factory()->create(['name' => 'Admin', 'email' => 'customer@cafe.test']); //customer
 
         $vendor1 = User::factory()->has(
             Vendor::factory()
@@ -66,7 +54,7 @@ class UsersTableSeeder extends Seeder
                   })
             , 'shop')->create([
             'name'   => 'Vendor',
-            'email'  => 'vendor@cafe.np',
+            'email'  => 'vendor@cafe.test',
             'mobile' => 61476857122,
         ]);
 
