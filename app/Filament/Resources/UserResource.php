@@ -99,7 +99,7 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Impersonate::make(),
+                Impersonate::make()->redirectTo(route('filament.admin.pages.dashboard')),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
