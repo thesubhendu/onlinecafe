@@ -22,7 +22,13 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'order_number' => $this->faker->unique()->numberBetween(1, 10000),
+            'user_id' => $this->faker->numberBetween(1, 9),
+            'vendor_id' => $this->faker->numberBetween(1, 9),
+            'order_total' => $this->faker->numberBetween(1, 1000),
+            'sub_total' => $this->faker->numberBetween(1, 1000),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'status' => $this->faker->randomElement(['pending', 'processing', 'completed', 'cancelled']),
         ];
     }
 }
