@@ -18,6 +18,8 @@ class StatsOverview extends BaseWidget
             Stat::make('Total Orders', Order::count())
                 ->descriptionIcon('heroicon-m-arrow-trending-up'),
             Stat::make('Products', Product::count()),
+            Stat::make('Customers', Order::groupBy('user_id')->count()),
+            Stat::make('Likes', auth()->user()->favourite_count),
         ];
     }
 }
