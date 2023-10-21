@@ -201,4 +201,23 @@ class Vendor extends Model
     {
         return (bool)$this->userRewardsQuery($user)->count();
     }
+
+    /*
+     * Generate setup code for vendor
+     * using this they can claim their business easily (helps during registration)
+     */
+    private function generateSetupCode()
+    {
+        //generate unique code
+        $code = \Str::random(10);
+        $this->vendor_setup_code = $code;
+        $this->save();
+        return $code;
+    }
+
+    public function getBusinessClaimLink()
+    {
+        return route('register-business.create', ['code' => $this->generateSetupCode()]);
+
+    }
 }
