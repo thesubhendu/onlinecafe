@@ -5,6 +5,7 @@ namespace App\Livewire\VendorOnboarding;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Vendor;
 use App\Services\AbnChecker;
 use App\Services\StripeService;
 use Illuminate\Auth\Events\Registered;
@@ -35,7 +36,8 @@ class Registration extends Component
 
     public $validationError;
 
-    protected $queryString = ['validationError'];
+    public $code;
+    protected $queryString = ['validationError', 'code'];
 
     public function render()
     {
@@ -44,8 +46,17 @@ class Registration extends Component
 
     public function mount(): void
     {
+
         $this->authUser = auth()->user();
-        if ($this->authUser) {
+
+        if ($this->code) {
+            $vendor = Vendor::where('vendor_setup_code', $this->code)->first();
+            if($vendor) {
+                $this->fillDataFromExistingVendor($vendor);
+            }else {
+                session()->flash('error', "Invalid Vendor Code");
+            }
+        } elseif($this->authUser) {
             $this->autoFillFields();
         }
     }
@@ -73,11 +84,13 @@ class Registration extends Component
 
     private function validationRules(): array
     {
+        $shop = $this->getShop();
+
         $rules = [
             'vendor_name'      => 'required|unique:vendors,vendor_name',
             'contact_name'     => 'required',
             'contact_lastname' => 'required',
-            'abn'              =>  'required|unique:vendors,abn',
+            'abn'              => 'required|unique:vendors,abn',
             'suburb'           => 'required',
             'pc'               => 'required',
             'agreement' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
@@ -86,20 +99,20 @@ class Registration extends Component
         if (!$this->authUser) {
             $rules['password'] = $this->passwordRules();
             $rules['email'] = 'email|required|unique:users,email';
-            $rules['mobile'] = 'digits|required|unique:users,mobile';
+            $rules['mobile'] = 'required|unique:users,mobile';
 
-            return $rules;
+        }else{
+            $rules['email'] = 'email|required|unique:users,email,'.auth()->user()->id;
+            $rules['mobile'] = 'required|unique:users,mobile,'.auth()->user()->id;
         }
 
-        $rules['email'] = 'email|required|unique:users,email,'.auth()->user()->id;
-        $rules['mobile'] = 'digits|required|unique:users,mobile,'.auth()->user()->id;
 
-        $shop = $this->authUser->shop;
         if($shop)
         {
             $rules['vendor_name'] = 'required|unique:vendors,vendor_name,'.$shop->id;
             $rules['abn'] = 'required|unique:vendors,abn,'.$shop->id;
         }
+
 
         return $rules;
     }
@@ -115,7 +128,24 @@ class Registration extends Component
 
     public function register()
     {
+        $this->validate($this->validationRules());
 
+        // check if valid business (ABN check)
+        $abnService = (new AbnChecker($this->abn));
+        $isValid = $abnService->isValidBusiness();
+
+        if (!$isValid) {
+            session()->flash('error', "Not Valid ABN. Please enter correct ABN/ASIC and try again");
+
+            return response()->json(['error' => 'Not Valid ABN'], 422);
+        }
+
+        $isValidBusinessName = $abnService->isValidBusinessName($this->vendor_name);
+        if (!$isValidBusinessName) {
+            session()->flash('error', "Invalid Business Name. Please enter correct Business Name and try again");
+
+            return response()->json(['error' => 'Invalid Business Name'], 422);
+        }
 
         // Update user and vendor data on auth user exist
 
@@ -196,6 +226,19 @@ class Registration extends Component
         return User::create($input);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getShop()
+    {
+        $shop = null;
+
+        if ($this->code) {
+            return Vendor::where('vendor_setup_code', $this->code)->first();
+        }
+        return $this->authUser->shop ?? $shop;
+    }
+
     private function updateUser(): void
     {
         $user = auth()->user();
@@ -225,16 +268,21 @@ class Registration extends Component
         $this->shop = $this->authUser->shop;
 
         if ($this->shop) {
-            $this->fill(
-                [
-                    'vendor_name'      => $this->shop->vendor_name,
-                    'address'          => $this->shop->address,
-                    'suburb'           => $this->shop->suburb,
-                    'pc'               => $this->shop->pc,
-                    'state'            => $this->shop->state,
-                    'abn'              => $this->shop->abn,
-                ]
-            );
+            $this->fillDataFromExistingVendor($this->shop);
         }
+    }
+
+    private function fillDataFromExistingVendor(Vendor $vendor)
+    {
+        $this->fill(
+            [
+                'vendor_name'      => $vendor->vendor_name,
+                'address'          => $vendor->address,
+                'suburb'           => $vendor->suburb,
+                'pc'               => $vendor->pc,
+                'state'            => $vendor->state,
+                'abn'              => $vendor->abn,
+            ]
+        );
     }
 }
