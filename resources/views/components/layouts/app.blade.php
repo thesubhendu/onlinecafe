@@ -18,15 +18,9 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('/assets/css/font-awesome.min.css')}}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     @livewireStyles
-    @livewireScripts
 
     <script src="https://js.stripe.com/v3/"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -63,9 +57,6 @@
 
 @stack('scripts')
 
-
-@include('owl-carosel-script')
-
 @auth
     <script>
         window.Laravel = @json([
@@ -91,6 +82,7 @@
             });
     </script>
 @endauth
+    @livewireScripts
 
     <x-impersonate::banner/>
 </body>

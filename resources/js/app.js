@@ -2,13 +2,10 @@ import {isAppInstalled} from "@/helpers";
 
 require('./bootstrap');
 
-import Alpine from 'alpinejs';
 import Swal from 'sweetalert2'
 import Echo from 'laravel-echo';
 
-window.Alpine = Alpine;
 
-Alpine.start();
 
 window.Pusher = require('pusher-js');
 
