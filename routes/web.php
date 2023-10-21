@@ -25,11 +25,7 @@ Route::get('/user-info', function (\Illuminate\Http\Request $request) {
     return ['user' => ''];
 });
 
-//Route::view('/main-landing', 'main-landing')->name('main-landing');
-Route::view('/vendor-landing', 'vendor-landing')->name('vendor-landing');
-
-
-Route::redirect('/', '/vendor-landing')->name('home');
+Route::redirect('/', '/vendors')->name('home');
 Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->name('vendor.show');
 
 Route::get('/confirm/{order}/update',[ConfirmOrderController::class, 'confirm'])->name('confirm_order.confirm')->middleware('auth');
