@@ -46,9 +46,10 @@ class UserResource extends Resource
                 Forms\Components\DateTimePicker::make('mobile_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->required()
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state)),
+                    ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                    ->dehydrated(fn (?string $state): bool => filled($state))
+                    ->required(fn (string $operation): bool => $operation === 'create'),
+
                 Forms\Components\Textarea::make('two_factor_secret')
                     ->maxLength(65535)
                     ->columnSpanFull(),
