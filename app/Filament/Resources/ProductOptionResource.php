@@ -42,7 +42,7 @@ class ProductOptionResource extends Resource
                     ->required()
                     ->numeric()
                     ->prefix('$'),
-                Forms\Components\Select::make('Option Type')
+                Forms\Components\Select::make('option_type_id')
                     ->relationship(name:'optionType',titleAttribute: 'name')
                     ->required(),
                 Forms\Components\Toggle::make('default_option')
