@@ -11,6 +11,8 @@ class OptionType extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function vendorProductOptions(): HasMany
     {
         return $this->hasMany(VendorProductOption::class)->orderBy('default_option', 'desc');

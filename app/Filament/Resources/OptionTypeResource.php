@@ -44,6 +44,9 @@ class OptionTypeResource extends Resource
                 Forms\Components\Select::make('productCategories')
                     ->multiple()
                     ->relationship(name:'productCategories',titleAttribute: 'name')
+                    ->searchable()
+                    ->preload()
+                    ->optionsLimit(20)
                     ->required(),
             ]);
     }
