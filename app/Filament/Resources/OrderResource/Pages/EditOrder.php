@@ -21,13 +21,11 @@ class EditOrder extends EditRecord
                         ->required()
                         ->numeric(),
                 ])
-                ->hidden(fn (Order $order) => $order->confirmed_at)
                 ->action(function (array $data, Order $order): void {
                     $order->order_ready_in = $data['order_ready_in'];
                     $order->save();
                     $order->confirm();
                 }),
-            Actions\ViewAction::make(),
             Actions\DeleteAction::make(),
         ];
     }
