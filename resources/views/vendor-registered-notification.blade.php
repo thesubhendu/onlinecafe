@@ -4,7 +4,7 @@
 Hi,
 {{ $user->name }} has just registered.
 
-@component('mail::button', ['url' => route('platform.main')  ])
+@component('mail::button', ['url' => route('filament.admin.pages.dashboard')  ])
 View Vendor
 @endcomponent
 

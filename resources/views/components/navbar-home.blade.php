@@ -79,7 +79,7 @@
 
 
                                     @can('visit-backend')
-                                        <a class="dropdown-item" href="{{route('platform.main')}}">Admin Panel</a>
+                                        <a class="dropdown-item" href="{{route('filament.admin.pages.dashboard')}}">Admin Panel</a>
                                         <a class="dropdown-item" href="{{route('download-customer-flyer')}}">Download Flyer</a>
                                     @endcan
 

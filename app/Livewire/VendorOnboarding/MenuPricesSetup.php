@@ -71,7 +71,7 @@ class MenuPricesSetup extends Component
             ]);
         }
 
-        return redirect()->route('platform.main');
+        return redirect()->route('filament.admin.pages.dashboard');
     }
 
     public function render()
