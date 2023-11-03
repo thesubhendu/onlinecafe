@@ -167,9 +167,7 @@ class Registration extends Component
         $this->authUser->shop()->create($this->dataToSave());
 
         //set user role to vendor
-        //todo set role
-//        $vendorRole = Role::where('slug', 'vendor')->first();
-//        $this->authUser->addRole($vendorRole);
+        $this->authUser->assignRole('vendor');
 
         session()->flash('message', 'Vendor Registered');
         $this->dispatch('vendorRegistered');

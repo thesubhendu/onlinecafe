@@ -43,17 +43,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('visit-backend', function (User $user) {
-//            return $user->hasAccess('platform.index'); // todo add actual implementation
+            return $user->hasAnyRole('super_admin','vendor');
         });
 
         Gate::define('admin', function (User $user) {
-            return true;
-//            return $user->hasAccess('platform.systems.roles'); // todo add actual implementation
+            return $user->hasRole('super_admin');
         });
 
         Gate::define('make-order', function (User $user, Vendor $vendor) {
-             return  !$user->shop  ;
-//             return  !$user->shop && $vendor->is_open ; todo uncomment it in production
+             return  !$user->shop && $vendor->is_open ;
         });
 
         Gate::define('make-rating', function (User $user) {

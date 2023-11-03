@@ -113,9 +113,9 @@ class UsersTableSeeder extends Seeder
                 'shop')
             ->count(5)
             ->create()
-//            ->each(
-////                fn($user) => $user->addRole($vendorRole) //todo add role
-//            )
+            ->each(
+                fn($user) => $user->assignRole('vendor')
+            )
         ; //vendors
     }
 
