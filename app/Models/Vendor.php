@@ -85,7 +85,6 @@ class Vendor extends Model
 
     public function getIsOpenAttribute()
     {
-        return true;
 
         if($this->is_taking_orders == false){
             return false;
