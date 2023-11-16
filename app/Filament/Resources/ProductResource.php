@@ -28,7 +28,8 @@ class ProductResource extends Resource
                     ->label('Vendor')
                     ->relationship(name: 'vendor', titleAttribute: 'vendor_name')
                     ->required()
-                    ->visible(auth()->user()->isAdmin())
+                    ->default(auth()->user()?->shop?->id)
+                    ->disabled(!auth()->user()->isAdmin())
                 ,
                 Forms\Components\Select::make('category_id')
                     ->relationship(name: 'category', titleAttribute: 'name')
