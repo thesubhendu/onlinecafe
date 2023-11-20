@@ -61,9 +61,6 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentShieldPlugin::make(),
             ])
-            ->navigationItems([
-77
-            ])
             ->databaseNotifications()
 //            ->databaseNotificationsPolling('40s')
             ->maxContentWidth('full')
