@@ -62,10 +62,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentShieldPlugin::make(),
             ])
             ->navigationItems([
-                NavigationItem::make('Update Shop Info')
-                    ->url(fn (): string => route('manage-shop'))
-                    ->icon('heroicon-o-building-storefront')
-                    ->sort(2),
+77
             ])
             ->databaseNotifications()
 //            ->databaseNotificationsPolling('40s')

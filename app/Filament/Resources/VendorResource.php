@@ -28,9 +28,9 @@ class VendorResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('owner_id')
+                Forms\Components\Select::make('owner_id')
+                    ->relationship('owner', 'name')
                     ->required()
-                    ->numeric()
                     ->default(1),
                 Forms\Components\TextInput::make('free_category')
                     ->numeric(),

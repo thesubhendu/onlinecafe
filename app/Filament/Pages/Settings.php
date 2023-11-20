@@ -15,6 +15,12 @@ class Settings extends Page
 
     public $vendor;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return \Gate::denies('admin');
+    }
+
+
     public function mount(): void
     {
         $this->vendor = auth()->user()->shop;

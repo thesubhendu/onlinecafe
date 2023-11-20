@@ -78,7 +78,7 @@ class ProductResource extends Resource
                             ->schema([
                                 Forms\Components\Select::make('size')->options(config('sizes')),
                                 Forms\Components\TextInput::make('price')
-                            ]),
+                            ])->maxItems(4),
                     ])
             ]);
     }
