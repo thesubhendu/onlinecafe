@@ -2,6 +2,8 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\TakingOrderStatus;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\Page;
 use Filament\Actions\Action;
@@ -18,6 +20,15 @@ class Settings extends Page
     public static function shouldRegisterNavigation(): bool
     {
         return \Gate::denies('admin');
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            TakingOrderStatus::make([
+                'vendor'=> $this->vendor
+            ])
+        ];
     }
 
 
