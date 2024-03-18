@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->brandName('Brewsta')
+            ->brandName(config('app.name'))
 //            ->brandLogo(asset('assets/images/coffee-cup.png'))
             ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

@@ -6,9 +6,8 @@
             <!-- LOGO -->
             <div class="col-md-2 col-xs-12 mobile-nav text-right">
                 <div class="middle-header-information">
-                    <a class="navbar-brand" href="{{route('home')}}"><img
-                            src="{{asset('assets/images/coffee-cup.png')}}">
-                        {{ config('app.name', 'LaravelCoffee') }}
+                    <a class="navbar-brand" href="{{route('home')}}">
+                        {{ config('app.name', 'OnlineCafe') }}
                     </a>
                 </div>
                 <div class="visible-xs mobile-nav">

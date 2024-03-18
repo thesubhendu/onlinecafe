@@ -12694,14 +12694,14 @@ button {
 }
 
 .btn-primary {
-  background: #e28936;
-  border: 1px solid #e28936;
+  background: #e24236;
+  border: 1px solid #e24236;
   color: #fff;
   position: relative;
 }
 .btn-primary:hover {
-  background: #e28936;
-  border: 1px solid #e28936;
+  background: #e24236;
+  border: 1px solid #e24236;
   color: #fff;
 }
 
@@ -12788,7 +12788,7 @@ input {
 }
 
 .text-primary {
-  color: #e28936 !important;
+  color: #e24236 !important;
 }
 
 a {
@@ -12860,7 +12860,7 @@ a {
 .middle-header {
   padding: 0;
   background: #fdfdfd;
-  border-bottom: 3px solid #e28936;
+  border-bottom: 3px solid #e24236;
 }
 .middle-header .middle-header-social-icon {
   float: right;
@@ -12995,7 +12995,7 @@ a {
   display: inline-block;
 }
 .middle-header .register {
-  background: #e28936;
+  background: #e24236;
   font-weight: bold;
   border: none;
 }
@@ -13064,7 +13064,7 @@ a {
 }
 .main-carousel .carousel-caption h3 span, .main-carousel .carousel-caption .h3 span {
   font-weight: bold;
-  color: #e28936;
+  color: #e24236;
   font-style: italic;
 }
 
@@ -13173,7 +13173,7 @@ a {
   font-size: 14px;
 }
 .shop-vendors .shop-vendors-item i.selected {
-  color: #e28936;
+  color: #e24236;
 }
 .shop-vendors .shop-vendors-item a:hover {
   text-decoration: none;
@@ -13300,7 +13300,7 @@ a {
   margin-right: 8px;
 }
 .banner-inner .vendor-actions i.selected {
-  color: #e28936;
+  color: #e24236;
 }
 .banner-inner .vendor-actions .rate-btn {
   display: inline-block;
@@ -13350,7 +13350,7 @@ a {
   color: #999;
 }
 .banner-inner .like-btn .liked {
-  border-color: #e28936;
+  border-color: #e24236;
 }
 .banner-inner .like-btn i {
   height: 58px !important;
@@ -13457,7 +13457,7 @@ a {
   background-attachment: fixed;
 }
 .welcome-content h2, .welcome-content .h2 {
-  color: #e28936;
+  color: #e24236;
   font-weight: 800;
   margin-bottom: 20px;
   font-size: 2.2rem;
@@ -13594,7 +13594,7 @@ section.our-features .row .features-content h6, section.our-features .row .featu
   font-size: 15px;
 }
 section.our-features .row .features-content h2, section.our-features .row .features-content .h2 {
-  color: #e28936;
+  color: #e24236;
   font-weight: bold;
   margin-bottom: 20px;
   font-size: 2.2rem;
@@ -13621,13 +13621,13 @@ section.our-features .row .features-content p {
   width: 60%;
 }
 .get-start-banner .btn-newsletter {
-  background: #e8a363;
+  background: #e86c63;
   color: #fff;
   text-transform: uppercase;
   padding: 0px 27px;
   display: inline-block;
   min-height: 50px;
-  border: 1px solid #e8a363;
+  border: 1px solid #e86c63;
   font-weight: bold;
   border-radius: 0;
   margin: 0 -4px;
@@ -13643,14 +13643,14 @@ section.our-features .row .features-content p {
 }
 .profile-content .user-img img {
   border-radius: 50%;
-  border: 4px solid #e28936;
+  border: 4px solid #e24236;
 }
 .profile-content .details h2, .profile-content .details .h2 {
   font-weight: bold;
   margin-bottom: 20px;
 }
 .profile-content .details i {
-  color: #e28936;
+  color: #e24236;
 }
 
 .details span {
@@ -13687,7 +13687,7 @@ section.our-features .row .features-content p {
   color: #b5a892;
 }
 .total-coffee .coffeees .selected {
-  background: #e28936;
+  background: #e24236;
   color: #fff;
   border-color: #a7713f;
 }
@@ -13837,11 +13837,11 @@ section.profile-content-details {
   height: 35px;
   background: white !important;
   border-radius: 50%;
-  color: #e28936 !important;
+  color: #e24236 !important;
   font-size: 33px !important;
   display: block;
   line-height: 26px;
-  border: 3px solid #e28936;
+  border: 3px solid #e24236;
 }
 
 .my-coffees {
@@ -13891,8 +13891,8 @@ section.profile-content-details {
   width: 100%;
   margin-top: 10px;
   border-radius: 300px !important;
-  background: #e28936 !important;
-  border: 1px solid #e28936;
+  background: #e24236 !important;
+  border: 1px solid #e24236;
   font-size: 14px;
   font-weight: bold;
   padding: 8px 0;
@@ -13911,8 +13911,8 @@ section.profile-content-details {
 .form-body .sigin-form .register-btn {
   width: 100%;
   font-weight: bold;
-  border: 1px solid #e28937;
-  color: #e28937;
+  border: 1px solid #e24236;
+  color: #e24236;
   padding: 8px 0;
   border-radius: 300px;
   display: block;
@@ -13969,13 +13969,13 @@ section.profile-content-details {
   font-size: 14px;
 }
 .comment-section .comments li .rating {
-  color: #e28936;
+  color: #e24236;
   float: right;
   font-weight: bold;
   font-size: 12px;
 }
 .comment-section .comments li .rating i {
-  color: #e28936;
+  color: #e24236;
 }
 .comment-section .comments li .comment {
   font-size: 14px;
