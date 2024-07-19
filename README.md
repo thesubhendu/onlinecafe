@@ -1,17 +1,9 @@
+# Online Cafe
+Online food ordering application made in Laravel 10
 
-## Setup Stripe for Connect
+# Features
+1. Stripe connect integration
+2. Multi vendor support
+3. Reward feature
+4. Custom Dashboard made in FilamentPHP to manage shop
 
-### Setup webhook at
-
-https://dashboard.stripe.com/test/webhooks
-
-put below link as webhook change main domain for live
-
-https://mycoffees.online/api/brewsta-stripe-whook 
-
-
-## Setup Plans
-
-https://dashboard.stripe.com/test/products 
-
-create subscription plans here and copy app id of plan 
