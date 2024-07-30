@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Violet,
             ])
             ->brandName(config('app.name'))
 //            ->brandLogo(asset('assets/images/coffee-cup.png'))
