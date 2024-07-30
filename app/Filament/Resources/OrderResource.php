@@ -5,13 +5,17 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use App\Tables\Columns\OrderId;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\Actions\Action;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Contracts\View\View;
 
 class OrderResource extends Resource
 {
@@ -81,6 +85,8 @@ class OrderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null)
+            ->recordAction(null)
             ->columns([
 
                 Tables\Columns\TextColumn::make('order_number')

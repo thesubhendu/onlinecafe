@@ -50,6 +50,8 @@ class Settings extends Page
                 ])
                 ->action(function (array $data): void {
                     $this->vendor->update(['is_taking_orders' => $data['is_taking_orders']]);
+                    $this->vendor = $this->vendor->fresh();
+                    $this->dispatch('order-status-changed');
                 }),
 
         ];

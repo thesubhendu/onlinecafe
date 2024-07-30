@@ -13,7 +13,7 @@ use App\Livewire\VendorOnboarding\Registration;
 use App\Livewire\VendorOnboarding\ShopSetup;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/vendors')->name('home');
+Route::redirect('/', '/admin')->name('home');
 Route::redirect('/vendors/login', '/login')->name('vendor.login');
 
 //Static Routes
