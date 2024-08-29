@@ -67,6 +67,7 @@ class CartService
             $activeOrder = $this->createActiveOrder(auth()->user(), $product->vendor);
         }
 
+//        todo refactor loyality module
         //handling reward item added to cart
         if(!empty($options['card_id'])) {
             $card = Card::find($options['card_id']);
@@ -146,9 +147,6 @@ class CartService
 
     private function createActiveOrder(User $user, Vendor $vendor): Order
     {
-
-//        $subTotal = $this->priceTotal($productData['price'], $productData['quantity']);
-//        $taxTotal = $this->tax($subTotal);
 
         $order = [
             'order_number' => uniqid(),
