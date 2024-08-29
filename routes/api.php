@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiveOrderController;
 use App\Http\Controllers\Api\{AuthController,
     CartController,
     CheckoutController,
@@ -32,30 +33,28 @@ use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 // Auth
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-
 Route::post('/forgot-password',[ PasswordResetLinkController::class,'store']);
-//Route::post('/reset-password',[ NewPasswordController::class,'store']);
+
 Route::get('/home', HomeController::class);
 Route::get('vendors/{vendor}', [VendorController::class, 'show']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    // Vendor
+
     Route::get('vendors', [VendorController::class, 'index']);
-    // Favorite Vendor
     Route::get('user/favourite-vendors', [UserController::class, 'favoriteVendors']);
-    // Toggle Favorite Vendor
     Route::get('vendors/{vendor}/toggle-favourite', [VendorController::class, 'toggleFavorite']);
-    // User Order Products
+
     Route::get('user/order-products', [UserController::class, 'orderProducts']);
 
-    Route::get('get-active-order', [CartController::class, 'getActiveOrder']);
     Route::post('add-to-cart/{product}', [CartController::class, 'addToCart']);
     Route::post('add-deal-to-cart/{deal}', [CartController::class, 'addDealToCart']);
     Route::put('update-cart-product/{orderProduct}', [CartController::class, 'updateCartProduct']);
     Route::delete('remove-from-cart/{orderProduct}', [CartController::class, 'removeFromCart']);
-    Route::delete('destroy-active-order', [CartController::class, 'destroyActiveOrder']);
+
+    Route::apiResource('active-order', ActiveOrderController::class)->only('index','destroy');
+
 
     Route::get('products/{product}', [ProductController::class, 'show']);
 
@@ -71,7 +70,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/rewards/add-product/{order}', [RewardController::class, 'addProduct']);
     Route::delete('/rewards/remove-product/{orderProduct}', [RewardController::class, 'removeProduct']);
 
-    Route::get('get-user-shipping-address', [ShippingAddressController::class, 'getUserShippingAddress']);
     Route::apiResource('shipping-address', ShippingAddressController::class);
 
     Route::post('/checkout/{type?}', CheckoutController::class);
@@ -80,13 +78,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('customer-notifications/', [NotificationController::class, 'getCustomerNotifications']);
     Route::get('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead']);
 
-    Route::get('user/{user}/frequent-orders-vendors', FrequentOrdersVendorsController::class);
+    Route::get('frequent-orders-vendors', FrequentOrdersVendorsController::class);
 
     Route::post('vendor/{vendor}/rate', [VendorController::class, 'rate']);
-
     Route::post('payment',[CustomerStripePaymentController::class,'generatePaymentLink']);
 
 });
 
-//todo setup on stripe dash on production
-Route::post('brewsta-stripe-whook', StripeWebhookController::class);
+Route::post('stripe-webhook', StripeWebhookController::class);

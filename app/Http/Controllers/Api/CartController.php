@@ -19,12 +19,6 @@ class CartController extends ApiBaseController
     ) {
     }
 
-    public function getActiveOrder(): JsonResponse
-    {
-        return $this->sendResponse(
-            new CartResource($this->cartService->getActiveOrder())
-        );
-    }
 
     public function addToCart(CartRequest $request, Product $product): JsonResponse
     {

@@ -43,28 +43,6 @@ class VendorController extends ApiBaseController
 
     }
 
-    public function rate(Request $request, Vendor $vendor)
-    {
-        $request->validate([
-            'rating'  => 'required|integer|max:5|min:1',
-            'comment' => 'string',
-        ]);
 
-        return $this->sendResponse(
-            [
-                'rating'                =>
-                    new VendorRatingResource($this->vendorRepository
-                    ->rate($vendor, $request->all())
-                    ->load([
-                        'author' => function ($query) {
-                            return $query->select(['id', 'name']);
-                        },
-                    ])),
-                'vendor_average_rating' => $vendor->rating(),
-            ],
-            'Rating Saved!'
-        );
-
-    }
 
 }

@@ -14,7 +14,7 @@ class ShippingAddressController extends ApiBaseController
         public ShippingAddressRepository $shippingAddressRepository
     ) {
     }
-    public function getUserShippingAddress(): ShippingAddressResource|JsonResponse
+    public function index(): ShippingAddressResource|JsonResponse
     {
         $shippingAddress = auth()->user()->shippingAddress;
         if(!$shippingAddress)
